@@ -39,3 +39,4 @@ Desktop.ini
 # Scratch logs and temporary files
 *.tmp
 *.log
+*-deep-dive.md

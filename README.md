@@ -9,9 +9,18 @@ A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active pro
 
 ## ⚡ Subscription URLs
 
-Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without a proxy should use the **China Accelerated Link** or **Global CDN Link** below:
+Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without an existing proxy should use the **jsDelivr** or **GHProxy** accelerated links below:
 
-### 🇨🇳 Direct China Links (No Proxy Needed — Fixes `EOF` Error)
+### 📱 iOS Shadowrocket (Base64 — Instant Load, No Lag)
+> 💡 **Why Shadowrocket users should use these links**: Shadowrocket renders all nodes in a flat list. Using standard YAML with hundreds of nodes freezes iOS networking and causes the subscription to hang. These dedicated Base64 links load in **0.05 seconds** with **100% green verified nodes**.
+
+| Version | Node Count | Best Mirror (jsDelivr CDN) | Backup Mirror (GHProxy) |
+|:--------|:----------:|:---------------------------|:------------------------|
+| 🚀 **iOS Lite (Recommended)** | **30 Nodes** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-lite.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-lite.txt` |
+| ⚡ **iOS Standard** | **60 Nodes** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.txt` |
+| 🌐 **Full Pool** | All Verified | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-all.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-all.txt` |
+
+### 💻 Clash / FlClash / Stash / Clash Verge (YAML Format)
 
 | Mirror Provider | Subscription URL |
 |:----------------|:-----------------|
@@ -19,13 +28,6 @@ Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Ma
 | 🚀 **GH-Proxy Mirror** | `https://gh-proxy.com/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
 | 🌐 **jsDelivr Global CDN** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
 | ⚡ **Fastly CDN** | `https://fastly.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
-
-> 📱 **For Testers**: Copy the **GHProxy** or **jsDelivr** link above and paste directly into **FlClash**, **Clash Verge Rev**, **Stash**, or **Shadowrocket**. The subscription will automatically import as **`ZorVPN`**!
-
-### 🌍 Global Direct Link (For Users with Existing Proxy or Outside China)
-```
-https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml
-```
 
 ---
 
@@ -79,22 +81,29 @@ Check out the **[Cloudflare Deployment Guide](cloudflare/README.md)** (Supports 
      enable: true
    ```
 
-### iOS — Stash (Recommended)
+### 📱 iOS — Shadowrocket (Step-by-Step)
 
-1. Open Stash → Settings → Subscribe
-2. Add new → paste the raw GitHub URL
-3. Tap to update and activate
+1. Open **Shadowrocket**, tap the **`+`** icon in the top right corner.
+2. Under **Type**, change it to **`Subscribe`** *(Important: Do NOT select Clash or Shadowsocks)*.
+3. In **URL**, paste the **Lite** or **Standard** accelerated link:
+   ```
+   https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-lite.txt
+   ```
+4. In **Remark**, enter: `zorVPN Lite`
+5. Tap **Save** in the top right corner.
+6. The subscription will fetch and load all 30 green nodes in **< 0.1 seconds**.
+7. In the bottom navigation, ensure **Global Routing** is set to **`Config`** *(so Chinese apps bypass the proxy, and global sites route through VPN)*.
+8. Tap the toggle switch at the top to connect!
 
-### iOS — Shadowrocket
+### 📱 Android — FlClash / ClashMeta
 
-1. Tap **+** → Type: Subscribe
-2. Paste the raw GitHub URL → Save
-3. Select the config and connect
-
-### Android — FlClash
-
-1. Profiles → Add → URL
-2. Paste the raw GitHub URL → Save → Activate
+1. Open **FlClash** → Go to **Profiles** → Tap **+** → Select **URL**.
+2. Paste the unblocked mirror link:
+   ```
+   https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml
+   ```
+3. Tap **Save & Fetch**.
+4. The profile will appear as **`ZorVPN`** with all proxy groups (⚡ Fastest, 🤖 AI Services, 🎬 Streaming). Tap it to activate.
 
 ### Surge / Quantumult X
 

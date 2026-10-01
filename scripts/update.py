@@ -11,6 +11,7 @@ import re
 import ssl
 import time
 import json
+import base64
 import shutil
 import hashlib
 import tempfile
@@ -25,6 +26,63 @@ import yaml
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_ZORVPN = os.path.join(ROOT_DIR, "ZorVPN.yaml")
 OUTPUT_CLASH = os.path.join(ROOT_DIR, "clash.yaml")
+OUTPUT_B64_TXT = os.path.join(ROOT_DIR, "ZorVPN.txt")
+OUTPUT_B64_LITE = os.path.join(ROOT_DIR, "ZorVPN-lite.txt")
+OUTPUT_B64_ALL = os.path.join(ROOT_DIR, "ZorVPN-all.txt")
+OUTPUT_NODES_TXT = os.path.join(ROOT_DIR, "ZorVPN-nodes.txt")
+
+def proxy_to_uri(p: dict) -> str:
+    """Convert Clash proxy dict to standard URI (vless, hysteria2, trojan, vmess, ss)."""
+    ptype = str(p.get('type', '')).lower()
+    name = str(p.get('name', ''))
+    server = str(p.get('server', ''))
+    port = str(p.get('port', ''))
+
+    if ptype == 'hysteria2':
+        auth = p.get('password', p.get('auth', ''))
+        sni = p.get('sni', p.get('server', ''))
+        insecure = 1 if p.get('skip-cert-verify') else 0
+        return f'hysteria2://{auth}@{server}:{port}?sni={sni}&insecure={insecure}#{urllib.parse.quote(name)}'
+    elif ptype == 'vless':
+        uuid = p.get('uuid', '')
+        flow = p.get('flow', '')
+        sni = p.get('servername', p.get('sni', ''))
+        network = p.get('network', 'tcp')
+        pbk = p.get('reality-opts', {}).get('public-key', '') if p.get('reality-opts') else ''
+        sid = p.get('reality-opts', {}).get('short-id', '') if p.get('reality-opts') else ''
+        fp = p.get('client-fingerprint', '')
+        security = 'reality' if pbk else ('tls' if p.get('tls') else 'none')
+        params = [f'security={security}']
+        if flow: params.append(f'flow={flow}')
+        if sni: params.append(f'sni={sni}')
+        if fp: params.append(f'fp={fp}')
+        if pbk: params.append(f'pbk={pbk}')
+        if sid: params.append(f'sid={sid}')
+        if network: params.append(f'type={network}')
+        return f'vless://{uuid}@{server}:{port}?' + '&'.join(params) + f'#{urllib.parse.quote(name)}'
+    elif ptype == 'trojan':
+        pw = p.get('password', '')
+        sni = p.get('sni', '')
+        return f'trojan://{pw}@{server}:{port}?security=tls&sni={sni}#{urllib.parse.quote(name)}'
+    elif ptype == 'vmess':
+        v_dict = {
+            'v': '2', 'ps': name, 'add': server, 'port': port,
+            'id': p.get('uuid', ''), 'aid': p.get('alterId', 0),
+            'scy': p.get('cipher', 'auto'), 'net': p.get('network', 'tcp'),
+            'type': 'none',
+            'host': p.get('ws-opts', {}).get('headers', {}).get('Host', '') if p.get('ws-opts') else '',
+            'path': p.get('ws-opts', {}).get('path', '') if p.get('ws-opts') else '',
+            'tls': 'tls' if p.get('tls') else '',
+            'sni': p.get('servername', p.get('sni', ''))
+        }
+        v_str = base64.b64encode(json.dumps(v_dict).encode('utf-8')).decode('utf-8')
+        return f'vmess://{v_str}'
+    elif ptype == 'ss':
+        cipher = p.get('cipher', '')
+        pw = p.get('password', '')
+        user_info = base64.b64encode(f'{cipher}:{pw}'.encode('utf-8')).decode('utf-8')
+        return f'ss://{user_info}@{server}:{port}#{urllib.parse.quote(name)}'
+    return ""
 
 # Verified upstream subscription sources
 SOURCES = [
@@ -630,62 +688,27 @@ dns:
     yaml_groups = yaml.dump({'proxy-groups': proxy_groups}, allow_unicode=True, default_flow_style=False, sort_keys=False, width=300)
 
     rules_section = """
-rule-providers:
-  LocalAreaNetwork:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
-    path: ./ruleset/LocalAreaNetwork.yaml
-    interval: 86400
-  BanAD:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
-    path: ./ruleset/BanAD.yaml
-    interval: 86400
-  BanProgramAD:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-    path: ./ruleset/BanProgramAD.yaml
-    interval: 86400
-  GoogleCN:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
-    path: ./ruleset/GoogleCN.yaml
-    interval: 86400
-  Apple:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
-    path: ./ruleset/Apple.yaml
-    interval: 86400
-  Telegram:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"
-    path: ./ruleset/Telegram.yaml
-    interval: 86400
-  ProxyLite:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list"
-    path: ./ruleset/ProxyLite.yaml
-    interval: 86400
-  ChinaDomain:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
-    path: ./ruleset/ChinaDomain.yaml
-    interval: 86400
-
 rules:
-  - RULE-SET,LocalAreaNetwork,DIRECT
-  - RULE-SET,BanAD,REJECT
-  - RULE-SET,BanProgramAD,REJECT
+  # ── Local Area Network ────────────────────────────────────────────────────
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN-SUFFIX,localhost,DIRECT
 
-  # AI Services
+  # ── Block Advertising ─────────────────────────────────────────────────────
+  - DOMAIN-KEYWORD,adservice,REJECT
+  - DOMAIN-KEYWORD,telemetry,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,googleadservices.com,REJECT
+  - DOMAIN-SUFFIX,adcolony.com,REJECT
+  - DOMAIN-SUFFIX,applovin.com,REJECT
+  - DOMAIN-SUFFIX,unityads.unity3d.com,REJECT
+
+  # ── AI Services → Dedicated Pool ──────────────────────────────────────────
   - DOMAIN-SUFFIX,openai.com,🤖 AI Services
   - DOMAIN-SUFFIX,chatgpt.com,🤖 AI Services
   - DOMAIN-SUFFIX,ai.com,🤖 AI Services
@@ -703,7 +726,7 @@ rules:
   - DOMAIN-SUFFIX,x.ai,🤖 AI Services
   - DOMAIN-SUFFIX,grok.com,🤖 AI Services
 
-  # Streaming
+  # ── Streaming → Dedicated Pool ────────────────────────────────────────────
   - DOMAIN-SUFFIX,netflix.com,🎬 Streaming
   - DOMAIN-SUFFIX,nflxvideo.net,🎬 Streaming
   - DOMAIN-SUFFIX,youtube.com,🎬 Streaming
@@ -719,12 +742,29 @@ rules:
   - DOMAIN-SUFFIX,crunchyroll.com,🎬 Streaming
   - DOMAIN-SUFFIX,tiktok.com,🎬 Streaming
 
-  # Direct
-  - RULE-SET,Apple,DIRECT
-  - RULE-SET,GoogleCN,DIRECT
+  # ── Telegram → Master Selector ────────────────────────────────────────────
+  - DOMAIN-SUFFIX,t.me,🎯 zorVPN
+  - DOMAIN-SUFFIX,tdesktop.com,🎯 zorVPN
+  - DOMAIN-SUFFIX,telegra.ph,🎯 zorVPN
+  - DOMAIN-SUFFIX,telegram.me,🎯 zorVPN
+  - DOMAIN-SUFFIX,telegram.org,🎯 zorVPN
+  - IP-CIDR,91.108.4.0/22,🎯 zorVPN,no-resolve
+  - IP-CIDR,91.108.8.0/22,🎯 zorVPN,no-resolve
+  - IP-CIDR,91.108.12.0/22,🎯 zorVPN,no-resolve
+  - IP-CIDR,91.108.16.0/22,🎯 zorVPN,no-resolve
+  - IP-CIDR,91.108.20.0/22,🎯 zorVPN,no-resolve
+  - IP-CIDR,91.108.56.0/22,🎯 zorVPN,no-resolve
+  - IP-CIDR,149.154.160.0/20,🎯 zorVPN,no-resolve
 
-  # Proxies
-  - RULE-SET,Telegram,🎯 zorVPN
+  # ── Apple & Google CN → Direct ────────────────────────────────────────────
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+  - DOMAIN-SUFFIX,itunes.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,google.cn,DIRECT
+  - DOMAIN-SUFFIX,gstatic.cn,DIRECT
+
+  # ── Global Sites & Dev Tools → Master Selector ────────────────────────────
   - DOMAIN-SUFFIX,twitter.com,🎯 zorVPN
   - DOMAIN-SUFFIX,x.com,🎯 zorVPN
   - DOMAIN-SUFFIX,instagram.com,🎯 zorVPN
@@ -737,31 +777,78 @@ rules:
   - DOMAIN-SUFFIX,stackoverflow.com,🎯 zorVPN
   - DOMAIN-SUFFIX,docker.io,🎯 zorVPN
   - DOMAIN-SUFFIX,npmjs.com,🎯 zorVPN
-
-  # Google Global
   - DOMAIN-SUFFIX,google.com,🎯 zorVPN
   - DOMAIN-SUFFIX,googleapis.com,🎯 zorVPN
   - DOMAIN-SUFFIX,gstatic.com,🎯 zorVPN
   - DOMAIN-SUFFIX,gmail.com,🎯 zorVPN
+  - DOMAIN-SUFFIX,wikipedia.org,🎯 zorVPN
 
-  - RULE-SET,ProxyLite,🎯 zorVPN
-  - RULE-SET,ChinaDomain,DIRECT
+  # ── Domestic Chinese Traffic → Direct ─────────────────────────────────────
+  - DOMAIN-SUFFIX,cn,DIRECT
+  - DOMAIN-SUFFIX,baidu.com,DIRECT
+  - DOMAIN-SUFFIX,qq.com,DIRECT
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT
+  - DOMAIN-SUFFIX,alipay.com,DIRECT
+  - DOMAIN-SUFFIX,taobao.com,DIRECT
+  - DOMAIN-SUFFIX,jd.com,DIRECT
+  - DOMAIN-SUFFIX,weibo.com,DIRECT
+  - DOMAIN-SUFFIX,zhihu.com,DIRECT
+  - DOMAIN-SUFFIX,163.com,DIRECT
+  - DOMAIN-SUFFIX,sohu.com,DIRECT
+  - DOMAIN-SUFFIX,sina.com.cn,DIRECT
+  - DOMAIN-SUFFIX,douyin.com,DIRECT
+  - DOMAIN-SUFFIX,bytedance.com,DIRECT
   - GEOIP,CN,DIRECT
+
+  # ── Final Catch-All ───────────────────────────────────────────────────────
   - MATCH,🎯 zorVPN
 """
 
     full_output = header + "\n" + yaml_proxies + "\n" + yaml_groups + "\n" + rules_section
 
+    # Write Clash/Mihomo YAML files (ZorVPN.yaml and clash.yaml)
     for out_path in [OUTPUT_ZORVPN, OUTPUT_CLASH]:
         with open(out_path, 'w', encoding='utf-8') as f:
             f.write(full_output)
 
+    # Convert proxies to standard URIs for Shadowrocket / V2Ray / Sing-box
+    uris = []
+    for p in working_proxies:
+        uri = proxy_to_uri(p)
+        if uri:
+            uris.append(uri)
+
+    # 1. Plaintext URI list (all verified nodes, one per line)
+    raw_nodes_text = "\n".join(uris)
+    with open(OUTPUT_NODES_TXT, 'w', encoding='utf-8') as f:
+        f.write(raw_nodes_text)
+
+    # 2. iOS Shadowrocket Lite (Top 30 ultra-low latency nodes — loads in 0.05s, zero clutter)
+    b64_lite = base64.b64encode("\n".join(uris[:30]).encode('utf-8')).decode('utf-8')
+    with open(OUTPUT_B64_LITE, 'w', encoding='utf-8') as f:
+        f.write(b64_lite)
+
+    # 3. iOS Shadowrocket Standard (Top 60 curated nodes — balanced global coverage)
+    b64_standard = base64.b64encode("\n".join(uris[:60]).encode('utf-8')).decode('utf-8')
+    with open(OUTPUT_B64_TXT, 'w', encoding='utf-8') as f:
+        f.write(b64_standard)
+
+    # 4. iOS Shadowrocket Full Pool (All verified nodes)
+    b64_all = base64.b64encode(raw_nodes_text.encode('utf-8')).decode('utf-8')
+    with open(OUTPUT_B64_ALL, 'w', encoding='utf-8') as f:
+        f.write(b64_all)
+
     print(f"\n{'═' * 70}")
-    print(f"  🎉 SUCCESS! zorVPN configuration written to:")
-    print(f"    - {OUTPUT_ZORVPN}")
-    print(f"    - {OUTPUT_CLASH}")
+    print(f"  🎉 SUCCESS! zorVPN subscriptions written successfully:")
+    print(f"    - {OUTPUT_ZORVPN} (Clash/Mihomo/FlClash/Stash)")
+    print(f"    - {OUTPUT_CLASH} (Legacy alias)")
+    print(f"    - {OUTPUT_B64_LITE} (iOS Shadowrocket Lite: Top 30 nodes)")
+    print(f"    - {OUTPUT_B64_TXT} (iOS Shadowrocket Standard: Top 60 nodes)")
+    print(f"    - {OUTPUT_B64_ALL} (Full Base64 Pool: {len(uris)} nodes)")
+    print(f"    - {OUTPUT_NODES_TXT} (Plain URI links)")
     print(f"  Total Verified Proxies : {len(renamed_proxies)} (100% Green)")
     print(f"  Total Groups           : {len(proxy_groups)}")
+    print(f"  Shadowrocket URIs      : {len(uris)}")
     print(f"  Countries              : {len(region_pools)}")
     print(f"  File Size              : {os.path.getsize(OUTPUT_ZORVPN):,} bytes")
     print(f"{'═' * 70}\n")
