@@ -30,7 +30,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Fetch Live Nodes & Rebuild zorVPN Subscription
+      - name: Install Mihomo (Clash.Meta) Engine for Real Health Checks
+        run: |
+          curl -sL https://github.com/MetaCubeX/mihomo/releases/download/v1.19.2/mihomo-linux-amd64-v1.19.2.gz | gzip -d > /tmp/mihomo
+          chmod +x /tmp/mihomo
+          sudo mv /tmp/mihomo /usr/local/bin/mihomo
+          mihomo -v
+
+      - name: Fetch Live Nodes & Run Active Latency Verification
         run: |
           python scripts/update.py
 
@@ -42,6 +49,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes detected in clash.yaml"
           else
-            git commit -m "chore(subscription): auto-update zorVPN nodes [$(date -u +'%Y-%m-%d %H:%M UTC')]"
+            git commit -m "chore(subscription): update verified green nodes [$(date -u +'%Y-%m-%d %H:%M UTC')]"
             git push
           fi
