@@ -7,14 +7,32 @@
 
 A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active proxy nodes** across **40+ countries**, auto-aggregated from top-tier GitHub sources with health checks, deduplication, and automated updates via GitHub Actions.
 
-## ⚡ Quick Import
+## ⚡ Subscription URLs
 
-**Subscription URL** (Raw GitHub Link):
+Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without a proxy should use the **China Accelerated Link** or **Global CDN Link** below:
+
+### 🇨🇳 Direct China Links (No Proxy Needed — Fixes `EOF` Error)
+
+| Mirror Provider | Subscription URL |
+|:----------------|:-----------------|
+| ⚡ **GHProxy (Recommended)** | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
+| 🚀 **GH-Proxy Mirror** | `https://gh-proxy.com/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
+| 🌐 **jsDelivr Global CDN** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
+| ⚡ **Fastly CDN** | `https://fastly.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
+
+> 📱 **For Testers**: Copy the **GHProxy** or **jsDelivr** link above and paste directly into **FlClash**, **Clash Verge Rev**, **Stash**, or **Shadowrocket**. The subscription will automatically import as **`ZorVPN`**!
+
+### 🌍 Global Direct Link (For Users with Existing Proxy or Outside China)
 ```
-https://raw.githubusercontent.com/hamzawih0/zorVPN/main/clash.yaml
+https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml
 ```
 
-Copy and paste this URL into **Clash Verge Rev**, **Stash**, **Shadowrocket**, **ClashX Meta**, or **FlClash**.
+---
+
+## ☁️ Cloudflare Pages & Worker (Self-Hosted Edge CDN)
+
+Want your own dedicated subscription domain (e.g. `https://zorvpn.pages.dev/ZorVPN.yaml`) with zero blocking?
+Check out the **[Cloudflare Deployment Guide](cloudflare/README.md)** (Supports 1-click Cloudflare Pages & Workers).
 
 ## 🎯 Proxy Groups
 

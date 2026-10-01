@@ -23,7 +23,8 @@ from collections import defaultdict
 import yaml
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUTPUT_YAML = os.path.join(ROOT_DIR, "clash.yaml")
+OUTPUT_ZORVPN = os.path.join(ROOT_DIR, "ZorVPN.yaml")
+OUTPUT_CLASH = os.path.join(ROOT_DIR, "clash.yaml")
 
 # Verified upstream subscription sources
 SOURCES = [
@@ -751,15 +752,18 @@ rules:
 
     full_output = header + "\n" + yaml_proxies + "\n" + yaml_groups + "\n" + rules_section
 
-    with open(OUTPUT_YAML, 'w', encoding='utf-8') as f:
-        f.write(full_output)
+    for out_path in [OUTPUT_ZORVPN, OUTPUT_CLASH]:
+        with open(out_path, 'w', encoding='utf-8') as f:
+            f.write(full_output)
 
     print(f"\n{'═' * 70}")
-    print(f"  🎉 SUCCESS! zorVPN configuration written to: {OUTPUT_YAML}")
+    print(f"  🎉 SUCCESS! zorVPN configuration written to:")
+    print(f"    - {OUTPUT_ZORVPN}")
+    print(f"    - {OUTPUT_CLASH}")
     print(f"  Total Verified Proxies : {len(renamed_proxies)} (100% Green)")
     print(f"  Total Groups           : {len(proxy_groups)}")
     print(f"  Countries              : {len(region_pools)}")
-    print(f"  File Size              : {os.path.getsize(OUTPUT_YAML):,} bytes")
+    print(f"  File Size              : {os.path.getsize(OUTPUT_ZORVPN):,} bytes")
     print(f"{'═' * 70}\n")
     return True
 
