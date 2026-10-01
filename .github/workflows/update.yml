@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -50,5 +52,6 @@ jobs:
             echo "No changes detected in clash.yaml"
           else
             git commit -m "chore(subscription): update verified green nodes [$(date -u +'%Y-%m-%d %H:%M UTC')]"
-            git push
+            git pull --rebase origin main
+            git push origin main
           fi
