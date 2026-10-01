@@ -271,6 +271,13 @@ def fetch_url(url: str, timeout: int = 15) -> bytes:
         raise e
 
 
+AD_KEYWORDS = [
+    '剩余流量', '到期时间', '官网', 'TG群', '购买', '过期', '通知', '重置',
+    '微信', '公告', '客服', '禁止', '续费', '套餐', '发布页', '频道', '导航',
+    '防失联', '打赏', '更新', '说明', '教程', '推广', '合作', '网址', '关注',
+    '备用', '返利', 'AFF', 'aff', 'QQ群', '群聊', '群主'
+]
+
 def parse_clash_yaml(content_bytes: bytes) -> list:
     try:
         text = content_bytes.decode('utf-8', errors='ignore')
@@ -280,10 +287,17 @@ def parse_clash_yaml(content_bytes: bytes) -> list:
             text = text.split('```', 1)[1].split('```', 1)[0]
         data = yaml.safe_load(text)
         if isinstance(data, dict) and 'proxies' in data and isinstance(data['proxies'], list):
-            # Only keep encrypted proxies (reject plain unencrypted HTTP proxies)
             valid = []
             for p in data['proxies']:
                 if isinstance(p, dict) and 'server' in p and 'port' in p:
+                    # Sanitize invalid dummy servers
+                    server = str(p.get('server', '')).strip().lower()
+                    if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
+                        continue
+                    # Sanitize airport marketing cards / spam announcements
+                    name = str(p.get('name', '')).strip()
+                    if any(kw in name for kw in AD_KEYWORDS):
+                        continue
                     ptype = str(p.get('type', '')).lower()
                     if ptype in ('vless', 'hysteria2', 'hysteria', 'trojan', 'vmess', 'ss', 'socks5'):
                         valid.append(p)
