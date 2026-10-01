@@ -11,10 +11,10 @@ A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active pro
 
 **Subscription URL** (Raw GitHub Link):
 ```
-https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/zorVPN/main/clash.yaml
+https://raw.githubusercontent.com/hamzawih0/zorVPN/main/clash.yaml
 ```
 
-> 💡 **Tip**: Replace `YOUR_GITHUB_USERNAME` with your GitHub username once pushed.
+Copy and paste this URL into **Clash Verge Rev**, **Stash**, **Shadowrocket**, **ClashX Meta**, or **FlClash**.
 
 ## 🎯 Proxy Groups
 
