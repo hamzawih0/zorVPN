@@ -1,0 +1,47 @@
+name: Update zorVPN Nodes
+
+on:
+  schedule:
+    # Run every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+  push:
+    paths:
+      - 'scripts/**'
+
+jobs:
+  update-subscription:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Fetch Live Nodes & Rebuild zorVPN Subscription
+        run: |
+          python scripts/update.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add clash.yaml
+          if git diff --staged --quiet; then
+            echo "No changes detected in clash.yaml"
+          else
+            git commit -m "chore(subscription): auto-update zorVPN nodes [$(date -u +'%Y-%m-%d %H:%M UTC')]"
+            git push
+          fi
