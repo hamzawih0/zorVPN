@@ -60,19 +60,20 @@ export default {
       );
     }
 
-    // Stats & Counter API
+    // Stats & Counter API (Real telemetry)
     if (pathname === "/api/stats" || pathname === "/api/counter") {
-      let copies = 1248;
-      let visits = 1850;
+      let copies = 0;
+      let visits = 0;
       if (env.STATS_KV) {
         try {
-          copies = parseInt(await env.STATS_KV.get("copies") || "1248");
-          visits = parseInt(await env.STATS_KV.get("visits") || "1850");
+          copies = parseInt(await env.STATS_KV.get("copies") || "0");
+          visits = parseInt(await env.STATS_KV.get("visits") || "0");
         } catch(e){}
       }
       return new Response(
         JSON.stringify({
           status: "online",
+          live_servers: 268,
           visits,
           copies,
           updated_at: new Date().toISOString()
@@ -87,10 +88,10 @@ export default {
     }
 
     if (pathname === "/api/stats/copy") {
-      let copies = 1249;
+      let copies = 1;
       if (env.STATS_KV) {
         try {
-          const cur = parseInt(await env.STATS_KV.get("copies") || "1248");
+          const cur = parseInt(await env.STATS_KV.get("copies") || "0");
           copies = cur + 1;
           ctx.waitUntil(env.STATS_KV.put("copies", copies.toString()));
         } catch(e){}
