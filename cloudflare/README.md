@@ -24,19 +24,19 @@ This method takes **less than 60 seconds** and requires no command line:
 6. Open [`cloudflare/worker.js`](worker.js), copy the entire code, and paste it into the Cloudflare code editor (replacing all default code).
 7. Click **Deploy** in the top right.
 
-🎉 **Done!** Your service is now live at:
+🎉 **Live Official URL:**
 ```
-https://zorvpn.<your-subdomain>.workers.dev/
+https://zorvpn.xxaweii.workers.dev/
 ```
 
 ### Direct Subscription Endpoints on your Worker:
 | Platform | Target Endpoint | What It Returns |
 | :--- | :--- | :--- |
-| **Web Browser** | `https://zorvpn.<subdomain>.workers.dev/` | Interactive Liquid Glass Web Hub with 1-click copy & QR |
-| **iOS Shadowrocket Lite** | `https://zorvpn.<subdomain>.workers.dev/lite` | Base64 Top 30 Green Nodes (0.05s load, zero lag) |
-| **iOS Shadowrocket Standard**| `https://zorvpn.<subdomain>.workers.dev/ios` | Base64 Top 60 Curated Nodes |
-| **Clash / FlClash / Stash** | `https://zorvpn.<subdomain>.workers.dev/clash` | Clash/Mihomo YAML with inline rules & auto fastest |
-| **Full Pool** | `https://zorvpn.<subdomain>.workers.dev/all` | Complete archive of all 200+ verified nodes |
+| **Web Browser** | `https://zorvpn.xxaweii.workers.dev/` | Interactive Liquid Glass Web Hub with 1-click copy & QR |
+| **iOS Shadowrocket Lite** | `https://zorvpn.xxaweii.workers.dev/lite` | Base64 Top 30 Green Nodes (0.05s load, zero lag) |
+| **iOS Shadowrocket Standard**| `https://zorvpn.xxaweii.workers.dev/ios` | Base64 Top 60 Curated Nodes |
+| **Clash / FlClash / Stash** | `https://zorvpn.xxaweii.workers.dev/clash` | Clash/Mihomo YAML with inline rules & auto fastest |
+| **Full Pool** | `https://zorvpn.xxaweii.workers.dev/all` | Complete archive of all 200+ verified nodes |
 
 ---
 

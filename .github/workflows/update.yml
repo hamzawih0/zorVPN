@@ -67,6 +67,14 @@ jobs:
             curl -s "https://purge.jsdelivr.net/gh/hamzawih0/zorVPN@main/$file" || true
           done
 
+      - name: Sync Repository Homepage to Cloudflare Worker URL
+        run: |
+          curl -s -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }} \
+            -d '{"homepage":"https://zorvpn.xxaweii.workers.dev/"}' || true
+
       - name: Deploy to Cloudflare Workers (.workers.dev)
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
         uses: cloudflare/wrangler-action@v3

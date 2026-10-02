@@ -1,16 +1,24 @@
+<div align="center">
+
 # zorVPN — Free Multi-Platform VPN Subscription
 
-![Nodes](https://img.shields.io/badge/Nodes-2700+-blue?style=for-the-badge)
-![Countries](https://img.shields.io/badge/Countries-40+-success?style=for-the-badge)
-![Auto-Update](https://img.shields.io/badge/Update-Every%206h-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)
+### 🚀 Official Edge Portal & Subscription Hub
+### 👉 **[https://zorvpn.xxaweii.workers.dev/](https://zorvpn.xxaweii.workers.dev/)** 👈
+
+[![Official Hub](https://img.shields.io/badge/Official%20Hub-zorvpn.xxaweii.workers.dev-6366f1?style=for-the-badge&logo=cloudflare&logoColor=white)](https://zorvpn.xxaweii.workers.dev/)
+[![Nodes](https://img.shields.io/badge/Nodes-2700+-blue?style=for-the-badge)](https://zorvpn.xxaweii.workers.dev/)
+[![Countries](https://img.shields.io/badge/Countries-40+-success?style=for-the-badge)](https://zorvpn.xxaweii.workers.dev/)
+[![Auto-Update](https://img.shields.io/badge/Update-Every%206h-orange?style=for-the-badge)](https://zorvpn.xxaweii.workers.dev/)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
+
+</div>
 
 A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active proxy nodes** across **40+ countries**, auto-aggregated from top-tier GitHub sources with health checks, deduplication, and automated updates via GitHub Actions.
 
 ## 🌐 Web Subscription Portal (One-Click Copy & QR)
 
 Visit the official zorVPN Web Hub to copy URLs, scan QR codes, or 1-click import into iOS Shadowrocket / Clash:
-- ☁️ **Cloudflare Edge Portal (Fastest)**: **[https://zorvpn.xxaweii.workers.dev/](https://zorvpn.xxaweii.workers.dev/)**
+- ☁️ **Main Official Portal**: **[https://zorvpn.xxaweii.workers.dev/](https://zorvpn.xxaweii.workers.dev/)**
 - 🌍 **GitHub Pages Mirror**: **[https://hamzawih0.github.io/zorVPN/](https://hamzawih0.github.io/zorVPN/)**
 
 ---
