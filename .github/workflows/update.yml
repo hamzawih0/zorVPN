@@ -66,3 +66,12 @@ jobs:
             echo "Purging jsDelivr cache for $file..."
             curl -s "https://purge.jsdelivr.net/gh/hamzawih0/zorVPN@main/$file" || true
           done
+
+      - name: Deploy to Cloudflare Workers (.workers.dev)
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+

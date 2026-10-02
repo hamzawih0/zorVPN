@@ -788,6 +788,9 @@ rules:
   - DOMAIN-SUFFIX,reddit.com,🎯 zorVPN
   - DOMAIN-SUFFIX,github.com,🎯 zorVPN
   - DOMAIN-SUFFIX,githubusercontent.com,🎯 zorVPN
+  - DOMAIN-SUFFIX,cloudflare.com,🎯 zorVPN
+  - DOMAIN-SUFFIX,workers.dev,🎯 zorVPN
+  - DOMAIN-SUFFIX,pages.dev,🎯 zorVPN
   - DOMAIN-SUFFIX,stackoverflow.com,🎯 zorVPN
   - DOMAIN-SUFFIX,docker.io,🎯 zorVPN
   - DOMAIN-SUFFIX,npmjs.com,🎯 zorVPN

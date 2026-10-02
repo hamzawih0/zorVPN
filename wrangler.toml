@@ -1,0 +1,9 @@
+name = "zorvpn"
+main = "cloudflare/worker.js"
+compatibility_date = "2024-09-23"
+workers_dev = true
+
+[vars]
+REPO_USER = "hamzawih0"
+REPO_NAME = "zorVPN"
+REPO_BRANCH = "main"

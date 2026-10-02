@@ -737,7 +737,7 @@ button {
 /* Mirror Segment */
 .segmented-mirrors {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 5px;
   padding: 4px;
   border-radius: 14px;
@@ -1189,6 +1189,7 @@ button {
         <span style="color: var(--teal); text-transform: none;">Unblocked in China</span>
       </div>
       <div class="segmented-mirrors">
+        <button id="mirror-cf" class="mirror-btn" onclick="selectMirror('cloudflare')">☁️ Cloudflare</button>
         <button id="mirror-jsdelivr" class="mirror-btn active" onclick="selectMirror('jsdelivr')">⚡ jsDelivr</button>
         <button id="mirror-ghproxy" class="mirror-btn" onclick="selectMirror('ghproxy')">🚀 GHProxy</button>
         <button id="mirror-raw" class="mirror-btn" onclick="selectMirror('raw')">🌍 GitHub</button>
@@ -1340,7 +1341,12 @@ const PLATFORMS = {
 
 // Mirror URLs
 function getMirrorUrl(filename) {
-  if (currentMirror === 'jsdelivr') {
+  if (currentMirror === 'cloudflare') {
+    if (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')) {
+      return `${window.location.origin}/${filename}`;
+    }
+    return `https://zorvpn.pages.dev/${filename}`;
+  } else if (currentMirror === 'jsdelivr') {
     return `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}@${REPO_BRANCH}/${filename}`;
   } else if (currentMirror === 'ghproxy') {
     return `https://ghproxy.net/https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`;
@@ -1430,10 +1436,16 @@ function selectTier(tier) {
 // Select Mirror
 function selectMirror(mirror) {
   currentMirror = mirror;
-  ['jsdelivr', 'ghproxy', 'raw'].forEach(m => {
-    document.getElementById(`mirror-${m}`).classList.toggle('active', m === mirror);
+  ['cf', 'jsdelivr', 'ghproxy', 'raw'].forEach(m => {
+    const el = document.getElementById(`mirror-${m}`);
+    if (el) el.classList.toggle('active', (m === 'cf' && mirror === 'cloudflare') || m === mirror);
   });
   updateSheetUrls();
+}
+
+// Auto-detect Cloudflare Workers / Pages origin
+if (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')) {
+  currentMirror = 'cloudflare';
 }
 
 // Toggle QR Code Display
