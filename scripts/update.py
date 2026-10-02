@@ -579,27 +579,15 @@ def build_zorvpn():
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
 mixed-port: 7890
-port: 7891
-socks-port: 7892
 allow-lan: true
 mode: rule
 log-level: info
-ipv6: true
-external-controller: 127.0.0.1:9090
+ipv6: false
 
 unified-delay: true
 tcp-concurrent: true
 global-client-fingerprint: chrome
 find-process-mode: strict
-
-geodata-mode: true
-geo-auto-update: true
-geo-update-interval: 24
-geox-url:
-  geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
-  geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
-  asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
 
 profile:
   store-selected: true
@@ -625,18 +613,14 @@ sniffer:
 tun:
   enable: false
   stack: mixed
-  dns-hijack:
-    - any:53
-    - tcp://any:53
   auto-route: true
   auto-detect-interface: true
   mtu: 1400
 
 dns:
   enable: true
-  ipv6: true
+  ipv6: false
   prefer-h3: true
-  listen: 0.0.0.0:53
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
@@ -684,8 +668,6 @@ dns:
   fallback-filter:
     geoip: true
     geoip-code: CN
-    geosite:
-      - gfw
     ipcidr:
       - 240.0.0.0/4
       - 0.0.0.0/32

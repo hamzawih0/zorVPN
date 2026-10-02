@@ -29,7 +29,8 @@ export default {
     const pathname = url.pathname.toLowerCase();
 
     const isShadowrocket = userAgent.includes("shadowrocket");
-    const isClash = userAgent.includes("clash") || userAgent.includes("stash") || userAgent.includes("meta");
+    const isClash = userAgent.includes("clash") || userAgent.includes("stash") || userAgent.includes("meta") || userAgent.includes("flclash") || userAgent.includes("mihomo");
+    const isV2ray = userAgent.includes("v2rayng") || userAgent.includes("v2ray") || userAgent.includes("xray") || userAgent.includes("sing-box");
 
     // Optional JSON API route
     if (pathname === "/api" || pathname === "/json" || url.searchParams.get("format") === "json") {
@@ -39,15 +40,17 @@ export default {
           service: "zorVPN Cloudflare Edge Subscription Proxy",
           domain: url.origin,
           subscriptions: {
-            ios_shadowrocket_lite_recommended: `${url.origin}/lite`,
+            v2rayng_android_lite: `${url.origin}/lite`,
+            clash_meta_yaml: `${url.origin}/clash`,
+            ios_shadowrocket_lite: `${url.origin}/lite`,
             ios_shadowrocket_standard: `${url.origin}/ios`,
-            clash_flclash_stash_yaml: `${url.origin}/clash`,
             all_nodes_base64: `${url.origin}/all`,
             raw_uri_nodes: `${url.origin}/nodes`
           },
           quick_guide: {
-            ios_shadowrocket: `Add as Type: Subscribe using ${url.origin}/lite (Top 30)`,
-            clash_flclash: `Add as URL subscription using ${url.origin}/clash`
+            v2rayng_android: `1-Click Intent: v2rayng://install-sub?url=${encodeURIComponent(url.origin + '/lite')}&name=zorVPN`,
+            clash_meta_android: `Add URL Subscription using ${url.origin}/clash (or jsDelivr CDN backup)`,
+            ios_shadowrocket: `Add as Type: Subscribe using ${url.origin}/lite (Top 30)`
           },
           updated_at: new Date().toISOString()
         }, null, 2),
@@ -111,7 +114,10 @@ export default {
     let targetFilename = "index.html";
     let contentType = "text/html; charset=utf-8";
 
-    if (pathname.includes("lite")) {
+    if (pathname.includes("yaml") || pathname.includes("yml") || pathname.includes("clash") || pathname.includes("meta") || isClash) {
+      targetFilename = "ZorVPN.yaml";
+      contentType = "text/yaml; charset=utf-8";
+    } else if (pathname.includes("lite") || pathname.includes("v2ray") || isV2ray) {
       targetFilename = "ZorVPN-lite.txt";
       contentType = "text/plain; charset=utf-8";
     } else if (pathname.includes("all")) {
@@ -120,9 +126,6 @@ export default {
     } else if (pathname.includes("nodes")) {
       targetFilename = "ZorVPN-nodes.txt";
       contentType = "text/plain; charset=utf-8";
-    } else if (pathname.includes("yaml") || pathname.includes("yml") || pathname.includes("clash") || isClash) {
-      targetFilename = "ZorVPN.yaml";
-      contentType = "text/yaml; charset=utf-8";
     } else if (pathname.includes("txt") || pathname.includes("ios") || pathname.includes("shadowrocket") || isShadowrocket) {
       targetFilename = "ZorVPN-lite.txt";
       contentType = "text/plain; charset=utf-8";

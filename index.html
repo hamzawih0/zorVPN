@@ -1109,8 +1109,8 @@ button {
         </div>
       </div>
 
-      <!-- 2. Android -->
-      <div class="platform-card" onclick="openPlatformSheet('android')">
+      <!-- 2. Android: v2rayNG / Xray -->
+      <div class="platform-card" onclick="openPlatformSheet('android_v2ray')">
         <div class="platform-left">
           <div class="platform-icon-wrap android">
             <!-- Android SVG Icon -->
@@ -1120,10 +1120,32 @@ button {
           </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <span class="platform-name">Android</span>
-              <span class="platform-pill">Clash / Meta</span>
+              <span class="platform-name">Android (v2rayNG)</span>
+              <span class="platform-pill green">1-Click Base64</span>
             </div>
-            <span class="platform-sub">FlClash • ClashMetaForAndroid • v2rayNG</span>
+            <span class="platform-sub">v2rayNG • NekoBox • SagerNet • sing-box</span>
+          </div>
+        </div>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- 3. Android: Clash Meta / FlClash -->
+      <div class="platform-card" onclick="openPlatformSheet('android_clash')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap android" style="background: rgba(191, 90, 242, 0.12); color: var(--purple);">
+            <!-- Zap / Speed Bolt SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <span class="platform-name">Android (Clash Meta)</span>
+              <span class="platform-pill">Smart YAML</span>
+            </div>
+            <span class="platform-sub">ClashMetaForAndroid • FlClash • Surfboard</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1368,19 +1390,49 @@ const PLATFORMS = {
       { num: 3, title: "Paste URL & Save", desc: "Paste the subscription URL, set Remark to <b>zorVPN</b>, and tap <b>Save</b>." }
     ]
   },
+  android_v2ray: {
+    title: "Android — v2rayNG & Xray",
+    subtitle: "v2rayNG • NekoBox • SagerNet • sing-box",
+    svg: ICONS.android,
+    stableFile: "ZorVPN-lite.txt",
+    fullFile: "ZorVPN-all.txt",
+    stableDesc: "Top 30 Curated Nodes • Base64 Instant Sync",
+    fullDesc: "All 260+ Verified Nodes • Base64 Full Pool",
+    importProtocol: "v2rayng",
+    steps: [
+      { num: 1, title: "1-Click Add or Copy URL", desc: "Tap <b>1-Click Add to v2rayNG</b> below, or copy the subscription link." },
+      { num: 2, title: "Open Subscription Settings", desc: "In v2rayNG, open <b>☰ (Menu)</b> → <b>Subscription group setting</b> (订阅分组设置) → tap <b>+</b>." },
+      { num: 3, title: "Update Subscription", desc: "Paste URL, save, then tap <b>⋮ (top right)</b> → <b>Update subscription</b>. Tap <b>V</b> to connect!" }
+    ]
+  },
+  android_clash: {
+    title: "Android — Clash Meta & FlClash",
+    subtitle: "ClashMetaForAndroid • FlClash • Surfboard",
+    svg: ICONS.zap,
+    stableFile: "ZorVPN.yaml",
+    fullFile: "ZorVPN.yaml",
+    stableDesc: "Clash Meta YAML • Smart Rule Routing",
+    fullDesc: "All 260+ Verified Nodes • Auto-Failover Rules",
+    importProtocol: "clashmeta",
+    steps: [
+      { num: 1, title: "1-Click Import or Copy", desc: "Tap <b>1-Click Add to Clash Meta</b> below, or copy the YAML URL." },
+      { num: 2, title: "Save Profile", desc: "In Clash Meta, tap <b>Profiles</b> → <b>+</b> → <b>New from URL</b> → paste link → tap <b>Save (floppy disk)</b>." },
+      { num: 3, title: "Start Gateway", desc: "Select the newly saved profile, return to main screen and tap <b>Tap to start</b>!" }
+    ]
+  },
   android: {
     title: "Android Setup",
-    subtitle: "FlClash • ClashMetaForAndroid • v2rayNG",
+    subtitle: "v2rayNG • ClashMetaForAndroid • FlClash",
     svg: ICONS.android,
-    stableFile: "ZorVPN.yaml",
-    fullFile: "ZorVPN-all.txt",
-    stableDesc: "Clash YAML • Smart Latency Testing Groups",
-    fullDesc: "All 260+ Verified Nodes • Full Archive",
-    importProtocol: "clash",
+    stableFile: "ZorVPN-lite.txt",
+    fullFile: "ZorVPN.yaml",
+    stableDesc: "Base64 Lite (v2rayNG)",
+    fullDesc: "Clash YAML (Clash Meta)",
+    importProtocol: "v2rayng",
     steps: [
-      { num: 1, title: "Open FlClash or ClashMeta", desc: "Launch your proxy client on Android." },
-      { num: 2, title: "Import Subscription", desc: "Navigate to <b>Profiles</b> → tap <b>+</b> → paste the subscription URL." },
-      { num: 3, title: "Start Gateway", desc: "Tap the downloaded profile and click <b>Start</b> to connect." }
+      { num: 1, title: "Pick Your Client", desc: "Use <b>v2rayNG</b> for Base64 links, or <b>Clash Meta</b> for YAML rule configurations." },
+      { num: 2, title: "Import Subscription", desc: "Click <b>1-Click Add</b> or paste the URL into your client's subscription manager." },
+      { num: 3, title: "Connect", desc: "Update nodes, test latency, and tap Connect!" }
     ]
   },
   mac: {
@@ -1438,7 +1490,8 @@ function getMirrorUrl(filename) {
     }
     return `https://zorvpn.xxaweii.workers.dev/${filename}`;
   } else if (currentMirror === 'jsdelivr') {
-    return `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}@${REPO_BRANCH}/${filename}`;
+    // Note: Do NOT append @main to prevent %40 encoding errors in clients
+    return `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}/${filename}`;
   } else if (currentMirror === 'ghproxy') {
     return `https://ghproxy.net/https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`;
   } else {
@@ -1499,6 +1552,12 @@ function updateSheetUrls() {
     const b64 = btoa(url);
     importBtn.href = `shadowrocket://add/sub://${b64}?title=zorVPN`;
     document.getElementById('btnImportLabel').textContent = 'Add to Shadowrocket';
+  } else if (p.importProtocol === 'v2rayng') {
+    importBtn.href = `v2rayng://install-sub?url=${encodeURIComponent(url)}&name=zorVPN`;
+    document.getElementById('btnImportLabel').textContent = '1-Click Add to v2rayNG';
+  } else if (p.importProtocol === 'clashmeta') {
+    importBtn.href = `clashmeta://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
+    document.getElementById('btnImportLabel').textContent = '1-Click Add to Clash Meta';
   } else {
     importBtn.href = `clash://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
     document.getElementById('btnImportLabel').textContent = 'Add to Clash';
