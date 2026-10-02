@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<meta name="theme-color" content="#000000" />
+<meta name="theme-color" content="#09090C" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -18,73 +18,43 @@
 <title>zorVPN — Subscription Hub & Client URL Selector</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   DESIGN TOKENS - iOS 26 Liquid Glass & Apple System Design
+   ZERO-GPU HIGH-PERFORMANCE DESIGN TOKENS
+   - 0% GPU idle: No backdrop-filter, no infinite keyframe loops,
+     no SVG filters, no composite blending passes.
    ============================================================ */
 :root {
-  --bg: #000000;
-  --bg-elevated: #0B0B0F;
-  --bg-grouped: #131318;
-  --bg-card: rgba(22, 22, 28, 0.72);
-  --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.07) 100%);
-  --glass-specular: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
-  --glass-blur: blur(14px);
-  --glass-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7);
-
-  --primary-accent: #0A84FF;
-  --primary-accent-glow: rgba(10, 132, 255, 0.45);
-  --primary-gradient: linear-gradient(135deg, #5E5CE6 0%, #0A84FF 55%, #64D2FF 100%);
-  --primary-gradient-soft: linear-gradient(135deg, rgba(94,92,230,0.16) 0%, rgba(10,132,255,0.10) 55%, rgba(100,210,255,0.05) 100%);
+  --bg: #09090C;
+  --bg-elevated: #111116;
+  --bg-card: #15151C;
+  --bg-card-hover: #1A1A24;
+  --bg-card-active: #22222E;
+  
+  --stroke: rgba(255, 255, 255, 0.08);
+  --stroke-strong: rgba(255, 255, 255, 0.16);
 
   --text-main: #FFFFFF;
   --text-sub: rgba(235, 235, 245, 0.65);
-  --text-dim: rgba(235, 235, 245, 0.38);
-
-  --stroke: rgba(255, 255, 255, 0.08);
-  --stroke-2: rgba(255, 255, 255, 0.14);
-  --stroke-3: rgba(255, 255, 255, 0.20);
-
-  --text: var(--text-main);
-  --text-2: var(--text-sub);
-  --text-3: var(--text-dim);
+  --text-dim: rgba(235, 235, 245, 0.40);
 
   --blue: #0A84FF;
-  --blue-soft: rgba(10, 132, 255, 0.16);
-  --blue-glow: rgba(10, 132, 255, 0.45);
-
+  --blue-soft: rgba(10, 132, 255, 0.12);
   --green: #30D158;
-  --green-soft: rgba(48, 209, 88, 0.16);
-  --green-glow: rgba(48, 209, 88, 0.45);
-
-  --indigo: #5E5CE6;
-  --indigo-soft: rgba(94, 92, 230, 0.16);
-
+  --green-soft: rgba(48, 209, 88, 0.12);
   --teal: #64D2FF;
-  --teal-soft: rgba(100, 210, 255, 0.16);
-
-  --orange: #FF9F0A;
-  --orange-soft: rgba(255, 159, 10, 0.16);
-
   --purple: #BF5AF2;
-  --purple-soft: rgba(191, 90, 242, 0.16);
+  --orange: #FF9F0A;
 
-  --brand-gradient: var(--primary-gradient);
-  --brand-gradient-soft: var(--primary-gradient-soft);
+  --brand-gradient: linear-gradient(135deg, #5E5CE6 0%, #0A84FF 55%, #64D2FF 100%);
 
-  --ease: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
-  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", monospace;
 
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
 }
 
 *, *::before, *::after {
@@ -95,85 +65,69 @@
 
 html {
   background: var(--bg);
-  color: var(--text);
+  color: var(--text-main);
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.011em;
-  font-feature-settings: "cv02","cv03","cv04","cv11";
   min-height: 100%;
 }
 
 body {
   background: var(--bg);
-  color: var(--text);
+  color: var(--text-main);
   overflow-x: hidden;
-  position: relative;
-  min-height: 100vh;
-  padding-bottom: calc(var(--safe-bottom) + 50px);
+  padding-bottom: calc(var(--safe-bottom) + 30px);
 }
 
 button {
-  font: inherit;
-  color: inherit;
-  background: none;
+  font-family: inherit;
   border: none;
+  background: none;
   cursor: pointer;
-  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ============================================================
-   HIGH-PERFORMANCE AMBIENT BACKGROUND (0% CPU / GPU)
-   ============================================================ */
+/* Static ambient background (0 GPU overhead) */
 .ambient {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background: 
-    radial-gradient(circle at 18% 12%, rgba(10, 132, 255, 0.16) 0%, transparent 48%),
-    radial-gradient(circle at 82% 88%, rgba(94, 92, 230, 0.14) 0%, transparent 45%),
-    radial-gradient(circle at 50% 45%, rgba(48, 209, 88, 0.05) 0%, transparent 50%),
-    #000000;
-  transform: translateZ(0);
+    radial-gradient(circle at 15% 10%, rgba(10, 132, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(94, 92, 230, 0.08) 0%, transparent 40%),
+    #09090C;
 }
 
-.blob, .grain {
-  display: none;
-}
-
-/* ============================================================
-   DYNAMIC ISLAND / NOTIFICATION TOAST
-   ============================================================ */
+/* Dynamic Island Toast */
 .toast-island {
   position: fixed;
   top: max(16px, var(--safe-top));
   left: 50%;
-  transform: translateX(-50%) translateY(-120px) scale(0.9);
+  transform: translateX(-50%) translateY(-100px);
   z-index: 99999;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 9px 18px 9px 12px;
+  background: #181820;
+  border: 1px solid var(--stroke-strong);
+  padding: 8px 18px 8px 12px;
   border-radius: 100px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.95), 0 0 24px var(--blue-glow);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8);
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.45s var(--spring), opacity 0.3s var(--ease);
+  transition: transform 0.28s ease, opacity 0.2s ease;
 }
 
 .toast-island.show {
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0);
   opacity: 1;
   pointer-events: auto;
 }
 
 .toast-icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--green-soft);
   color: var(--green);
@@ -191,19 +145,16 @@ button {
   font-size: 13px;
   font-weight: 600;
   color: #FFFFFF;
-  letter-spacing: -0.01em;
 }
 
-/* ============================================================
-   LAYOUT & CONTAINER
-   ============================================================ */
+/* App Container */
 .app-container {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 640px;
+  max-width: 620px;
   margin: 0 auto;
-  padding: calc(var(--safe-top) + 20px) 18px 40px;
+  padding: calc(var(--safe-top) + 16px) 16px 30px;
 }
 
 /* Header */
@@ -211,25 +162,30 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   background: var(--brand-gradient);
   display: grid;
   place-items: center;
-  box-shadow: 0 10px 28px -6px rgba(10, 132, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  font-size: 22px;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.brand-icon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .brand-info {
@@ -238,13 +194,11 @@ button {
 }
 
 .brand-name {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 800;
-  letter-spacing: -0.035em;
-  background: var(--brand-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  line-height: 1.15;
 }
 
 .brand-status {
@@ -254,44 +208,36 @@ button {
   font-size: 11.5px;
   font-weight: 600;
   color: var(--green);
+  margin-top: 1px;
 }
 
 .pulse-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 6px var(--green);
-  animation: pulse 2.2s infinite ease-in-out;
-  will-change: opacity;
-  transform: translateZ(0);
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  box-shadow: 0 0 6px rgba(48, 209, 88, 0.7);
+  display: inline-block;
 }
 
 .header-action {
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--text-2);
-  padding: 8px 14px;
+  color: var(--text-sub);
+  padding: 7px 13px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--bg-card);
   border: 1px solid var(--stroke);
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.22s var(--ease);
   text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.header-action:active {
-  transform: scale(0.96);
-  background: rgba(255, 255, 255, 0.1);
+.header-action:hover {
+  background: var(--bg-card-hover);
+  color: #FFFFFF;
 }
 
 .header-action svg {
@@ -300,61 +246,41 @@ button {
 }
 
 /* ============================================================
-   LIVE REAL-TIME COUNTER BAR (Apple Liquid Glass)
+   100% REAL OPERATIONAL METRICS BAR (0 GPU)
    ============================================================ */
 .live-counter-bar {
-  background: rgba(20, 20, 26, 0.72);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--stroke-2);
-  border-radius: 20px;
-  padding: 12px 18px;
-  margin-bottom: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-strong);
+  border-radius: 18px;
+  padding: 12px 16px;
+  margin-bottom: 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.65), var(--glass-specular);
-  position: relative;
-  overflow: hidden;
-}
-
-.live-counter-bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  gap: 10px;
 }
 
 .counter-badge {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   padding: 5px 11px;
   border-radius: 100px;
-  background: rgba(48, 209, 88, 0.12);
+  background: var(--green-soft);
   border: 1px solid rgba(48, 209, 88, 0.28);
   flex-shrink: 0;
 }
 
-.counter-badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 6px var(--green);
-  animation: pulse 2.2s infinite ease-in-out;
-  will-change: opacity;
-  transform: translateZ(0);
+.counter-badge svg {
+  width: 14px;
+  height: 14px;
+  color: var(--green);
 }
 
 .counter-badge-text {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   color: var(--green);
   text-transform: uppercase;
 }
@@ -372,24 +298,35 @@ button {
   align-items: flex-end;
 }
 
+.metric-val-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metric-val-row svg {
+  width: 13px;
+  height: 13px;
+  color: var(--text-sub);
+}
+
 .metric-val {
-  font-family: var(--font-mono);
-  font-size: 16px;
+  font-family: var(--mono);
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: -0.02em;
   color: #FFFFFF;
   line-height: 1.1;
-  transition: transform 0.25s var(--spring), color 0.2s;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .metric-val.bump {
-  transform: scale(1.22);
+  transform: scale(1.2);
   color: var(--teal);
 }
 
 .metric-lbl {
   font-size: 10.5px;
-  color: var(--text-2);
+  color: var(--text-sub);
   margin-top: 2px;
   font-weight: 500;
   white-space: nowrap;
@@ -397,45 +334,22 @@ button {
 
 .metric-sep {
   width: 1px;
-  height: 24px;
+  height: 22px;
   background: var(--stroke);
   flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
-  .live-counter-bar {
-    padding: 10px 14px;
-    margin-bottom: 20px;
-  }
-  .counter-badge {
-    padding: 4px 8px;
-    gap: 6px;
-  }
-  .counter-badge-text {
-    font-size: 10px;
-  }
-  .counter-metrics {
-    gap: 11px;
-  }
-  .metric-val {
-    font-size: 14.5px;
-  }
-  .metric-lbl {
-    font-size: 9.5px;
-  }
-}
-
-/* Hero */
+/* Hero Section */
 .hero {
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .hero-title {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.15;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .hero-title span {
@@ -446,38 +360,41 @@ button {
 }
 
 .hero-desc {
-  font-size: 14px;
+  font-size: 13.5px;
+  color: var(--text-sub);
   line-height: 1.5;
-  color: var(--text-2);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .stat-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 6px;
 }
 
 .stat-pill {
   font-size: 11.5px;
-  font-weight: 600;
+  color: var(--text-sub);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
   padding: 5px 10px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--stroke);
-  color: var(--text-2);
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.stat-pill b {
-  color: var(--text);
+.stat-pill svg {
+  width: 12px;
+  height: 12px;
+  color: var(--blue);
 }
 
-/* ============================================================
-   PLATFORM GRID CARDS (iOS 2026 Widget Feel)
-   ============================================================ */
+.stat-pill b {
+  color: #FFFFFF;
+}
+
+/* Section Title */
 .section-head {
   display: flex;
   align-items: center;
@@ -488,95 +405,74 @@ button {
 .section-title {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: var(--text-dim);
 }
 
 .section-hint {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--blue);
+  font-size: 11.5px;
+  color: var(--text-dim);
 }
 
+/* Platform Cards Grid */
 .platforms-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .platform-card {
-  position: relative;
-  border-radius: 22px;
-  padding: 16px 18px;
+  border-radius: 18px;
+  padding: 14px 16px;
   background: var(--bg-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--stroke);
-  box-shadow: var(--glass-shadow), var(--glass-specular);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+  gap: 12px;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 .platform-card:hover {
-  border-color: var(--stroke-2);
-  background: rgba(30, 30, 38, 0.85);
-  transform: translateY(-1.5px);
+  border-color: var(--stroke-strong);
+  background: var(--bg-card-hover);
 }
 
 .platform-card:active {
-  transform: scale(0.975);
-  background: rgba(40, 40, 52, 0.9);
+  background: var(--bg-card-active);
 }
 
 .platform-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 13px;
   min-width: 0;
 }
 
 .platform-icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  font-size: 24px;
   flex-shrink: 0;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--stroke);
 }
 
-.platform-icon-wrap.ios {
-  background: linear-gradient(135deg, rgba(10, 132, 255, 0.22), rgba(94, 92, 230, 0.16));
-  border: 1px solid rgba(10, 132, 255, 0.35);
+.platform-icon-wrap svg {
+  width: 22px;
+  height: 22px;
 }
 
-.platform-icon-wrap.android {
-  background: linear-gradient(135deg, rgba(48, 209, 88, 0.22), rgba(100, 210, 255, 0.16));
-  border: 1px solid rgba(48, 209, 88, 0.35);
-}
-
-.platform-icon-wrap.mac {
-  background: linear-gradient(135deg, rgba(94, 92, 230, 0.22), rgba(191, 90, 242, 0.16));
-  border: 1px solid rgba(94, 92, 230, 0.35);
-}
-
-.platform-icon-wrap.win {
-  background: linear-gradient(135deg, rgba(10, 132, 255, 0.22), rgba(100, 210, 255, 0.16));
-  border: 1px solid rgba(10, 132, 255, 0.35);
-}
-
-.platform-icon-wrap.router {
-  background: linear-gradient(135deg, rgba(255, 159, 10, 0.22), rgba(255, 69, 58, 0.16));
-  border: 1px solid rgba(255, 159, 10, 0.35);
-}
+.platform-icon-wrap.ios { background: rgba(10, 132, 255, 0.12); color: #0A84FF; }
+.platform-icon-wrap.android { background: rgba(48, 209, 88, 0.12); color: #30D158; }
+.platform-icon-wrap.mac { background: rgba(94, 92, 230, 0.12); color: #5E5CE6; }
+.platform-icon-wrap.win { background: rgba(10, 132, 255, 0.12); color: #0A84FF; }
+.platform-icon-wrap.router { background: rgba(255, 159, 10, 0.12); color: #FF9F0A; }
 
 .platform-meta {
   display: flex;
@@ -591,9 +487,9 @@ button {
 }
 
 .platform-name {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: #FFFFFF;
 }
 
@@ -602,8 +498,8 @@ button {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 5px;
+  padding: 2px 6px;
+  border-radius: 4px;
   background: var(--blue-soft);
   color: var(--blue);
   border: 1px solid rgba(10, 132, 255, 0.25);
@@ -616,61 +512,51 @@ button {
 }
 
 .platform-pill.orange {
-  background: var(--orange-soft);
+  background: rgba(255, 159, 10, 0.12);
   color: var(--orange);
   border-color: rgba(255, 159, 10, 0.25);
 }
 
 .platform-sub {
   font-size: 12.5px;
-  color: var(--text-2);
-  margin-top: 3px;
+  color: var(--text-sub);
+  margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .platform-chevron {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--stroke);
   display: grid;
   place-items: center;
-  color: var(--text-2);
+  color: var(--text-sub);
   flex-shrink: 0;
-  transition: transform 0.2s var(--ease), background 0.2s;
-}
-
-.platform-card:hover .platform-chevron {
-  background: var(--brand-gradient);
-  color: #FFFFFF;
-  border-color: transparent;
-  transform: translateX(2px);
 }
 
 .platform-chevron svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 
 /* ============================================================
-   BOTTOM SLIDE-UP SHEET (Apple iOS Style)
+   BOTTOM SLIDE-UP SHEET DRAWER
    ============================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.76);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.82);
   z-index: 10000;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s var(--ease);
+  transition: opacity 0.22s ease;
 }
 
 .modal-overlay.open {
@@ -680,15 +566,15 @@ button {
 
 .modal-sheet {
   width: 100%;
-  max-width: 580px;
-  background: linear-gradient(180deg, #181820 0%, #0A0A0E 100%);
-  border-radius: 34px 34px 0 0;
-  border-top: 1px solid var(--stroke-2);
-  padding: 16px 22px calc(var(--safe-bottom) + 26px);
-  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.9), var(--glass-specular);
+  max-width: 560px;
+  background: #141419;
+  border-radius: 26px 26px 0 0;
+  border-top: 1px solid var(--stroke-strong);
+  padding: 14px 20px calc(var(--safe-bottom) + 24px);
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.9);
   transform: translateY(100%);
-  transition: transform 0.42s var(--spring);
-  max-height: 92vh;
+  transition: transform 0.28s ease;
+  max-height: 90vh;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -698,11 +584,11 @@ button {
 }
 
 .modal-grab {
-  width: 38px;
-  height: 4.5px;
+  width: 36px;
+  height: 4px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.24);
-  margin: 0 auto 16px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 auto 14px;
   cursor: pointer;
 }
 
@@ -710,175 +596,187 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-.modal-header-left {
+.sheet-title-group {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.modal-platform-icon {
-  font-size: 26px;
+.sheet-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid rgba(10, 132, 255, 0.25);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
 }
 
-.modal-title {
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+.sheet-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+}
+
+.sheet-title-meta h4 {
+  font-size: 17px;
+  font-weight: 700;
   color: #FFFFFF;
 }
 
-.modal-subtitle {
+.sheet-title-meta p {
   font-size: 12px;
-  color: var(--text-3);
-  font-weight: 500;
+  color: var(--text-sub);
+  margin-top: 1px;
 }
 
-.modal-close-btn {
-  width: 32px;
-  height: 32px;
+.btn-close-sheet {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--stroke);
+  color: var(--text-sub);
   display: grid;
   place-items: center;
-  color: var(--text-2);
-  transition: background 0.2s;
+  transition: background 0.15s ease;
 }
 
-.modal-close-btn:hover {
-  background: rgba(255, 255, 255, 0.16);
+.btn-close-sheet:hover {
+  background: rgba(255, 255, 255, 0.14);
   color: #FFFFFF;
 }
 
-.modal-close-btn svg {
-  width: 15px;
-  height: 15px;
+.btn-close-sheet svg {
+  width: 14px;
+  height: 14px;
 }
 
-/* Version Segmented Switch (Stable vs Full) */
+/* Sections in Sheet */
 .sheet-section {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .sheet-label {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-3);
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.segmented-tiers {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  padding: 5px;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid var(--stroke);
-}
-
-.tier-btn {
-  padding: 11px 12px;
-  border-radius: 12px;
+/* Segmented Control */
+.segmented-control {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: #0C0C10;
+  border-radius: 12px;
+  padding: 3px;
+  border: 1px solid var(--stroke);
   gap: 3px;
-  transition: all 0.22s var(--ease);
-  color: var(--text-2);
+}
+
+.segment-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 12.5px;
   font-weight: 600;
-  font-size: 13.5px;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
 }
 
-.tier-btn .tier-sub {
-  font-size: 10px;
-  color: var(--text-3);
-  font-weight: 500;
+.segment-btn svg {
+  width: 14px;
+  height: 14px;
 }
 
-.tier-btn.active {
-  background: var(--brand-gradient);
+.segment-btn.active {
+  background: #20202A;
   color: #FFFFFF;
-  box-shadow: 0 6px 20px -6px var(--blue-glow);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.tier-btn.active .tier-sub {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* Mirror Segment */
-.segmented-mirrors {
+/* Mirror Pills */
+.mirror-chips {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-  padding: 4px;
-  border-radius: 14px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid var(--stroke);
+  gap: 6px;
 }
 
-.mirror-btn {
-  padding: 8px 6px;
+.mirror-chip {
+  padding: 7px 6px;
   border-radius: 10px;
-  font-size: 11.5px;
+  background: #0C0C10;
+  border: 1px solid var(--stroke);
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-2);
-  text-align: center;
-  transition: all 0.2s var(--ease);
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.15s ease;
 }
 
-.mirror-btn.active {
-  background: rgba(255, 255, 255, 0.14);
+.mirror-chip svg {
+  width: 13px;
+  height: 13px;
+}
+
+.mirror-chip.active {
+  background: rgba(10, 132, 255, 0.15);
+  border-color: rgba(10, 132, 255, 0.45);
   color: #FFFFFF;
 }
 
 /* URL Preview Box */
 .url-preview-card {
-  background: #000000;
+  background: #0C0C10;
+  border-radius: 12px;
   border: 1px solid var(--stroke);
-  border-radius: 16px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .url-text-code {
   font-family: var(--mono);
   font-size: 11.5px;
   color: var(--teal);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-all;
+  line-height: 1.4;
   user-select: all;
-  letter-spacing: -0.02em;
 }
 
 .url-quick-copy {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
+  padding: 6px;
+  border-radius: 7px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--stroke);
+  color: var(--text-sub);
   display: grid;
   place-items: center;
-  color: var(--text-2);
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
 }
 
 .url-quick-copy:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
 }
 
@@ -891,139 +789,129 @@ button {
 .sheet-actions {
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .btn-primary-action {
   width: 100%;
-  height: 52px;
-  border-radius: 15px;
+  height: 46px;
+  border-radius: 12px;
   background: var(--brand-gradient);
   color: #FFFFFF;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 10px 28px -8px var(--blue-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
+  transition: transform 0.12s ease;
 }
 
 .btn-primary-action:active {
-  transform: scale(0.975);
+  transform: scale(0.98);
 }
 
 .btn-primary-action svg {
-  width: 17px;
-  height: 17px;
-}
-
-.btn-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-}
-
-.btn-secondary-action {
-  height: 48px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid var(--stroke);
-  color: var(--text);
-  font-size: 13.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  text-decoration: none;
-  transition: all 0.2s var(--ease);
-}
-
-.btn-secondary-action:active {
-  transform: scale(0.97);
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.btn-secondary-action svg {
   width: 16px;
   height: 16px;
 }
 
-/* QR Code Section (Always Working, Zero-Dependency Canvas) */
+.btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-secondary-action {
+  flex: 1;
+  height: 42px;
+  border-radius: 12px;
+  background: #202028;
+  border: 1px solid var(--stroke);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.btn-secondary-action:hover {
+  background: #282834;
+}
+
+.btn-secondary-action:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary-action svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* QR Code Section */
 .qr-section {
   display: none;
   flex-direction: column;
   align-items: center;
-  padding: 18px;
+  padding: 16px;
   background: #FFFFFF;
-  border-radius: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
-  animation: fadeIn 0.25s var(--ease);
+  border-radius: 16px;
+  margin-bottom: 16px;
 }
 
 .qr-section.show {
   display: flex;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
-}
-
 #qrcode-container {
   display: grid;
   place-items: center;
-  padding: 8px;
-}
-
-#qrcode-container canvas, #qrcode-container img {
-  border-radius: 8px;
+  padding: 4px;
 }
 
 .qr-label {
   font-size: 12px;
   font-weight: 700;
   color: #111111;
-  margin-top: 10px;
-  text-align: center;
+  margin-top: 8px;
 }
 
 .qr-sublabel {
   font-size: 11px;
   color: #666666;
   margin-top: 2px;
-  text-align: center;
 }
 
 /* Steps List */
 .platform-steps {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .step-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #0C0C10;
   border: 1px solid var(--stroke);
 }
 
 .step-digit {
-  width: 24px;
-  height: 24px;
-  border-radius: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   background: var(--blue-soft);
   color: var(--blue);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   display: grid;
   place-items: center;
@@ -1031,16 +919,16 @@ button {
 }
 
 .step-content h6 {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 2px;
   color: #FFFFFF;
+  margin-bottom: 2px;
 }
 
 .step-content p {
-  font-size: 12px;
-  color: var(--text-2);
-  line-height: 1.45;
+  font-size: 11.5px;
+  color: var(--text-sub);
+  line-height: 1.4;
 }
 
 .step-content b {
@@ -1049,16 +937,22 @@ button {
 
 /* Footer */
 .footer {
-  margin-top: 36px;
+  margin-top: 24px;
   text-align: center;
   font-size: 12px;
-  color: var(--text-3);
-  line-height: 1.6;
+  color: var(--text-dim);
+  line-height: 1.5;
 }
 
 .footer a {
   color: var(--blue);
   text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .mirror-chips {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
 </head>
@@ -1074,7 +968,7 @@ button {
   <div id="toastMessage" class="toast-text">Subscription URL Copied</div>
 </div>
 
-<!-- High-Performance Ambient Background -->
+<!-- Static Background (0 GPU) -->
 <div class="ambient"></div>
 
 <!-- Main Web Application -->
@@ -1083,7 +977,13 @@ button {
   <!-- Header -->
   <header class="header">
     <a href="#" class="brand">
-      <div class="brand-icon">🎯</div>
+      <div class="brand-icon">
+        <!-- Lucide ShieldCheck SVG -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <polyline points="9 11 12 14 22 4"></polyline>
+        </svg>
+      </div>
       <div class="brand-info">
         <div class="brand-name">zorVPN</div>
         <div class="brand-status">
@@ -1093,52 +993,92 @@ button {
       </div>
     </a>
     <a href="https://github.com/hamzawih0/zorVPN" target="_blank" rel="noopener" class="header-action">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+      <!-- GitHub SVG Mark -->
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
       </svg>
       <span>GitHub</span>
     </a>
   </header>
 
-  <!-- Real-Time User & Usage Counter -->
-  <div class="live-counter-bar" id="liveCounterBar">
+  <!-- 100% Real Operational Metrics Bar -->
+  <div class="live-counter-bar">
     <div class="counter-badge" title="Live proxy servers verified & online">
-      <span class="counter-badge-dot"></span>
-      <span class="counter-badge-text"><span id="liveServersCount">268</span> Live Servers</span>
+      <!-- Lucide Radio / Server SVG -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+      </svg>
+      <span class="counter-badge-text"><span id="liveServersCount">268</span> Live Nodes</span>
     </div>
     <div class="counter-metrics">
-      <div class="metric-item">
-        <div class="metric-val" id="metricUsers">0</div>
-        <div class="metric-lbl">Active Users</div>
+      <div class="metric-item" title="Distinct countries represented in subscription">
+        <div class="metric-val-row">
+          <!-- Globe SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="metric-val" id="metricCountries">22</span>
+        </div>
+        <div class="metric-lbl">Countries</div>
       </div>
       <div class="metric-sep"></div>
-      <div class="metric-item">
-        <div class="metric-val" id="metricViews">--</div>
-        <div class="metric-lbl">Total Visits</div>
+      <div class="metric-item" title="Health verification status">
+        <div class="metric-val-row">
+          <!-- Zap SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span class="metric-val" id="metricStatus">100%</span>
+        </div>
+        <div class="metric-lbl">Verified 204</div>
       </div>
       <div class="metric-sep"></div>
-      <div class="metric-item">
-        <div class="metric-val" id="metricCopies">--</div>
+      <div class="metric-item" title="Real client subscription copies">
+        <div class="metric-val-row">
+          <!-- Copy SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span class="metric-val" id="metricCopies">0</span>
+        </div>
         <div class="metric-lbl">Subs Copied</div>
       </div>
     </div>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
     <h1 class="hero-title">Select Your Device<br><span>Get Instant Subscription</span></h1>
     <p class="hero-desc">
-      Tap your operating system below to open the dedicated subscription drawer with <b>Stable (Fastest)</b> and <b>Full (All Servers)</b> options, 1-click import, or zero-delay QR codes.
+      Choose your operating system below to open the dedicated subscription drawer with <b>Stable (Fastest)</b> and <b>Full (All Servers)</b> tiers, 1-click import, or QR codes.
     </p>
     <div class="stat-pills">
-      <div class="stat-pill">⚡ <b>Mihomo HTTP 204 Tested</b></div>
-      <div class="stat-pill">🚀 <b>0.05s Load for iOS</b></div>
-      <div class="stat-pill">🛡️ <b>Anti-GFW CDNs</b></div>
-      <div class="stat-pill">🔄 <b>Synced Every 6h</b></div>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span><b>Mihomo HTTP 204</b> Tested</span>
+      </div>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg>
+        <span><b>0.05s Load</b> for iOS</span>
+      </div>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span><b>Anti-GFW</b> Edge CDNs</span>
+      </div>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        <span><b>Synced Every 6h</b></span>
+      </div>
     </div>
   </section>
 
-  <!-- Platform Selector Grid -->
+  <!-- Platform Selector Grid (Open Source SVG Canvas Icons) -->
   <section>
     <div class="section-head">
       <span class="section-title">Choose Operating System</span>
@@ -1150,13 +1090,18 @@ button {
       <!-- 1. iOS -->
       <div class="platform-card" onclick="openPlatformSheet('ios')">
         <div class="platform-left">
-          <div class="platform-icon-wrap ios">🍏</div>
+          <div class="platform-icon-wrap ios">
+            <!-- Apple SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.66-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/>
+            </svg>
+          </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <h3 class="platform-name">iOS (iPhone & iPad)</h3>
-              <span class="platform-pill">Shadowrocket</span>
+              <span class="platform-name">iOS</span>
+              <span class="platform-pill green">Instant Load</span>
             </div>
-            <p class="platform-sub">Stable (30 Top Nodes) • Full (200+ Nodes) • No Lag</p>
+            <span class="platform-sub">Shadowrocket • Stash • Loon • Quantumult X</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1167,13 +1112,18 @@ button {
       <!-- 2. Android -->
       <div class="platform-card" onclick="openPlatformSheet('android')">
         <div class="platform-left">
-          <div class="platform-icon-wrap android">🤖</div>
+          <div class="platform-icon-wrap android">
+            <!-- Android SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 10h16M7 4l1 3M17 4l-1 3M5 10v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-6M9 14h.01M15 14h.01"/>
+            </svg>
+          </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <h3 class="platform-name">Android</h3>
-              <span class="platform-pill green">FlClash</span>
+              <span class="platform-name">Android</span>
+              <span class="platform-pill">Clash / Meta</span>
             </div>
-            <p class="platform-sub">FlClash • ClashMeta • NekoBox • v2rayNG</p>
+            <span class="platform-sub">FlClash • ClashMetaForAndroid • v2rayNG</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1182,15 +1132,21 @@ button {
       </div>
 
       <!-- 3. macOS -->
-      <div class="platform-card" onclick="openPlatformSheet('macos')">
+      <div class="platform-card" onclick="openPlatformSheet('mac')">
         <div class="platform-left">
-          <div class="platform-icon-wrap mac">💻</div>
+          <div class="platform-icon-wrap mac">
+            <!-- Monitor / Laptop SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+              <path d="M2 20h20M12 16v4"></path>
+            </svg>
+          </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <h3 class="platform-name">macOS</h3>
-              <span class="platform-pill">Clash Verge</span>
+              <span class="platform-name">macOS</span>
+              <span class="platform-pill">Apple Silicon</span>
             </div>
-            <p class="platform-sub">Apple Silicon Native • Clash Verge Rev • ClashX Meta</p>
+            <span class="platform-sub">Clash Verge Rev • ClashX Meta • Sing-box</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1201,13 +1157,18 @@ button {
       <!-- 4. Windows -->
       <div class="platform-card" onclick="openPlatformSheet('windows')">
         <div class="platform-left">
-          <div class="platform-icon-wrap win">🪟</div>
+          <div class="platform-icon-wrap win">
+            <!-- Windows SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 5.48L10.33 4.5v6.52H3V5.48zm0 13.04L10.33 19.5v-6.52H3v5.54zM11.67 4.31L21 3v8.02h-9.33V4.31zm9.33 8.67V21l-9.33-1.31v-6.67H21z"/>
+            </svg>
+          </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <h3 class="platform-name">Windows</h3>
-              <span class="platform-pill">Clash Verge</span>
+              <span class="platform-name">Windows</span>
+              <span class="platform-pill">TUN Mode</span>
             </div>
-            <p class="platform-sub">Clash Verge Rev • v2rayN • TUN Mode System Proxy</p>
+            <span class="platform-sub">Clash Verge Rev • v2rayN • WinXray</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1218,13 +1179,19 @@ button {
       <!-- 5. Merlin / Router / Linux -->
       <div class="platform-card" onclick="openPlatformSheet('merlin')">
         <div class="platform-left">
-          <div class="platform-icon-wrap router">📡</div>
+          <div class="platform-icon-wrap router">
+            <!-- Router / Wifi SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+              <path d="M6 18h.01M10 18h.01M14 6a8 8 0 0 1 6.5 3.3M17 10a4 4 0 0 1 3.5 1.7M7 14V8"></path>
+            </svg>
+          </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <h3 class="platform-name">Merlin / Router / Linux</h3>
-              <span class="platform-pill orange">Router Ready</span>
+              <span class="platform-name">Merlin / Router</span>
+              <span class="platform-pill orange">Gateway</span>
             </div>
-            <p class="platform-sub">MerlinClash • OpenWrt • ShellCrash • Gateway</p>
+            <span class="platform-sub">MerlinClash • OpenWrt PassWall • ShellCrash</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1238,60 +1205,75 @@ button {
   <!-- Footer -->
   <footer class="footer">
     <p>zorVPN is an open-source health-filtered subscription aggregator.</p>
-    <p>Automated tests via native Mihomo engine • <a href="https://github.com/hamzawih0/zorVPN" target="_blank">GitHub Project</a></p>
+    <p style="margin-top: 4px;">Node verification runs via Mihomo engine every 6 hours.</p>
   </footer>
 
 </div>
 
 <!-- ============================================================
-     APPLE-STYLE BOTTOM SLIDE-UP MODAL SHEET
+     BOTTOM SLIDE-UP SHEET MODAL
      ============================================================ -->
 <div id="sheetModal" class="modal-overlay" onclick="handleBackdropClick(event)">
   <div class="modal-sheet">
     <div class="modal-grab" onclick="closeSheet()"></div>
 
+    <!-- Header -->
     <div class="modal-header">
-      <div class="modal-header-left">
-        <span id="sheetIcon" class="modal-platform-icon">🍏</span>
-        <div>
-          <h2 id="sheetTitle" class="modal-title">iOS Setup</h2>
-          <span id="sheetSubtitle" class="modal-subtitle">Shadowrocket • Base64 Optimized</span>
+      <div class="sheet-title-group">
+        <div class="sheet-icon-wrap" id="sheetIconWrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
+        </div>
+        <div class="sheet-title-meta">
+          <h4 id="sheetTitle">Platform</h4>
+          <p id="sheetSubtitle">Configuration</p>
         </div>
       </div>
-      <button class="modal-close-btn" onclick="closeSheet()" title="Close">
+      <button class="btn-close-sheet" onclick="closeSheet()" title="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
 
-    <!-- 1. Version Segment (Stable vs Full) -->
+    <!-- 1. Version Tier Selector -->
     <div class="sheet-section">
       <div class="sheet-label">
-        <span>Select Server Version</span>
-        <span id="tierBadge" style="color: var(--green); text-transform: none; font-weight: 700;">⚡ Recommended</span>
+        <span>Select Pool Version</span>
+        <span id="tierBadge" style="color: var(--teal); font-weight: 700;">⚡ Stable</span>
       </div>
-      <div class="segmented-tiers">
-        <button id="btnTierStable" class="tier-btn active" onclick="selectTier('stable')">
-          <span>⚡ Stable (Fastest)</span>
-          <span id="tierStableDesc" class="tier-sub">Top 30 Nodes • 0.05s Load</span>
+      <div class="segmented-control">
+        <button id="btnTierStable" class="segment-btn active" onclick="selectTier('stable')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <span>Stable (Fastest)</span>
         </button>
-        <button id="btnTierFull" class="tier-btn" onclick="selectTier('full')">
-          <span>🌐 Full (All Servers)</span>
-          <span class="tier-sub">All 200+ Verified Nodes</span>
+        <button id="btnTierFull" class="segment-btn" onclick="selectTier('full')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span>Full Pool</span>
         </button>
       </div>
     </div>
 
-    <!-- 2. Mirror Selector Segment -->
+    <!-- 2. Mirror Selector -->
     <div class="sheet-section">
       <div class="sheet-label">
-        <span>CDN Acceleration Mirror</span>
-        <span style="color: var(--teal); text-transform: none;">Unblocked in China</span>
+        <span>Mirror Accelerator</span>
+        <span style="color: var(--text-dim);">No Proxy Needed</span>
       </div>
-      <div class="segmented-mirrors">
-        <button id="mirror-cf" class="mirror-btn" onclick="selectMirror('cloudflare')">☁️ Cloudflare</button>
-        <button id="mirror-jsdelivr" class="mirror-btn active" onclick="selectMirror('jsdelivr')">⚡ jsDelivr</button>
-        <button id="mirror-ghproxy" class="mirror-btn" onclick="selectMirror('ghproxy')">🚀 GHProxy</button>
-        <button id="mirror-raw" class="mirror-btn" onclick="selectMirror('raw')">🌍 GitHub</button>
+      <div class="mirror-chips">
+        <button id="mirror-cf" class="mirror-chip active" onclick="selectMirror('cloudflare')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+          <span>Cloudflare</span>
+        </button>
+        <button id="mirror-jsdelivr" class="mirror-chip" onclick="selectMirror('jsdelivr')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <span>jsDelivr</span>
+        </button>
+        <button id="mirror-ghproxy" class="mirror-chip" onclick="selectMirror('ghproxy')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg>
+          <span>GHProxy</span>
+        </button>
+        <button id="mirror-raw" class="mirror-chip" onclick="selectMirror('raw')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span>Direct</span>
+        </button>
       </div>
     </div>
 
@@ -1299,42 +1281,42 @@ button {
     <div class="url-preview-card">
       <span id="sheetUrlDisplay" class="url-text-code">Loading...</span>
       <button class="url-quick-copy" onclick="copyActiveUrl()" title="Copy">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
       </button>
     </div>
 
     <!-- 4. Action Buttons -->
     <div class="sheet-actions">
       <button class="btn-primary-action" onclick="copyActiveUrl()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
         <span>Copy Subscription URL</span>
       </button>
       <div class="btn-row">
         <a id="btnOneClickImport" href="#" class="btn-secondary-action" onclick="recordCopyAction()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           <span id="btnImportLabel">1-Click Add</span>
         </a>
         <button id="btnToggleQr" class="btn-secondary-action" onclick="toggleQrCode()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
           <span>Show QR Code</span>
         </button>
       </div>
     </div>
 
-    <!-- 5. Zero-Dependency Built-in QR Code Container -->
+    <!-- 5. QR Code Container -->
     <div id="qrCodeSection" class="qr-section">
       <div id="qrcode-container"></div>
       <div class="qr-label">Scan to Import Subscription</div>
-      <div class="qr-sublabel">Point your iPhone camera or client scanner at the code</div>
+      <div class="qr-sublabel">Point your phone camera or app scanner at the QR code</div>
     </div>
 
-    <!-- 6. Platform Specific Step Guide -->
+    <!-- 6. Platform Setup Guide -->
     <div class="sheet-section">
       <div class="sheet-label">Quick Setup Steps</div>
       <div id="stepsContainer" class="platform-steps"></div>
     </div>
 
-    <button class="btn-secondary-action" style="width: 100%; height: 48px; margin-top: 4px;" onclick="closeSheet()">Done</button>
+    <button class="btn-secondary-action" style="width: 100%; height: 42px; margin-top: 4px;" onclick="closeSheet()">Done</button>
   </div>
 </div>
 
@@ -1342,11 +1324,11 @@ button {
      EMBEDDED ZERO-DEPENDENCY QRCODE.JS ENGINE
      ============================================================ -->
 <script>
-var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
+var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/2000/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
 </script>
 
 <!-- ============================================================
-     APPLICATION LOGIC
+     APPLICATION LOGIC & REAL TELEMETRY
      ============================================================ -->
 <script>
 const REPO_USER = "hamzawih0";
@@ -1358,62 +1340,72 @@ let currentPlatform = 'ios';
 let currentTier = 'stable';
 let currentMirror = 'jsdelivr';
 
+// Open Source Vector Icons (SVG strings)
+const ICONS = {
+  apple: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.66-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/></svg>`,
+  android: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h16M7 4l1 3M17 4l-1 3M5 10v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-6M9 14h.01M15 14h.01"/></svg>`,
+  mac: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M2 20h20M12 16v4"></path></svg>`,
+  windows: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.48L10.33 4.5v6.52H3V5.48zm0 13.04L10.33 19.5v-6.52H3v5.54zM11.67 4.31L21 3v8.02h-9.33V4.31zm9.33 8.67V21l-9.33-1.31v-6.67H21z"/></svg>`,
+  router: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="20" height="8" rx="2"></rect><path d="M6 18h.01M10 18h.01M14 6a8 8 0 0 1 6.5 3.3M17 10a4 4 0 0 1 3.5 1.7M7 14V8"></path></svg>`,
+  zap: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+  globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
+};
+
 // Platform definitions
 const PLATFORMS = {
   ios: {
     title: "iOS (iPhone & iPad)",
     subtitle: "Shadowrocket • Loon • Stash • Quantumult X",
-    icon: "🍏",
+    svg: ICONS.apple,
     stableFile: "ZorVPN-lite.txt",
-    fullFile: "ZorVPN-all.txt",
-    stableDesc: "Top 30 Nodes • 0.05s Load • Zero Lag",
-    fullDesc: "All 200+ Nodes • Base64 Pool",
+    fullFile: "ZorVPN.txt",
+    stableDesc: "Top 30 Curated Nodes • Zero Lag Base64",
+    fullDesc: "Top 60 Curated Nodes • Flat Base64 List",
     importProtocol: "shadowrocket",
     steps: [
-      { num: 1, title: "Open Shadowrocket", desc: "Tap the <b>+</b> icon in the top right corner." },
-      { num: 2, title: "Change Type to Subscribe", desc: "Select <b>Type: Subscribe</b> (⚠️ Do NOT select Shadowsocks or Clash)." },
-      { num: 3, title: "Paste URL & Save", desc: "Paste the URL, enter <b>zorVPN</b> in Remark, and tap Save." },
-      { num: 4, title: "Set Global Routing to Config", desc: "In the bottom bar, set routing to <b>Config</b> so domestic Chinese apps go Direct." }
+      { num: 1, title: "Install Shadowrocket", desc: "Open Shadowrocket on your iPhone or iPad." },
+      { num: 2, title: "Add Subscription", desc: "Tap <b>+</b> in the top right, set Type to <b>Subscribe</b> (do NOT pick Shadowsocks/Clash)." },
+      { num: 3, title: "Paste URL & Save", desc: "Paste the subscription URL, set Remark to <b>zorVPN</b>, and tap <b>Save</b>." }
     ]
   },
   android: {
     title: "Android Setup",
-    subtitle: "FlClash • ClashMeta for Android • NekoBox • v2rayNG",
-    icon: "🤖",
+    subtitle: "FlClash • ClashMetaForAndroid • v2rayNG",
+    svg: ICONS.android,
     stableFile: "ZorVPN.yaml",
     fullFile: "ZorVPN-all.txt",
-    stableDesc: "Clash YAML • Auto Fastest • Inline Rules",
-    fullDesc: "All 200+ Nodes • Universal Pool",
+    stableDesc: "Clash YAML • Smart Latency Testing Groups",
+    fullDesc: "All 260+ Verified Nodes • Full Archive",
     importProtocol: "clash",
     steps: [
-      { num: 1, title: "Open FlClash or ClashMeta", desc: "Navigate to <b>Profiles</b> → tap the <b>+</b> floating action button." },
-      { num: 2, title: "Import by URL", desc: "Choose <b>URL</b>, paste the subscription link, and tap Save & Fetch." },
-      { num: 3, title: "Activate zorVPN", desc: "Tap the new <b>ZorVPN</b> profile to activate and toggle connect!" }
+      { num: 1, title: "Open FlClash or ClashMeta", desc: "Launch your proxy client on Android." },
+      { num: 2, title: "Import Subscription", desc: "Navigate to <b>Profiles</b> → tap <b>+</b> → paste the subscription URL." },
+      { num: 3, title: "Start Gateway", desc: "Tap the downloaded profile and click <b>Start</b> to connect." }
     ]
   },
-  macos: {
+  mac: {
     title: "macOS Setup",
-    subtitle: "Clash Verge Rev • ClashX Meta • Surge",
-    icon: "💻",
+    subtitle: "Clash Verge Rev • ClashX Meta • Sing-box",
+    svg: ICONS.mac,
     stableFile: "ZorVPN.yaml",
     fullFile: "ZorVPN-all.txt",
     stableDesc: "Clash YAML • Apple Silicon Optimized",
-    fullDesc: "All 200+ Nodes • Complete Archive",
+    fullDesc: "All 260+ Verified Nodes • Complete Archive",
     importProtocol: "clash",
     steps: [
       { num: 1, title: "Open Clash Verge Rev", desc: "Click <b>Profiles</b> in the left sidebar." },
       { num: 2, title: "Paste & Download", desc: "Paste the subscription link into the top bar and click <b>Import</b>." },
-      { num: 3, title: "Select Profile", desc: "Right click <b>ZorVPN</b> → Select, and toggle <b>System Proxy</b>." }
+      { num: 3, title: "Select Profile", desc: "Right click <b>zorVPN</b> → Select, and toggle <b>System Proxy</b>." }
     ]
   },
   windows: {
     title: "Windows Setup",
     subtitle: "Clash Verge Rev • v2rayN • WinXray",
-    icon: "🪟",
+    svg: ICONS.windows,
     stableFile: "ZorVPN.yaml",
     fullFile: "ZorVPN-all.txt",
-    stableDesc: "Clash YAML • Fastest URL-Test Group",
-    fullDesc: "All 200+ Nodes • Full Redundancy",
+    stableDesc: "Clash YAML • Auto-Fastest Group",
+    fullDesc: "All 260+ Verified Nodes • Full Redundancy",
     importProtocol: "clash",
     steps: [
       { num: 1, title: "Open Clash Verge Rev", desc: "Go to <b>Profiles</b> section." },
@@ -1424,7 +1416,7 @@ const PLATFORMS = {
   merlin: {
     title: "Merlin / Router / Linux",
     subtitle: "MerlinClash • OpenWrt • ShellCrash • Mihomo CLI",
-    icon: "📡",
+    svg: ICONS.router,
     stableFile: "ZorVPN.yaml",
     fullFile: "ZorVPN-nodes.txt",
     stableDesc: "Clash YAML • Smart Domestic Direct",
@@ -1466,10 +1458,9 @@ function openPlatformSheet(platKey) {
   currentPlatform = platKey;
   const p = PLATFORMS[platKey];
 
-  document.getElementById('sheetIcon').textContent = p.icon;
+  document.getElementById('sheetIconWrap').innerHTML = p.svg;
   document.getElementById('sheetTitle').textContent = p.title;
   document.getElementById('sheetSubtitle').textContent = p.subtitle;
-  document.getElementById('tierStableDesc').textContent = p.stableDesc;
 
   // Render steps
   const stepsContainer = document.getElementById('stepsContainer');
@@ -1492,10 +1483,6 @@ function openPlatformSheet(platKey) {
   // Open modal
   const modal = document.getElementById('sheetModal');
   modal.classList.add('open');
-
-  if ('vibrate' in navigator) {
-    try { navigator.vibrate(15); } catch(e){}
-  }
 }
 
 // Update UI inside the active sheet
@@ -1528,7 +1515,7 @@ function selectTier(tier) {
   currentTier = tier;
   document.getElementById('btnTierStable').classList.toggle('active', tier === 'stable');
   document.getElementById('btnTierFull').classList.toggle('active', tier === 'full');
-  document.getElementById('tierBadge').textContent = (tier === 'stable') ? '⚡ Recommended (Lowest Ping)' : '🌐 200+ Nodes Pool';
+  document.getElementById('tierBadge').textContent = (tier === 'stable') ? 'Stable (Fastest)' : 'Full Pool';
   updateSheetUrls();
 }
 
@@ -1573,18 +1560,16 @@ function renderQrCode(text) {
   try {
     qrcodeInstance = new QRCode(container, {
       text: text,
-      width: 190,
-      height: 190,
+      width: 180,
+      height: 180,
       colorDark: "#000000",
       colorLight: "#FFFFFF",
       correctLevel: QRCode.CorrectLevel.M
     });
-  } catch (err) {
-    console.error('QR code generation error:', err);
-  }
+  } catch (err) {}
 }
 
-// Copy URL with toast & vibration
+// Copy URL with toast
 async function copyActiveUrl() {
   const url = getActiveUrl();
   try {
@@ -1600,37 +1585,15 @@ async function copyActiveUrl() {
 
   recordCopyAction();
 
-  if ('vibrate' in navigator) {
-    try { navigator.vibrate(25); } catch(e){}
-  }
-
   const p = PLATFORMS[currentPlatform];
   const tierName = (currentTier === 'stable') ? 'Stable' : 'Full';
   showToast(`${p.title} (${tierName}) Copied!`);
 }
 
 // ============================================================
-// REAL-TIME METRICS & LIVE SERVERS DETECTOR (100% Real Numbers)
+// 100% REAL OPERATIONAL TELEMETRY (0 Fake Numbers, 0 GPU)
 // ============================================================
-const COPY_STORAGE_KEY = 'zorvpn_real_copies_count';
-
-// Detect real live verified servers from active subscription nodes
-async function detectLiveServers() {
-  try {
-    const res = await fetch('ZorVPN-nodes.txt', { cache: 'no-cache' });
-    if (res.ok) {
-      const text = await res.text();
-      const count = text.split('\n').filter(line => {
-        const s = line.trim();
-        return s.startsWith('vless://') || s.startsWith('vmess://') || s.startsWith('trojan://') || s.startsWith('ss://') || s.startsWith('hysteria2://') || s.startsWith('tuic://');
-      }).length;
-      if (count > 0) {
-        const el = document.getElementById('liveServersCount');
-        if (el) el.textContent = count;
-      }
-    }
-  } catch (e) {}
-}
+const COPY_STORAGE_KEY = 'zorvpn_user_copies';
 
 function getRealCopies() {
   return parseInt(localStorage.getItem(COPY_STORAGE_KEY) || '0', 10);
@@ -1646,101 +1609,58 @@ function recordCopyAction() {
     void el.offsetWidth;
     el.classList.add('bump');
     el.textContent = val.toLocaleString();
-    setTimeout(() => el.classList.remove('bump'), 300);
+    setTimeout(() => el.classList.remove('bump'), 250);
   }
 
-  // Ping backend/worker edge stats if deployed
   try {
     if (navigator.sendBeacon) {
       navigator.sendBeacon('/api/stats/copy');
-    } else {
-      fetch('/api/stats/copy', { method: 'POST', keepalive: true }).catch(() => {});
     }
   } catch(e){}
 }
 
-// Smooth number roll-up animation
-function animateCount(elem, start, end, duration = 800) {
-  if (!elem) return;
-  start = Number(start) || 0;
-  end = Number(end) || 0;
-  if (start === end) {
-    elem.textContent = end.toLocaleString();
-    return;
-  }
-  const range = end - start;
-  const startTime = performance.now();
-  function step(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(start + range * ease);
-    elem.textContent = current.toLocaleString();
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    } else {
-      elem.textContent = end.toLocaleString();
-    }
-  }
-  requestAnimationFrame(step);
-}
-
-// Fetch real-time edge visitors & page views (Zero fake offsets)
-async function initLiveCounters() {
-  const usersEl = document.getElementById('metricUsers');
-  const viewsEl = document.getElementById('metricViews');
+// Detect real nodes and distinct countries directly from the subscription files
+async function loadRealOperationalStats() {
   const copiesEl = document.getElementById('metricCopies');
-
-  // Immediately display real copies made in this browser/session
-  const currentCopies = getRealCopies();
-  animateCount(copiesEl, 0, currentCopies, 600);
-
-  // Detect real online servers
-  detectLiveServers();
-
-  // Check if visitor is new UV in this browser session
-  const UV_LOG_KEY = 'zorvpn_real_uv_tracked';
-  const isNewUv = !localStorage.getItem(UV_LOG_KEY);
-  if (isNewUv) {
-    try { localStorage.setItem(UV_LOG_KEY, '1'); } catch(e){}
+  if (copiesEl) {
+    copiesEl.textContent = getRealCopies().toLocaleString();
   }
 
   try {
-    const targetUrl = 'https://zorvpn.xxaweii.workers.dev/';
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
-
-    const res = await fetch('https://events.vercount.one/api/v2/log', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: targetUrl, isNewUv: isNewUv }),
-      signal: controller.signal
-    });
-    clearTimeout(timeoutId);
-
+    const res = await fetch('ZorVPN-nodes.txt', { cache: 'no-cache' });
     if (res.ok) {
-      const json = await res.json();
-      if (json && json.data) {
-        // 100% genuine numbers directly from edge telemetry
-        const realPv = Number(json.data.site_pv || json.data.page_pv || 1);
-        const realUv = Number(json.data.site_uv || 1);
-        animateCount(viewsEl, 0, realPv, 800);
-        animateCount(usersEl, 0, realUv, 800);
-        return;
+      const text = await res.text();
+      const lines = text.split('\n').filter(l => l.trim().length > 0);
+      
+      let nodeCount = 0;
+      const countries = new Set();
+
+      lines.forEach(line => {
+        const s = line.trim();
+        if (s.startsWith('vless://') || s.startsWith('vmess://') || s.startsWith('trojan://') || s.startsWith('ss://') || s.startsWith('hysteria2://')) {
+          nodeCount++;
+          try {
+            const hashPart = s.split('#')[1] || '';
+            const decoded = decodeURIComponent(hashPart);
+            const m = decoded.match(/([A-Za-z\s]+)\s+#\d+/);
+            if (m && m[1]) {
+              countries.add(m[1].trim());
+            }
+          } catch(e){}
+        }
+      });
+
+      if (nodeCount > 0) {
+        const nodeEl = document.getElementById('liveServersCount');
+        if (nodeEl) nodeEl.textContent = nodeCount;
+      }
+
+      if (countries.size > 0) {
+        const cEl = document.getElementById('metricCountries');
+        if (cEl) cEl.textContent = countries.size;
       }
     }
-  } catch (err) {}
-
-  // Fallback to real single-session count if API is unreachable
-  animateCount(viewsEl, 0, 1, 400);
-  animateCount(usersEl, 0, 1, 400);
-}
-
-// Start live counters when ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initLiveCounters);
-} else {
-  initLiveCounters();
+  } catch(e){}
 }
 
 // Toast notification
@@ -1754,7 +1674,7 @@ function showToast(msg) {
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.classList.remove('show');
-  }, 2500);
+  }, 2200);
 }
 
 // Close sheet
@@ -1766,6 +1686,13 @@ function handleBackdropClick(e) {
   if (e.target.id === 'sheetModal') {
     closeSheet();
   }
+}
+
+// Initialize on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadRealOperationalStats);
+} else {
+  loadRealOperationalStats();
 }
 </script>
 
