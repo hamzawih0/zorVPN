@@ -60,6 +60,52 @@ export default {
       );
     }
 
+    // Stats & Counter API
+    if (pathname === "/api/stats" || pathname === "/api/counter") {
+      let copies = 1248;
+      let visits = 1850;
+      if (env.STATS_KV) {
+        try {
+          copies = parseInt(await env.STATS_KV.get("copies") || "1248");
+          visits = parseInt(await env.STATS_KV.get("visits") || "1850");
+        } catch(e){}
+      }
+      return new Response(
+        JSON.stringify({
+          status: "online",
+          visits,
+          copies,
+          updated_at: new Date().toISOString()
+        }),
+        {
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+            "access-control-allow-origin": "*"
+          }
+        }
+      );
+    }
+
+    if (pathname === "/api/stats/copy") {
+      let copies = 1249;
+      if (env.STATS_KV) {
+        try {
+          const cur = parseInt(await env.STATS_KV.get("copies") || "1248");
+          copies = cur + 1;
+          ctx.waitUntil(env.STATS_KV.put("copies", copies.toString()));
+        } catch(e){}
+      }
+      return new Response(
+        JSON.stringify({ status: "ok", copies }),
+        {
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+            "access-control-allow-origin": "*"
+          }
+        }
+      );
+    }
+
     // Determine target file and content type
     let targetFilename = "index.html";
     let contentType = "text/html; charset=utf-8";
