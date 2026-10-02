@@ -7,6 +7,13 @@
 
 A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active proxy nodes** across **40+ countries**, auto-aggregated from top-tier GitHub sources with health checks, deduplication, and automated updates via GitHub Actions.
 
+## 🌐 Web Subscription Portal (One-Click Copy & QR)
+
+Visit the official zorVPN Web Hub to copy URLs, scan QR codes, or 1-click import into iOS Shadowrocket / Clash:
+👉 **[Open Web Subscription Portal](https://hamzawih0.github.io/zorVPN/)**
+
+---
+
 ## ⚡ Subscription URLs
 
 Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without an existing proxy should use the **jsDelivr** or **GHProxy** accelerated links below:

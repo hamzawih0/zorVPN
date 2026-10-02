@@ -62,7 +62,7 @@ jobs:
 
       - name: Purge jsDelivr Global CDN Cache (Instant Global Refresh)
         run: |
-          for file in ZorVPN.yaml clash.yaml ZorVPN.txt ZorVPN-lite.txt ZorVPN-all.txt ZorVPN-nodes.txt; do
+          for file in ZorVPN.yaml clash.yaml ZorVPN.txt ZorVPN-lite.txt ZorVPN-all.txt ZorVPN-nodes.txt index.html; do
             echo "Purging jsDelivr cache for $file..."
             curl -s "https://purge.jsdelivr.net/gh/hamzawih0/zorVPN@main/$file" || true
           done

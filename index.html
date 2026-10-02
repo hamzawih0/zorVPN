@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="zorVPN" />
+<meta name="application-name" content="zorVPN" />
+<meta name="description" content="zorVPN — 100% verified green proxy subscription for iOS Shadowrocket, Clash, and FlClash with China-accelerated CDN links." />
+<title>zorVPN — Subscription Hub & Client URL Selector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- QRCode.js for zero-dependency client-side QR generation -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+<style>
+/* ============================================================
+   DESIGN TOKENS - iOS 26 Liquid Glass & Apple System Design
+   ============================================================ */
+:root {
+  --bg: #000000;
+  --bg-elevated: #0B0B0F;
+  --bg-grouped: #131318;
+  --bg-card: rgba(22, 22, 28, 0.72);
+  --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.07) 100%);
+  --glass-specular: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
+  --glass-blur: blur(40px) saturate(210%) contrast(108%);
+  --glass-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7);
+
+  --primary-accent: #0A84FF;
+  --primary-accent-glow: rgba(10, 132, 255, 0.45);
+  --primary-gradient: linear-gradient(135deg, #5E5CE6 0%, #0A84FF 55%, #64D2FF 100%);
+  --primary-gradient-soft: linear-gradient(135deg, rgba(94,92,230,0.16) 0%, rgba(10,132,255,0.10) 55%, rgba(100,210,255,0.05) 100%);
+
+  --text-main: #FFFFFF;
+  --text-sub: rgba(235, 235, 245, 0.65);
+  --text-dim: rgba(235, 235, 245, 0.38);
+
+  --stroke: rgba(255, 255, 255, 0.08);
+  --stroke-2: rgba(255, 255, 255, 0.14);
+  --stroke-3: rgba(255, 255, 255, 0.20);
+
+  --text: var(--text-main);
+  --text-2: var(--text-sub);
+  --text-3: var(--text-dim);
+
+  --blue: #0A84FF;
+  --blue-soft: rgba(10, 132, 255, 0.16);
+  --blue-glow: rgba(10, 132, 255, 0.45);
+
+  --green: #30D158;
+  --green-soft: rgba(48, 209, 88, 0.16);
+
+  --indigo: #5E5CE6;
+  --indigo-soft: rgba(94, 92, 230, 0.16);
+
+  --teal: #64D2FF;
+  --teal-soft: rgba(100, 210, 255, 0.16);
+
+  --orange: #FF9F0A;
+  --orange-soft: rgba(255, 159, 10, 0.16);
+
+  --purple: #BF5AF2;
+  --purple-soft: rgba(191, 90, 242, 0.16);
+
+  --brand-gradient: var(--primary-gradient);
+  --brand-gradient-soft: var(--primary-gradient-soft);
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+  font-feature-settings: "cv02","cv03","cv04","cv11";
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: calc(var(--safe-bottom) + 60px);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================================
+   LIQUID GLASS AMBIENT BACKGROUND
+   ============================================================ */
+.ambient {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform, opacity;
+}
+
+.b1 {
+  width: 720px;
+  height: 720px;
+  background: #0A84FF;
+  top: -280px;
+  left: -200px;
+  opacity: 0.15;
+  animation: float1 28s ease-in-out infinite;
+}
+
+.b2 {
+  width: 620px;
+  height: 620px;
+  background: #5E5CE6;
+  bottom: -260px;
+  right: -180px;
+  opacity: 0.13;
+  animation: float2 32s ease-in-out infinite;
+}
+
+.b3 {
+  width: 520px;
+  height: 520px;
+  background: #64D2FF;
+  top: 40%;
+  left: 55%;
+  opacity: 0.08;
+  animation: float3 36s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  50% { transform: translate(80px, 60px) scale(1.18); opacity: 0.20; }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.13; }
+  50% { transform: translate(-70px, -50px) scale(1.12); opacity: 0.18; }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.08; }
+  50% { transform: translate(-42%, -58%) scale(1.2); opacity: 0.12; }
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   DYNAMIC ISLAND / NOTIFICATION TOAST
+   ============================================================ */
+.toast-island {
+  position: fixed;
+  top: max(16px, var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%) translateY(-120px) scale(0.9);
+  z-index: 9999;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 18px 8px 12px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 24px var(--blue-glow);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.45s var(--spring), opacity 0.3s var(--ease);
+}
+
+.toast-island.show {
+  transform: translateX(-50%) translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.toast-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.toast-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+.app-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: calc(var(--safe-top) + 24px) 20px 40px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--brand-gradient);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 30px -6px rgba(10, 132, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  font-size: 22px;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.header-action {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+  padding: 8px 14px;
+  border-radius: 100px;
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--stroke);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.22s var(--ease);
+  text-decoration: none;
+}
+
+.header-action:hover, .header-action:active {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  transform: scale(0.97);
+}
+
+.header-action svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Hero Section */
+.hero {
+  margin-bottom: 28px;
+}
+
+.hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.hero-title span {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-desc {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-2);
+  margin-bottom: 18px;
+}
+
+.stat-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stat-pill {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--stroke);
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-pill b {
+  color: var(--text);
+}
+
+/* ============================================================
+   CONTROL SEGMENTS (Mirror & Platform Pickers)
+   ============================================================ */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mirror-picker {
+  margin-bottom: 22px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 5px;
+  border-radius: 16px;
+  background: rgba(18, 18, 24, 0.85);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--stroke);
+}
+
+.seg-btn {
+  padding: 10px 8px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.22s var(--ease);
+  position: relative;
+}
+
+.seg-btn .sub-lbl {
+  font-size: 9.5px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.seg-btn.active {
+  background: var(--brand-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px -6px var(--blue-glow);
+}
+
+.seg-btn.active .sub-lbl {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.seg-btn:not(.active):hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+/* Platform Filter Chips */
+.platform-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 22px;
+  padding-bottom: 2px;
+}
+
+.chip {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--stroke);
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.22s var(--ease);
+}
+
+.chip svg {
+  width: 14px;
+  height: 14px;
+}
+
+.chip.active {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+}
+
+.chip:not(.active):hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+/* ============================================================
+   SUBSCRIPTION CARDS (Liquid Glass Style)
+   ============================================================ */
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sub-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 22px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  overflow: hidden;
+}
+
+.sub-card:hover {
+  border-color: var(--stroke-2);
+  transform: translateY(-2px);
+}
+
+.sub-card.highlight {
+  border-color: rgba(10, 132, 255, 0.35);
+  box-shadow: 0 20px 44px -12px rgba(10, 132, 255, 0.22), var(--glass-specular);
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(10, 132, 255, 0.12);
+  border: 1px solid rgba(10, 132, 255, 0.24);
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+.card-icon.orange {
+  background: var(--orange-soft);
+  border-color: rgba(255, 159, 10, 0.28);
+}
+
+.card-icon.purple {
+  background: var(--purple-soft);
+  border-color: rgba(191, 90, 242, 0.28);
+}
+
+.card-icon.green {
+  background: var(--green-soft);
+  border-color: rgba(48, 209, 88, 0.28);
+}
+
+.card-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+}
+
+.card-sub {
+  font-size: 12px;
+  color: var(--text-3);
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid rgba(10, 132, 255, 0.24);
+  flex-shrink: 0;
+}
+
+.badge.recommended {
+  background: linear-gradient(135deg, rgba(94,92,230,0.25), rgba(10,132,255,0.25));
+  color: #64D2FF;
+  border-color: rgba(100, 210, 255, 0.35);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* Code Snippet Box */
+.url-box {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.url-code {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--teal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: all;
+  letter-spacing: -0.02em;
+}
+
+.url-copy-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--stroke);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  flex-shrink: 0;
+  transition: all 0.2s var(--ease);
+}
+
+.url-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+
+.url-copy-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Card Action Buttons */
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+}
+
+.btn-copy {
+  height: 44px;
+  border-radius: 12px;
+  background: var(--brand-gradient);
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  box-shadow: 0 8px 24px -8px var(--blue-glow);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.btn-copy:hover {
+  box-shadow: 0 10px 28px -6px var(--blue-glow);
+}
+
+.btn-copy:active {
+  transform: scale(0.97);
+}
+
+.btn-copy svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn-secondary {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--stroke);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s var(--ease);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border-color: var(--stroke-2);
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ============================================================
+   GUIDE BANNER & MODAL SHEET
+   ============================================================ */
+.guide-banner {
+  margin-top: 32px;
+  border-radius: 20px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(10,132,255,0.08) 0%, rgba(94,92,230,0.08) 100%);
+  border: 1px solid rgba(10, 132, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.guide-banner-text h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.guide-banner-text p {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.btn-guide {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  padding: 9px 15px;
+  border-radius: 100px;
+  background: var(--blue-soft);
+  border: 1px solid rgba(10, 132, 255, 0.35);
+  white-space: nowrap;
+  transition: all 0.2s var(--ease);
+}
+
+.btn-guide:active {
+  transform: scale(0.96);
+  background: var(--blue);
+}
+
+/* Modal Bottom Sheet */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 10000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-sheet {
+  width: 100%;
+  max-width: 540px;
+  background: linear-gradient(180deg, #18181F 0%, #0D0D12 100%);
+  border-radius: 32px 32px 0 0;
+  border-top: 1px solid var(--stroke-2);
+  padding: 20px 24px calc(var(--safe-bottom) + 30px);
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(100%);
+  transition: transform 0.45s var(--spring);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.open .modal-sheet {
+  transform: translateY(0);
+}
+
+.modal-grab {
+  width: 36px;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 auto 18px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
+.modal-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Steps inside modal */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--stroke);
+}
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.step-info h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.step-info p {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.45;
+}
+
+.step-info code {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--teal);
+}
+
+/* QR Code Section inside Modal */
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#qrcode {
+  display: grid;
+  place-items: center;
+}
+
+.qr-caption {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111111;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.6;
+}
+
+.footer a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 27px;
+  }
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
+  .btn-secondary {
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Dynamic Island Toast -->
+<div id="toastIsland" class="toast-island">
+  <div class="toast-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  <div id="toastMessage" class="toast-text">Subscription URL Copied</div>
+</div>
+
+<!-- Ambient Liquid Mesh -->
+<div class="ambient">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+<div class="grain"></div>
+
+<!-- Main Web Application -->
+<div class="app-container">
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="brand">
+      <div class="brand-icon">🎯</div>
+      <div class="brand-info">
+        <div class="brand-name">zorVPN</div>
+        <div class="brand-status">
+          <span class="pulse-dot"></span>
+          <span>100% Green Verified</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://github.com/hamzawih0/zorVPN" target="_blank" rel="noopener" class="header-action">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+      </svg>
+      <span>GitHub</span>
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-title">High-Speed Subscriptions<br><span>Clean, Fast & Verified</span></h1>
+    <p class="hero-desc">
+      Automated health checks via Mihomo HTTP 204 engine. Choose your preferred client tier below and copy or import with a single tap.
+    </p>
+    <div class="stat-pills">
+      <div class="stat-pill">🚀 <b>0.05s Load</b> (iOS Lite)</div>
+      <div class="stat-pill">🛡️ <b>Mihomo Latency Filter</b></div>
+      <div class="stat-pill">⚡ <b>Hysteria2 & VLESS Reality</b></div>
+      <div class="stat-pill">🔄 <b>Auto-Sync: 6h</b></div>
+    </div>
+  </section>
+
+  <!-- Mirror / CDN Selector -->
+  <section class="mirror-picker">
+    <div class="section-label">
+      <span>CDN Mirror (China Accelerated)</span>
+      <span style="color: var(--green); text-transform: none; font-weight: 600;">No VPN Required</span>
+    </div>
+    <div class="segmented">
+      <button class="seg-btn active" onclick="setMirror('jsdelivr', this)">
+        <span>jsDelivr Global</span>
+        <span class="sub-lbl">Fastest in CN</span>
+      </button>
+      <button class="seg-btn" onclick="setMirror('ghproxy', this)">
+        <span>GHProxy</span>
+        <span class="sub-lbl">Reliable Mirror</span>
+      </button>
+      <button class="seg-btn" onclick="setMirror('raw', this)">
+        <span>GitHub Direct</span>
+        <span class="sub-lbl">Outside China</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Platform Filter Chips -->
+  <section>
+    <div class="section-label">Target Client</div>
+    <div class="platform-chips">
+      <button class="chip active" onclick="filterPlatform('all', this)">
+        <span>✨ All Tiers</span>
+      </button>
+      <button class="chip" onclick="filterPlatform('ios', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <span>iOS (Shadowrocket)</span>
+      </button>
+      <button class="chip" onclick="filterPlatform('clash', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <span>Clash / FlClash</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Cards List -->
+  <main class="cards-list">
+
+    <!-- Card 1: iOS Shadowrocket Lite -->
+    <article class="sub-card highlight" data-platform="ios">
+      <div class="card-top">
+        <div class="card-title-group">
+          <div class="card-icon">🚀</div>
+          <div class="card-titles">
+            <h2 class="card-title">iOS Shadowrocket Lite</h2>
+            <span class="card-sub">Base64 • 30 Top Ultra-Fast Nodes</span>
+          </div>
+        </div>
+        <span class="badge recommended">Recommended</span>
+      </div>
+      <p class="card-desc">
+        Lightweight tier optimized for iPhones. Parses in <b>0.05 seconds</b>, zero UI freeze, speed-test completes in 1 second.
+      </p>
+      <div class="url-box">
+        <span class="url-code" id="url-sr-lite"></span>
+        <button class="url-copy-btn" onclick="copyCard('sr-lite')" title="Copy URL">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-actions">
+        <button class="btn-copy" onclick="copyCard('sr-lite')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy URL</span>
+        </button>
+        <a id="btn-import-sr-lite" href="#" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>1-Click Add</span>
+        </a>
+        <button class="btn-secondary" onclick="openQrModal('sr-lite', 'iOS Shadowrocket Lite')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>QR</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 2: iOS Shadowrocket Standard -->
+    <article class="sub-card" data-platform="ios">
+      <div class="card-top">
+        <div class="card-title-group">
+          <div class="card-icon purple">⚡</div>
+          <div class="card-titles">
+            <h2 class="card-title">iOS Shadowrocket Standard</h2>
+            <span class="card-sub">Base64 • 60 Curated Nodes</span>
+          </div>
+        </div>
+        <span class="badge">Standard</span>
+      </div>
+      <p class="card-desc">
+        Balanced coverage across Hong Kong, Japan, Singapore, US, UK, and Germany. Ideal for frequent travelers.
+      </p>
+      <div class="url-box">
+        <span class="url-code" id="url-sr-std"></span>
+        <button class="url-copy-btn" onclick="copyCard('sr-std')" title="Copy URL">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-actions">
+        <button class="btn-copy" onclick="copyCard('sr-std')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy URL</span>
+        </button>
+        <a id="btn-import-sr-std" href="#" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>1-Click Add</span>
+        </a>
+        <button class="btn-secondary" onclick="openQrModal('sr-std', 'iOS Shadowrocket Standard')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>QR</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 3: Clash / FlClash / Stash / Clash Verge -->
+    <article class="sub-card highlight" data-platform="clash">
+      <div class="card-top">
+        <div class="card-title-group">
+          <div class="card-icon green">🎯</div>
+          <div class="card-titles">
+            <h2 class="card-title">Clash / FlClash / Stash</h2>
+            <span class="card-sub">YAML • Inline Rules • Proxy Groups</span>
+          </div>
+        </div>
+        <span class="badge recommended">Clash / Meta</span>
+      </div>
+      <p class="card-desc">
+        Complete config with <b>⚡ Fastest</b> auto-switch, <b>🤖 AI Services</b> (ChatGPT, Claude), and <b>🎬 Streaming</b>. Zero external rule dependencies.
+      </p>
+      <div class="url-box">
+        <span class="url-code" id="url-clash"></span>
+        <button class="url-copy-btn" onclick="copyCard('clash')" title="Copy URL">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-actions">
+        <button class="btn-copy" onclick="copyCard('clash')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy URL</span>
+        </button>
+        <a id="btn-import-clash" href="#" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>Import Clash</span>
+        </a>
+        <button class="btn-secondary" onclick="openQrModal('clash', 'Clash / FlClash Subscription')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>QR</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 4: Full Node Pool -->
+    <article class="sub-card" data-platform="ios">
+      <div class="card-top">
+        <div class="card-title-group">
+          <div class="card-icon orange">🌐</div>
+          <div class="card-titles">
+            <h2 class="card-title">Full Verified Pool</h2>
+            <span class="card-sub">Base64 • All Verified Active Nodes</span>
+          </div>
+        </div>
+        <span class="badge">Archive</span>
+      </div>
+      <p class="card-desc">
+        Complete pool of all verified green proxies. Recommended for high-spec desktop clients and backup connections.
+      </p>
+      <div class="url-box">
+        <span class="url-code" id="url-all"></span>
+        <button class="url-copy-btn" onclick="copyCard('all')" title="Copy URL">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-actions">
+        <button class="btn-copy" onclick="copyCard('all')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy URL</span>
+        </button>
+        <a id="btn-import-all" href="#" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>1-Click Add</span>
+        </a>
+        <button class="btn-secondary" onclick="openQrModal('all', 'Full Verified Pool')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>QR</span>
+        </button>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Setup Tutorial Banner -->
+  <section class="guide-banner">
+    <div class="guide-banner-text">
+      <h4>📱 Setup Guide for iOS Shadowrocket</h4>
+      <p>Need help importing? Set Type to <b>Subscribe</b> to prevent freezing.</p>
+    </div>
+    <button class="btn-guide" onclick="openGuideModal()">View Steps</button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>zorVPN is an open-source health-filtered subscription aggregator.</p>
+    <p>Auto-updated every 6 hours via GitHub Actions • <a href="https://github.com/hamzawih0/zorVPN" target="_blank">Star on GitHub</a></p>
+  </footer>
+
+</div>
+
+<!-- iOS Setup Modal Sheet -->
+<div id="guideModal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'guideModal')">
+  <div class="modal-sheet">
+    <div class="modal-grab"></div>
+    <div class="modal-header">
+      <div class="modal-title">Shadowrocket Setup (iOS)</div>
+      <button class="modal-close" onclick="closeGuideModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="steps-list">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <h5>Open Shadowrocket</h5>
+          <p>Tap the <b><code>+</code></b> icon in the top right corner of the home screen.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <h5>Change Type to Subscribe</h5>
+          <p>Tap <b>Type</b> and select <b>Subscribe</b>. <i>(⚠️ Do NOT select Shadowsocks or Clash)</i>.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <h5>Paste the Lite Subscription URL</h5>
+          <p>Paste the copied <code>ZorVPN-lite.txt</code> link into the <b>URL</b> field and name the Remark <code>zorVPN</code>.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-info">
+          <h5>Set Global Routing to Config</h5>
+          <p>Tap <b>Save</b>. In the bottom bar, select <b>Config</b> routing so domestic apps bypass the VPN.</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn-copy" style="width: 100%; height: 50px;" onclick="closeGuideModal()">Done</button>
+  </div>
+</div>
+
+<!-- QR Code Modal Sheet -->
+<div id="qrModal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'qrModal')">
+  <div class="modal-sheet" style="text-align: center;">
+    <div class="modal-grab"></div>
+    <div class="modal-header">
+      <div class="modal-title" id="qrModalTitle">Scan Subscription QR</div>
+      <button class="modal-close" onclick="closeQrModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="qr-container">
+      <div id="qrcode"></div>
+      <div id="qrCaption" class="qr-caption">Scan with Shadowrocket or FlClash camera</div>
+    </div>
+    <p style="font-size: 12px; color: var(--text-3); margin-bottom: 20px;">
+      Point your phone's camera or client scanner at the QR code to auto-import.
+    </p>
+    <button class="btn-copy" style="width: 100%; height: 50px;" onclick="closeQrModal()">Close</button>
+  </div>
+</div>
+
+<script>
+// Repository Configuration
+const REPO_USER = "hamzawih0";
+const REPO_NAME = "zorVPN";
+const REPO_BRANCH = "main";
+
+// Subscription File Mapping
+const FILES = {
+  "sr-lite": "ZorVPN-lite.txt",
+  "sr-std": "ZorVPN.txt",
+  "clash": "ZorVPN.yaml",
+  "all": "ZorVPN-all.txt",
+  "nodes": "ZorVPN-nodes.txt"
+};
+
+// Mirror URLs generator
+const MIRRORS = {
+  jsdelivr: (filename) => `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}@${REPO_BRANCH}/${filename}`,
+  ghproxy: (filename) => `https://ghproxy.net/https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`,
+  raw: (filename) => `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`
+};
+
+let activeMirror = 'jsdelivr';
+
+// Generate subscription URL based on active mirror
+function getSubUrl(key) {
+  const filename = FILES[key];
+  return MIRRORS[activeMirror](filename);
+}
+
+// Update all URL boxes & one-click import buttons
+function updateDisplayUrls() {
+  for (const [key, filename] of Object.entries(FILES)) {
+    const url = getSubUrl(key);
+    const box = document.getElementById(`url-${key}`);
+    if (box) box.textContent = url;
+
+    // Update One-Click Import schemes
+    const srBtn = document.getElementById(`btn-import-${key}`);
+    if (srBtn) {
+      if (key === 'clash') {
+        srBtn.href = `clash://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
+      } else {
+        // Shadowrocket custom URL scheme (sub:// encoded in base64)
+        const b64Url = btoa(url);
+        srBtn.href = `shadowrocket://add/sub://${b64Url}?title=zorVPN`;
+      }
+    }
+  }
+}
+
+// Switch Mirror
+function setMirror(mirrorKey, btnEl) {
+  activeMirror = mirrorKey;
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  updateDisplayUrls();
+  showToast(`Switched mirror to ${btnEl.querySelector('span').textContent}`);
+}
+
+// Filter Cards by Platform
+function filterPlatform(platform, btnEl) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btnEl.classList.add('active');
+
+  const cards = document.querySelectorAll('.sub-card');
+  cards.forEach(card => {
+    if (platform === 'all') {
+      card.style.display = 'block';
+    } else {
+      const cardPlat = card.getAttribute('data-platform');
+      card.style.display = (cardPlat === platform) ? 'block' : 'none';
+    }
+  });
+}
+
+// Copy URL to Clipboard with Toast Notification & Haptic Feedback
+async function copyCard(key) {
+  const url = getSubUrl(key);
+  try {
+    await navigator.clipboard.writeText(url);
+  } catch (e) {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+
+  // Trigger Haptic Vibration if supported
+  if ('vibrate' in navigator) {
+    try { navigator.vibrate(20); } catch(e){}
+  }
+
+  const names = {
+    'sr-lite': 'Shadowrocket Lite (30 Nodes)',
+    'sr-std': 'Shadowrocket Standard',
+    'clash': 'Clash / FlClash YAML',
+    'all': 'Full Verified Pool'
+  };
+
+  showToast(`${names[key] || 'Subscription'} Copied!`);
+}
+
+// Show Dynamic Island Toast
+let toastTimer = null;
+function showToast(msg) {
+  const toast = document.getElementById('toastIsland');
+  const msgEl = document.getElementById('toastMessage');
+  msgEl.textContent = msg;
+  toast.classList.add('show');
+
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2600);
+}
+
+// Modal Handlers
+function openGuideModal() {
+  document.getElementById('guideModal').classList.add('open');
+}
+
+function closeGuideModal() {
+  document.getElementById('guideModal').classList.remove('open');
+}
+
+function openQrModal(key, title) {
+  const url = getSubUrl(key);
+  document.getElementById('qrModalTitle').textContent = title;
+  document.getElementById('qrCaption').textContent = url;
+  const qrContainer = document.getElementById('qrcode');
+  qrContainer.innerHTML = '';
+
+  new QRCode(qrContainer, {
+    text: url,
+    width: 190,
+    height: 190,
+    colorDark: "#000000",
+    colorLight: "#FFFFFF",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  document.getElementById('qrModal').classList.add('open');
+}
+
+function closeQrModal() {
+  document.getElementById('qrModal').classList.remove('open');
+}
+
+function closeModalOnBackdrop(e, modalId) {
+  if (e.target.id === modalId) {
+    document.getElementById(modalId).classList.remove('open');
+  }
+}
+
+// Initialize on Load
+document.addEventListener('DOMContentLoaded', () => {
+  updateDisplayUrls();
+});
+</script>
+
+</body>
+</html>
