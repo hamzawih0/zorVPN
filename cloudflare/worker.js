@@ -32,6 +32,48 @@ export default {
     const isClash = userAgent.includes("clash") || userAgent.includes("stash") || userAgent.includes("meta") || userAgent.includes("flclash") || userAgent.includes("mihomo");
     const isV2ray = userAgent.includes("v2rayng") || userAgent.includes("v2ray") || userAgent.includes("xray") || userAgent.includes("sing-box");
 
+    // Direct App Binary Streaming Route (No redirect, edge streamed)
+    if (pathname.startsWith("/download/")) {
+      const appKey = pathname.replace("/download/", "").trim();
+      const DOWNLOAD_MAP = {
+        "v2rayng": {
+          url: "https://github.com/2dust/v2rayNG/releases/download/2.2.6/v2rayNG_2.2.6_arm64-v8a.apk",
+          filename: "v2rayNG_2.2.6_arm64-v8a.apk",
+          contentType: "application/vnd.android.package-archive"
+        },
+        "clashmeta": {
+          url: "https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.35/cmfa-2.11.35-meta-universal-release.apk",
+          filename: "ClashMetaForAndroid_2.11.35.apk",
+          contentType: "application/vnd.android.package-archive"
+        },
+        "clashverge": {
+          url: "https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.6/Clash.Verge_2.5.6_x64-setup.exe",
+          filename: "Clash.Verge_2.5.6_x64-setup.exe",
+          contentType: "application/octet-stream"
+        }
+      };
+
+      if (DOWNLOAD_MAP[appKey]) {
+        const item = DOWNLOAD_MAP[appKey];
+        try {
+          const dlRes = await fetch(item.url, {
+            redirect: "follow",
+            headers: {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            }
+          });
+          if (dlRes.ok) {
+            const h = new Headers(dlRes.headers);
+            h.set("content-type", item.contentType);
+            h.set("content-disposition", `attachment; filename="${item.filename}"`);
+            h.set("access-control-allow-origin", "*");
+            h.set("cache-control", "public, max-age=86400");
+            return new Response(dlRes.body, { status: 200, headers: h });
+          }
+        } catch(e) {}
+      }
+    }
+
     // Optional JSON API route
     if (pathname === "/api" || pathname === "/json" || url.searchParams.get("format") === "json") {
       return new Response(

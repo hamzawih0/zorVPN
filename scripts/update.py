@@ -87,6 +87,46 @@ def proxy_to_uri(p: dict) -> str:
 # Verified upstream subscription sources
 SOURCES = [
     {
+        "name": "v2nodes.com (Global Node Feed)",
+        "url": "https://www.v2nodes.com/subscriptions/country/all/?key=EA14A8FD6DCEA0A",
+    },
+    {
+        "name": "MatinGhanbari/v2ray-configs (15m Refresh)",
+        "url": "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/all_sub.txt",
+    },
+    {
+        "name": "barry-far/V2ray-Config (15m Refresh)",
+        "url": "https://raw.githubusercontent.com/barry-far/V2ray-Config/main/All_Configs_Sub.txt",
+    },
+    {
+        "name": "Nexus Nodes (ninjastrikers/nexus-nodes 4h Speed-Sorted)",
+        "url": "https://raw.githubusercontent.com/ninjastrikers/nexus-nodes/main/configs/all.txt",
+    },
+    {
+        "name": "lyqnihao/proxy (12h Meta-Aggregator Clash-Meta)",
+        "url": "https://raw.githubusercontent.com/lyqnihao/proxy/main/clash-meta/output.yaml",
+    },
+    {
+        "name": "lyqnihao/proxy (V2Nodes Aggregated Pool)",
+        "url": "https://raw.githubusercontent.com/lyqnihao/proxy/main/V2Nodes/output.yaml",
+    },
+    {
+        "name": "jichangx/free-nodes (Daily 00:00 Pool)",
+        "url": "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml",
+    },
+    {
+        "name": "free-nodes/v2rayfree (Daily Verified Aggregation)",
+        "url": "https://raw.githubusercontent.com/free-nodes/v2rayfree/main/sub",
+    },
+    {
+        "name": "Pawdroid/Free-servers (Curated Global)",
+        "url": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
+    },
+    {
+        "name": "awesome-vpn/awesome-vpn (Midnight Refresh)",
+        "url": "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml",
+    },
+    {
         "name": "Au1rxx/free-vpn-subscriptions (VLESS & Hy2 Pre-verified)",
         "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/clash.yaml",
     },
@@ -109,10 +149,6 @@ SOURCES = [
     {
         "name": "anaer/Sub (Multi-Airport Harvest)",
         "url": "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
-    },
-    {
-        "name": "awesome-vpn/awesome-vpn",
-        "url": "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml",
     },
 ]
 
@@ -278,33 +314,291 @@ AD_KEYWORDS = [
     '备用', '返利', 'AFF', 'aff', 'QQ群', '群聊', '群主'
 ]
 
-def parse_clash_yaml(content_bytes: bytes) -> list:
+def parse_vmess(uri: str) -> dict | None:
     try:
-        text = content_bytes.decode('utf-8', errors='ignore')
-        if '```yaml' in text:
-            text = text.split('```yaml', 1)[1].split('```', 1)[0]
-        elif '```' in text:
-            text = text.split('```', 1)[1].split('```', 1)[0]
-        data = yaml.safe_load(text)
-        if isinstance(data, dict) and 'proxies' in data and isinstance(data['proxies'], list):
-            valid = []
-            for p in data['proxies']:
-                if isinstance(p, dict) and 'server' in p and 'port' in p:
-                    # Sanitize invalid dummy servers
-                    server = str(p.get('server', '')).strip().lower()
-                    if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
-                        continue
-                    # Sanitize airport marketing cards / spam announcements
-                    name = str(p.get('name', '')).strip()
-                    if any(kw in name for kw in AD_KEYWORDS):
-                        continue
-                    ptype = str(p.get('type', '')).lower()
-                    if ptype in ('vless', 'hysteria2', 'hysteria', 'trojan', 'vmess', 'ss', 'socks5'):
-                        valid.append(p)
-            return valid
-    except Exception as e:
-        print(f"    [Error parsing YAML]: {e}")
-    return []
+        b64_str = uri[8:]
+        b64_str += '=' * ((4 - len(b64_str) % 4) % 4)
+        raw = base64.b64decode(b64_str).decode('utf-8', errors='ignore')
+        data = json.loads(raw)
+        server = str(data.get('add', '')).strip()
+        port = int(data.get('port', 0))
+        uuid = str(data.get('id', '')).strip()
+        if not server or not port or not uuid:
+            return None
+        name = str(data.get('ps', f"vmess-{server}-{port}")).strip()
+        net = str(data.get('net', 'tcp')).lower()
+        tls_val = str(data.get('tls', '')).lower()
+        use_tls = tls_val in ('tls', '1', 'true')
+        sni = str(data.get('sni', data.get('host', ''))).strip()
+
+        proxy = {
+            'name': name,
+            'type': 'vmess',
+            'server': server,
+            'port': port,
+            'uuid': uuid,
+            'alterId': int(data.get('aid', 0)),
+            'cipher': str(data.get('scy', 'auto')),
+            'udp': True,
+            'tls': use_tls,
+            'network': net
+        }
+        if sni:
+            proxy['servername'] = sni
+        if net == 'ws':
+            ws_opts = {}
+            if data.get('path'):
+                ws_opts['path'] = str(data.get('path'))
+            if data.get('host'):
+                ws_opts['headers'] = {'Host': str(data.get('host'))}
+            if ws_opts:
+                proxy['ws-opts'] = ws_opts
+        return proxy
+    except Exception:
+        return None
+
+
+def parse_vless(uri: str) -> dict | None:
+    try:
+        parsed = urllib.parse.urlparse(uri)
+        uuid = parsed.username
+        server = parsed.hostname
+        port = parsed.port
+        if not uuid or not server or not port:
+            return None
+        qs = urllib.parse.parse_qs(parsed.query)
+        name = urllib.parse.unquote(parsed.fragment) if parsed.fragment else f"vless-{server}-{port}"
+
+        security = qs.get('security', ['none'])[0].lower()
+        flow = qs.get('flow', [''])[0]
+        sni = qs.get('sni', [''])[0] or qs.get('servername', [''])[0]
+        fp = qs.get('fp', [''])[0]
+        net = qs.get('type', ['tcp'])[0].lower()
+        pbk = qs.get('pbk', [''])[0]
+        sid = qs.get('sid', [''])[0]
+
+        proxy = {
+            'name': name,
+            'type': 'vless',
+            'server': server,
+            'port': int(port),
+            'uuid': uuid,
+            'udp': True,
+            'network': net
+        }
+        if flow:
+            proxy['flow'] = flow
+        if security == 'reality' or pbk:
+            proxy['tls'] = True
+            reality_opts = {}
+            if pbk: reality_opts['public-key'] = pbk
+            if sid: reality_opts['short-id'] = sid
+            proxy['reality-opts'] = reality_opts
+        elif security == 'tls':
+            proxy['tls'] = True
+
+        if sni:
+            proxy['servername'] = sni
+        if fp:
+            proxy['client-fingerprint'] = fp
+        if net == 'ws':
+            path = qs.get('path', [''])[0]
+            host = qs.get('host', [''])[0]
+            ws_opts = {}
+            if path: ws_opts['path'] = path
+            if host: ws_opts['headers'] = {'Host': host}
+            if ws_opts: proxy['ws-opts'] = ws_opts
+
+        return proxy
+    except Exception:
+        return None
+
+
+def parse_trojan(uri: str) -> dict | None:
+    try:
+        parsed = urllib.parse.urlparse(uri)
+        password = parsed.username
+        server = parsed.hostname
+        port = parsed.port
+        if not password or not server or not port:
+            return None
+        qs = urllib.parse.parse_qs(parsed.query)
+        name = urllib.parse.unquote(parsed.fragment) if parsed.fragment else f"trojan-{server}-{port}"
+        sni = qs.get('sni', [''])[0] or qs.get('peer', [''])[0]
+        allow_insecure = qs.get('allowInsecure', ['0'])[0] in ('1', 'true')
+        net = qs.get('type', ['tcp'])[0].lower()
+
+        proxy = {
+            'name': name,
+            'type': 'trojan',
+            'server': server,
+            'port': int(port),
+            'password': password,
+            'udp': True,
+            'network': net
+        }
+        if sni:
+            proxy['sni'] = sni
+        if allow_insecure:
+            proxy['skip-cert-verify'] = True
+        if net == 'ws':
+            path = qs.get('path', [''])[0]
+            host = qs.get('host', [''])[0]
+            ws_opts = {}
+            if path: ws_opts['path'] = path
+            if host: ws_opts['headers'] = {'Host': host}
+            if ws_opts: proxy['ws-opts'] = ws_opts
+        return proxy
+    except Exception:
+        return None
+
+
+def parse_ss(uri: str) -> dict | None:
+    try:
+        rest = uri[5:]
+        name = ""
+        if '#' in rest:
+            rest, tag = rest.split('#', 1)
+            name = urllib.parse.unquote(tag)
+
+        if '@' in rest:
+            userinfo, hostport = rest.split('@', 1)
+            userinfo += '=' * ((4 - len(userinfo) % 4) % 4)
+            decoded_user = base64.b64decode(userinfo).decode('utf-8', errors='ignore')
+            cipher, password = decoded_user.split(':', 1)
+            if ':' in hostport:
+                h_parts = hostport.split(':')
+                server = ':'.join(h_parts[:-1]).strip('[]')
+                port = int(h_parts[-1].split('/')[0].split('?')[0])
+            else:
+                return None
+        else:
+            rest += '=' * ((4 - len(rest) % 4) % 4)
+            decoded = base64.b64decode(rest).decode('utf-8', errors='ignore')
+            m = re.match(r'^(.*?):(.*?)@(.*?):(\d+)', decoded)
+            if not m:
+                return None
+            cipher, password, server, port = m.group(1), m.group(2), m.group(3), int(m.group(4))
+
+        if not name:
+            name = f"ss-{server}-{port}"
+        return {
+            'name': name,
+            'type': 'ss',
+            'server': server,
+            'port': port,
+            'cipher': cipher,
+            'password': password,
+            'udp': True
+        }
+    except Exception:
+        return None
+
+
+def parse_hy2(uri: str) -> dict | None:
+    try:
+        parsed = urllib.parse.urlparse(uri)
+        auth = parsed.username or ''
+        server = parsed.hostname
+        port = parsed.port
+        if not server or not port:
+            return None
+        qs = urllib.parse.parse_qs(parsed.query)
+        name = urllib.parse.unquote(parsed.fragment) if parsed.fragment else f"hy2-{server}-{port}"
+        sni = qs.get('sni', [''])[0]
+        insecure = qs.get('insecure', ['0'])[0] in ('1', 'true')
+
+        proxy = {
+            'name': name,
+            'type': 'hysteria2',
+            'server': server,
+            'port': int(port),
+            'password': auth,
+            'udp': True
+        }
+        if sni: proxy['sni'] = sni
+        if insecure: proxy['skip-cert-verify'] = True
+        return proxy
+    except Exception:
+        return None
+
+
+def parse_uri(uri: str) -> dict | None:
+    uri = uri.strip()
+    if uri.startswith('vmess://'):
+        return parse_vmess(uri)
+    elif uri.startswith('vless://'):
+        return parse_vless(uri)
+    elif uri.startswith('trojan://'):
+        return parse_trojan(uri)
+    elif uri.startswith('ss://'):
+        return parse_ss(uri)
+    elif uri.startswith('hysteria2://') or uri.startswith('hy2://'):
+        return parse_hy2(uri)
+    return None
+
+
+def parse_subscription_content(content_bytes: bytes) -> list:
+    results = []
+    text = content_bytes.decode('utf-8', errors='ignore')
+
+    # 1. Try Clash YAML
+    if 'proxies:' in text:
+        try:
+            yaml_text = text
+            if '```yaml' in text:
+                yaml_text = text.split('```yaml', 1)[1].split('```', 1)[0]
+            elif '```' in text:
+                yaml_text = text.split('```', 1)[1].split('```', 1)[0]
+            data = yaml.safe_load(yaml_text)
+            if isinstance(data, dict) and 'proxies' in data and isinstance(data['proxies'], list):
+                for p in data['proxies']:
+                    if isinstance(p, dict) and 'server' in p and 'port' in p:
+                        server = str(p.get('server', '')).strip().lower()
+                        if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
+                            continue
+                        name = str(p.get('name', '')).strip()
+                        if any(kw in name for kw in AD_KEYWORDS):
+                            continue
+                        ptype = str(p.get('type', '')).lower()
+                        if ptype in ('vless', 'hysteria2', 'hysteria', 'trojan', 'vmess', 'ss', 'socks5'):
+                            results.append(p)
+                if results:
+                    return results
+        except Exception:
+            pass
+
+    # 2. Try Base64-encoded subscription
+    cleaned = ''.join(text.split())
+    try:
+        padded = cleaned + '=' * ((4 - len(cleaned) % 4) % 4)
+        decoded = base64.b64decode(padded).decode('utf-8', errors='ignore')
+        if any(proto in decoded for proto in ('vmess://', 'vless://', 'trojan://', 'ss://', 'hysteria2://', 'hy2://')):
+            text = decoded
+    except Exception:
+        pass
+
+    # 3. Parse URI lines
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        p = parse_uri(line)
+        if p:
+            server = str(p.get('server', '')).strip().lower()
+            if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
+                continue
+            name = str(p.get('name', '')).strip()
+            if any(kw in name for kw in AD_KEYWORDS):
+                continue
+            results.append(p)
+
+    return results
+
+
+def parse_clash_yaml(content_bytes: bytes) -> list:
+    """Backwards-compatible alias for parse_subscription_content."""
+    return parse_subscription_content(content_bytes)
 
 
 def test_proxies_with_mihomo(candidates: list, mihomo_bin: str, max_workers: int = 35) -> list:
@@ -406,7 +700,7 @@ def build_zorvpn():
         print(f"  ➜ Fetching {name} ...", end="", flush=True)
         try:
             data = fetch_url(url, timeout=18)
-            proxies = parse_clash_yaml(data)
+            proxies = parse_subscription_content(data)
             added = 0
             for p in proxies:
                 fp = proxy_fingerprint(p)

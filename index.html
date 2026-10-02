@@ -651,7 +651,164 @@ button {
   color: #FFFFFF;
 }
 
-.btn-close-sheet svg {
+/* In-Sheet App Switcher (for Android: v2rayNG vs Clash Meta) */
+.app-switcher-wrap {
+  margin-bottom: 14px;
+}
+
+.app-switcher-bar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--stroke-strong);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 6px;
+}
+
+.app-switch-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-switch-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mini-app-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mini-app-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* App Download Bar in Sheet */
+.app-download-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--stroke-strong);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.app-download-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.app-download-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.app-download-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.app-download-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-download-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-download-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-download-tag {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1px solid rgba(48, 209, 88, 0.25);
+}
+
+.app-download-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-app-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: 9px;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.btn-app-download:hover {
+  background: #0071E3;
+  transform: translateY(-1px);
+}
+
+.btn-app-download svg {
   width: 14px;
   height: 14px;
 }
@@ -1109,8 +1266,8 @@ button {
         </div>
       </div>
 
-      <!-- 2. Android: v2rayNG / Xray -->
-      <div class="platform-card" onclick="openPlatformSheet('android_v2ray')">
+      <!-- 2. Android -->
+      <div class="platform-card" onclick="openPlatformSheet('android')">
         <div class="platform-left">
           <div class="platform-icon-wrap android">
             <!-- Android SVG Icon -->
@@ -1120,32 +1277,10 @@ button {
           </div>
           <div class="platform-meta">
             <div class="platform-name-row">
-              <span class="platform-name">Android (v2rayNG)</span>
-              <span class="platform-pill green">1-Click Base64</span>
+              <span class="platform-name">Android</span>
+              <span class="platform-pill green">v2rayNG & Clash Meta</span>
             </div>
-            <span class="platform-sub">v2rayNG • NekoBox • SagerNet • sing-box</span>
-          </div>
-        </div>
-        <div class="platform-chevron">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </div>
-      </div>
-
-      <!-- 3. Android: Clash Meta / FlClash -->
-      <div class="platform-card" onclick="openPlatformSheet('android_clash')">
-        <div class="platform-left">
-          <div class="platform-icon-wrap android" style="background: rgba(191, 90, 242, 0.12); color: var(--purple);">
-            <!-- Zap / Speed Bolt SVG Icon -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-          </div>
-          <div class="platform-meta">
-            <div class="platform-name-row">
-              <span class="platform-name">Android (Clash Meta)</span>
-              <span class="platform-pill">Smart YAML</span>
-            </div>
-            <span class="platform-sub">ClashMetaForAndroid • FlClash • Surfboard</span>
+            <span class="platform-sub">v2rayNG • Clash Meta • NekoBox • sing-box</span>
           </div>
         </div>
         <div class="platform-chevron">
@@ -1255,6 +1390,40 @@ button {
       </button>
     </div>
 
+    <!-- In-Sheet App Switcher (for Android: v2rayNG vs Clash Meta) -->
+    <div id="sheetAppSwitcher" class="app-switcher-wrap" style="display: none;">
+      <div class="app-switcher-bar">
+        <button id="btnAppV2ray" class="app-switch-btn active" onclick="switchAndroidApp('v2rayng')">
+          <div class="mini-app-icon" id="miniIconV2ray"></div>
+          <span>v2rayNG</span>
+        </button>
+        <button id="btnAppClash" class="app-switch-btn" onclick="switchAndroidApp('clashmeta')">
+          <div class="mini-app-icon" id="miniIconClash"></div>
+          <span>Clash Meta</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 0. App Download Bar (Direct Download for Android/Windows, Store Redirect for iOS/Mac) -->
+    <div id="sheetAppDownloadSection" class="app-download-bar" style="display: none;">
+      <div class="app-download-left">
+        <div class="app-download-icon" id="sheetAppIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        </div>
+        <div class="app-download-meta">
+          <div class="app-download-title-row">
+            <span class="app-download-title" id="sheetAppTitle">App Name</span>
+            <span class="app-download-tag" id="sheetAppTag">Direct</span>
+          </div>
+          <span class="app-download-sub" id="sheetAppSub">China Fast CDN • No Redirect</span>
+        </div>
+      </div>
+      <a id="btnSheetAppDownload" href="#" class="btn-app-download" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <span id="sheetAppDownloadBtnText">Download</span>
+      </a>
+    </div>
+
     <!-- 1. Version Tier Selector -->
     <div class="sheet-section">
       <div class="sheet-label">
@@ -1332,12 +1501,6 @@ button {
       <div class="qr-sublabel">Point your phone camera or app scanner at the QR code</div>
     </div>
 
-    <!-- 6. Platform Setup Guide -->
-    <div class="sheet-section">
-      <div class="sheet-label">Quick Setup Steps</div>
-      <div id="stepsContainer" class="platform-steps"></div>
-    </div>
-
     <button class="btn-secondary-action" style="width: 100%; height: 42px; margin-top: 4px;" onclick="closeSheet()">Done</button>
   </div>
 </div>
@@ -1362,6 +1525,53 @@ let currentPlatform = 'ios';
 let currentTier = 'stable';
 let currentMirror = 'jsdelivr';
 
+
+// Authentic Brand SVGs for Client Apps (Exact Vector Logos)
+const APP_LOGOS = {
+  shadowrocket: `<svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="sr-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0F52BA"/><stop offset="100%" stop-color="#002244"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#sr-grad)"/><path d="M68 22c-8 0-21 10-28 17l-9-2c-3-1-5 1-4 3l4 6-9 9c-2 2-2 5 0 7l6 6c2 2 5 2 7 0l9-9 6 4c2 1 4-1 3-4l-2-9c7-7 17-20 17-28 0-1-1-1-1 0zm-15 15c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4z" fill="#FFFFFF"/><circle cx="53" cy="41" r="3.5" fill="#0F52BA"/><path d="M26 66l-6 14 14-6-8-8z" fill="#FF9500"/></svg>`,
+  
+  v2rayng: `<svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="v2-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#007AFF"/><stop offset="100%" stop-color="#0040DD"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#v2-grad)"/><path d="M22 28h18l10 32 10-32h18L58 76H42L22 28z" fill="#FFFFFF"/><path d="M50 60l8-25h-16l8 25z" fill="rgba(0,122,255,0.3)"/><path d="M36 28l14 44 4-13-11-31h-7z" fill="rgba(255,255,255,0.7)"/></svg>`,
+  
+  clashmeta: `<svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="cm-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5E5CE6"/><stop offset="100%" stop-color="#3634A3"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#cm-grad)"/><circle cx="50" cy="52" r="26" fill="#FFFFFF"/><path d="M27 34l8 12h-8zM73 34l-8 12h8z" fill="#FFFFFF"/><ellipse cx="40" cy="52" rx="4.5" ry="6" fill="#1C1C1E"/><ellipse cx="60" cy="52" rx="4.5" ry="6" fill="#1C1C1E"/><circle cx="41.5" cy="50" r="1.5" fill="#FFFFFF"/><circle cx="61.5" cy="50" r="1.5" fill="#FFFFFF"/><path d="M47 59l3 3 3-3" stroke="#1C1C1E" stroke-width="2" stroke-linecap="round" fill="none"/></svg>`,
+  
+  singbox: `<svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="sb-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2C2C2E"/><stop offset="100%" stop-color="#1C1C1E"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#sb-grad)"/><path d="M50 20l28 16v32L50 84 22 68V36L50 20z" fill="#48484A" stroke="#5E5CE6" stroke-width="2.5"/><path d="M50 20v34L22 36l28-16z" fill="#5E5CE6"/><path d="M50 54l28-18-28-16v34z" fill="#7D7AFF"/><path d="M50 54v30l28-16V36L50 54z" fill="#4B48B8"/><path d="M22 36v32l28 16V54L22 36z" fill="#3D3A9E"/></svg>`,
+  
+  clashverge: `<svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="cv-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C7BE"/><stop offset="100%" stop-color="#0A84FF"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="#1C1C1E"/><path d="M50 18l26 15v30L50 78 24 63V33l26-15z" fill="none" stroke="url(#cv-grad)" stroke-width="6" stroke-linejoin="round"/><path d="M50 32l14 8v16l-14 8-14-8V40l14-8z" fill="url(#cv-grad)"/><circle cx="50" cy="48" r="4.5" fill="#1C1C1E"/></svg>`
+};
+
+// Android Sub-App Configurations (Toggled inside the Android Drawer)
+const ANDROID_APPS = {
+  v2rayng: {
+    appTitle: "v2rayNG",
+    appTag: "Direct APK",
+    appSub: "v2.2.6 • China Fast CDN",
+    appDownloadUrl: "https://gh-proxy.com/https://github.com/2dust/v2rayNG/releases/download/2.2.6/v2rayNG_2.2.6_arm64-v8a.apk",
+    appFilename: "v2rayNG_2.2.6_arm64-v8a.apk",
+    appDownloadBtnText: "Download APK",
+    isDirectDownload: true,
+    logo: APP_LOGOS.v2rayng,
+    stableFile: "ZorVPN-lite.txt",
+    fullFile: "ZorVPN-all.txt",
+    importProtocol: "v2rayng",
+    importLabel: "1-Click Add to v2rayNG"
+  },
+  clashmeta: {
+    appTitle: "Clash Meta",
+    appTag: "Direct APK",
+    appSub: "v2.11.35 • China Fast CDN",
+    appDownloadUrl: "https://gh-proxy.com/https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.35/cmfa-2.11.35-meta-universal-release.apk",
+    appFilename: "cmfa-2.11.35-meta-universal-release.apk",
+    appDownloadBtnText: "Download APK",
+    isDirectDownload: true,
+    logo: APP_LOGOS.clashmeta,
+    stableFile: "ZorVPN.yaml",
+    fullFile: "ZorVPN.yaml",
+    importProtocol: "clashmeta",
+    importLabel: "1-Click Add to Clash Meta"
+  }
+};
+let activeAndroidApp = 'v2rayng';
+
 // Open Source Vector Icons (SVG strings)
 const ICONS = {
   apple: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.66-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/></svg>`,
@@ -1384,56 +1594,19 @@ const PLATFORMS = {
     stableDesc: "Top 30 Curated Nodes • Zero Lag Base64",
     fullDesc: "Top 60 Curated Nodes • Flat Base64 List",
     importProtocol: "shadowrocket",
-    steps: [
-      { num: 1, title: "Install Shadowrocket", desc: "Open Shadowrocket on your iPhone or iPad." },
-      { num: 2, title: "Add Subscription", desc: "Tap <b>+</b> in the top right, set Type to <b>Subscribe</b> (do NOT pick Shadowsocks/Clash)." },
-      { num: 3, title: "Paste URL & Save", desc: "Paste the subscription URL, set Remark to <b>zorVPN</b>, and tap <b>Save</b>." }
-    ]
-  },
-  android_v2ray: {
-    title: "Android — v2rayNG & Xray",
-    subtitle: "v2rayNG • NekoBox • SagerNet • sing-box",
-    svg: ICONS.android,
-    stableFile: "ZorVPN-lite.txt",
-    fullFile: "ZorVPN-all.txt",
-    stableDesc: "Top 30 Curated Nodes • Base64 Instant Sync",
-    fullDesc: "All 260+ Verified Nodes • Base64 Full Pool",
-    importProtocol: "v2rayng",
-    steps: [
-      { num: 1, title: "1-Click Add or Copy URL", desc: "Tap <b>1-Click Add to v2rayNG</b> below, or copy the subscription link." },
-      { num: 2, title: "Open Subscription Settings", desc: "In v2rayNG, open <b>☰ (Menu)</b> → <b>Subscription group setting</b> (订阅分组设置) → tap <b>+</b>." },
-      { num: 3, title: "Update Subscription", desc: "Paste URL, save, then tap <b>⋮ (top right)</b> → <b>Update subscription</b>. Tap <b>V</b> to connect!" }
-    ]
-  },
-  android_clash: {
-    title: "Android — Clash Meta & FlClash",
-    subtitle: "ClashMetaForAndroid • FlClash • Surfboard",
-    svg: ICONS.zap,
-    stableFile: "ZorVPN.yaml",
-    fullFile: "ZorVPN.yaml",
-    stableDesc: "Clash Meta YAML • Smart Rule Routing",
-    fullDesc: "All 260+ Verified Nodes • Auto-Failover Rules",
-    importProtocol: "clashmeta",
-    steps: [
-      { num: 1, title: "1-Click Import or Copy", desc: "Tap <b>1-Click Add to Clash Meta</b> below, or copy the YAML URL." },
-      { num: 2, title: "Save Profile", desc: "In Clash Meta, tap <b>Profiles</b> → <b>+</b> → <b>New from URL</b> → paste link → tap <b>Save (floppy disk)</b>." },
-      { num: 3, title: "Start Gateway", desc: "Select the newly saved profile, return to main screen and tap <b>Tap to start</b>!" }
-    ]
+    appTitle: "Shadowrocket",
+    appTag: "App Store",
+    appSub: "Requires Non-China Apple ID",
+    appDownloadUrl: "https://apps.apple.com/app/shadowrocket/id932747118",
+    appDownloadBtnText: "Open App Store ↗",
+    isDirectDownload: false,
+    appLogo: APP_LOGOS.shadowrocket
   },
   android: {
     title: "Android Setup",
-    subtitle: "v2rayNG • ClashMetaForAndroid • FlClash",
+    subtitle: "v2rayNG • Clash Meta • NekoBox • sing-box",
     svg: ICONS.android,
-    stableFile: "ZorVPN-lite.txt",
-    fullFile: "ZorVPN.yaml",
-    stableDesc: "Base64 Lite (v2rayNG)",
-    fullDesc: "Clash YAML (Clash Meta)",
-    importProtocol: "v2rayng",
-    steps: [
-      { num: 1, title: "Pick Your Client", desc: "Use <b>v2rayNG</b> for Base64 links, or <b>Clash Meta</b> for YAML rule configurations." },
-      { num: 2, title: "Import Subscription", desc: "Click <b>1-Click Add</b> or paste the URL into your client's subscription manager." },
-      { num: 3, title: "Connect", desc: "Update nodes, test latency, and tap Connect!" }
-    ]
+    isAndroidMultiApp: true
   },
   mac: {
     title: "macOS Setup",
@@ -1444,11 +1617,13 @@ const PLATFORMS = {
     stableDesc: "Clash YAML • Apple Silicon Optimized",
     fullDesc: "All 260+ Verified Nodes • Complete Archive",
     importProtocol: "clash",
-    steps: [
-      { num: 1, title: "Open Clash Verge Rev", desc: "Click <b>Profiles</b> in the left sidebar." },
-      { num: 2, title: "Paste & Download", desc: "Paste the subscription link into the top bar and click <b>Import</b>." },
-      { num: 3, title: "Select Profile", desc: "Right click <b>zorVPN</b> → Select, and toggle <b>System Proxy</b>." }
-    ]
+    appTitle: "Sing-box",
+    appTag: "Mac Store",
+    appSub: "Official Mac App Store Client",
+    appDownloadUrl: "https://apps.apple.com/app/sing-box/id6451272673",
+    appDownloadBtnText: "Open App Store ↗",
+    isDirectDownload: false,
+    appLogo: APP_LOGOS.singbox
   },
   windows: {
     title: "Windows Setup",
@@ -1459,11 +1634,14 @@ const PLATFORMS = {
     stableDesc: "Clash YAML • Auto-Fastest Group",
     fullDesc: "All 260+ Verified Nodes • Full Redundancy",
     importProtocol: "clash",
-    steps: [
-      { num: 1, title: "Open Clash Verge Rev", desc: "Go to <b>Profiles</b> section." },
-      { num: 2, title: "Add Subscription", desc: "Paste the URL and click <b>Import</b> to download the profile." },
-      { num: 3, title: "Enable System Proxy", desc: "In Settings, toggle <b>System Proxy</b> (or TUN Mode for games)." }
-    ]
+    appTitle: "Clash Verge Rev",
+    appTag: "Direct .exe",
+    appSub: "v2.5.6 64-bit • China Fast CDN",
+    appDownloadUrl: "https://gh-proxy.com/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.6/Clash.Verge_2.5.6_x64-setup.exe",
+    appFilename: "Clash.Verge_2.5.6_x64-setup.exe",
+    appDownloadBtnText: "Download .exe",
+    isDirectDownload: true,
+    appLogo: APP_LOGOS.clashverge
   },
   merlin: {
     title: "Merlin / Router / Linux",
@@ -1474,11 +1652,10 @@ const PLATFORMS = {
     stableDesc: "Clash YAML • Smart Domestic Direct",
     fullDesc: "Plaintext URI Nodes List",
     importProtocol: "clash",
-    steps: [
-      { num: 1, title: "Access Router Admin", desc: "Open your router web panel (e.g. <b>MerlinClash</b> or <b>OpenWrt PassWall</b>)." },
-      { num: 2, title: "Add Subscription Node", desc: "Paste the URL into the subscription management section and click Update." },
-      { num: 3, title: "Apply Whole-Home Gateway", desc: "Save and apply. All devices connected to your Wi-Fi will be proxied!" }
-    ]
+    appTitle: null,
+    appDownloadUrl: null,
+    isDirectDownload: false,
+    appLogo: null
   }
 };
 
@@ -1502,7 +1679,13 @@ function getMirrorUrl(filename) {
 // Compute active URL
 function getActiveUrl() {
   const p = PLATFORMS[currentPlatform];
-  const filename = (currentTier === 'stable') ? p.stableFile : p.fullFile;
+  let filename;
+  if (currentPlatform === 'android') {
+    const app = ANDROID_APPS[activeAndroidApp];
+    filename = (currentTier === 'stable') ? app.stableFile : app.fullFile;
+  } else {
+    filename = (currentTier === 'stable') ? p.stableFile : p.fullFile;
+  }
   return getMirrorUrl(filename);
 }
 
@@ -1515,27 +1698,87 @@ function openPlatformSheet(platKey) {
   document.getElementById('sheetTitle').textContent = p.title;
   document.getElementById('sheetSubtitle').textContent = p.subtitle;
 
-  // Render steps
-  const stepsContainer = document.getElementById('stepsContainer');
-  stepsContainer.innerHTML = p.steps.map(s => `
-    <div class="step-item">
-      <div class="step-digit">${s.num}</div>
-      <div class="step-content">
-        <h6>${s.title}</h6>
-        <p>${s.desc}</p>
-      </div>
-    </div>
-  `).join('');
+  const appSwitcher = document.getElementById('sheetAppSwitcher');
+  const appSection = document.getElementById('sheetAppDownloadSection');
+
+  if (platKey === 'android') {
+    appSwitcher.style.display = 'block';
+    document.getElementById('miniIconV2ray').innerHTML = APP_LOGOS.v2rayng;
+    document.getElementById('miniIconClash').innerHTML = APP_LOGOS.clashmeta;
+    switchAndroidApp(activeAndroidApp);
+  } else {
+    appSwitcher.style.display = 'none';
+    if (p.appDownloadUrl) {
+      appSection.style.display = 'flex';
+      document.getElementById('sheetAppTitle').textContent = p.appTitle;
+      document.getElementById('sheetAppTag').textContent = p.appTag;
+      document.getElementById('sheetAppSub').textContent = p.appSub;
+      document.getElementById('sheetAppDownloadBtnText').textContent = p.appDownloadBtnText;
+      document.getElementById('sheetAppIcon').innerHTML = p.appLogo || '';
+
+      const dlBtn = document.getElementById('btnSheetAppDownload');
+      dlBtn.href = p.appDownloadUrl;
+
+      if (p.isDirectDownload) {
+        dlBtn.setAttribute('download', p.appFilename || '');
+        dlBtn.setAttribute('target', '_self');
+        dlBtn.onclick = function() {
+          showToast(`Starting ${p.appTitle} download!`);
+        };
+      } else {
+        dlBtn.removeAttribute('download');
+        dlBtn.setAttribute('target', '_blank');
+        dlBtn.setAttribute('rel', 'noopener noreferrer');
+        dlBtn.onclick = null;
+      }
+    } else {
+      appSection.style.display = 'none';
+    }
+    updateSheetUrls();
+  }
 
   // Hide QR code initially on sheet open
   document.getElementById('qrCodeSection').classList.remove('show');
   document.getElementById('btnToggleQr').querySelector('span').textContent = 'Show QR Code';
 
-  updateSheetUrls();
-
   // Open modal
   const modal = document.getElementById('sheetModal');
   modal.classList.add('open');
+}
+
+function switchAndroidApp(appKey) {
+  activeAndroidApp = appKey;
+  const app = ANDROID_APPS[appKey];
+
+  // Update switcher buttons
+  const btnV2ray = document.getElementById('btnAppV2ray');
+  const btnClash = document.getElementById('btnAppClash');
+  if (appKey === 'v2rayng') {
+    btnV2ray.classList.add('active');
+    btnClash.classList.remove('active');
+  } else {
+    btnClash.classList.add('active');
+    btnV2ray.classList.remove('active');
+  }
+
+  // Update download card
+  const appSection = document.getElementById('sheetAppDownloadSection');
+  appSection.style.display = 'flex';
+  document.getElementById('sheetAppTitle').textContent = app.appTitle;
+  document.getElementById('sheetAppTag').textContent = app.appTag;
+  document.getElementById('sheetAppSub').textContent = app.appSub;
+  document.getElementById('sheetAppDownloadBtnText').textContent = app.appDownloadBtnText;
+  document.getElementById('sheetAppIcon').innerHTML = app.logo;
+
+  const dlBtn = document.getElementById('btnSheetAppDownload');
+  dlBtn.href = app.appDownloadUrl;
+  dlBtn.setAttribute('download', app.appFilename || '');
+  dlBtn.setAttribute('target', '_self');
+  dlBtn.onclick = function() {
+    showToast(`Starting ${app.appTitle} download!`);
+  };
+
+  updateSheetUrls();
 }
 
 // Update UI inside the active sheet
@@ -1548,28 +1791,36 @@ function updateSheetUrls() {
 
   // Import button link
   const importBtn = document.getElementById('btnOneClickImport');
-  if (p.importProtocol === 'shadowrocket') {
+  let protocol = p.importProtocol;
+  let label = '1-Click Add';
+
+  if (currentPlatform === 'android') {
+    const app = ANDROID_APPS[activeAndroidApp];
+    protocol = app.importProtocol;
+    label = app.importLabel;
+  }
+
+  if (protocol === 'shadowrocket') {
     const b64 = btoa(url);
     importBtn.href = `shadowrocket://add/sub://${b64}?title=zorVPN`;
     document.getElementById('btnImportLabel').textContent = 'Add to Shadowrocket';
-  } else if (p.importProtocol === 'v2rayng') {
+  } else if (protocol === 'v2rayng') {
     importBtn.href = `v2rayng://install-sub?url=${encodeURIComponent(url)}&name=zorVPN`;
     document.getElementById('btnImportLabel').textContent = '1-Click Add to v2rayNG';
-  } else if (p.importProtocol === 'clashmeta') {
-    importBtn.href = `clashmeta://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
-    document.getElementById('btnImportLabel').textContent = '1-Click Add to Clash Meta';
-  } else {
+  } else if (protocol === 'clashmeta' || protocol === 'clash') {
     importBtn.href = `clash://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
-    document.getElementById('btnImportLabel').textContent = 'Add to Clash';
+    document.getElementById('btnImportLabel').textContent = (currentPlatform === 'android') ? '1-Click Add to Clash Meta' : '1-Click Add to Clash';
+  } else {
+    importBtn.href = url;
+    document.getElementById('btnImportLabel').textContent = 'Open Raw Subscription';
   }
 
-  // Regenerate QR Code if it is currently visible
+  // If QR code is currently open, re-render it
   if (document.getElementById('qrCodeSection').classList.contains('show')) {
     renderQrCode(url);
   }
 }
 
-// Select Tier (Stable vs Full)
 function selectTier(tier) {
   currentTier = tier;
   document.getElementById('btnTierStable').classList.toggle('active', tier === 'stable');
