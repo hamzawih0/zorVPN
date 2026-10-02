@@ -9,13 +9,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="zorVPN" />
 <meta name="application-name" content="zorVPN" />
-<meta name="description" content="zorVPN — 100% verified green proxy subscription for iOS Shadowrocket, Clash, and FlClash with China-accelerated CDN links." />
+<meta name="description" content="zorVPN — 100% verified green proxy subscription for iOS, Android, macOS, Windows, and Merlin routers with China-accelerated CDN links." />
 <title>zorVPN — Subscription Hub & Client URL Selector</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<!-- QRCode.js for zero-dependency client-side QR generation -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 
 <style>
 /* ============================================================
@@ -54,6 +52,7 @@
 
   --green: #30D158;
   --green-soft: rgba(48, 209, 88, 0.16);
+  --green-glow: rgba(48, 209, 88, 0.45);
 
   --indigo: #5E5CE6;
   --indigo-soft: rgba(94, 92, 230, 0.16);
@@ -106,7 +105,7 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
-  padding-bottom: calc(var(--safe-bottom) + 60px);
+  padding-bottom: calc(var(--safe-bottom) + 50px);
 }
 
 button {
@@ -141,40 +140,40 @@ button {
   width: 720px;
   height: 720px;
   background: #0A84FF;
-  top: -280px;
+  top: -260px;
   left: -200px;
-  opacity: 0.15;
+  opacity: 0.16;
   animation: float1 28s ease-in-out infinite;
 }
 
 .b2 {
-  width: 620px;
-  height: 620px;
+  width: 640px;
+  height: 640px;
   background: #5E5CE6;
-  bottom: -260px;
-  right: -180px;
-  opacity: 0.13;
+  bottom: -240px;
+  right: -160px;
+  opacity: 0.14;
   animation: float2 32s ease-in-out infinite;
 }
 
 .b3 {
   width: 520px;
   height: 520px;
-  background: #64D2FF;
+  background: #30D158;
   top: 40%;
-  left: 55%;
+  left: 60%;
   opacity: 0.08;
   animation: float3 36s ease-in-out infinite;
 }
 
 @keyframes float1 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
-  50% { transform: translate(80px, 60px) scale(1.18); opacity: 0.20; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.16; }
+  50% { transform: translate(80px, 60px) scale(1.18); opacity: 0.22; }
 }
 
 @keyframes float2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.13; }
-  50% { transform: translate(-70px, -50px) scale(1.12); opacity: 0.18; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.14; }
+  50% { transform: translate(-70px, -50px) scale(1.12); opacity: 0.19; }
 }
 
 @keyframes float3 {
@@ -200,15 +199,15 @@ button {
   top: max(16px, var(--safe-top));
   left: 50%;
   transform: translateX(-50%) translateY(-120px) scale(0.9);
-  z-index: 9999;
+  z-index: 99999;
   background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 8px 18px 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 9px 18px 9px 12px;
   border-radius: 100px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 24px var(--blue-glow);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.95), 0 0 24px var(--blue-glow);
   opacity: 0;
   pointer-events: none;
   transition: transform 0.45s var(--spring), opacity 0.3s var(--ease);
@@ -221,8 +220,8 @@ button {
 }
 
 .toast-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: var(--green-soft);
   color: var(--green);
@@ -232,8 +231,8 @@ button {
 }
 
 .toast-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 
 .toast-text {
@@ -244,15 +243,15 @@ button {
 }
 
 /* ============================================================
-   PAGE LAYOUT
+   LAYOUT & CONTAINER
    ============================================================ */
 .app-container {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 680px;
+  max-width: 640px;
   margin: 0 auto;
-  padding: calc(var(--safe-top) + 24px) 20px 40px;
+  padding: calc(var(--safe-top) + 20px) 18px 40px;
 }
 
 /* Header */
@@ -260,7 +259,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .brand {
@@ -277,7 +276,7 @@ button {
   background: var(--brand-gradient);
   display: grid;
   place-items: center;
-  box-shadow: 0 10px 30px -6px rgba(10, 132, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 28px -6px rgba(10, 132, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   font-size: 22px;
 }
 
@@ -325,7 +324,7 @@ button {
   color: var(--text-2);
   padding: 8px 14px;
   border-radius: 100px;
-  background: var(--glass-surface);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--stroke);
@@ -336,20 +335,19 @@ button {
   text-decoration: none;
 }
 
-.header-action:hover, .header-action:active {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text);
-  transform: scale(0.97);
+.header-action:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .header-action svg {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .hero-title {
@@ -368,22 +366,22 @@ button {
 }
 
 .hero-desc {
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--text-2);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .stat-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .stat-pill {
   font-size: 11.5px;
   font-weight: 600;
-  padding: 6px 11px;
+  padding: 5px 10px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--stroke);
@@ -398,247 +396,384 @@ button {
 }
 
 /* ============================================================
-   CONTROL SEGMENTS (Mirror & Platform Pickers)
+   PLATFORM GRID CARDS (iOS 2026 Widget Feel)
    ============================================================ */
-.section-label {
-  font-size: 11px;
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-3);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-.mirror-picker {
-  margin-bottom: 22px;
-}
-
-.segmented {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  padding: 5px;
-  border-radius: 16px;
-  background: rgba(18, 18, 24, 0.85);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--stroke);
-}
-
-.seg-btn {
-  padding: 10px 8px;
-  border-radius: 12px;
-  font-size: 12.5px;
+.section-hint {
+  font-size: 12px;
   font-weight: 600;
-  color: var(--text-2);
+  color: var(--blue);
+}
+
+.platforms-grid {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  transition: all 0.22s var(--ease);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.platform-card {
   position: relative;
-}
-
-.seg-btn .sub-lbl {
-  font-size: 9.5px;
-  color: var(--text-3);
-  font-weight: 500;
-}
-
-.seg-btn.active {
-  background: var(--brand-gradient);
-  color: #FFFFFF;
-  box-shadow: 0 6px 20px -6px var(--blue-glow);
-}
-
-.seg-btn.active .sub-lbl {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.seg-btn:not(.active):hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
-}
-
-/* Platform Filter Chips */
-.platform-chips {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  margin-bottom: 22px;
-  padding-bottom: 2px;
-}
-
-.chip {
-  flex-shrink: 0;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 100px;
-  background: var(--bg-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--stroke);
-  color: var(--text-2);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.22s var(--ease);
-}
-
-.chip svg {
-  width: 14px;
-  height: 14px;
-}
-
-.chip.active {
-  background: #FFFFFF;
-  color: #000000;
-  border-color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
-}
-
-.chip:not(.active):hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text);
-}
-
-/* ============================================================
-   SUBSCRIPTION CARDS (Liquid Glass Style)
-   ============================================================ */
-.cards-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.sub-card {
-  position: relative;
-  border-radius: 24px;
-  padding: 22px;
+  border-radius: 22px;
+  padding: 16px 18px;
   background: var(--bg-card);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--stroke);
   box-shadow: var(--glass-shadow), var(--glass-specular);
-  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
-  overflow: hidden;
-}
-
-.sub-card:hover {
-  border-color: var(--stroke-2);
-  transform: translateY(-2px);
-}
-
-.sub-card.highlight {
-  border-color: rgba(10, 132, 255, 0.35);
-  box-shadow: 0 20px 44px -12px rgba(10, 132, 255, 0.22), var(--glass-specular);
-}
-
-.card-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  gap: 12px;
-}
-
-.card-title-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.card-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: rgba(10, 132, 255, 0.12);
-  border: 1px solid rgba(10, 132, 255, 0.24);
+.platform-card:hover {
+  border-color: var(--stroke-2);
+  background: rgba(30, 30, 38, 0.85);
+  transform: translateY(-1.5px);
+}
+
+.platform-card:active {
+  transform: scale(0.975);
+  background: rgba(40, 40, 52, 0.9);
+}
+
+.platform-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.platform-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   display: grid;
   place-items: center;
-  font-size: 19px;
+  font-size: 24px;
   flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.card-icon.orange {
-  background: var(--orange-soft);
-  border-color: rgba(255, 159, 10, 0.28);
+.platform-icon-wrap.ios {
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.22), rgba(94, 92, 230, 0.16));
+  border: 1px solid rgba(10, 132, 255, 0.35);
 }
 
-.card-icon.purple {
-  background: var(--purple-soft);
-  border-color: rgba(191, 90, 242, 0.28);
+.platform-icon-wrap.android {
+  background: linear-gradient(135deg, rgba(48, 209, 88, 0.22), rgba(100, 210, 255, 0.16));
+  border: 1px solid rgba(48, 209, 88, 0.35);
 }
 
-.card-icon.green {
-  background: var(--green-soft);
-  border-color: rgba(48, 209, 88, 0.28);
+.platform-icon-wrap.mac {
+  background: linear-gradient(135deg, rgba(94, 92, 230, 0.22), rgba(191, 90, 242, 0.16));
+  border: 1px solid rgba(94, 92, 230, 0.35);
 }
 
-.card-titles {
+.platform-icon-wrap.win {
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.22), rgba(100, 210, 255, 0.16));
+  border: 1px solid rgba(10, 132, 255, 0.35);
+}
+
+.platform-icon-wrap.router {
+  background: linear-gradient(135deg, rgba(255, 159, 10, 0.22), rgba(255, 69, 58, 0.16));
+  border: 1px solid rgba(255, 159, 10, 0.35);
+}
+
+.platform-meta {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
-.card-title {
+.platform-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.platform-name {
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.025em;
   color: #FFFFFF;
 }
 
-.card-sub {
-  font-size: 12px;
-  color: var(--text-3);
-  font-weight: 500;
-  margin-top: 1px;
-}
-
-.badge {
+.platform-pill {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 4px 9px;
-  border-radius: 6px;
+  padding: 2px 7px;
+  border-radius: 5px;
   background: var(--blue-soft);
   color: var(--blue);
-  border: 1px solid rgba(10, 132, 255, 0.24);
-  flex-shrink: 0;
+  border: 1px solid rgba(10, 132, 255, 0.25);
 }
 
-.badge.recommended {
-  background: linear-gradient(135deg, rgba(94,92,230,0.25), rgba(10,132,255,0.25));
-  color: #64D2FF;
-  border-color: rgba(100, 210, 255, 0.35);
+.platform-pill.green {
+  background: var(--green-soft);
+  color: var(--green);
+  border-color: rgba(48, 209, 88, 0.25);
 }
 
-.card-desc {
-  font-size: 13px;
+.platform-pill.orange {
+  background: var(--orange-soft);
+  color: var(--orange);
+  border-color: rgba(255, 159, 10, 0.25);
+}
+
+.platform-sub {
+  font-size: 12.5px;
   color: var(--text-2);
-  line-height: 1.5;
-  margin-bottom: 14px;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Code Snippet Box */
-.url-box {
-  background: rgba(0, 0, 0, 0.6);
+.platform-chevron {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--stroke);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  flex-shrink: 0;
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+
+.platform-card:hover .platform-chevron {
+  background: var(--brand-gradient);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateX(2px);
+}
+
+.platform-chevron svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ============================================================
+   BOTTOM SLIDE-UP SHEET (Apple iOS Style)
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  z-index: 10000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-sheet {
+  width: 100%;
+  max-width: 580px;
+  background: linear-gradient(180deg, #181820 0%, #0A0A0E 100%);
+  border-radius: 34px 34px 0 0;
+  border-top: 1px solid var(--stroke-2);
+  padding: 16px 22px calc(var(--safe-bottom) + 26px);
+  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.9), var(--glass-specular);
+  transform: translateY(100%);
+  transition: transform 0.42s var(--spring);
+  max-height: 92vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.modal-overlay.open .modal-sheet {
+  transform: translateY(0);
+}
+
+.modal-grab {
+  width: 38px;
+  height: 4.5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.24);
+  margin: 0 auto 16px;
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-platform-icon {
+  font-size: 26px;
+}
+
+.modal-title {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+.modal-subtitle {
+  font-size: 12px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.modal-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--stroke);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  transition: background 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
+.modal-close-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Version Segmented Switch (Stable vs Full) */
+.sheet-section {
+  margin-bottom: 18px;
+}
+
+.sheet-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.segmented-tiers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--stroke);
+}
+
+.tier-btn {
+  padding: 11px 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.22s var(--ease);
+  color: var(--text-2);
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.tier-btn .tier-sub {
+  font-size: 10px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.tier-btn.active {
+  background: var(--brand-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px -6px var(--blue-glow);
+}
+
+.tier-btn.active .tier-sub {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Mirror Segment */
+.segmented-mirrors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 4px;
   border-radius: 14px;
-  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--stroke);
+}
+
+.mirror-btn {
+  padding: 8px 6px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-align: center;
+  transition: all 0.2s var(--ease);
+}
+
+.mirror-btn.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+}
+
+/* URL Preview Box */
+.url-preview-card {
+  background: #000000;
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 16px;
-  position: relative;
 }
 
-.url-code {
+.url-text-code {
   font-family: var(--mono);
   font-size: 11.5px;
   color: var(--teal);
@@ -649,300 +784,192 @@ button {
   letter-spacing: -0.02em;
 }
 
-.url-copy-btn {
-  width: 28px;
-  height: 28px;
+.url-quick-copy {
+  width: 30px;
+  height: 30px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--stroke);
   display: grid;
   place-items: center;
   color: var(--text-2);
   flex-shrink: 0;
-  transition: all 0.2s var(--ease);
+  transition: all 0.2s;
 }
 
-.url-copy-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+.url-quick-copy:hover {
+  background: rgba(255, 255, 255, 0.16);
   color: #FFFFFF;
 }
 
-.url-copy-btn svg {
+.url-quick-copy svg {
   width: 14px;
   height: 14px;
 }
 
-/* Card Action Buttons */
-.card-actions {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 8px;
+/* Action Buttons */
+.sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 20px;
 }
 
-.btn-copy {
-  height: 44px;
-  border-radius: 12px;
+.btn-primary-action {
+  width: 100%;
+  height: 52px;
+  border-radius: 15px;
   background: var(--brand-gradient);
   color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 10px 28px -8px var(--blue-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+}
+
+.btn-primary-action:active {
+  transform: scale(0.975);
+}
+
+.btn-primary-action svg {
+  width: 17px;
+  height: 17px;
+}
+
+.btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.btn-secondary-action {
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--stroke);
+  color: var(--text);
   font-size: 13.5px;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  box-shadow: 0 8px 24px -8px var(--blue-glow);
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-}
-
-.btn-copy:hover {
-  box-shadow: 0 10px 28px -6px var(--blue-glow);
-}
-
-.btn-copy:active {
-  transform: scale(0.97);
-}
-
-.btn-copy svg {
-  width: 15px;
-  height: 15px;
-}
-
-.btn-secondary {
-  height: 44px;
-  padding: 0 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--stroke);
-  color: var(--text-2);
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s var(--ease);
   text-decoration: none;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text);
-  border-color: var(--stroke-2);
-}
-
-.btn-secondary:active {
-  transform: scale(0.97);
-}
-
-.btn-secondary svg {
-  width: 15px;
-  height: 15px;
-}
-
-/* ============================================================
-   GUIDE BANNER & MODAL SHEET
-   ============================================================ */
-.guide-banner {
-  margin-top: 32px;
-  border-radius: 20px;
-  padding: 18px 20px;
-  background: linear-gradient(135deg, rgba(10,132,255,0.08) 0%, rgba(94,92,230,0.08) 100%);
-  border: 1px solid rgba(10, 132, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.guide-banner-text h4 {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 3px;
-}
-
-.guide-banner-text p {
-  font-size: 12.5px;
-  color: var(--text-2);
-}
-
-.btn-guide {
-  font-size: 13px;
-  font-weight: 600;
-  color: #FFFFFF;
-  padding: 9px 15px;
-  border-radius: 100px;
-  background: var(--blue-soft);
-  border: 1px solid rgba(10, 132, 255, 0.35);
-  white-space: nowrap;
   transition: all 0.2s var(--ease);
 }
 
-.btn-guide:active {
-  transform: scale(0.96);
-  background: var(--blue);
+.btn-secondary-action:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-/* Modal Bottom Sheet */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  z-index: 10000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s var(--ease);
-}
-
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-sheet {
-  width: 100%;
-  max-width: 540px;
-  background: linear-gradient(180deg, #18181F 0%, #0D0D12 100%);
-  border-radius: 32px 32px 0 0;
-  border-top: 1px solid var(--stroke-2);
-  padding: 20px 24px calc(var(--safe-bottom) + 30px);
-  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.8);
-  transform: translateY(100%);
-  transition: transform 0.45s var(--spring);
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-overlay.open .modal-sheet {
-  transform: translateY(0);
-}
-
-.modal-grab {
-  width: 36px;
-  height: 4px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 0 auto 18px;
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
-}
-
-.modal-title {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-.modal-close {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  display: grid;
-  place-items: center;
-  color: var(--text-2);
-  transition: background 0.2s;
-}
-
-.modal-close:hover {
-  background: rgba(255, 255, 255, 0.16);
-  color: #FFFFFF;
-}
-
-.modal-close svg {
+.btn-secondary-action svg {
   width: 16px;
   height: 16px;
 }
 
-/* Steps inside modal */
-.steps-list {
-  display: flex;
+/* QR Code Section (Always Working, Zero-Dependency Canvas) */
+.qr-section {
+  display: none;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  align-items: center;
+  padding: 18px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.25s var(--ease);
 }
 
-.step-card {
+.qr-section.show {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#qrcode-container {
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+#qrcode-container canvas, #qrcode-container img {
+  border-radius: 8px;
+}
+
+.qr-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111111;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.qr-sublabel {
+  font-size: 11px;
+  color: #666666;
+  margin-top: 2px;
+  text-align: center;
+}
+
+/* Steps List */
+.platform-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.step-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 14px 16px;
-  border-radius: 16px;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--stroke);
 }
 
-.step-num {
-  width: 28px;
-  height: 28px;
-  border-radius: 10px;
+.step-digit {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
   background: var(--blue-soft);
   color: var(--blue);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   display: grid;
   place-items: center;
   flex-shrink: 0;
 }
 
-.step-info h5 {
-  font-size: 14px;
+.step-content h6 {
+  font-size: 13.5px;
   font-weight: 600;
   margin-bottom: 2px;
+  color: #FFFFFF;
 }
 
-.step-info p {
-  font-size: 12.5px;
+.step-content p {
+  font-size: 12px;
   color: var(--text-2);
   line-height: 1.45;
 }
 
-.step-info code {
-  font-family: var(--mono);
-  font-size: 11px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 2px 6px;
-  border-radius: 4px;
+.step-content b {
   color: var(--teal);
-}
-
-/* QR Code Section inside Modal */
-.qr-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-#qrcode {
-  display: grid;
-  place-items: center;
-}
-
-.qr-caption {
-  font-size: 12px;
-  font-weight: 600;
-  color: #111111;
-  margin-top: 10px;
-  text-align: center;
 }
 
 /* Footer */
 .footer {
-  margin-top: 40px;
+  margin-top: 36px;
   text-align: center;
   font-size: 12px;
   color: var(--text-3);
@@ -952,18 +979,6 @@ button {
 .footer a {
   color: var(--blue);
   text-decoration: none;
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 27px;
-  }
-  .card-actions {
-    grid-template-columns: 1fr;
-  }
-  .btn-secondary {
-    justify-content: center;
-  }
 }
 </style>
 </head>
@@ -1012,449 +1027,457 @@ button {
 
   <!-- Hero -->
   <section class="hero">
-    <h1 class="hero-title">High-Speed Subscriptions<br><span>Clean, Fast & Verified</span></h1>
+    <h1 class="hero-title">Select Your Device<br><span>Get Instant Subscription</span></h1>
     <p class="hero-desc">
-      Automated health checks via Mihomo HTTP 204 engine. Choose your preferred client tier below and copy or import with a single tap.
+      Tap your operating system below to open the dedicated subscription drawer with <b>Stable (Fastest)</b> and <b>Full (All Servers)</b> options, 1-click import, or zero-delay QR codes.
     </p>
     <div class="stat-pills">
-      <div class="stat-pill">🚀 <b>0.05s Load</b> (iOS Lite)</div>
-      <div class="stat-pill">🛡️ <b>Mihomo Latency Filter</b></div>
-      <div class="stat-pill">⚡ <b>Hysteria2 & VLESS Reality</b></div>
-      <div class="stat-pill">🔄 <b>Auto-Sync: 6h</b></div>
+      <div class="stat-pill">⚡ <b>Mihomo HTTP 204 Tested</b></div>
+      <div class="stat-pill">🚀 <b>0.05s Load for iOS</b></div>
+      <div class="stat-pill">🛡️ <b>Anti-GFW CDNs</b></div>
+      <div class="stat-pill">🔄 <b>Synced Every 6h</b></div>
     </div>
   </section>
 
-  <!-- Mirror / CDN Selector -->
-  <section class="mirror-picker">
-    <div class="section-label">
-      <span>CDN Mirror (China Accelerated)</span>
-      <span style="color: var(--green); text-transform: none; font-weight: 600;">No VPN Required</span>
-    </div>
-    <div class="segmented">
-      <button class="seg-btn active" onclick="setMirror('jsdelivr', this)">
-        <span>jsDelivr Global</span>
-        <span class="sub-lbl">Fastest in CN</span>
-      </button>
-      <button class="seg-btn" onclick="setMirror('ghproxy', this)">
-        <span>GHProxy</span>
-        <span class="sub-lbl">Reliable Mirror</span>
-      </button>
-      <button class="seg-btn" onclick="setMirror('raw', this)">
-        <span>GitHub Direct</span>
-        <span class="sub-lbl">Outside China</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- Platform Filter Chips -->
+  <!-- Platform Selector Grid -->
   <section>
-    <div class="section-label">Target Client</div>
-    <div class="platform-chips">
-      <button class="chip active" onclick="filterPlatform('all', this)">
-        <span>✨ All Tiers</span>
-      </button>
-      <button class="chip" onclick="filterPlatform('ios', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-          <line x1="12" y1="18" x2="12.01" y2="18"></line>
-        </svg>
-        <span>iOS (Shadowrocket)</span>
-      </button>
-      <button class="chip" onclick="filterPlatform('clash', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-          <line x1="8" y1="21" x2="16" y2="21"></line>
-          <line x1="12" y1="17" x2="12" y2="21"></line>
-        </svg>
-        <span>Clash / FlClash</span>
-      </button>
+    <div class="section-head">
+      <span class="section-title">Choose Operating System</span>
+      <span class="section-hint">Tap to Configure ↓</span>
     </div>
-  </section>
 
-  <!-- Cards List -->
-  <main class="cards-list">
+    <div class="platforms-grid">
 
-    <!-- Card 1: iOS Shadowrocket Lite -->
-    <article class="sub-card highlight" data-platform="ios">
-      <div class="card-top">
-        <div class="card-title-group">
-          <div class="card-icon">🚀</div>
-          <div class="card-titles">
-            <h2 class="card-title">iOS Shadowrocket Lite</h2>
-            <span class="card-sub">Base64 • 30 Top Ultra-Fast Nodes</span>
+      <!-- 1. iOS -->
+      <div class="platform-card" onclick="openPlatformSheet('ios')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap ios">🍏</div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <h3 class="platform-name">iOS (iPhone & iPad)</h3>
+              <span class="platform-pill">Shadowrocket</span>
+            </div>
+            <p class="platform-sub">Stable (30 Top Nodes) • Full (200+ Nodes) • No Lag</p>
           </div>
         </div>
-        <span class="badge recommended">Recommended</span>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
       </div>
-      <p class="card-desc">
-        Lightweight tier optimized for iPhones. Parses in <b>0.05 seconds</b>, zero UI freeze, speed-test completes in 1 second.
-      </p>
-      <div class="url-box">
-        <span class="url-code" id="url-sr-lite"></span>
-        <button class="url-copy-btn" onclick="copyCard('sr-lite')" title="Copy URL">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="card-actions">
-        <button class="btn-copy" onclick="copyCard('sr-lite')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <span>Copy URL</span>
-        </button>
-        <a id="btn-import-sr-lite" href="#" class="btn-secondary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-          <span>1-Click Add</span>
-        </a>
-        <button class="btn-secondary" onclick="openQrModal('sr-lite', 'iOS Shadowrocket Lite')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>QR</span>
-        </button>
-      </div>
-    </article>
 
-    <!-- Card 2: iOS Shadowrocket Standard -->
-    <article class="sub-card" data-platform="ios">
-      <div class="card-top">
-        <div class="card-title-group">
-          <div class="card-icon purple">⚡</div>
-          <div class="card-titles">
-            <h2 class="card-title">iOS Shadowrocket Standard</h2>
-            <span class="card-sub">Base64 • 60 Curated Nodes</span>
+      <!-- 2. Android -->
+      <div class="platform-card" onclick="openPlatformSheet('android')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap android">🤖</div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <h3 class="platform-name">Android</h3>
+              <span class="platform-pill green">FlClash</span>
+            </div>
+            <p class="platform-sub">FlClash • ClashMeta • NekoBox • v2rayNG</p>
           </div>
         </div>
-        <span class="badge">Standard</span>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
       </div>
-      <p class="card-desc">
-        Balanced coverage across Hong Kong, Japan, Singapore, US, UK, and Germany. Ideal for frequent travelers.
-      </p>
-      <div class="url-box">
-        <span class="url-code" id="url-sr-std"></span>
-        <button class="url-copy-btn" onclick="copyCard('sr-std')" title="Copy URL">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="card-actions">
-        <button class="btn-copy" onclick="copyCard('sr-std')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <span>Copy URL</span>
-        </button>
-        <a id="btn-import-sr-std" href="#" class="btn-secondary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-          <span>1-Click Add</span>
-        </a>
-        <button class="btn-secondary" onclick="openQrModal('sr-std', 'iOS Shadowrocket Standard')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>QR</span>
-        </button>
-      </div>
-    </article>
 
-    <!-- Card 3: Clash / FlClash / Stash / Clash Verge -->
-    <article class="sub-card highlight" data-platform="clash">
-      <div class="card-top">
-        <div class="card-title-group">
-          <div class="card-icon green">🎯</div>
-          <div class="card-titles">
-            <h2 class="card-title">Clash / FlClash / Stash</h2>
-            <span class="card-sub">YAML • Inline Rules • Proxy Groups</span>
+      <!-- 3. macOS -->
+      <div class="platform-card" onclick="openPlatformSheet('macos')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap mac">💻</div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <h3 class="platform-name">macOS</h3>
+              <span class="platform-pill">Clash Verge</span>
+            </div>
+            <p class="platform-sub">Apple Silicon Native • Clash Verge Rev • ClashX Meta</p>
           </div>
         </div>
-        <span class="badge recommended">Clash / Meta</span>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
       </div>
-      <p class="card-desc">
-        Complete config with <b>⚡ Fastest</b> auto-switch, <b>🤖 AI Services</b> (ChatGPT, Claude), and <b>🎬 Streaming</b>. Zero external rule dependencies.
-      </p>
-      <div class="url-box">
-        <span class="url-code" id="url-clash"></span>
-        <button class="url-copy-btn" onclick="copyCard('clash')" title="Copy URL">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="card-actions">
-        <button class="btn-copy" onclick="copyCard('clash')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <span>Copy URL</span>
-        </button>
-        <a id="btn-import-clash" href="#" class="btn-secondary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-          <span>Import Clash</span>
-        </a>
-        <button class="btn-secondary" onclick="openQrModal('clash', 'Clash / FlClash Subscription')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>QR</span>
-        </button>
-      </div>
-    </article>
 
-    <!-- Card 4: Full Node Pool -->
-    <article class="sub-card" data-platform="ios">
-      <div class="card-top">
-        <div class="card-title-group">
-          <div class="card-icon orange">🌐</div>
-          <div class="card-titles">
-            <h2 class="card-title">Full Verified Pool</h2>
-            <span class="card-sub">Base64 • All Verified Active Nodes</span>
+      <!-- 4. Windows -->
+      <div class="platform-card" onclick="openPlatformSheet('windows')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap win">🪟</div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <h3 class="platform-name">Windows</h3>
+              <span class="platform-pill">Clash Verge</span>
+            </div>
+            <p class="platform-sub">Clash Verge Rev • v2rayN • TUN Mode System Proxy</p>
           </div>
         </div>
-        <span class="badge">Archive</span>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
       </div>
-      <p class="card-desc">
-        Complete pool of all verified green proxies. Recommended for high-spec desktop clients and backup connections.
-      </p>
-      <div class="url-box">
-        <span class="url-code" id="url-all"></span>
-        <button class="url-copy-btn" onclick="copyCard('all')" title="Copy URL">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="card-actions">
-        <button class="btn-copy" onclick="copyCard('all')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <span>Copy URL</span>
-        </button>
-        <a id="btn-import-all" href="#" class="btn-secondary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-          <span>1-Click Add</span>
-        </a>
-        <button class="btn-secondary" onclick="openQrModal('all', 'Full Verified Pool')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>QR</span>
-        </button>
-      </div>
-    </article>
 
-  </main>
+      <!-- 5. Merlin / Router / Linux -->
+      <div class="platform-card" onclick="openPlatformSheet('merlin')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap router">📡</div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <h3 class="platform-name">Merlin / Router / Linux</h3>
+              <span class="platform-pill orange">Router Ready</span>
+            </div>
+            <p class="platform-sub">MerlinClash • OpenWrt • ShellCrash • Gateway</p>
+          </div>
+        </div>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
 
-  <!-- Setup Tutorial Banner -->
-  <section class="guide-banner">
-    <div class="guide-banner-text">
-      <h4>📱 Setup Guide for iOS Shadowrocket</h4>
-      <p>Need help importing? Set Type to <b>Subscribe</b> to prevent freezing.</p>
     </div>
-    <button class="btn-guide" onclick="openGuideModal()">View Steps</button>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <p>zorVPN is an open-source health-filtered subscription aggregator.</p>
-    <p>Auto-updated every 6 hours via GitHub Actions • <a href="https://github.com/hamzawih0/zorVPN" target="_blank">Star on GitHub</a></p>
+    <p>Automated tests via native Mihomo engine • <a href="https://github.com/hamzawih0/zorVPN" target="_blank">GitHub Project</a></p>
   </footer>
 
 </div>
 
-<!-- iOS Setup Modal Sheet -->
-<div id="guideModal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'guideModal')">
+<!-- ============================================================
+     APPLE-STYLE BOTTOM SLIDE-UP MODAL SHEET
+     ============================================================ -->
+<div id="sheetModal" class="modal-overlay" onclick="handleBackdropClick(event)">
   <div class="modal-sheet">
-    <div class="modal-grab"></div>
+    <div class="modal-grab" onclick="closeSheet()"></div>
+
     <div class="modal-header">
-      <div class="modal-title">Shadowrocket Setup (iOS)</div>
-      <button class="modal-close" onclick="closeGuideModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
+      <div class="modal-header-left">
+        <span id="sheetIcon" class="modal-platform-icon">🍏</span>
+        <div>
+          <h2 id="sheetTitle" class="modal-title">iOS Setup</h2>
+          <span id="sheetSubtitle" class="modal-subtitle">Shadowrocket • Base64 Optimized</span>
+        </div>
+      </div>
+      <button class="modal-close-btn" onclick="closeSheet()" title="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
-    <div class="steps-list">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div class="step-info">
-          <h5>Open Shadowrocket</h5>
-          <p>Tap the <b><code>+</code></b> icon in the top right corner of the home screen.</p>
-        </div>
+
+    <!-- 1. Version Segment (Stable vs Full) -->
+    <div class="sheet-section">
+      <div class="sheet-label">
+        <span>Select Server Version</span>
+        <span id="tierBadge" style="color: var(--green); text-transform: none; font-weight: 700;">⚡ Recommended</span>
       </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div class="step-info">
-          <h5>Change Type to Subscribe</h5>
-          <p>Tap <b>Type</b> and select <b>Subscribe</b>. <i>(⚠️ Do NOT select Shadowsocks or Clash)</i>.</p>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div class="step-info">
-          <h5>Paste the Lite Subscription URL</h5>
-          <p>Paste the copied <code>ZorVPN-lite.txt</code> link into the <b>URL</b> field and name the Remark <code>zorVPN</code>.</p>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <div class="step-info">
-          <h5>Set Global Routing to Config</h5>
-          <p>Tap <b>Save</b>. In the bottom bar, select <b>Config</b> routing so domestic apps bypass the VPN.</p>
-        </div>
+      <div class="segmented-tiers">
+        <button id="btnTierStable" class="tier-btn active" onclick="selectTier('stable')">
+          <span>⚡ Stable (Fastest)</span>
+          <span id="tierStableDesc" class="tier-sub">Top 30 Nodes • 0.05s Load</span>
+        </button>
+        <button id="btnTierFull" class="tier-btn" onclick="selectTier('full')">
+          <span>🌐 Full (All Servers)</span>
+          <span class="tier-sub">All 200+ Verified Nodes</span>
+        </button>
       </div>
     </div>
-    <button class="btn-copy" style="width: 100%; height: 50px;" onclick="closeGuideModal()">Done</button>
+
+    <!-- 2. Mirror Selector Segment -->
+    <div class="sheet-section">
+      <div class="sheet-label">
+        <span>CDN Acceleration Mirror</span>
+        <span style="color: var(--teal); text-transform: none;">Unblocked in China</span>
+      </div>
+      <div class="segmented-mirrors">
+        <button id="mirror-jsdelivr" class="mirror-btn active" onclick="selectMirror('jsdelivr')">⚡ jsDelivr</button>
+        <button id="mirror-ghproxy" class="mirror-btn" onclick="selectMirror('ghproxy')">🚀 GHProxy</button>
+        <button id="mirror-raw" class="mirror-btn" onclick="selectMirror('raw')">🌍 GitHub</button>
+      </div>
+    </div>
+
+    <!-- 3. Active URL Preview Box -->
+    <div class="url-preview-card">
+      <span id="sheetUrlDisplay" class="url-text-code">Loading...</span>
+      <button class="url-quick-copy" onclick="copyActiveUrl()" title="Copy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+    </div>
+
+    <!-- 4. Action Buttons -->
+    <div class="sheet-actions">
+      <button class="btn-primary-action" onclick="copyActiveUrl()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span>Copy Subscription URL</span>
+      </button>
+      <div class="btn-row">
+        <a id="btnOneClickImport" href="#" class="btn-secondary-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span id="btnImportLabel">1-Click Add</span>
+        </a>
+        <button id="btnToggleQr" class="btn-secondary-action" onclick="toggleQrCode()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Show QR Code</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 5. Zero-Dependency Built-in QR Code Container -->
+    <div id="qrCodeSection" class="qr-section">
+      <div id="qrcode-container"></div>
+      <div class="qr-label">Scan to Import Subscription</div>
+      <div class="qr-sublabel">Point your iPhone camera or client scanner at the code</div>
+    </div>
+
+    <!-- 6. Platform Specific Step Guide -->
+    <div class="sheet-section">
+      <div class="sheet-label">Quick Setup Steps</div>
+      <div id="stepsContainer" class="platform-steps"></div>
+    </div>
+
+    <button class="btn-secondary-action" style="width: 100%; height: 48px; margin-top: 4px;" onclick="closeSheet()">Done</button>
   </div>
 </div>
 
-<!-- QR Code Modal Sheet -->
-<div id="qrModal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'qrModal')">
-  <div class="modal-sheet" style="text-align: center;">
-    <div class="modal-grab"></div>
-    <div class="modal-header">
-      <div class="modal-title" id="qrModalTitle">Scan Subscription QR</div>
-      <button class="modal-close" onclick="closeQrModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    <div class="qr-container">
-      <div id="qrcode"></div>
-      <div id="qrCaption" class="qr-caption">Scan with Shadowrocket or FlClash camera</div>
-    </div>
-    <p style="font-size: 12px; color: var(--text-3); margin-bottom: 20px;">
-      Point your phone's camera or client scanner at the QR code to auto-import.
-    </p>
-    <button class="btn-copy" style="width: 100%; height: 50px;" onclick="closeQrModal()">Close</button>
-  </div>
-</div>
-
+<!-- ============================================================
+     EMBEDDED ZERO-DEPENDENCY QRCODE.JS ENGINE
+     ============================================================ -->
 <script>
-// Repository Configuration
+var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
+</script>
+
+<!-- ============================================================
+     APPLICATION LOGIC
+     ============================================================ -->
+<script>
 const REPO_USER = "hamzawih0";
 const REPO_NAME = "zorVPN";
 const REPO_BRANCH = "main";
 
-// Subscription File Mapping
-const FILES = {
-  "sr-lite": "ZorVPN-lite.txt",
-  "sr-std": "ZorVPN.txt",
-  "clash": "ZorVPN.yaml",
-  "all": "ZorVPN-all.txt",
-  "nodes": "ZorVPN-nodes.txt"
+// State
+let currentPlatform = 'ios';
+let currentTier = 'stable';
+let currentMirror = 'jsdelivr';
+
+// Platform definitions
+const PLATFORMS = {
+  ios: {
+    title: "iOS (iPhone & iPad)",
+    subtitle: "Shadowrocket • Loon • Stash • Quantumult X",
+    icon: "🍏",
+    stableFile: "ZorVPN-lite.txt",
+    fullFile: "ZorVPN-all.txt",
+    stableDesc: "Top 30 Nodes • 0.05s Load • Zero Lag",
+    fullDesc: "All 200+ Nodes • Base64 Pool",
+    importProtocol: "shadowrocket",
+    steps: [
+      { num: 1, title: "Open Shadowrocket", desc: "Tap the <b>+</b> icon in the top right corner." },
+      { num: 2, title: "Change Type to Subscribe", desc: "Select <b>Type: Subscribe</b> (⚠️ Do NOT select Shadowsocks or Clash)." },
+      { num: 3, title: "Paste URL & Save", desc: "Paste the URL, enter <b>zorVPN</b> in Remark, and tap Save." },
+      { num: 4, title: "Set Global Routing to Config", desc: "In the bottom bar, set routing to <b>Config</b> so domestic Chinese apps go Direct." }
+    ]
+  },
+  android: {
+    title: "Android Setup",
+    subtitle: "FlClash • ClashMeta for Android • NekoBox • v2rayNG",
+    icon: "🤖",
+    stableFile: "ZorVPN.yaml",
+    fullFile: "ZorVPN-all.txt",
+    stableDesc: "Clash YAML • Auto Fastest • Inline Rules",
+    fullDesc: "All 200+ Nodes • Universal Pool",
+    importProtocol: "clash",
+    steps: [
+      { num: 1, title: "Open FlClash or ClashMeta", desc: "Navigate to <b>Profiles</b> → tap the <b>+</b> floating action button." },
+      { num: 2, title: "Import by URL", desc: "Choose <b>URL</b>, paste the subscription link, and tap Save & Fetch." },
+      { num: 3, title: "Activate zorVPN", desc: "Tap the new <b>ZorVPN</b> profile to activate and toggle connect!" }
+    ]
+  },
+  macos: {
+    title: "macOS Setup",
+    subtitle: "Clash Verge Rev • ClashX Meta • Surge",
+    icon: "💻",
+    stableFile: "ZorVPN.yaml",
+    fullFile: "ZorVPN-all.txt",
+    stableDesc: "Clash YAML • Apple Silicon Optimized",
+    fullDesc: "All 200+ Nodes • Complete Archive",
+    importProtocol: "clash",
+    steps: [
+      { num: 1, title: "Open Clash Verge Rev", desc: "Click <b>Profiles</b> in the left sidebar." },
+      { num: 2, title: "Paste & Download", desc: "Paste the subscription link into the top bar and click <b>Import</b>." },
+      { num: 3, title: "Select Profile", desc: "Right click <b>ZorVPN</b> → Select, and toggle <b>System Proxy</b>." }
+    ]
+  },
+  windows: {
+    title: "Windows Setup",
+    subtitle: "Clash Verge Rev • v2rayN • WinXray",
+    icon: "🪟",
+    stableFile: "ZorVPN.yaml",
+    fullFile: "ZorVPN-all.txt",
+    stableDesc: "Clash YAML • Fastest URL-Test Group",
+    fullDesc: "All 200+ Nodes • Full Redundancy",
+    importProtocol: "clash",
+    steps: [
+      { num: 1, title: "Open Clash Verge Rev", desc: "Go to <b>Profiles</b> section." },
+      { num: 2, title: "Add Subscription", desc: "Paste the URL and click <b>Import</b> to download the profile." },
+      { num: 3, title: "Enable System Proxy", desc: "In Settings, toggle <b>System Proxy</b> (or TUN Mode for games)." }
+    ]
+  },
+  merlin: {
+    title: "Merlin / Router / Linux",
+    subtitle: "MerlinClash • OpenWrt • ShellCrash • Mihomo CLI",
+    icon: "📡",
+    stableFile: "ZorVPN.yaml",
+    fullFile: "ZorVPN-nodes.txt",
+    stableDesc: "Clash YAML • Smart Domestic Direct",
+    fullDesc: "Plaintext URI Nodes List",
+    importProtocol: "clash",
+    steps: [
+      { num: 1, title: "Access Router Admin", desc: "Open your router web panel (e.g. <b>MerlinClash</b> or <b>OpenWrt PassWall</b>)." },
+      { num: 2, title: "Add Subscription Node", desc: "Paste the URL into the subscription management section and click Update." },
+      { num: 3, title: "Apply Whole-Home Gateway", desc: "Save and apply. All devices connected to your Wi-Fi will be proxied!" }
+    ]
+  }
 };
 
-// Mirror URLs generator
-const MIRRORS = {
-  jsdelivr: (filename) => `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}@${REPO_BRANCH}/${filename}`,
-  ghproxy: (filename) => `https://ghproxy.net/https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`,
-  raw: (filename) => `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`
-};
-
-let activeMirror = 'jsdelivr';
-
-// Generate subscription URL based on active mirror
-function getSubUrl(key) {
-  const filename = FILES[key];
-  return MIRRORS[activeMirror](filename);
-}
-
-// Update all URL boxes & one-click import buttons
-function updateDisplayUrls() {
-  for (const [key, filename] of Object.entries(FILES)) {
-    const url = getSubUrl(key);
-    const box = document.getElementById(`url-${key}`);
-    if (box) box.textContent = url;
-
-    // Update One-Click Import schemes
-    const srBtn = document.getElementById(`btn-import-${key}`);
-    if (srBtn) {
-      if (key === 'clash') {
-        srBtn.href = `clash://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
-      } else {
-        // Shadowrocket custom URL scheme (sub:// encoded in base64)
-        const b64Url = btoa(url);
-        srBtn.href = `shadowrocket://add/sub://${b64Url}?title=zorVPN`;
-      }
-    }
+// Mirror URLs
+function getMirrorUrl(filename) {
+  if (currentMirror === 'jsdelivr') {
+    return `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}@${REPO_BRANCH}/${filename}`;
+  } else if (currentMirror === 'ghproxy') {
+    return `https://ghproxy.net/https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`;
+  } else {
+    return `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${REPO_BRANCH}/${filename}`;
   }
 }
 
-// Switch Mirror
-function setMirror(mirrorKey, btnEl) {
-  activeMirror = mirrorKey;
-  document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
-  btnEl.classList.add('active');
-  updateDisplayUrls();
-  showToast(`Switched mirror to ${btnEl.querySelector('span').textContent}`);
+// Compute active URL
+function getActiveUrl() {
+  const p = PLATFORMS[currentPlatform];
+  const filename = (currentTier === 'stable') ? p.stableFile : p.fullFile;
+  return getMirrorUrl(filename);
 }
 
-// Filter Cards by Platform
-function filterPlatform(platform, btnEl) {
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  btnEl.classList.add('active');
+// Open bottom sheet
+function openPlatformSheet(platKey) {
+  currentPlatform = platKey;
+  const p = PLATFORMS[platKey];
 
-  const cards = document.querySelectorAll('.sub-card');
-  cards.forEach(card => {
-    if (platform === 'all') {
-      card.style.display = 'block';
-    } else {
-      const cardPlat = card.getAttribute('data-platform');
-      card.style.display = (cardPlat === platform) ? 'block' : 'none';
-    }
+  document.getElementById('sheetIcon').textContent = p.icon;
+  document.getElementById('sheetTitle').textContent = p.title;
+  document.getElementById('sheetSubtitle').textContent = p.subtitle;
+  document.getElementById('tierStableDesc').textContent = p.stableDesc;
+
+  // Render steps
+  const stepsContainer = document.getElementById('stepsContainer');
+  stepsContainer.innerHTML = p.steps.map(s => `
+    <div class="step-item">
+      <div class="step-digit">${s.num}</div>
+      <div class="step-content">
+        <h6>${s.title}</h6>
+        <p>${s.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // Hide QR code initially on sheet open
+  document.getElementById('qrCodeSection').classList.remove('show');
+  document.getElementById('btnToggleQr').querySelector('span').textContent = 'Show QR Code';
+
+  updateSheetUrls();
+
+  // Open modal
+  const modal = document.getElementById('sheetModal');
+  modal.classList.add('open');
+
+  if ('vibrate' in navigator) {
+    try { navigator.vibrate(15); } catch(e){}
+  }
+}
+
+// Update UI inside the active sheet
+function updateSheetUrls() {
+  const url = getActiveUrl();
+  const p = PLATFORMS[currentPlatform];
+
+  // URL text
+  document.getElementById('sheetUrlDisplay').textContent = url;
+
+  // Import button link
+  const importBtn = document.getElementById('btnOneClickImport');
+  if (p.importProtocol === 'shadowrocket') {
+    const b64 = btoa(url);
+    importBtn.href = `shadowrocket://add/sub://${b64}?title=zorVPN`;
+    document.getElementById('btnImportLabel').textContent = 'Add to Shadowrocket';
+  } else {
+    importBtn.href = `clash://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
+    document.getElementById('btnImportLabel').textContent = 'Add to Clash';
+  }
+
+  // Regenerate QR Code if it is currently visible
+  if (document.getElementById('qrCodeSection').classList.contains('show')) {
+    renderQrCode(url);
+  }
+}
+
+// Select Tier (Stable vs Full)
+function selectTier(tier) {
+  currentTier = tier;
+  document.getElementById('btnTierStable').classList.toggle('active', tier === 'stable');
+  document.getElementById('btnTierFull').classList.toggle('active', tier === 'full');
+  document.getElementById('tierBadge').textContent = (tier === 'stable') ? '⚡ Recommended (Lowest Ping)' : '🌐 200+ Nodes Pool';
+  updateSheetUrls();
+}
+
+// Select Mirror
+function selectMirror(mirror) {
+  currentMirror = mirror;
+  ['jsdelivr', 'ghproxy', 'raw'].forEach(m => {
+    document.getElementById(`mirror-${m}`).classList.toggle('active', m === mirror);
   });
+  updateSheetUrls();
 }
 
-// Copy URL to Clipboard with Toast Notification & Haptic Feedback
-async function copyCard(key) {
-  const url = getSubUrl(key);
+// Toggle QR Code Display
+function toggleQrCode() {
+  const section = document.getElementById('qrCodeSection');
+  const btn = document.getElementById('btnToggleQr');
+  const isShown = section.classList.contains('show');
+
+  if (isShown) {
+    section.classList.remove('show');
+    btn.querySelector('span').textContent = 'Show QR Code';
+  } else {
+    section.classList.add('show');
+    btn.querySelector('span').textContent = 'Hide QR Code';
+    renderQrCode(getActiveUrl());
+  }
+}
+
+// Instant pure JS QR Code Renderer
+let qrcodeInstance = null;
+function renderQrCode(text) {
+  const container = document.getElementById('qrcode-container');
+  container.innerHTML = '';
+
+  try {
+    qrcodeInstance = new QRCode(container, {
+      text: text,
+      width: 190,
+      height: 190,
+      colorDark: "#000000",
+      colorLight: "#FFFFFF",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } catch (err) {
+    console.error('QR code generation error:', err);
+  }
+}
+
+// Copy URL with toast & vibration
+async function copyActiveUrl() {
+  const url = getActiveUrl();
   try {
     await navigator.clipboard.writeText(url);
   } catch (e) {
-    // Fallback
     const ta = document.createElement('textarea');
     ta.value = url;
     document.body.appendChild(ta);
@@ -1463,22 +1486,16 @@ async function copyCard(key) {
     document.body.removeChild(ta);
   }
 
-  // Trigger Haptic Vibration if supported
   if ('vibrate' in navigator) {
-    try { navigator.vibrate(20); } catch(e){}
+    try { navigator.vibrate(25); } catch(e){}
   }
 
-  const names = {
-    'sr-lite': 'Shadowrocket Lite (30 Nodes)',
-    'sr-std': 'Shadowrocket Standard',
-    'clash': 'Clash / FlClash YAML',
-    'all': 'Full Verified Pool'
-  };
-
-  showToast(`${names[key] || 'Subscription'} Copied!`);
+  const p = PLATFORMS[currentPlatform];
+  const tierName = (currentTier === 'stable') ? 'Stable' : 'Full';
+  showToast(`${p.title} (${tierName}) Copied!`);
 }
 
-// Show Dynamic Island Toast
+// Toast notification
 let toastTimer = null;
 function showToast(msg) {
   const toast = document.getElementById('toastIsland');
@@ -1489,51 +1506,19 @@ function showToast(msg) {
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.classList.remove('show');
-  }, 2600);
+  }, 2500);
 }
 
-// Modal Handlers
-function openGuideModal() {
-  document.getElementById('guideModal').classList.add('open');
+// Close sheet
+function closeSheet() {
+  document.getElementById('sheetModal').classList.remove('open');
 }
 
-function closeGuideModal() {
-  document.getElementById('guideModal').classList.remove('open');
-}
-
-function openQrModal(key, title) {
-  const url = getSubUrl(key);
-  document.getElementById('qrModalTitle').textContent = title;
-  document.getElementById('qrCaption').textContent = url;
-  const qrContainer = document.getElementById('qrcode');
-  qrContainer.innerHTML = '';
-
-  new QRCode(qrContainer, {
-    text: url,
-    width: 190,
-    height: 190,
-    colorDark: "#000000",
-    colorLight: "#FFFFFF",
-    correctLevel: QRCode.CorrectLevel.M
-  });
-
-  document.getElementById('qrModal').classList.add('open');
-}
-
-function closeQrModal() {
-  document.getElementById('qrModal').classList.remove('open');
-}
-
-function closeModalOnBackdrop(e, modalId) {
-  if (e.target.id === modalId) {
-    document.getElementById(modalId).classList.remove('open');
+function handleBackdropClick(e) {
+  if (e.target.id === 'sheetModal') {
+    closeSheet();
   }
 }
-
-// Initialize on Load
-document.addEventListener('DOMContentLoaded', () => {
-  updateDisplayUrls();
-});
 </script>
 
 </body>
