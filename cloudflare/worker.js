@@ -86,7 +86,8 @@ export default {
 
     const upstreamUrl = `${RAW_BASE}/${targetFilename}`;
     const cache = caches.default;
-    let response = await cache.match(request);
+    const cacheKey = new Request(upstreamUrl);
+    let response = await cache.match(cacheKey);
 
     if (!response) {
       const fetchHeaders = new Headers();
@@ -123,7 +124,7 @@ export default {
         headers
       });
 
-      ctx.waitUntil(cache.put(request, response.clone()));
+      ctx.waitUntil(cache.put(cacheKey, response.clone()));
     }
 
     return response;

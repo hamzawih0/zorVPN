@@ -10,38 +10,42 @@ A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active pro
 ## 🌐 Web Subscription Portal (One-Click Copy & QR)
 
 Visit the official zorVPN Web Hub to copy URLs, scan QR codes, or 1-click import into iOS Shadowrocket / Clash:
-👉 **[Open Web Subscription Portal](https://hamzawih0.github.io/zorVPN/)**
+- ☁️ **Cloudflare Edge Portal (Fastest)**: **[https://zorvpn.xxaweii.workers.dev/](https://zorvpn.xxaweii.workers.dev/)**
+- 🌍 **GitHub Pages Mirror**: **[https://hamzawih0.github.io/zorVPN/](https://hamzawih0.github.io/zorVPN/)**
 
 ---
 
 ## ⚡ Subscription URLs
 
-Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without an existing proxy should use the **jsDelivr** or **GHProxy** accelerated links below:
+Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without an existing proxy should use the **Cloudflare Edge**, **jsDelivr**, or **GHProxy** accelerated links below:
 
 ### 📱 iOS Shadowrocket (Base64 — Instant Load, No Lag)
 > 💡 **Why Shadowrocket users should use these links**: Shadowrocket renders all nodes in a flat list. Using standard YAML with hundreds of nodes freezes iOS networking and causes the subscription to hang. These dedicated Base64 links load in **0.05 seconds** with **100% green verified nodes**.
 
-| Version | Node Count | Best Mirror (jsDelivr CDN) | Backup Mirror (GHProxy) |
-|:--------|:----------:|:---------------------------|:------------------------|
-| 🚀 **iOS Lite (Recommended)** | **30 Nodes** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-lite.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-lite.txt` |
-| ⚡ **iOS Standard** | **60 Nodes** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.txt` |
-| 🌐 **Full Pool** | All Verified | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-all.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-all.txt` |
+| Version | Node Count | ☁️ Cloudflare Edge (Recommended) | ⚡ jsDelivr Global | 🚀 GHProxy Backup |
+|:--------|:----------:|:---------------------------------|:-------------------|:------------------|
+| 🚀 **iOS Lite** | **30 Nodes** | `https://zorvpn.xxaweii.workers.dev/lite` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-lite.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-lite.txt` |
+| ⚡ **iOS Standard** | **60 Nodes** | `https://zorvpn.xxaweii.workers.dev/ios` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.txt` |
+| 🌐 **Full Pool** | All Verified | `https://zorvpn.xxaweii.workers.dev/all` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-all.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-all.txt` |
 
 ### 💻 Clash / FlClash / Stash / Clash Verge (YAML Format)
 
-| Mirror Provider | Subscription URL |
-|:----------------|:-----------------|
-| ⚡ **GHProxy (Recommended)** | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
-| 🚀 **GH-Proxy Mirror** | `https://gh-proxy.com/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
+| Provider | Subscription URL |
+|:---------|:-----------------|
+| ☁️ **Cloudflare Edge (Fastest)** | `https://zorvpn.xxaweii.workers.dev/clash` |
+| ⚡ **GHProxy Mirror** | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
+| 🚀 **GH-Proxy Backup** | `https://gh-proxy.com/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
 | 🌐 **jsDelivr Global CDN** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
-| ⚡ **Fastly CDN** | `https://fastly.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
 
 ---
 
-## ☁️ Cloudflare Pages & Worker (Self-Hosted Edge CDN)
+## ☁️ Cloudflare Worker Edge Subscription Proxy
 
-Want your own dedicated subscription domain (e.g. `https://zorvpn.pages.dev/ZorVPN.yaml`) with zero blocking?
-Check out the **[Cloudflare Deployment Guide](cloudflare/README.md)** (Supports 1-click Cloudflare Pages & Workers).
+The project runs an active Cloudflare Worker at **`https://zorvpn.xxaweii.workers.dev/`** which:
+- Bypasses GFW blocking without requiring an existing proxy to fetch
+- Auto-detects client User-Agent (`Shadowrocket` gets Base64, `Clash` gets YAML)
+- Injects `profile-update-interval: 6` for automated 6-hour client sync
+- Caches responses at edge to prevent rate limits
 
 ## 🎯 Proxy Groups
 

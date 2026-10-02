@@ -1345,7 +1345,7 @@ function getMirrorUrl(filename) {
     if (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')) {
       return `${window.location.origin}/${filename}`;
     }
-    return `https://zorvpn.pages.dev/${filename}`;
+    return `https://zorvpn.xxaweii.workers.dev/${filename}`;
   } else if (currentMirror === 'jsdelivr') {
     return `https://cdn.jsdelivr.net/gh/${REPO_USER}/${REPO_NAME}@${REPO_BRANCH}/${filename}`;
   } else if (currentMirror === 'ghproxy') {
