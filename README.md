@@ -1,178 +1,186 @@
 <div align="center">
 
-# zorVPN — Free Multi-Platform VPN Subscription
+# zorVPN
 
-### 🚀 Official Edge Portal & Subscription Hub
-### 👉 **[https://zorvpn.xxaweii.workers.dev/](https://zorvpn.xxaweii.workers.dev/)** 👈
+### High-Performance Multi-Protocol Subscription Infrastructure & Active Health Filter
 
-[![Official Hub](https://img.shields.io/badge/Official%20Hub-zorvpn.xxaweii.workers.dev-6366f1?style=for-the-badge&logo=cloudflare&logoColor=white)](https://zorvpn.xxaweii.workers.dev/)
-[![Nodes](https://img.shields.io/badge/Nodes-2700+-blue?style=for-the-badge)](https://zorvpn.xxaweii.workers.dev/)
-[![Countries](https://img.shields.io/badge/Countries-40+-success?style=for-the-badge)](https://zorvpn.xxaweii.workers.dev/)
-[![Auto-Update](https://img.shields.io/badge/Update-Every%206h-orange?style=for-the-badge)](https://zorvpn.xxaweii.workers.dev/)
-[![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
+[![Official Edge Hub](https://img.shields.io/badge/Official%20Edge%20Hub-zorvpn.xxaweii.workers.dev-0A84FF?style=for-the-badge&logo=cloudflare&logoColor=white)](https://zorvpn.xxaweii.workers.dev/)
+[![GitHub Pages Mirror](https://img.shields.io/badge/GitHub%20Pages%20Mirror-Live-30D158?style=for-the-badge&logo=github&logoColor=white)](https://hamzawih0.github.io/zorVPN/)
+[![Engine](https://img.shields.io/badge/Kernel-Mihomo%20Meta-BF5AF2?style=for-the-badge)](https://github.com/MetaCubeX/mihomo)
+[![Sync Cadence](https://img.shields.io/badge/Auto--Sync-Every%206%20Hours-FF9F0A?style=for-the-badge)](https://github.com/hamzawih0/zorVPN/actions)
+[![License](https://img.shields.io/badge/License-MIT-gray?style=for-the-badge)](LICENSE)
+
+<br/>
+
+**[🌐 Launch Official Web Portal](https://zorvpn.xxaweii.workers.dev/)** • **[🌍 GitHub Pages Mirror](https://hamzawih0.github.io/zorVPN/)** • **[📖 Architecture Deep Dive](clash-yaml-deep-dive.md)**
 
 </div>
 
-A high-performance, free Clash/Mihomo YAML subscription with **2,700+ active proxy nodes** across **40+ countries**, auto-aggregated from top-tier GitHub sources with health checks, deduplication, and automated updates via GitHub Actions.
+---
 
-## 🌐 Web Subscription Portal (One-Click Copy & QR)
+## 📌 Overview
 
-Visit the official zorVPN Web Hub to copy URLs, scan QR codes, or 1-click import into iOS Shadowrocket / Clash:
-- ☁️ **Main Official Portal**: **[https://zorvpn.xxaweii.workers.dev/](https://zorvpn.xxaweii.workers.dev/)**
-- 🌍 **GitHub Pages Mirror**: **[https://hamzawih0.github.io/zorVPN/](https://hamzawih0.github.io/zorVPN/)**
+**zorVPN** is an automated proxy aggregation, latency verification, and multi-format subscription generator designed for resilient global connectivity. 
+
+Upstream public proxy feeds frequently suffer from stale nodes, rate limits, and DNS poisoning. zorVPN solves this by continuously harvesting candidate configurations from **16+ high-frequency global repositories and feeds**, validating every candidate through a local **Mihomo (Clash.Meta) kernel via genuine HTTP 204 latency probes**, discarding dead/blocked entries, and publishing optimized configurations tailored for every operating system.
+
+### Key Capabilities
+- **Zero-Lag iOS Profiles**: Dedicated flat Base64 feeds (Lite 30-node and Standard 60-node) preventing Shadowrocket UI freezes.
+- **Unified Android Hub**: Dynamic drawer switching between **v2rayNG** and **Clash Meta** with direct CDN APK downloads.
+- **Active Mihomo Probing**: Nodes must pass real TCP handshakes and HTTP 204 benchmarks before entering production pools.
+- **GFW-Resilient Edge Delivery**: Deployed on Cloudflare Workers, jsDelivr Global CDN, and GHProxy mirrors with automatic failover.
+- **Smart Grouping**: Pre-configured rules for AI services (ChatGPT, Claude, Gemini), global streaming (Netflix, YouTube), and direct Chinese bypass.
 
 ---
 
-## ⚡ Subscription URLs
+## 🏗️ Architecture Pipeline
 
-Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, testers without an existing proxy should use the **Cloudflare Edge**, **jsDelivr**, or **GHProxy** accelerated links below:
+```mermaid
+flowchart TD
+    subgraph Upstreams ["1. High-Frequency Upstream Feeds (16+ Providers)"]
+        U1["v2nodes.com (Live API)"]
+        U2["MatinGhanbari (15m Refresh)"]
+        U3["barry-far (15m Refresh)"]
+        U4["Nexus Nodes (4h Sorted)"]
+        U5["lyqnihao (12h Meta-Aggregator)"]
+        U6["jichangx / v2rayfree (Daily Batches)"]
+    end
 
-### 📱 iOS Shadowrocket (Base64 — Instant Load, No Lag)
-> 💡 **Why Shadowrocket users should use these links**: Shadowrocket renders all nodes in a flat list. Using standard YAML with hundreds of nodes freezes iOS networking and causes the subscription to hang. These dedicated Base64 links load in **0.05 seconds** with **100% green verified nodes**.
+    subgraph Ingestion ["2. Ingestion & Normalization Engine (scripts/update.py)"]
+        I1["YAML / Base64 / URI Decoding"]
+        I2["Protocol Parsing (VLESS Reality, VMess, Trojan, Hysteria2, SS)"]
+        I3["Spam & Advertising Sanitizer"]
+        I4["SHA-256 Node Deduplication"]
+    end
 
-| Version | Node Count | ☁️ Cloudflare Edge (Recommended) | ⚡ jsDelivr Global | 🚀 GHProxy Backup |
-|:--------|:----------:|:---------------------------------|:-------------------|:------------------|
-| 🚀 **iOS Lite** | **30 Nodes** | `https://zorvpn.xxaweii.workers.dev/lite` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-lite.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-lite.txt` |
-| ⚡ **iOS Standard** | **60 Nodes** | `https://zorvpn.xxaweii.workers.dev/ios` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.txt` |
-| 🌐 **Full Pool** | All Verified | `https://zorvpn.xxaweii.workers.dev/all` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-all.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-all.txt` |
+    subgraph Probe ["3. Active Health Verification (Mihomo Meta Core)"]
+        P1["Mihomo Micro-Daemon Spawned"]
+        P2["Parallel Workers (35 concurrent)"]
+        P3["HTTP 204 Delay Probe (2500ms timeout)"]
+        P4["Latency Sort & Dead Node Elimination"]
+    end
 
-### 💻 Clash / FlClash / Stash / Clash Verge (YAML Format)
+    subgraph Emission ["4. Artifact Generation & Classification"]
+        E1["ZorVPN.yaml (Full Clash/Mihomo Profile)"]
+        E2["ZorVPN-lite.txt (iOS Top 30 Base64)"]
+        E3["ZorVPN.txt (iOS Top 60 Base64)"]
+        E4["ZorVPN-all.txt (Complete Base64 Archive)"]
+        E5["ZorVPN-nodes.txt (Plaintext URI Stream)"]
+    end
 
-| Provider | Subscription URL |
-|:---------|:-----------------|
-| ☁️ **Cloudflare Edge (Fastest)** | `https://zorvpn.xxaweii.workers.dev/clash` |
-| ⚡ **GHProxy Mirror** | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
-| 🚀 **GH-Proxy Backup** | `https://gh-proxy.com/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` |
-| 🌐 **jsDelivr Global CDN** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml` |
+    subgraph Edge ["5. Global Edge Distribution"]
+        D1["Cloudflare Workers (Auto UA Detection & Cache)"]
+        D2["jsDelivr Multi-CDN Acceleration"]
+        D3["GHProxy Mainland Fast Mirror"]
+    end
+
+    Upstreams --> Ingestion
+    Ingestion --> Probe
+    Probe --> Emission
+    Emission --> Edge
+```
 
 ---
 
-## ☁️ Cloudflare Worker Edge Subscription Proxy
+## ⚡ Subscription Endpoints
 
-The project runs an active Cloudflare Worker at **`https://zorvpn.xxaweii.workers.dev/`** which:
-- Bypasses GFW blocking without requiring an existing proxy to fetch
-- Auto-detects client User-Agent (`Shadowrocket` gets Base64, `Clash` gets YAML)
-- Injects `profile-update-interval: 6` for automated 6-hour client sync
-- Caches responses at edge to prevent rate limits
+Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, users without an active proxy should utilize the **Cloudflare Edge**, **jsDelivr**, or **GHProxy** accelerated mirrors below.
 
-## 🎯 Proxy Groups
+### 📱 iOS Clients (Shadowrocket, Loon, Quantumult X)
+> **Recommended**: Shadowrocket renders all nodes in a flat list. Standard large YAML files cause memory spikes and UI lag. These curated Base64 endpoints load in **0.05 seconds**.
 
-| Group | Type | Purpose |
-|:------|:-----|:--------|
-| 🎯 **zorVPN** | `select` | Master selector — pick strategy or country |
-| ⚡ **Fastest** | `url-test` | Auto-select lowest latency node (300s test, 50ms tolerance) |
-| 🛡️ **Fallback** | `fallback` | Cascading reliability — auto-failover across regions |
-| 🤖 **AI Services** | `url-test` | Optimized for ChatGPT, Claude, Gemini, Perplexity, Poe, Suno |
-| 🎬 **Streaming** | `url-test` | Optimized for Netflix, YouTube, Spotify, Disney+, Twitch, TikTok |
-| 🇺🇸 🇭🇰 🇯🇵 🇸🇬 🇩🇪 ... | `url-test` | 40 country-specific pools |
+| Tier | Curated Size | ☁️ Cloudflare Edge (Recommended) | ⚡ jsDelivr Global CDN | 🚀 GHProxy China Mirror |
+| :--- | :---: | :--- | :--- | :--- |
+| 🚀 **iOS Lite** | **Top 30 Nodes** | `https://zorvpn.xxaweii.workers.dev/lite` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN/ZorVPN-lite.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-lite.txt` |
+| ⚡ **iOS Standard** | **Top 60 Nodes** | `https://zorvpn.xxaweii.workers.dev/ios` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN/ZorVPN.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.txt` |
+| 🌐 **Full Pool** | All Verified | `https://zorvpn.xxaweii.workers.dev/all` | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN/ZorVPN-all.txt` | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-all.txt` |
 
-## 🌍 Countries Available (40+ Regions)
+---
 
-| Region | Countries |
-|:-------|:----------|
-| **Asia-Pacific** | 🇭🇰 Hong Kong · 🇯🇵 Japan · 🇸🇬 Singapore · 🇰🇷 South Korea · 🇹🇼 Taiwan · 🇮🇳 India · 🇦🇺 Australia · 🇲🇾 Malaysia · 🇹🇭 Thailand · 🇻🇳 Vietnam · 🇵🇭 Philippines · 🇮🇩 Indonesia |
-| **North America** | 🇺🇸 United States · 🇨🇦 Canada |
-| **Europe** | 🇩🇪 Germany · 🇬🇧 United Kingdom · 🇫🇷 France · 🇳🇱 Netherlands · 🇸🇪 Sweden · 🇨🇿 Czech Republic · 🇮🇹 Italy · 🇪🇸 Spain · 🇷🇴 Romania · 🇪🇪 Estonia · 🇱🇻 Latvia · 🇵🇱 Poland · 🇦🇹 Austria · 🇨🇭 Switzerland · 🇫🇮 Finland · 🇳🇴 Norway · 🇩🇰 Denmark · 🇮🇪 Ireland · 🇺🇦 Ukraine |
-| **Middle East & Eurasia** | 🇷🇺 Russia · 🇹🇷 Turkey · 🇮🇱 Israel · 🇦🇪 UAE |
-| **South America & Africa** | 🇧🇷 Brazil · 🇨🇱 Chile · 🇿🇦 South Africa |
+### 💻 Clash & Mihomo Clients (Clash Verge Rev, Clash Meta, FlClash, Stash, Sing-box)
 
-## 📱 Supported Clients
+| Mirror Provider | Subscription URL | Notes |
+| :--- | :--- | :--- |
+| ☁️ **Cloudflare Edge** *(Primary)* | `https://zorvpn.xxaweii.workers.dev/clash` | Automatic client routing & edge caching |
+| ⚡ **jsDelivr Global CDN** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN/ZorVPN.yaml` | Worldwide edge acceleration |
+| 🚀 **GHProxy Mirror** | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` | Direct China optimization |
+| 🌐 **GitHub Raw** *(Requires Proxy)* | `https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN.yaml` | Direct source |
 
-| Platform | Client | Support |
-|:---------|:-------|:--------|
-| **Windows** | Clash Verge Rev | ✅ Full |
-| **macOS** | Clash Verge Rev / ClashX Meta | ✅ Full |
-| **iOS** | Stash (recommended) / Shadowrocket | ✅ Full |
-| **Android** | FlClash / ClashMeta for Android | ✅ Full |
-| **Linux** | Mihomo CLI | ✅ Full |
-| **iOS** | Surge / Quantumult X | ⚠️ Use subconverter |
+---
 
-## 🚀 Setup Instructions
+## 🎯 Smart Routing & Proxy Groups
 
-### Desktop (Windows / macOS / Linux)
+Each generated Clash profile includes production-grade rules and automated health groups:
 
-1. Download or clone this repo
-2. Open **Clash Verge Rev** → Profiles → Import Local File
-3. Select `clash.yaml` → Activate
-4. To enable TUN mode (system-wide proxy), use a Merge profile:
-   ```yaml
-   tun:
-     enable: true
+| Proxy Group | Strategy | Functional Scope |
+| :--- | :--- | :--- |
+| 🎯 **zorVPN** | `select` | Master selector: choose between speed strategies, fallback, or specific countries. |
+| ⚡ **Fastest** | `url-test` | Automated real-time latency selection (300s interval, 50ms tolerance). |
+| 🛡️ **Fallback** | `fallback` | Cascading high-availability failover across geographic clusters. |
+| 🤖 **AI Services** | `url-test` | Targeted low-latency routing for OpenAI, Claude, Google Gemini, Perplexity, and Poe. |
+| 🎬 **Streaming** | `url-test` | Optimized for Netflix, YouTube, Spotify, Disney+, Twitch, and TikTok. |
+| 🇭🇰 🇯🇵 🇸🇬 🇺🇸 🇩🇪 ... | `url-test` | Dedicated country clusters covering **40+ regions** worldwide. |
+
+---
+
+## 📱 Client Setup Guides
+
+### 1. Android (v2rayNG & Clash Meta)
+1. Open the [zorVPN Web Hub](https://zorvpn.xxaweii.workers.dev/) on your mobile browser.
+2. Tap the **Android** card.
+3. Choose your preferred client via the top segmented switch:
+   - **v2rayNG**: Tap **Download APK** (direct accelerated download) → Tap **1-Click Add to v2rayNG**.
+   - **Clash Meta**: Tap **Download APK** → Tap **1-Click Add to Clash Meta**.
+4. In your client, tap update subscription and toggle connection on.
+
+### 2. iOS (Shadowrocket)
+1. Open **Shadowrocket**, tap the **`+`** icon in the upper right.
+2. Change **Type** to **`Subscribe`** *(Important: Do not select Clash)*.
+3. Paste the **iOS Lite** URL:
+   ```text
+   https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN/ZorVPN-lite.txt
    ```
+4. Set **Remark** to `zorVPN Lite` and tap **Save**.
+5. Ensure **Global Routing** at the bottom is set to **`Config`** (bypasses domestic traffic).
 
-### 📱 iOS — Shadowrocket (Step-by-Step)
+### 3. Windows & macOS (Clash Verge Rev)
+1. Download **Clash Verge Rev** from our web drawer or official releases.
+2. Navigate to **Profiles** → Paste the **Cloudflare Edge** or **jsDelivr** YAML URL.
+3. Click **Import** → Right-click profile → **Select**.
+4. Enable **System Proxy** or toggle **TUN Mode** for full system-level tunneling.
 
-1. Open **Shadowrocket**, tap the **`+`** icon in the top right corner.
-2. Under **Type**, change it to **`Subscribe`** *(Important: Do NOT select Clash or Shadowsocks)*.
-3. In **URL**, paste the **Lite** or **Standard** accelerated link:
-   ```
-   https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN-lite.txt
-   ```
-4. In **Remark**, enter: `zorVPN Lite`
-5. Tap **Save** in the top right corner.
-6. The subscription will fetch and load all 30 green nodes in **< 0.1 seconds**.
-7. In the bottom navigation, ensure **Global Routing** is set to **`Config`** *(so Chinese apps bypass the proxy, and global sites route through VPN)*.
-8. Tap the toggle switch at the top to connect!
+---
 
-### 📱 Android — FlClash / ClashMeta
+## 📡 Upstream Providers Registry
 
-1. Open **FlClash** → Go to **Profiles** → Tap **+** → Select **URL**.
-2. Paste the unblocked mirror link:
-   ```
-   https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN@main/ZorVPN.yaml
-   ```
-3. Tap **Save & Fetch**.
-4. The profile will appear as **`ZorVPN`** with all proxy groups (⚡ Fastest, 🤖 AI Services, 🎬 Streaming). Tap it to activate.
+zorVPN continuously aggregates and validates configurations from prominent open-source platforms and high-cadence repositories:
 
-### Surge / Quantumult X
+| Provider / Repository | Frequency | Primary Protocols |
+| :--- | :---: | :--- |
+| **[v2nodes.com](https://www.v2nodes.com/)** | Continuous API | VLESS, VMess, Shadowsocks |
+| **[MatinGhanbari/v2ray-configs](https://github.com/MatinGhanbari/v2ray-configs)** | Every 15 min | VLESS, VMess, Trojan, SS, Hysteria2 |
+| **[barry-far/V2ray-Config](https://github.com/barry-far/V2ray-Config)** | Every 15 min | Multi-protocol subscription feeds |
+| **[Nexus Nodes (ninjastrikers)](https://github.com/ninjastrikers/nexus-nodes)** | Every 4 hours | Latency-tested & region-sorted |
+| **[lyqnihao/proxy](https://github.com/lyqnihao/proxy)** | Every 12 hours | Meta-aggregation (Clash-Meta & V2Nodes) |
+| **[jichangx/free-nodes](https://github.com/jichangx/free-nodes)** | Daily (00:00) | Curated stable server pool |
+| **[free-nodes/v2rayfree](https://github.com/free-nodes/v2rayfree)** | Daily | Shadowsocks, Trojan, VLESS |
+| **[Pawdroid/Free-servers](https://github.com/Pawdroid/Free-servers)** | Daily | Public Shadowsocks & V2Ray nodes |
+| **[awesome-vpn/awesome-vpn](https://github.com/awesome-vpn/awesome-vpn)** | Midnight UTC | Base64 & Clash YAML feeds |
+| **[Au1rxx/free-vpn-subscriptions](https://github.com/Au1rxx/free-vpn-subscriptions)** | Scheduled | VLESS Reality & Hysteria2 |
+| **[sunmiao4458/free-proxy-airport](https://github.com/sunmiao4458/free-proxy-airport)** | Every 30 min | Low-latency verified nodes |
 
-Use a subconverter to transform the Clash YAML:
-```
-# Surge
-https://api.subconverter.xyz/sub?target=surge&ver=4&url=YOUR_ENCODED_URL
+---
 
-# Quantumult X
-https://api.subconverter.xyz/sub?target=quanx&url=YOUR_ENCODED_URL
-```
+## 🔒 Security & Safe Usage Notice
 
-## 🔗 Node Sources
-zorVPN continuously aggregates and validates nodes from 6 major auto-updating sources:
+> [!IMPORTANT]
+> - **Public Infrastructure**: All nodes aggregated by this project are publicly hosted servers. **Never use public proxies for online banking, credit card transactions, or sensitive account logins.**
+> - **Node Lifespan**: Public proxy nodes are ephemeral and may be deprecated or rate-limited without notice. The background updater refreshes the pool every 6 hours to maintain green status.
+> - **Compliance**: This project is maintained strictly for network measurement, educational exploration, and development purposes. Please comply with local telecommunication regulations.
 
-| Source | Update Frequency | Nodes Contributed | Method |
-|:-------|:----------------|:------------------|:-------|
-| [anaer/Sub](https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml) | Every few hours | ~1,600+ | Large multi-airport merge |
-| [ermaozi/get_subscribe](https://github.com/ermaozi/get_subscribe) | Hourly | ~500+ | Speed-tested, latency verified |
-| [sinspired/airport](https://github.com/sinspired/airport) | Daily | ~550+ | Strict deduplication & test |
-| [peasoft/NoMoreWalls](https://github.com/peasoft/NoMoreWalls) | Daily | ~400+ | Filtered high-speed nodes |
-| [awesome-vpn/awesome-vpn](https://github.com/awesome-vpn/awesome-vpn) | Daily | ~40+ | Direct proxy harvest |
-| [sunmiao4458/free-proxy-airport](https://github.com/sunmiao4458/free-proxy-airport) | Every 30 min | ~35+ | Health checks & low latency |
-
-## 📐 Routing Rules
-
-| Category | Action | Rule Source |
-|:---------|:-------|:-----------|
-| **AI** (ChatGPT, Claude, Gemini, etc.) | → 🤖 AI Services | Inline DOMAIN-SUFFIX |
-| **Streaming** (Netflix, YouTube, etc.) | → 🎬 Streaming | Inline DOMAIN-SUFFIX |
-| **Ads** | → REJECT | ACL4SSR BanAD + BanProgramAD |
-| **Telegram** | → 🎯 zorVPN | ACL4SSR Telegram |
-| **Social** (Twitter, Discord, Reddit) | → 🎯 zorVPN | Inline DOMAIN-SUFFIX |
-| **Dev Tools** (GitHub, Docker, npm) | → 🎯 zorVPN | Inline DOMAIN-SUFFIX |
-| **Google** | → 🎯 zorVPN | Inline + ACL4SSR |
-| **Apple** | → DIRECT | ACL4SSR Apple |
-| **China** | → DIRECT | ACL4SSR ChinaDomain + GEOIP |
-| **Everything else** | → 🎯 zorVPN | MATCH catch-all |
-
-## ⚠️ Disclaimer
-
-- **Free nodes are public** — do NOT use for banking, passwords, or sensitive data
-- **Nodes go stale** — refresh the subscription regularly for best results
-- **For educational use only** — comply with your local laws and regulations
-- **No warranty** — provided as-is, no guarantees of availability or speed
+---
 
 ## 📄 License
 
-MIT — Free to use, modify, and distribute.
-
----
-
-**zorVPN** — Built with 🔥 by Zero
+This project is licensed under the [MIT License](LICENSE).
+Code and aggregated configuration formats are open-source and free for community use.

@@ -1044,66 +1044,24 @@ button {
   margin-top: 2px;
 }
 
-/* Steps List */
-.platform-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.step-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: #0C0C10;
-  border: 1px solid var(--stroke);
-}
-
-.step-digit {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: var(--blue-soft);
-  color: var(--blue);
-  font-size: 11px;
-  font-weight: 800;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-
-.step-content h6 {
-  font-size: 13px;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 2px;
-}
-
-.step-content p {
-  font-size: 11.5px;
-  color: var(--text-sub);
-  line-height: 1.4;
-}
-
-.step-content b {
-  color: var(--teal);
-}
-
 /* Footer */
 .footer {
-  margin-top: 24px;
+  margin-top: 28px;
   text-align: center;
   font-size: 12px;
   color: var(--text-dim);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .footer a {
   color: var(--blue);
   text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer a:hover {
+  color: var(--teal);
+  text-decoration: underline;
 }
 
 @media (max-width: 480px) {
@@ -1361,8 +1319,12 @@ button {
 
   <!-- Footer -->
   <footer class="footer">
-    <p>zorVPN is an open-source health-filtered subscription aggregator.</p>
-    <p style="margin-top: 4px;">Node verification runs via Mihomo engine every 6 hours.</p>
+    <p>zorVPN is an open-source, health-filtered proxy infrastructure project.</p>
+    <p style="margin-top: 5px;">
+      <a href="https://github.com/hamzawih0/zorVPN" target="_blank" rel="noopener">GitHub</a> • 
+      <a href="https://github.com/hamzawih0/zorVPN/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a> • 
+      <span>Verified Every 6 Hours</span>
+    </p>
   </footer>
 
 </div>
@@ -1418,7 +1380,7 @@ button {
           <span class="app-download-sub" id="sheetAppSub">China Fast CDN • No Redirect</span>
         </div>
       </div>
-      <a id="btnSheetAppDownload" href="#" class="btn-app-download" download>
+      <a id="btnSheetAppDownload" href="#" class="btn-app-download">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         <span id="sheetAppDownloadBtnText">Download</span>
       </a>
@@ -1523,7 +1485,9 @@ const REPO_BRANCH = "main";
 // State
 let currentPlatform = 'ios';
 let currentTier = 'stable';
-let currentMirror = 'jsdelivr';
+// Default to Cloudflare Workers — fastest globally, no proxy needed, China-accessible
+let currentMirror = (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev'))
+  ? 'cloudflare' : 'cloudflare';
 
 
 // Authentic Brand SVGs for Client Apps (Exact Vector Logos)
@@ -1615,7 +1579,7 @@ const PLATFORMS = {
     stableFile: "ZorVPN.yaml",
     fullFile: "ZorVPN-all.txt",
     stableDesc: "Clash YAML • Apple Silicon Optimized",
-    fullDesc: "All 260+ Verified Nodes • Complete Archive",
+    fullDesc: "Full Verified Green Pool • Complete Archive",
     importProtocol: "clash",
     appTitle: "Sing-box",
     appTag: "Mac Store",
@@ -1632,7 +1596,7 @@ const PLATFORMS = {
     stableFile: "ZorVPN.yaml",
     fullFile: "ZorVPN-all.txt",
     stableDesc: "Clash YAML • Auto-Fastest Group",
-    fullDesc: "All 260+ Verified Nodes • Full Redundancy",
+    fullDesc: "Full Verified Green Pool • Full Redundancy",
     importProtocol: "clash",
     appTitle: "Clash Verge Rev",
     appTag: "Direct .exe",
@@ -1741,6 +1705,9 @@ function openPlatformSheet(platKey) {
   document.getElementById('qrCodeSection').classList.remove('show');
   document.getElementById('btnToggleQr').querySelector('span').textContent = 'Show QR Code';
 
+  // Prevent background scroll
+  document.body.style.overflow = 'hidden';
+
   // Open modal
   const modal = document.getElementById('sheetModal');
   modal.classList.add('open');
@@ -1805,6 +1772,7 @@ function updateSheetUrls() {
     importBtn.href = `shadowrocket://add/sub://${b64}?title=zorVPN`;
     document.getElementById('btnImportLabel').textContent = 'Add to Shadowrocket';
   } else if (protocol === 'v2rayng') {
+    // v2rayNG deep-link: install-sub with encoded url parameter
     importBtn.href = `v2rayng://install-sub?url=${encodeURIComponent(url)}&name=zorVPN`;
     document.getElementById('btnImportLabel').textContent = '1-Click Add to v2rayNG';
   } else if (protocol === 'clashmeta' || protocol === 'clash') {
@@ -1839,10 +1807,14 @@ function selectMirror(mirror) {
   updateSheetUrls();
 }
 
-// Auto-detect Cloudflare Workers / Pages origin
-if (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')) {
-  currentMirror = 'cloudflare';
-}
+// Initialize the correct mirror chip as active on page load
+(function initMirrorChip() {
+  const mirrorMap = { cloudflare: 'cf', jsdelivr: 'jsdelivr', ghproxy: 'ghproxy', raw: 'raw' };
+  const key = mirrorMap[currentMirror] || 'cf';
+  document.querySelectorAll('.mirror-chip').forEach(el => el.classList.remove('active'));
+  const activeChip = document.getElementById(`mirror-${key}`);
+  if (activeChip) activeChip.classList.add('active');
+})();
 
 // Toggle QR Code Display
 function toggleQrCode() {
@@ -1936,6 +1908,8 @@ async function loadRealOperationalStats() {
     copiesEl.textContent = getRealCopies().toLocaleString();
   }
 
+  const KNOWN_CODES = ['HK', 'JP', 'SG', 'KR', 'TW', 'US', 'CA', 'DE', 'GB', 'FR', 'NL', 'SE', 'IT', 'ES', 'CZ', 'PL', 'RO', 'EE', 'RU', 'TR', 'IN', 'AU', 'BR', 'ZA', 'TH', 'VN', 'PH', 'MY', 'ID', 'CH', 'AT', 'FI', 'NO', 'IE', 'UA', 'CL', 'IL', 'AE'];
+
   try {
     const res = await fetch('ZorVPN-nodes.txt', { cache: 'no-cache' });
     if (res.ok) {
@@ -1952,9 +1926,27 @@ async function loadRealOperationalStats() {
           try {
             const hashPart = s.split('#')[1] || '';
             const decoded = decodeURIComponent(hashPart);
-            const m = decoded.match(/([A-Za-z\s]+)\s+#\d+/);
-            if (m && m[1]) {
-              countries.add(m[1].trim());
+            
+            // 1. Check flag emoji
+            const flagMatch = decoded.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/);
+            if (flagMatch) {
+              countries.add(flagMatch[0]);
+            } else {
+              // 2. Check standard 2-letter codes or ISO country patterns
+              let matched = false;
+              for (const c of KNOWN_CODES) {
+                if (new RegExp(`(?:^|[\\s\\[\\(\\_\\-|])${c}(?:$|[\\s\\]\\)\\_\\-\\d#|])`, 'i').test(decoded)) {
+                  countries.add(c);
+                  matched = true;
+                  break;
+                }
+              }
+              if (!matched) {
+                const nameMatch = decoded.match(/([A-Za-z\s]+)\s*#?\d*/);
+                if (nameMatch && nameMatch[1] && nameMatch[1].trim().length > 2) {
+                  countries.add(nameMatch[1].trim());
+                }
+              }
             }
           } catch(e){}
         }
@@ -1989,6 +1981,7 @@ function showToast(msg) {
 
 // Close sheet
 function closeSheet() {
+  document.body.style.overflow = '';
   document.getElementById('sheetModal').classList.remove('open');
 }
 
@@ -1997,6 +1990,13 @@ function handleBackdropClick(e) {
     closeSheet();
   }
 }
+
+// Keyboard ESC to close
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeSheet();
+  }
+});
 
 // Initialize on load
 if (document.readyState === 'loading') {
