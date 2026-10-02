@@ -31,7 +31,7 @@
   --bg-card: rgba(22, 22, 28, 0.72);
   --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.07) 100%);
   --glass-specular: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
-  --glass-blur: blur(40px) saturate(210%) contrast(108%);
+  --glass-blur: blur(14px);
   --glass-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7);
 
   --primary-accent: #0A84FF;
@@ -124,76 +124,23 @@ button {
 }
 
 /* ============================================================
-   LIQUID GLASS AMBIENT BACKGROUND
+   HIGH-PERFORMANCE AMBIENT BACKGROUND (0% CPU / GPU)
    ============================================================ */
 .ambient {
   position: fixed;
   inset: 0;
-  overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  background: 
+    radial-gradient(circle at 18% 12%, rgba(10, 132, 255, 0.16) 0%, transparent 48%),
+    radial-gradient(circle at 82% 88%, rgba(94, 92, 230, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 50% 45%, rgba(48, 209, 88, 0.05) 0%, transparent 50%),
+    #000000;
+  transform: translateZ(0);
 }
 
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  will-change: transform, opacity;
-}
-
-.b1 {
-  width: 720px;
-  height: 720px;
-  background: #0A84FF;
-  top: -260px;
-  left: -200px;
-  opacity: 0.16;
-  animation: float1 28s ease-in-out infinite;
-}
-
-.b2 {
-  width: 640px;
-  height: 640px;
-  background: #5E5CE6;
-  bottom: -240px;
-  right: -160px;
-  opacity: 0.14;
-  animation: float2 32s ease-in-out infinite;
-}
-
-.b3 {
-  width: 520px;
-  height: 520px;
-  background: #30D158;
-  top: 40%;
-  left: 60%;
-  opacity: 0.08;
-  animation: float3 36s ease-in-out infinite;
-}
-
-@keyframes float1 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.16; }
-  50% { transform: translate(80px, 60px) scale(1.18); opacity: 0.22; }
-}
-
-@keyframes float2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.14; }
-  50% { transform: translate(-70px, -50px) scale(1.12); opacity: 0.19; }
-}
-
-@keyframes float3 {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.08; }
-  50% { transform: translate(-42%, -58%) scale(1.2); opacity: 0.12; }
-}
-
-.grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.025;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.blob, .grain {
+  display: none;
 }
 
 /* ============================================================
@@ -314,13 +261,15 @@ button {
   height: 6px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 10px var(--green);
-  animation: pulse 2s infinite ease-in-out;
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2.2s infinite ease-in-out;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
 .header-action {
@@ -396,8 +345,10 @@ button {
   height: 7px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 8px var(--green);
-  animation: pulse 1.8s infinite ease-in-out;
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2.2s infinite ease-in-out;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 .counter-badge-text {
@@ -1123,13 +1074,8 @@ button {
   <div id="toastMessage" class="toast-text">Subscription URL Copied</div>
 </div>
 
-<!-- Ambient Liquid Mesh -->
-<div class="ambient">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-</div>
-<div class="grain"></div>
+<!-- High-Performance Ambient Background -->
+<div class="ambient"></div>
 
 <!-- Main Web Application -->
 <div class="app-container">
