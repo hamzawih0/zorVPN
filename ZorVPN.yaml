@@ -1,7 +1,7 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
-# ║  Auto-generated: 2026-10-08T22:35:34Z                                  ║
-# ║  Nodes:   50 | Countries: 14 | Tested: 100% Functional Latency Verified        ║
+# ║  Auto-generated: 2026-10-09T03:24:56Z                                  ║
+# ║  Nodes:  153 | Countries: 20 | Tested: 100% Functional Latency Verified        ║
 # ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Surge  ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -107,193 +107,1162 @@ dns:
       - "+.googleapis.com"
 
 proxies:
-- name: '🇩🇪 Germany #01 Hy2'
-  type: hysteria2
-  server: 181.214.99.162
-  port: 35000
-  password: b4bd0613-ff7c-4f2f-954d-185915e6ddad
-  udp: true
-  sni: api.kermanshahi.org
-  skip-cert-verify: true
-- name: '🇺🇸 United States #01 Hy2'
-  type: hysteria2
-  server: 54.213.89.22
-  port: 443
-  password: qQe1z5kU8kN6SlKnDt9Ru3Qp
-  udp: true
-  sni: vk.com
-  skip-cert-verify: true
 - name: '🌍 Other #01 Hy2'
-  type: hysteria2
-  server: mhzedir.qzz.io
-  port: 51791
-  password: 17537e14543a478b9c7a558870d814f3
-  udp: true
-  sni: mhzedir.qzz.io
-- name: '🇷🇴 Romania #01 Hy2'
-  type: hysteria2
-  server: 109.104.153.124
-  port: 11592
-  password: 35d26d53bc
-  udp: true
-  sni: srv-0e5387.frd21.ru
-- name: '🌍 Other #02 Hy2'
-  type: hysteria2
-  server: 91.142.73.159
-  port: 36758
-  password: 5bcodmhjtyfyyrqh
-  udp: true
-  sni: cdn77.dmtr.ru
+  password: 4291c983-c520-46ac-82cc-48f14bef573f
+  port: 35013
+  server: 129.213.91.185
   skip-cert-verify: true
-- name: '🇷🇺 Russia #01 Hy2'
+  sni: www.bing.com
   type: hysteria2
-  server: giftcard.gisora.ir
-  port: 52000
-  password: 617z9r1mbzbm1t5z
-  udp: true
-  sni: giftcard.gisora.ir
-- name: '🇫🇮 Finland #01 Hy2'
-  type: hysteria2
-  server: 31.76.80.69
+- name: '🇫🇮 Finland #01 VLESS'
+  type: vless
+  server: 47.253.226.114
   port: 443
-  password: 6aab8efdf13945829ae3699c342be406
+  uuid: 055a1ce8-2a16-4a0d-a2c2-22826c9b2413
   udp: true
-  sni: fiproxy1.lockdwn.com
-- name: '🌍 Other #03 Hy2'
-  type: hysteria2
-  server: giftcard.gateway-stream.com
-  port: 52087
-  password: 8f0gvz5eul6omhq4
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: Svl81isn16RPAFnjtmYw7A6TPnsEPLHuYYaJht65Rzc
+  servername: www.cloudflare.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #02 VLESS'
+  type: vless
+  server: 172.64.150.28
+  port: 2082
+  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
   udp: true
-  sni: giftcard.gateway-stream.com
-- name: '🇩🇪 Germany #02 Hy2'
-  type: hysteria2
-  server: gift-catalog.aroonia.ir
-  port: 52000
-  password: 8z2e26xkqsa598s3
+  network: ws
+  ws-opts:
+    path: /fp
+    headers:
+      Host: hhlfy.twiladaphne.ndjp.net
+- name: '🇫🇮 Finland #03 VLESS'
+  type: vless
+  server: 104.243.33.154
+  port: 45299
+  uuid: 261f011c-e97a-4d72-b596-e6329b50b47b
   udp: true
-  sni: gift-catalog.aroonia.ir
-- name: '🌍 Other #04 Hy2'
-  type: hysteria2
-  server: mhzedir.qzz.io
-  port: 51791
-  password: 9ed56ba1c7c44bbab670d83a435591b8
+  network: tcp
+- name: '🇫🇮 Finland #04 VLESS'
+  type: vless
+  server: 104.18.35.86
+  port: 8080
+  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
   udp: true
-  sni: mhzedir.qzz.io
-- name: '🇷🇴 Romania #02 Hy2'
-  type: hysteria2
-  server: fastly.vexogf.ir
-  port: 5443
-  password: KRYlhDrdm34kDT3En9j9vVO4-c3rcSiU
-  udp: true
-  sni: tun-a-1.bexait.ir
-- name: '🇷🇴 Romania #03 Hy2'
-  type: hysteria2
-  server: 179.61.132.96
-  port: 8443
-  password: KevinZakarian
-  udp: true
-  sni: 179.61.132.96
-  skip-cert-verify: true
-- name: '🌍 Other #05 Hy2'
-  type: hysteria2
-  server: 162.249.125.133
+  network: ws
+  client-fingerprint: chrome
+  ws-opts:
+    path: /sg-melbi
+    headers:
+      Host: hhlfy.twiladaphne.ndjp.net
+- name: '🇩🇪 Germany #01 VLESS'
+  type: vless
+  server: 188.114.97.6
   port: 443
-  password: QCgqi_I4EkV8UR-OgQ_tG4EnVTEVvIyR2GgRBzrIn2s
+  uuid: 33918b20-9e02-4dc6-8b30-79b2d4b2e0e6
   udp: true
-  sni: hy2-new.aspidnet.xyz
-- name: '🇦🇹 Austria #01 Hy2'
-  type: hysteria2
-  server: fastly.vexogf.ir
-  port: 5443
-  password: TPey1Zqj9th9y2JKyiuqVPRTvfjQC-nB
+  network: ws
+  tls: true
+  servername: auto-scale-238b2b.infra-core-1630dd.workers.dev
+  ws-opts:
+    path: /eyJqdW5rIjoiUjJBU3JkVlRwSWtnciIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbImJwYi55b3VzZWYuaXNlZ2Fyby5jb20iXX0
+    headers:
+      Host: auto-scale-238b2b.infra-core-1630dd.workers.dev
+- name: '🇨🇦 Canada #01 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 8080
+  uuid: 3a701524-30c8-45f3-8922-d7af5d024af0
   udp: true
-  sni: tun-a-1.bexait.ir
-- name: '🇳🇱 Netherlands #01 Hy2'
-  type: hysteria2
-  server: 206.71.158.37
-  port: 35000
-  password: Yet-Another-Public-Config-1
+  network: ws
+  ws-opts:
+    path: /eyJqdW5rIjoiWDRPODRLWDd2IiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcmVmaXgiLCJwYW5lbElQcyI6WyJbMmEwMjo4OTg6MTQ2OjY0OjpdIiwiWzI2MDI6ZmM1OTpiMDo2NDo6XSIsIlsyNjAyOmZjNTk6MTE6NjQ6Ol0iXX0=
+    headers:
+      Host: server14.peekconf.workers.dev
+- name: '🇵🇱 Poland #01 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 443
+  uuid: 03790b11-e3d9-4966-859b-4e524bb04645
   udp: true
-  sni: YAPC-1.afshin.ir
-  skip-cert-verify: true
-- name: '🇮🇳 India #01 Hy2'
-  type: hysteria2
-  server: 5.175.249.174
-  port: 35000
-  password: b4bd0613-ff7c-4f2f-954d-185915e6ddad
+  network: ws
+  tls: true
+  servername: vfuhf4iqn9b0-pyqr62d.qfem579emmb5z6ne0ejfcb.workers.dev
+  ws-opts:
+    path: /vl/DfvlLmSkjWX3nTYInEaKodZ33E4cvX?ed=2560
+    headers:
+      Host: vfuhf4iqn9b0-pyqr62d.qfem579emmb5z6ne0ejfcb.workers.dev
+- name: '🇫🇮 Finland #05 VLESS'
+  type: vless
+  server: 104.21.87.238
+  port: 8080
+  uuid: 8f53fce2-6c17-4e37-9ae9-d969fd85117c
   udp: true
-  sni: api.kermanshahi.org
+  network: ws
+  ws-opts:
+    path: /vl/Wp4FqWLcoYNYXCovu4?ed=2560
+    headers:
+      Host: ApI-hub-C9A393.ALiMiRZAi539-484.WOrKerS.DeV
+- name: '🌍 Other #02 VLESS'
+  type: vless
+  server: 104.18.34.245
+  port: 8880
+  uuid: 0b01d4d8-656d-4d55-8ad5-ed2a362788b5
+  udp: true
+  network: ws
+  ws-opts:
+    path: /pyip=ProxyIP.SG.CMLiussss.net
+    headers:
+      Host: square-tree-3dbf.285.workers.dev
+- name: '🇨🇦 Canada #02 VLESS'
+  type: vless
+  server: 104.17.181.19
+  port: 8880
+  uuid: 26fb53e4-fd49-4b34-b605-b6cc1b1a06a8
+  udp: true
+  network: ws
+  client-fingerprint: chrome
+  ws-opts:
+    path: /pyip=ProxyIP.SG.CMLiussss.net
+    headers:
+      Host: royal-shape-3771.93-728.workers.dev
+- name: '🇫🇮 Finland #06 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 443
+  uuid: e6df2095-a73c-4043-8693-8d5a03686870
+  udp: true
+  network: ws
+  tls: true
+  servername: lucasjow.us.ci
+  client-fingerprint: chrome
+  ws-opts:
+    path: /cart/docs/www/proxyip=108.160.132.132?ed#Telegram---mehrosaboran
+    headers:
+      Host: lucasjow.us.ci
+- name: '🇫🇮 Finland #07 VLESS'
+  type: vless
+  server: 172.67.174.37
+  port: 8880
+  uuid: afb13fa2-bba2-417f-b8c2-62565f92a78d
+  udp: true
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: orange-block-5cd1.124-199.workers.dev
+- name: '🇫🇮 Finland #08 VLESS'
+  type: vless
+  server: 172.67.179.98
+  port: 8880
+  uuid: 56c673ba-865a-48ec-8dc0-fd7133a7ecfd
+  udp: true
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: curly-surf-4401.75-08c.workers.dev
+- name: '🇩🇪 Germany #02 VLESS'
+  type: vless
+  server: 188.114.96.9
+  port: 443
+  uuid: 2e305ebe-f6e6-4689-b32f-cd04ab5ff541
+  udp: true
+  network: ws
+  tls: true
+  servername: IdB8ONMVbntuYT5t7t6cEJfw8vLrb.paGEs.DeV
+  client-fingerprint: chrome
+  ws-opts:
+    path: /vl/9yvcoLdzdOXLUYfH7r5gwJhu1CHrj
+    headers:
+      Host: idb8onmvbntuyt5t7t6cejfw8vlrb.pages.dev
+- name: '🌍 Other #03 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 8080
+  uuid: 34ce8760-24ed-41e7-a1f5-aa6c2660a53c
+  udp: true
+  network: ws
+  ws-opts:
+    path: /pyip=ProxyIP.SG.CMLiussss.net
+    headers:
+      Host: quiet-frost-ac61.333-07d.workers.dev
+- name: '🌍 Other #04 VLESS'
+  type: vless
+  server: 104.16.98.215
+  port: 8880
+  uuid: 23187ddc-16a5-432d-bf4e-dd42a7ae39f7
+  udp: true
+  network: ws
+  ws-opts:
+    headers:
+      Host: steep-thunder-97fa.108-d10.workers.dev
+- name: '🇺🇸 United States #01 VLESS'
+  type: vless
+  server: 169.40.42.52
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇷🇴 Romania #01 VLESS'
+  type: vless
+  server: 169.40.42.232
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇫🇮 Finland #09 VLESS'
+  type: vless
+  server: 169.40.42.35
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇺🇸 United States #02 VLESS'
+  type: vless
+  server: 169.40.42.224
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇸🇬 Singapore #01 VLESS'
+  type: vless
+  server: server16.peekconfig.workers.dev
+  port: 443
+  uuid: 419b7a2c-9fa2-4870-b58a-0498ccc7d6c4
+  udp: true
+  network: ws
+  tls: true
+  servername: sERveR16.pEeKCoNFIg.worKerS.DeV
+  ws-opts:
+    path: /eyJqdW5rIjoiYXdUWFpSYnZubU5hIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcmVmaXgiLCJwYW5lbElQcyI6WyJbMmEwMjo4OTg6MTQ2OjY0OjpdIiwiWzI2MDI6ZmM1OToxMTo2NDo6XSIsIlsyNjAyOmZjNTk6YjA6NjQ6Ol0iXX0
+    headers:
+      Host: server16.peekconfig.workers.dev
+- name: '🇫🇮 Finland #10 VLESS'
+  type: vless
+  server: 169.40.42.15
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇫🇮 Finland #11 VLESS'
+  type: vless
+  server: 172.66.140.62
+  port: 8880
+  uuid: afb13fa2-bba2-417f-b8c2-62565f92a78d
+  udp: true
+  network: ws
+  ws-opts:
+    path: /pyip=ProxyIP.JP.CMLiussss.net
+    headers:
+      Host: orange-block-5cd1.124-199.workers.dev
+- name: '🇵🇱 Poland #02 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 443
+  uuid: 41750e18-7143-49a3-bdac-4edcb3c8b8f3
+  udp: true
+  network: ws
+  tls: true
+  servername: h3hadzojqmjxwseayj0dwe4o0.ade-1018.workers.dev
+  ws-opts:
+    path: /vl/ml3Epzqnzr8r2cTPtolbD5lTi1GWsZOP?ed=2560
+    headers:
+      Host: h3hadzojqmjxwseayj0dwe4o0.ade-1018.workers.dev
+- name: '🇵🇱 Poland #03 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 443
+  uuid: 26168a04-a91c-48fc-b8d0-3ba5a4e719c4
+  udp: true
+  network: ws
+  tls: true
+  servername: 2yijonkovdic86iq5ebnd1moqqf.yyuz0mhr4awg8vw-wwycuu4.workers.dev
+  ws-opts:
+    path: /vl/17NBgz64AfwQ4Dd6qdNR?ed=2560
+    headers:
+      Host: 2yijonkovdic86iq5ebnd1moqqf.yyuz0mhr4awg8vw-wwycuu4.workers.dev
+- name: '🇫🇮 Finland #12 VLESS'
+  type: vless
+  server: node-562276409-ece9be.account12.workers.dev
+  port: 443
+  uuid: 3cd23424-7182-4f37-9461-7701917791f6
+  udp: true
+  network: ws
+  tls: true
+  servername: NOde-562276409-eCe9Be.AcCouNT12.WORKERs.DeV
+  client-fingerprint: chrome
+  ws-opts:
+    path: /vl/LoojiwDChctBr67OEQH2dfP05?ed=2560
+    headers:
+      Host: node-562276409-ece9be.account12.workers.dev
+- name: '🇫🇮 Finland #13 VLESS'
+  type: vless
+  server: 169.40.42.225
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #14 VLESS'
+  type: vless
+  server: 169.40.42.89
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #15 VLESS'
+  type: vless
+  server: 169.40.42.223
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #16 VLESS'
+  type: vless
+  server: 169.40.42.184
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #17 VLESS'
+  type: vless
+  server: www.iplocation.net
+  port: 8080
+  uuid: 5c4ce4e3-d4cd-43ff-8eb0-9aa553410bff
+  udp: true
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: n23odi-jolly-sound-f784.mbkl61es.workers.dev
+- name: '🇫🇮 Finland #18 VLESS'
+  type: vless
+  server: 169.40.42.235
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇫🇮 Finland #19 VLESS'
+  type: vless
+  server: www.gov.ua
+  port: 8880
+  uuid: afb13fa2-bba2-417f-b8c2-62565f92a78d
+  udp: true
+  network: ws
+  ws-opts:
+    path: /pyip=ProxyIP.JP.CMLiussss.net
+    headers:
+      Host: orange-block-5cd1.124-199.workers.dev
+- name: '🇨🇦 Canada #03 VLESS'
+  type: vless
+  server: ip.sb
+  port: 8080
+  uuid: 3e06b1db-2efb-446e-ba2d-68850dfd2f9d
+  udp: true
+  network: ws
+  servername: ip.sb
+  ws-opts:
+    path: /
+    headers:
+      Host: bdfba-cool-tree-b580.v8fz4kbv.workers.dev
+- name: '🇫🇮 Finland #20 VLESS'
+  type: vless
+  server: 198.251.78.29
+  port: 2053
+  uuid: c423cc1b-f88e-421c-9a16-c480d84da20f
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: Uk5b-Wh_uxeCc7R8NS9iWE40xc0h9wWC04rSB9yhgAw
+    short-id: b5d625695ec82c7e
+  servername: www.cloudflare.com
+  client-fingerprint: chrome
+- name: '🇦🇺 Australia #01 VLESS'
+  type: vless
+  server: 169.40.42.133
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇫🇮 Finland #21 VLESS'
+  type: vless
+  server: 169.40.42.104
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #22 VLESS'
+  type: vless
+  server: 169.40.42.74
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇫🇮 Finland #23 VLESS'
+  type: vless
+  server: 169.40.42.163
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇨🇦 Canada #04 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 443
+  uuid: 489f1717-d3c7-4940-ad68-bdbdbab857f4
+  udp: true
+  network: ws
+  tls: true
+  servername: x.m-90.xyz
+  client-fingerprint: chrome
+  ws-opts:
+    path: t.me/TEAMNETGRATISCOL
+    headers:
+      Host: x.m-90.xyz
+- name: '🇫🇮 Finland #24 VLESS'
+  type: vless
+  server: 169.40.42.179
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🇺🇸 United States #03 VLESS'
+  type: vless
+  server: 169.40.42.168
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: ios
+- name: '🌍 Other #05 VLESS'
+  type: vless
+  server: 31.76.11.83
+  port: 22849
+  uuid: 2e511783-125c-466b-925d-a9cd1c98e30e
+  udp: true
+  network: tcp
 - name: '🌍 Other #06 Hy2'
+  password: 099830134df5ac3a04a4b21d39b8c395
+  port: 50160
+  server: 163.192.14.135
+  skip-cert-verify: true
+  sni: whatsapp.com
   type: hysteria2
-  server: 155.94.134.183
-  port: 11592
-  password: ca78f919e6
+- name: '🌍 Other #07 VLESS'
+  type: vless
+  server: 15.204.97.197
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
   udp: true
-  sni: srv-3fc7c9.21freedom.net
-- name: '🇫🇮 Finland #02 Hy2'
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+  servername: fuck.rkn
+  client-fingerprint: chrome
+- name: '🇺🇸 United States #04 VLESS'
+  type: vless
+  server: 15.204.97.195
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+  servername: fuck.rkn
+  client-fingerprint: chrome
+- name: '🌍 Other #08 VLESS'
+  type: vless
+  server: 15.204.97.206
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+  servername: fuck.rkn
+  client-fingerprint: chrome
+- name: '🇺🇸 United States #05 Hy2'
   type: hysteria2
-  server: 144.31.49.138
+  server: 142.249.37.90
+  port: 44356
+  password: dongtaiwang.com
+  udp: true
+  sni: hy2.561891.xyz
+- name: '🇺🇸 United States #06 Hy2'
+  type: hysteria2
+  server: hy2.561891.xyz
+  port: 44356
+  password: dongtaiwang.com
+  udp: true
+  sni: hy2.561891.xyz
+- name: '🌍 Other #09 Hy2'
+  password: pbgLTkd5276SN1sZ
+  port: 8443
+  server: 144.24.46.175
+  skip-cert-verify: true
+  sni: 144.24.46.175
+  type: hysteria2
+- name: '🌍 Other #10 Hy2'
+  password: bce6c821-200d-421f-bf3d-7159e5246ea0
+  port: 33333
+  server: 155.248.209.237
+  skip-cert-verify: false
+  sni: hy2.123266.xyz
+  type: hysteria2
+- name: '🇫🇮 Finland #25 VLESS'
+  type: vless
+  server: 188.114.97.6
   port: 443
-  password: cd74c0a406664a5bc0bac098220a2468
+  uuid: c4edb87e-8544-4fa4-bd1c-b0cda9a34b46
   udp: true
-  sni: ru1.sferavpn.pro
-- name: '🌍 Other #07 Hy2'
-  type: hysteria2
-  server: 2.27.59.206
+  network: ws
+  tls: true
+  servername: a.cwvps.eu.org
+  ws-opts:
+    path: /ws
+    headers:
+      Host: a.cwvps.eu.org
+- name: '🇫🇮 Finland #26 VLESS'
+  type: vless
+  server: 51.255.166.202
   port: 443
-  password: cd74c0a406664a5bc0bac098220a2468
+  uuid: 593bf46b-8316-5050-9357-d8a41e4db78b
   udp: true
-  sni: de1.sferavpn.pro
-- name: '🌍 Other #08 Hy2'
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  servername: e3k67dwms3-51255166202-direct.tavafog.com
+- name: '🇺🇸 United States #07 Hy2'
   type: hysteria2
-  server: giftcard.gateway-stream.com
-  port: 52076
-  password: fmaznn1lrzys7ddy
+  server: hy2.123266.xyz
+  port: 33333
+  password: bce6c821-200d-421f-bf3d-7159e5246ea0
   udp: true
-  sni: giftcard.gateway-stream.com
-- name: '🇫🇮 Finland #03 Hy2'
-  type: hysteria2
-  server: 130.49.161.70
+  sni: hy2.123266.xyz
+- name: '🇫🇮 Finland #27 VLESS'
+  type: vless
+  server: 137.74.16.237
   port: 443
-  password: p7Q76LzlnS4hIzr1W3staBOnUe_WwSkR
+  uuid: aaec4e42-a095-44b6-a239-f16d234a0798
   udp: true
-  sni: hy2.aspidnet.xyz
-- name: '🇱🇻 Latvia #01 Hy2'
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 7LSzvilTVKGMtBDuKGeMrLtlhY7tQf5YcG566dEgO0I
+    short-id: b390e0a721d242b0
+  servername: www.icloud.com
+  client-fingerprint: chrome
+- name: '🌍 Other #11 Hy2'
+  password: github.com/Alvin9999-newpac/fanqiang
+  port: 60111
+  server: 62.210.7.139
+  skip-cert-verify: true
+  sni: bing.com
   type: hysteria2
-  server: pro2.riziro.ir
-  port: 44100
-  password: rjj39jg8iphgd06h
-  udp: true
-  sni: pro2.riziro.ir
-- name: '🇳🇱 Netherlands #02 Hy2'
+- name: '🌍 Other #12 Hy2'
+  password: Krab9Hyst2_Rk7pQ2xL
+  port: 36723
+  server: 151.247.197.253
+  skip-cert-verify: true
+  sni: 'off'
   type: hysteria2
-  server: giftcard.gateway-stream.com
-  port: 52050
-  password: s6gt5e4mof43sfg8
-  udp: true
-  sni: giftcard.gateway-stream.com
-- name: '🇫🇮 Finland #04 Hy2'
+- name: '🌍 Other #13 Hy2'
+  password: 84a506ca5aca505696a454d828420b3f
+  port: 50160
+  server: 140.238.213.114
+  skip-cert-verify: true
+  sni: 'off'
   type: hysteria2
-  server: bwdf2fnt.xn--e1aatfr8bwa.online
-  port: 30000
-  password: tnnls
+- name: '🇵🇱 Poland #04 VLESS'
+  type: vless
+  server: 13.143.166.245
+  port: 443
+  uuid: 2a0b565e-904e-4d3b-a7eb-0725d6a2c7cd
   udp: true
-  sni: bwdf2fnt.xn--e1aatfr8bwa.online
-- name: '🇸🇪 Sweden #01 Hy2'
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: FuKGULeQ9xZMJN8hWz6J_49tDJKT9HA-nsAXOOVRmyM
+    short-id: ff867ed245c73f43
+  servername: cdn.jsdelivr.net
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #28 VLESS'
+  type: vless
+  server: e3k67dwms3-51255166202-direct.tavafog.com
+  port: 443
+  uuid: 593bf46b-8316-5050-9357-d8a41e4db78b
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  servername: e3k67dwms3-51255166202-direct.tavafog.com
+- name: '🇫🇮 Finland #29 VLESS'
+  type: vless
+  server: 95.85.253.241
+  port: 2083
+  uuid: ee0a38e3-d148-48ac-ba99-5133446c2377
+  udp: true
+  network: tcp
+  tls: true
+  servername: 95.85.253.241
+- name: '🇫🇮 Finland #30 VLESS'
+  type: vless
+  server: 95.85.253.241
+  port: 2053
+  uuid: ee0a38e3-d148-48ac-ba99-5133446c2377
+  udp: true
+  network: tcp
+  tls: true
+  servername: 95.85.253.241
+  client-fingerprint: firefox
+- name: '🌍 Other #14 Hy2'
+  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
+  port: 443
+  server: vpn-de-002.fastervpn.world
+  skip-cert-verify: true
+  sni: ''
   type: hysteria2
-  server: giftcard.gateway-stream.com
-  port: 52062
-  password: vz86jgszv4zszchv
+- name: '🇫🇮 Finland #31 VLESS'
+  type: vless
+  server: 2.27.35.55
+  port: 443
+  uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
   udp: true
-  sni: giftcard.gateway-stream.com
-- name: '🇫🇮 Finland #05 Hy2'
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: RTG-xTU5UuKTRrkk8_COe04GiUWrqrSdt9mqSak_XEc
+    short-id: e696e744
+  servername: addons.mozilla.org
+  client-fingerprint: chrome
+- name: '🌍 Other #15 Hy2'
+  password: 488b2611852407f03a681927cb91804b
+  port: 8443
+  server: 107.149.159.190
+  skip-cert-verify: false
+  sni: cf.shiranyu.xyz
   type: hysteria2
-  server: giftcard.gateway-stream.com
-  port: 52090
-  password: xf2ak19a4uajprxg
+- name: '🇨🇱 Chile #01 Hy2'
+  password: mkL3AfdSZIpTWRB9TcWPn9vywPGN89MRHg3ToRDj
+  port: 443
+  server: 91.196.32.163
+  skip-cert-verify: true
+  sni: germany3.h2corp.local
+  tls: false
+  type: hysteria2
+- name: '🌍 Other #16 Hy2'
+  password: gf1:gfhysteria2024
+  port: 443
+  server: 66.94.121.46
+  skip-cert-verify: true
+  sni: ''
+  type: hysteria2
+- name: '🇫🇮 Finland #32 VLESS'
+  type: vless
+  server: 91.107.165.48
+  port: 443
+  uuid: 6f0f17f0-d45c-4584-bf50-a00cb6e423d3
   udp: true
-  sni: giftcard.gateway-stream.com
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: _OmNcv89o5SDt4H3ButRX9UynGIVwNZR250w4Zie-yk
+    short-id: 73693dea6faae051
+  servername: www.actionvfx.com
+  client-fingerprint: firefox
+- name: '🇫🇮 Finland #33 VLESS'
+  type: vless
+  server: 179.198.49.99
+  port: 443
+  uuid: ee18d188-14cc-417e-beb1-70e4add6d023
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: iwHKqXfMtE61bupFq0qdpc8_uGwQswGc3JpLvDVB9Wo
+    short-id: 088b263ae349cc97
+  servername: pl1.nztvpn.com
+  client-fingerprint: safari
+- name: '🇵🇭 Philippines #01 VLESS'
+  type: vless
+  server: 179.61.145.245
+  port: 443
+  uuid: 318c935d-c195-41d3-99ad-9bbcfdab3386
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 0-or5ogGhYbBgsVSrSC2Fhxyp2BN97Y9pqIdg61Qd08
+    short-id: 4be4110078ebed4a
+  servername: de2.srv.vbuste.ru
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #34 VLESS'
+  type: vless
+  server: 177.1.192.72
+  port: 443
+  uuid: 4d852af3-a121-41aa-9aed-4ca40a6f7b4d
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: y3YCXTqEVks0nGfiSwJ43ol4pY69-mWFUZsdmveoVDM
+    short-id: 46455ff0
+  servername: addons.mozilla.org
+  client-fingerprint: chrome
+- name: '🇨🇱 Chile #02 Hy2'
+  password: s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z
+  port: 8443
+  server: 77.74.123.100
+  skip-cert-verify: true
+  sni: grape-test-italy.dynuddns.net
+  tls: false
+  type: hysteria2
+- name: '🇫🇮 Finland #35 VLESS'
+  type: vless
+  server: 177.1.192.74
+  port: 443
+  uuid: 4d852af3-a121-41aa-9aed-4ca40a6f7b4d
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: qC0g7Y0pwyLFTGAPG2zfZNuo64Cda695wdKgLU4KkF8
+    short-id: 770618b6
+  servername: addons.mozilla.org
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #36 VLESS'
+  type: vless
+  server: free-amsterdam-node-1.cloudwidecdn.com
+  port: 443
+  uuid: 44ae52b9-76fc-444d-8e43-186b4384b80a
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: PryGoq51ilG0eLUPl9i0xCvmk1xpwkyFSr_tG4GNLlU
+    short-id: 1d86d17709852910
+  servername: www.apple.com
+  client-fingerprint: chrome
+- name: '🌍 Other #17 Hy2'
+  password: gf1:gfhysteria2024
+  port: 443
+  server: 173.212.201.85
+  skip-cert-verify: true
+  sni: www.docker.com
+  type: hysteria2
+- name: '🇫🇮 Finland #37 VLESS'
+  type: vless
+  server: tyxyrytyro-51255165170-direct.araghchy.com
+  port: 443
+  uuid: tyxyrytyro
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  servername: tyxyrytyro-51255165170-direct.araghchy.com
+  client-fingerprint: chrome
+- name: '🇪🇪 Estonia #01 VLESS'
+  type: vless
+  server: 94.183.170.135
+  port: 8443
+  uuid: 06c4e938-2954-478f-a870-ca1b163e30e9
+  udp: true
+  network: tcp
+  tls: true
+  servername: estproxy4.lockdwn.com
+  client-fingerprint: chrome
+- name: '🌍 Other #18 Hy2'
+  password: s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z
+  port: 8443
+  server: 77.74.123.98
+  skip-cert-verify: true
+  sni: grape-test-italy.dynuddns.net
+  type: hysteria2
+- name: '🌍 Other #19 Hy2'
+  password: s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z
+  port: 8443
+  server: 77.74.123.108
+  skip-cert-verify: true
+  sni: grape-test-italy.dynuddns.net
+  type: hysteria2
+- auth: s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z
+  name: '🇳🇱 Netherlands #01 Hy2'
+  password: s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z
+  port: 8443
+  server: 77.74.123.109
+  skip-cert-verify: true
+  sni: grape-test-italy.dynuddns.net
+  tls: false
+  type: hysteria2
+- name: '🌍 Other #20 VLESS'
+  type: vless
+  server: 93.89.220.37
+  port: 443
+  uuid: 185e2bb3-2934-48d0-bbd5-dd20d16e83ee
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: lwKaUQ81wJUJRsqAPsfTPj5V_f9N50UYEwzRI_nuq2g
+    short-id: e88cb983f3c97528
+  servername: ibm.com
+  client-fingerprint: chrome
+- name: '🌍 Other #21 Hy2'
+  password: 529f1911-04d5-4427-94b9-c851fd459a27
+  port: 443
+  server: 109.235.49.234
+  skip-cert-verify: true
+  sni: tcp-reset-club.net
+  type: hysteria2
+- name: '🇫🇮 Finland #38 VLESS'
+  type: vless
+  server: 216.173.71.43
+  port: 443
+  uuid: ee18d188-14cc-417e-beb1-70e4add6d023
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: miDhSALrcCvSfc38VjCDYlzNh5M61NMR5IkUli7IN08
+    short-id: 0da7e14db353e7d0
+  servername: lv.nztvpn.com
+  client-fingerprint: firefox
+- name: '🇨🇱 Chile #03 Hy2'
+  password: YutbgyXL1mGaSlBXDoEucWvYbrDCINgUcQ6R6_At5Pjr2xCc
+  port: 443
+  server: 45.192.12.93
+  sni: admin.wwwinternetvideo.click
+  tls: false
+  type: hysteria2
+- name: '🇫🇮 Finland #39 VLESS'
+  type: vless
+  server: 31.77.13.19
+  port: 2063
+  uuid: b18d5990-96eb-4587-a386-7f8ef7591e6a
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: MMpt_jWc4J3oySBdf5sPDVRkiWlZmOObth6A1scM9BM
+  servername: rusbid.de
+  client-fingerprint: chrome
+- name: '🌍 Other #22 Hy2'
+  password: Hc9_NX924RE_Mn948rgrwiub_m93V84nll
+  port: 9443
+  server: 5.254.51.109
+  skip-cert-verify: false
+  sni: keyhop-voxility-at.dynuddns.com
+  type: hysteria2
+- name: '🇨🇭 Switzerland #01 Hy2'
+  password: we9_I1893UFj3149xbr1_k8qvJ8734ic_Mx82gH
+  port: 8443
+  server: 82.38.64.237
+  skip-cert-verify: false
+  sni: hopp-swizland-new.mysynology.net
+  tls: false
+  type: hysteria2
+- name: '🌍 Other #23 Hy2'
+  password: we9_I1893UFj3149xbr1_k8qvJ8734ic_Mx82gH
+  port: 8443
+  server: 82.38.64.229
+  skip-cert-verify: true
+  sni: hopp-swizland-new.mysynology.net
+  type: hysteria2
+- name: '🌍 Other #24 Hy2'
+  password: b4c8ee9caa74b7ba0a61
+  port: 35076
+  server: 78.17.128.153
+  skip-cert-verify: true
+  sni: scrap.halyvanedorogo.ru
+  type: hysteria2
+- name: '🇨🇱 Chile #04 Hy2'
+  password: dsmO0439gj_nX942GJRE_9j39fbcxv52_R
+  port: 8080
+  server: 85.209.157.177
+  sni: hopp-transit.1cooldns.com
+  tls: false
+  type: hysteria2
+- name: '🇫🇮 Finland #40 VLESS'
+  type: vless
+  server: 77.72.85.246
+  port: 8443
+  uuid: 6c713691-3ca2-4446-ad25-113d1bed6b03
+  udp: true
+  network: ws
+  tls: true
+  servername: fdghyt.com
+  ws-opts:
+    path: /vpn-wss/fluxor/59011/
+    headers:
+      Host: fdghyt.com
+- name: '🌍 Other #25 Hy2'
+  password: my_super_password_123
+  port: 5443
+  server: 138.2.21.246
+  skip-cert-verify: true
+  sni: open.2ml.cc.cd
+  type: hysteria2
+- name: '🇨🇱 Chile #05 Hy2'
+  password: 865e271f7c97b549b024255c9d02cebe9cc0c2c070a82b1e11bb11b9cd88dd01
+  port: 443
+  server: streambox.wwwinternetvideo.click
+  skip-cert-verify: true
+  sni: streambox.wwwinternetvideo.click
+  tls: false
+  type: hysteria2
+- name: '🌍 Other #26 Hy2'
+  password: my_super_password_123
+  port: 443
+  server: 158.101.148.79
+  skip-cert-verify: true
+  sni: open.2ml.bid
+  type: hysteria2
+- name: '🇫🇮 Finland #41 VLESS'
+  type: vless
+  server: 188.114.97.6
+  port: 443
+  uuid: 698b212d-ca12-4794-8256-252a6e1b4533
+  udp: true
+  network: ws
+  tls: true
+  servername: w2p6.vpnpolar.online
+  client-fingerprint: chrome
+  ws-opts:
+    path: /beeline?ed#Telegram---PLANB_NET---PLANB_NET---PLANB_NET---PLANB_NET
+    headers:
+      Host: w2p6.vpnpolar.online
+- name: '🇫🇮 Finland #42 VLESS'
+  type: vless
+  server: 77.72.85.247
+  port: 8443
+  uuid: 6c713691-3ca2-4446-ad25-113d1bed6b03
+  udp: true
+  network: ws
+  tls: true
+  servername: fdghyt.com
+  ws-opts:
+    path: /vpn-wss/fluxor/59011/
+    headers:
+      Host: fdghyt.com
+- name: '🇫🇮 Finland #43 VLESS'
+  type: vless
+  server: 82.39.171.142
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+  client-fingerprint: chrome
+- name: '🌍 Other #27 Hy2'
+  password: my_super_password_123
+  port: 5443
+  server: 158.101.148.79
+  skip-cert-verify: false
+  sni: open.2ml.bid
+  type: hysteria2
+- name: '🇨🇱 Chile #06 Hy2'
+  password: YutbgyXL1mGaSlBXDoEucWvYbrDCINgUcQ6R6_At5Pjr2xCc
+  port: 443
+  server: admin.wwwinternetvideo.click
+  sni: admin.wwwinternetvideo.click
+  tls: false
+  type: hysteria2
+- name: '🇮🇳 India #01 VLESS'
+  type: vless
+  server: 151.241.226.201
+  port: 2053
+  uuid: 0eed6293-8cf1-4e77-ac10-9c3d50d0b2f8
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: bYW_MmB_CUHrsyoCAUKviI2LZdHf63yY2yOPXbih104
+    short-id: 9e419c0759b54d6f
+  servername: www.apple.com
+  client-fingerprint: chrome
+- auth: e3c3b722-1264-4cdc-a97c-b0a1bb73cd67
+  name: '🇱🇻 Latvia #01 Hy2'
+  password: e3c3b722-1264-4cdc-a97c-b0a1bb73cd67
+  port: 9443
+  server: lv02.gotosvo.com
+  skip-cert-verify: true
+  sni: onecloudstream.com
+  tls: false
+  type: hysteria2
+- name: '🇵🇱 Poland #05 VLESS'
+  type: vless
+  server: 144.31.93.231
+  port: 443
+  uuid: 3710fc0f-5f0c-4b9c-a5d4-40cb419e943a
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: WKN5yaRN05O2WdCURXRmS-yBVYaabaFWOvGudX6ohWc
+    short-id: b97e7d4582b6fa6e
+  servername: yandex.ru
+  client-fingerprint: chrome
+- name: '🌍 Other #28 Hy2'
+  password: 9Me_Jx935gnHx13_Nx45M_NYXe037js_Be4z
+  port: 9443
+  server: 162.249.126.40
+  skip-cert-verify: false
+  sni: hop-germany-september.dynuddns.com
+  type: hysteria2
+- name: '🌍 Other #29 Hy2'
+  password: 184cdec28da5a09450803c8debcd2cc9
+  port: 50160
+  server: 138.3.208.26
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- name: '🌍 Other #30 Hy2'
+  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
+  port: 443
+  server: 160.187.100.109
+  skip-cert-verify: true
+  sni: ''
+  type: hysteria2
 - name: '🇹🇼 Taiwan #01 Hy2'
   type: hysteria2
   server: 103.115.109.49
@@ -302,14 +1271,20 @@ proxies:
   udp: true
   sni: https://t.me/oneclickvpnkeys
   skip-cert-verify: true
-- name: '🇭🇰 Hong Kong #01 Hy2'
-  type: hysteria2
-  server: 202.146.222.29
+- name: '🌍 Other #31 Hy2'
+  password: dd50a499-7e43-4589-8490-f3b9c2451473
   port: 443
-  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
-  udp: true
-  sni: 202.146.222.29
+  server: nl-hy-test.tcp-reset-club.net
   skip-cert-verify: true
+  sni: tcp-reset-club.net
+  type: hysteria2
+- name: '🌍 Other #32 Hy2'
+  password: 529f1911-04d5-4427-94b9-c851fd459a27
+  port: 443
+  server: nl-hy-test.tcp-reset-club.net
+  skip-cert-verify: true
+  sni: tcp-reset-club.net
+  type: hysteria2
 - name: '🇹🇼 Taiwan #02 Hy2'
   type: hysteria2
   server: vpn-tw-002.fastervpn.world
@@ -318,156 +1293,406 @@ proxies:
   udp: true
   sni: 127.0.0.1
   skip-cert-verify: true
-- name: '🇱🇻 Latvia #02 Hy2'
-  type: hysteria2
-  server: hy2-latvia2.unlimited-access.ru
+- name: '🇷🇺 Russia #01 VLESS'
+  type: vless
+  server: 144.31.50.236
   port: 443
-  password: GSPOBvG-ZwYcBFMr0ekFGO_Zga3wK6v_
+  uuid: 1c332eae-7e02-4acd-996d-4eb3e652401c
   udp: true
-  sni: hy2-latvia2.unlimited-access.ru
-- name: '🇺🇸 United States #02 Hy2'
-  type: hysteria2
-  server: hy2.123266.xyz
-  port: 33333
-  password: bce6c821-200d-421f-bf3d-7159e5246ea0
-  udp: true
-  sni: hy2.123266.xyz
-- name: '🇺🇸 United States #03 Hy2'
-  type: hysteria2
-  server: 142.249.37.90
-  port: 44356
-  password: dongtaiwang.com
-  udp: true
-  sni: hy2.561891.xyz
-- name: '🇺🇸 United States #04 Hy2'
-  type: hysteria2
-  server: hy2.561891.xyz
-  port: 44356
-  password: dongtaiwang.com
-  udp: true
-  sni: hy2.561891.xyz
-- name: '🌍 Other #09 Hy2'
-  type: hysteria2
-  server: 8.211.175.236
-  port: 8443
-  password: u63SxILNwtrQZ7Y1ZrFaZfsA
-  udp: true
-  sni: bing.com
-  skip-cert-verify: true
-- name: '🇺🇸 United States #05 Hy2'
-  type: hysteria2
-  server: 129.159.156.109
-  port: 50160
-  password: f25f19f29ce3fb53a35bf1b35b452a43
-  udp: true
-  sni: www.bing.com
-  skip-cert-verify: true
-- name: '🇹🇷 Turkey #01 Hy2'
-  type: hysteria2
-  server: rb.mangshe.xyz
-  port: 2060
-  password: 5d0a6445-a30d-4522-bb1f-94f1d3ad63be
-  udp: true
-  sni: 127.0.0.1
-  skip-cert-verify: true
-- name: '🌍 Other #10 Hy2'
-  password: 184cdec28da5a09450803c8debcd2cc9
-  port: 50160
-  server: 138.3.208.26
-  skip-cert-verify: true
-  sni: 'off'
-  type: hysteria2
-- name: '🌍 Other #11 Hy2'
-  password: my_super_password_123
-  port: 443
-  server: 158.101.148.79
-  skip-cert-verify: true
-  sni: 158.101.148.79
-  type: hysteria2
-- name: '🌍 Other #12 Hy2'
-  password: my_super_password_123
-  port: 5443
-  server: 138.2.21.246
-  skip-cert-verify: true
-  sni: open.2ml.cc.cd
-  type: hysteria2
-- name: '🌍 Other #13 Hy2'
-  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
-  port: 443
-  server: 202.146.222.174
-  skip-cert-verify: true
-  sni: t.me
-  type: hysteria2
-- name: '🌍 Other #14 Hy2'
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: uitO4Z8t9TplwwYaqwLqh5rfxDh_X8bOBiNuPbzvaEM
+    short-id: bbe46bd8f6b96839
+  servername: yandex.ru
+  client-fingerprint: chrome
+- name: '🌍 Other #33 Hy2'
   password: H7mP2xY9kJ4nQ9wR5tF6vB3z
   port: 443
   server: 3.34.95.215
   skip-cert-verify: true
   sni: vpn-kr-002.fastervpn.world
   type: hysteria2
-- name: '🌍 Other #15 Hy2'
-  password: 3d7634af8cb2c6cb4bac1c0efad8b43d
-  port: 50160
-  server: 152.67.200.82
-  skip-cert-verify: true
-  sni: vk.com
-  type: hysteria2
-- name: '🌍 Other #16 Hy2'
-  password: my_super_password_123
-  port: 5443
-  server: 158.101.148.79
+- name: '🇫🇮 Finland #44 VLESS'
+  type: vless
+  server: 200.165.231.209
+  port: 443
+  uuid: ff0b6ba8-bed0-4c4d-bbc9-23af47582615
+  udp: true
+  network: ws
+  tls: true
+  servername: wstg.datasynctrue.online
+  ws-opts:
+    path: /api/connect
+    headers:
+      Host: wstg.datasynctrue.online
+- name: '🌍 Other #34 Hy2'
+  password: 96ab5cd282733fd4c312a61f972f330a
+  port: 443
+  server: 45.32.10.7
   skip-cert-verify: false
-  sni: open.2ml.bid
+  sni: vp3.yysyy.online
   type: hysteria2
-- name: '🌍 Other #17 Hy2'
+- name: '🌍 Other #35 Hy2'
+  password: H7mP2xY9kJ4nQ9wR5tF6vB3z
+  port: 443
+  server: 54.180.231.160
+  skip-cert-verify: true
+  sni: vpn-kr-002.fastervpn.world
+  type: hysteria2
+- name: '🌍 Other #36 Hy2'
   password: H7mP2xY9kJ4nQ8wR5tF6vB3z
   port: 443
   server: 202.146.222.89
   skip-cert-verify: true
   sni: t.me
   type: hysteria2
-- name: '🌍 Other #18 Hy2'
+- name: '🌍 Other #37 Hy2'
+  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
+  port: 443
+  server: vpn-au-001.fastervpn.world
+  skip-cert-verify: true
+  sni: 127.0.0.1
+  type: hysteria2
+- name: '🌍 Other #38 Hy2'
   password: 1671a252e2a97dc2bda4e515475931da
   port: 50160
   server: 132.226.226.189
   skip-cert-verify: true
-  sni: 132.226.226.189
+  sni: ''
   type: hysteria2
-- name: '🌍 Other #19 Hy2'
-  password: 96ab5cd282733fd4c312a61f972f330a
-  port: 443
-  server: 45.32.10.7
-  skip-cert-verify: true
-  sni: vp3.yysyy.online
-  type: hysteria2
-- name: '🌍 Other #20 Hy2'
+- name: '🌍 Other #39 Hy2'
   password: maintell
   port: 2053
   server: 152.70.237.123
   skip-cert-verify: true
-  sni: bing.com
+  sni: 152.70.237.123
   type: hysteria2
-- name: '🌍 Other #21 Hy2'
-  password: 099830134df5ac3a04a4b21d39b8c395
-  port: 50160
-  server: 163.192.14.135
-  skip-cert-verify: true
-  sni: whatsapp.com
-  type: hysteria2
-- name: '🌍 Other #22 Hy2'
-  password: my_super_password_123
+- name: '🌍 Other #40 Hy2'
+  password: H7mP2xY9kJ4nQ9wR5tF6vB3z
   port: 443
-  server: open.2ml.bid
+  server: 3.38.115.120
   skip-cert-verify: true
-  sni: ''
+  sni: vpn-kr-002.fastervpn.world
   type: hysteria2
-- name: '🌍 Other #23 Hy2'
+- name: '🌍 Other #41 Hy2'
+  password: H7mP2xY9kJ4nQ9wR5tF6vB3z
+  port: 443
+  server: vpn-kr-002.fastervpn.world
+  skip-cert-verify: true
+  sni: 127.0.0.1
+  type: hysteria2
+- name: '🇭🇰 Hong Kong #01 Hy2'
+  type: hysteria2
+  server: 202.146.222.29
+  port: 443
+  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
+  udp: true
+  sni: 202.146.222.29
+  skip-cert-verify: true
+- name: '🌍 Other #42 Hy2'
+  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
+  port: 443
+  server: 202.146.222.174
+  skip-cert-verify: true
+  sni: t.me
+  type: hysteria2
+- name: '🌍 Other #43 Hy2'
   password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
   server: vp3.yysyy.online
   skip-cert-verify: true
   sni: vp3.yysyy.online
   type: hysteria2
+- name: '🌍 Other #44 Hy2'
+  password: H7mP2xY9kJ4nQ9wR5tF6vB3z
+  port: 443
+  server: 13.124.119.204
+  skip-cert-verify: true
+  sni: vpn-kr-002.fastervpn.world
+  type: hysteria2
+- name: '🌍 Other #45 Hy2'
+  password: WvH8ooM9hom4KOOJHFJz1x5umE0aV4R0
+  port: 8443
+  server: 43.156.36.253
+  skip-cert-verify: true
+  sni: tx-hy2
+  type: hysteria2
+- name: '🌍 Other #46 Hy2'
+  password: 3d7634af8cb2c6cb4bac1c0efad8b43d
+  port: 50160
+  server: 152.67.200.82
+  skip-cert-verify: true
+  sni: whatsapp.com
+  type: hysteria2
+- name: '🇫🇮 Finland #45 VLESS'
+  type: vless
+  server: 54.251.9.130
+  port: 24146
+  uuid: 9d9a048b-3aea-4b3e-b106-1106bf301feb
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: VeluC9A7XDurAWQNgXKShS2SJSgoK79QHFgiAMYrvGo
+    short-id: 7205d9079521832c
+  servername: www.intel.com
+  client-fingerprint: chrome
+- name: '🌍 Other #47 Hy2'
+  password: f87376e17da040ed04c9665ce8972930
+  port: 50160
+  server: 138.2.73.238
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- name: '🇩🇪 Germany #03 VLESS'
+  type: vless
+  server: prep.wwwinternetvideo.click
+  port: 443
+  uuid: 1c332eae-7e02-4acd-996d-4eb3e652401c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: uitO4Z8t9TplwwYaqwLqh5rfxDh_X8bOBiNuPbzvaEM
+    short-id: bbe46bd8f6b96839
+  servername: yandex.ru
+  client-fingerprint: chrome
+- name: '🌍 Other #48 Hy2'
+  password: 83rwy5zazcx1f4i6
+  port: 443
+  server: top.bostnet.xyz
+  skip-cert-verify: true
+  sni: ''
+  type: hysteria2
+- name: '🌍 Other #49 VLESS'
+  type: vless
+  server: hinet1.2yly.com
+  port: 24215
+  uuid: 19d5a678-8396-4e3b-93da-ece618d0e83a
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE
+  servername: addons.mozilla.org
+  client-fingerprint: chrome
+- name: '🇩🇪 Germany #04 VLESS'
+  type: vless
+  server: 103.86.49.57
+  port: 80
+  uuid: 3c52e091-6714-4915-949f-2149fe69951b
+  udp: true
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: aIs.SpEeDtEsT.nEt
+- name: '🌍 Other #50 Hy2'
+  password: c-E0lamG8OnEj9M_uh3oJPmIXqYIVGctO-NHELF1TmNYs7Jl
+  port: 443
+  server: cz.h2.cleanersaz.help
+  skip-cert-verify: false
+  sni: cz.h2.cleanersaz.help
+  type: hysteria2
+- name: '🇫🇮 Finland #46 VLESS'
+  type: vless
+  server: pl-waw.dontblockmepls.com
+  port: 2063
+  uuid: b18d5990-96eb-4587-a386-7f8ef7591e6a
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: MMpt_jWc4J3oySBdf5sPDVRkiWlZmOObth6A1scM9BM
+  servername: rusbid.de
+  client-fingerprint: firefox
+- name: '🌍 Other #51 Hy2'
+  password: my_super_password_123
+  port: 443
+  server: open.2ml.bid
+  skip-cert-verify: true
+  sni: ''
+  type: hysteria2
+- name: '🌍 Other #52 Hy2'
+  password: my_super_password_123
+  port: 5443
+  server: open.2ml.bid
+  skip-cert-verify: false
+  sni: ''
+  type: hysteria2
+- name: '🌍 Other #53 VLESS'
+  type: vless
+  server: 90.127.143.135
+  port: 443
+  uuid: 489f1717-d3c7-4940-ad68-bdbdbab857f4
+  udp: true
+  network: ws
+  tls: true
+  servername: x.m-90.xyz
+  client-fingerprint: chrome
+  ws-opts:
+    path: t.me/TEAMNETGRATISCOL
+    headers:
+      Host: x.m-90.xyz
+- name: '🇺🇸 United States #08 Hy2'
+  password: b8949dae-cb53-4b5a-ad9c-50f58c4656fb
+  port: 19512
+  server: us1.xiaoliyu.us
+  skip-cert-verify: true
+  sni: us1.xiaoliyu.us
+  type: hysteria2
+- name: '🇸🇬 Singapore #02 VLESS'
+  type: vless
+  server: 46.137.202.178
+  port: 12512
+  uuid: 2a6c617d-98e4-49c3-95ab-76f02fcf0150
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: sO0RBMr_l8TLtZaYBX8n3NdI9AtaugUqJpCR1szNsyA
+    short-id: e692a8250d2e2fd0
+  servername: www.intel.com
+  client-fingerprint: chrome
+- name: '🌍 Other #54 Hy2'
+  password: HysTeria2026!Proxy
+  port: 8443
+  server: 43.161.230.103
+  skip-cert-verify: true
+  sni: mz.hkychina.com
+  type: hysteria2
+- name: '🌍 Other #55 Hy2'
+  password: b0917015b656b3dd2286b5633af0c5c1
+  port: 50160
+  server: 31.57.248.176
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- name: '🇫🇮 Finland #47 VLESS'
+  type: vless
+  server: 216.173.67.59
+  port: 443
+  uuid: d342d11e-d224-4463-b982-532309285094
+  udp: true
+  network: ws
+  tls: true
+  servername: ccc.010304.xyz
+  client-fingerprint: chrome
+  ws-opts:
+    path: /
+    headers:
+      Host: ccc.010304.xyz
+- name: '🇫🇮 Finland #48 VLESS'
+  type: vless
+  server: 45.153.130.119
+  port: 44988
+  uuid: 57beeeb0-03fc-4fc9-94da-7604488a7134
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: f6Tj8-uvWsLv3V-lGLuPciArp5oKqUImBg-U7-WJ-0A
+    short-id: bb82c8
+  servername: www.tesla.com
+  client-fingerprint: safari
+- name: '🌍 Other #56 Hy2'
+  password: b8949dae-cb53-4b5a-ad9c-50f58c4656fb
+  port: 19512
+  server: 23.170.40.39
+  skip-cert-verify: false
+  sni: us1.xiaoliyu.us
+  type: hysteria2
+- name: '🌍 Other #57 Hy2'
+  password: HysTeria2026!Proxy
+  port: 8443
+  server: mz.hkychina.com
+  skip-cert-verify: true
+  sni: mz.hkychina.com
+  type: hysteria2
+- name: '🌍 Other #58 Hy2'
+  password: my_super_password_123
+  port: 5443
+  server: open.2ml.cc.cd
+  skip-cert-verify: true
+  sni: 'off'
+  type: hysteria2
+- name: '🌍 Other #59 VLESS'
+  type: vless
+  server: 107.181.151.241
+  port: 443
+  uuid: 455cfdc6-9abf-4e40-863f-5ff6cc63457c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: FjcEZNQ8t5E4R04_11T6ghsOutdqwKKrelkuadakoQg
+    short-id: 18e4d2d21241
+  servername: www.microsoft.com
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #49 VLESS'
+  type: vless
+  server: 8.47.69.0
+  port: 2053
+  uuid: 9d672694-c146-422e-b3b5-3717a38a0fcc
+  udp: true
+  network: ws
+  tls: true
+  servername: vless.api-music-fa.com
+  client-fingerprint: qq
+  ws-opts:
+    path: /api/voip/updates/static/fr2035
+    headers:
+      Host: fr.api-music-fa.com
+- name: '🇹🇷 Turkey #01 Hy2'
+  type: hysteria2
+  server: rb.mangshe.xyz
+  port: 2060
+  password: 5d0a6445-a30d-4522-bb1f-94f1d3ad63be
+  udp: true
+  sni: rb.mangshe.xyz
+  skip-cert-verify: true
+- name: '🇫🇮 Finland #50 VLESS'
+  type: vless
+  server: server.slavkiti.monster
+  port: 443
+  uuid: fad0b9a6-187d-4fcc-96fc-498bc5b3135a
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk
+    short-id: 8325360e8bd2
+  servername: www.foxsports.com
+  client-fingerprint: chrome
+- name: '🌍 Other #60 Hy2'
+  password: github.com/Alvin9999-newpac/fanqiang
+  port: 43115
+  server: 62.210.147.2
+  skip-cert-verify: true
+  sni: www.microsoft.com
+  type: hysteria2
+- name: '🇫🇮 Finland #51 VLESS'
+  type: vless
+  server: 203.202.232.211
+  port: 443
+  uuid: d342d11e-d224-4463-b982-532309285094
+  udp: true
+  network: ws
+  tls: true
+  servername: ccc.010304.xyz
+  ws-opts:
+    path: /fp=chrome
+    headers:
+      Host: ccc.010304.xyz
 
 proxy-groups:
 - name: 🎯 zorVPN
@@ -479,72 +1704,181 @@ proxy-groups:
   - 🎬 Streaming
   - 🇺🇸 United States
   - 🇭🇰 Hong Kong
+  - 🇸🇬 Singapore
   - 🇩🇪 Germany
   - 🇳🇱 Netherlands
   - 🇹🇼 Taiwan
+  - 🇨🇦 Canada
+  - 🇦🇺 Australia
   - 🇷🇺 Russia
-  - 🇸🇪 Sweden
   - 🇹🇷 Turkey
+  - 🇪🇪 Estonia
   - 🇱🇻 Latvia
   - 🇮🇳 India
+  - 🇵🇱 Poland
   - 🇷🇴 Romania
-  - 🇦🇹 Austria
+  - 🇨🇱 Chile
+  - 🇨🇭 Switzerland
   - 🇫🇮 Finland
+  - 🇵🇭 Philippines
   - 🌍 Other
   - DIRECT
 - name: ⚡ Fastest
   type: url-test
   proxies:
-  - '🇩🇪 Germany #01 Hy2'
-  - '🇺🇸 United States #01 Hy2'
   - '🌍 Other #01 Hy2'
-  - '🇷🇴 Romania #01 Hy2'
-  - '🌍 Other #02 Hy2'
-  - '🇷🇺 Russia #01 Hy2'
-  - '🇫🇮 Finland #01 Hy2'
-  - '🌍 Other #03 Hy2'
-  - '🇩🇪 Germany #02 Hy2'
-  - '🌍 Other #04 Hy2'
-  - '🇷🇴 Romania #02 Hy2'
-  - '🇷🇴 Romania #03 Hy2'
-  - '🌍 Other #05 Hy2'
-  - '🇦🇹 Austria #01 Hy2'
-  - '🇳🇱 Netherlands #01 Hy2'
-  - '🇮🇳 India #01 Hy2'
+  - '🇫🇮 Finland #01 VLESS'
+  - '🇫🇮 Finland #02 VLESS'
+  - '🇫🇮 Finland #03 VLESS'
+  - '🇫🇮 Finland #04 VLESS'
+  - '🇩🇪 Germany #01 VLESS'
+  - '🇨🇦 Canada #01 VLESS'
+  - '🇵🇱 Poland #01 VLESS'
+  - '🇫🇮 Finland #05 VLESS'
+  - '🌍 Other #02 VLESS'
+  - '🇨🇦 Canada #02 VLESS'
+  - '🇫🇮 Finland #06 VLESS'
+  - '🇫🇮 Finland #07 VLESS'
+  - '🇫🇮 Finland #08 VLESS'
+  - '🇩🇪 Germany #02 VLESS'
+  - '🌍 Other #03 VLESS'
+  - '🌍 Other #04 VLESS'
+  - '🇺🇸 United States #01 VLESS'
+  - '🇷🇴 Romania #01 VLESS'
+  - '🇫🇮 Finland #09 VLESS'
+  - '🇺🇸 United States #02 VLESS'
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇫🇮 Finland #10 VLESS'
+  - '🇫🇮 Finland #11 VLESS'
+  - '🇵🇱 Poland #02 VLESS'
+  - '🇵🇱 Poland #03 VLESS'
+  - '🇫🇮 Finland #12 VLESS'
+  - '🇫🇮 Finland #13 VLESS'
+  - '🇫🇮 Finland #14 VLESS'
+  - '🇫🇮 Finland #15 VLESS'
+  - '🇫🇮 Finland #16 VLESS'
+  - '🇫🇮 Finland #17 VLESS'
+  - '🇫🇮 Finland #18 VLESS'
+  - '🇫🇮 Finland #19 VLESS'
+  - '🇨🇦 Canada #03 VLESS'
+  - '🇫🇮 Finland #20 VLESS'
+  - '🇦🇺 Australia #01 VLESS'
+  - '🇫🇮 Finland #21 VLESS'
+  - '🇫🇮 Finland #22 VLESS'
+  - '🇫🇮 Finland #23 VLESS'
+  - '🇨🇦 Canada #04 VLESS'
+  - '🇫🇮 Finland #24 VLESS'
+  - '🇺🇸 United States #03 VLESS'
+  - '🌍 Other #05 VLESS'
   - '🌍 Other #06 Hy2'
-  - '🇫🇮 Finland #02 Hy2'
-  - '🌍 Other #07 Hy2'
-  - '🌍 Other #08 Hy2'
-  - '🇫🇮 Finland #03 Hy2'
-  - '🇱🇻 Latvia #01 Hy2'
-  - '🇳🇱 Netherlands #02 Hy2'
-  - '🇫🇮 Finland #04 Hy2'
-  - '🇸🇪 Sweden #01 Hy2'
-  - '🇫🇮 Finland #05 Hy2'
-  - '🇹🇼 Taiwan #01 Hy2'
-  - '🇭🇰 Hong Kong #01 Hy2'
-  - '🇹🇼 Taiwan #02 Hy2'
-  - '🇱🇻 Latvia #02 Hy2'
-  - '🇺🇸 United States #02 Hy2'
-  - '🇺🇸 United States #03 Hy2'
-  - '🇺🇸 United States #04 Hy2'
-  - '🌍 Other #09 Hy2'
+  - '🌍 Other #07 VLESS'
+  - '🇺🇸 United States #04 VLESS'
+  - '🌍 Other #08 VLESS'
   - '🇺🇸 United States #05 Hy2'
-  - '🇹🇷 Turkey #01 Hy2'
+  - '🇺🇸 United States #06 Hy2'
+  - '🌍 Other #09 Hy2'
   - '🌍 Other #10 Hy2'
+  - '🇫🇮 Finland #25 VLESS'
+  - '🇫🇮 Finland #26 VLESS'
+  - '🇺🇸 United States #07 Hy2'
+  - '🇫🇮 Finland #27 VLESS'
   - '🌍 Other #11 Hy2'
   - '🌍 Other #12 Hy2'
   - '🌍 Other #13 Hy2'
+  - '🇵🇱 Poland #04 VLESS'
+  - '🇫🇮 Finland #28 VLESS'
+  - '🇫🇮 Finland #29 VLESS'
+  - '🇫🇮 Finland #30 VLESS'
   - '🌍 Other #14 Hy2'
+  - '🇫🇮 Finland #31 VLESS'
   - '🌍 Other #15 Hy2'
+  - '🇨🇱 Chile #01 Hy2'
   - '🌍 Other #16 Hy2'
+  - '🇫🇮 Finland #32 VLESS'
+  - '🇫🇮 Finland #33 VLESS'
+  - '🇵🇭 Philippines #01 VLESS'
+  - '🇫🇮 Finland #34 VLESS'
+  - '🇨🇱 Chile #02 Hy2'
+  - '🇫🇮 Finland #35 VLESS'
+  - '🇫🇮 Finland #36 VLESS'
   - '🌍 Other #17 Hy2'
+  - '🇫🇮 Finland #37 VLESS'
+  - '🇪🇪 Estonia #01 VLESS'
   - '🌍 Other #18 Hy2'
   - '🌍 Other #19 Hy2'
-  - '🌍 Other #20 Hy2'
+  - '🇳🇱 Netherlands #01 Hy2'
+  - '🌍 Other #20 VLESS'
   - '🌍 Other #21 Hy2'
+  - '🇫🇮 Finland #38 VLESS'
+  - '🇨🇱 Chile #03 Hy2'
+  - '🇫🇮 Finland #39 VLESS'
   - '🌍 Other #22 Hy2'
+  - '🇨🇭 Switzerland #01 Hy2'
   - '🌍 Other #23 Hy2'
+  - '🌍 Other #24 Hy2'
+  - '🇨🇱 Chile #04 Hy2'
+  - '🇫🇮 Finland #40 VLESS'
+  - '🌍 Other #25 Hy2'
+  - '🇨🇱 Chile #05 Hy2'
+  - '🌍 Other #26 Hy2'
+  - '🇫🇮 Finland #41 VLESS'
+  - '🇫🇮 Finland #42 VLESS'
+  - '🇫🇮 Finland #43 VLESS'
+  - '🌍 Other #27 Hy2'
+  - '🇨🇱 Chile #06 Hy2'
+  - '🇮🇳 India #01 VLESS'
+  - '🇱🇻 Latvia #01 Hy2'
+  - '🇵🇱 Poland #05 VLESS'
+  - '🌍 Other #28 Hy2'
+  - '🌍 Other #29 Hy2'
+  - '🌍 Other #30 Hy2'
+  - '🇹🇼 Taiwan #01 Hy2'
+  - '🌍 Other #31 Hy2'
+  - '🌍 Other #32 Hy2'
+  - '🇹🇼 Taiwan #02 Hy2'
+  - '🇷🇺 Russia #01 VLESS'
+  - '🌍 Other #33 Hy2'
+  - '🇫🇮 Finland #44 VLESS'
+  - '🌍 Other #34 Hy2'
+  - '🌍 Other #35 Hy2'
+  - '🌍 Other #36 Hy2'
+  - '🌍 Other #37 Hy2'
+  - '🌍 Other #38 Hy2'
+  - '🌍 Other #39 Hy2'
+  - '🌍 Other #40 Hy2'
+  - '🌍 Other #41 Hy2'
+  - '🇭🇰 Hong Kong #01 Hy2'
+  - '🌍 Other #42 Hy2'
+  - '🌍 Other #43 Hy2'
+  - '🌍 Other #44 Hy2'
+  - '🌍 Other #45 Hy2'
+  - '🌍 Other #46 Hy2'
+  - '🇫🇮 Finland #45 VLESS'
+  - '🌍 Other #47 Hy2'
+  - '🇩🇪 Germany #03 VLESS'
+  - '🌍 Other #48 Hy2'
+  - '🌍 Other #49 VLESS'
+  - '🇩🇪 Germany #04 VLESS'
+  - '🌍 Other #50 Hy2'
+  - '🇫🇮 Finland #46 VLESS'
+  - '🌍 Other #51 Hy2'
+  - '🌍 Other #52 Hy2'
+  - '🌍 Other #53 VLESS'
+  - '🇺🇸 United States #08 Hy2'
+  - '🇸🇬 Singapore #02 VLESS'
+  - '🌍 Other #54 Hy2'
+  - '🌍 Other #55 Hy2'
+  - '🇫🇮 Finland #47 VLESS'
+  - '🇫🇮 Finland #48 VLESS'
+  - '🌍 Other #56 Hy2'
+  - '🌍 Other #57 Hy2'
+  - '🌍 Other #58 Hy2'
+  - '🌍 Other #59 VLESS'
+  - '🇫🇮 Finland #49 VLESS'
+  - '🇹🇷 Turkey #01 Hy2'
+  - '🇫🇮 Finland #50 VLESS'
+  - '🌍 Other #60 Hy2'
+  - '🇫🇮 Finland #51 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
@@ -554,49 +1888,69 @@ proxy-groups:
   - ⚡ Fastest
   - 🇺🇸 United States
   - 🇭🇰 Hong Kong
+  - 🇸🇬 Singapore
   - 🇩🇪 Germany
   - 🇳🇱 Netherlands
   - 🇹🇼 Taiwan
-  - 🇷🇺 Russia
-  - 🇸🇪 Sweden
-  - 🇹🇷 Turkey
+  - 🇨🇦 Canada
+  - 🇦🇺 Australia
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🤖 AI Services
   type: url-test
   proxies:
-  - '🇩🇪 Germany #01 Hy2'
-  - '🇺🇸 United States #01 Hy2'
-  - '🇩🇪 Germany #02 Hy2'
-  - '🇺🇸 United States #02 Hy2'
-  - '🇺🇸 United States #03 Hy2'
-  - '🇺🇸 United States #04 Hy2'
+  - '🇩🇪 Germany #01 VLESS'
+  - '🇨🇦 Canada #01 VLESS'
+  - '🇨🇦 Canada #02 VLESS'
+  - '🇩🇪 Germany #02 VLESS'
+  - '🇺🇸 United States #01 VLESS'
+  - '🇺🇸 United States #02 VLESS'
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇨🇦 Canada #03 VLESS'
+  - '🇦🇺 Australia #01 VLESS'
+  - '🇨🇦 Canada #04 VLESS'
+  - '🇺🇸 United States #03 VLESS'
+  - '🇺🇸 United States #04 VLESS'
   - '🇺🇸 United States #05 Hy2'
+  - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
+  - '🇩🇪 Germany #03 VLESS'
+  - '🇩🇪 Germany #04 VLESS'
+  - '🇺🇸 United States #08 Hy2'
+  - '🇸🇬 Singapore #02 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
 - name: 🎬 Streaming
   type: url-test
   proxies:
-  - '🇺🇸 United States #01 Hy2'
-  - '🇹🇼 Taiwan #01 Hy2'
-  - '🇭🇰 Hong Kong #01 Hy2'
-  - '🇹🇼 Taiwan #02 Hy2'
-  - '🇺🇸 United States #02 Hy2'
-  - '🇺🇸 United States #03 Hy2'
-  - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #01 VLESS'
+  - '🇺🇸 United States #02 VLESS'
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇺🇸 United States #03 VLESS'
+  - '🇺🇸 United States #04 VLESS'
   - '🇺🇸 United States #05 Hy2'
+  - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
+  - '🇹🇼 Taiwan #01 Hy2'
+  - '🇹🇼 Taiwan #02 Hy2'
+  - '🇭🇰 Hong Kong #01 Hy2'
+  - '🇺🇸 United States #08 Hy2'
+  - '🇸🇬 Singapore #02 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
 - name: 🇺🇸 United States
   type: url-test
   proxies:
-  - '🇺🇸 United States #01 Hy2'
-  - '🇺🇸 United States #02 Hy2'
-  - '🇺🇸 United States #03 Hy2'
-  - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #01 VLESS'
+  - '🇺🇸 United States #02 VLESS'
+  - '🇺🇸 United States #03 VLESS'
+  - '🇺🇸 United States #04 VLESS'
   - '🇺🇸 United States #05 Hy2'
+  - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
+  - '🇺🇸 United States #08 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇭🇰 Hong Kong
@@ -605,18 +1959,26 @@ proxy-groups:
   - '🇭🇰 Hong Kong #01 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
+- name: 🇸🇬 Singapore
+  type: url-test
+  proxies:
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇸🇬 Singapore #02 VLESS'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
 - name: 🇩🇪 Germany
   type: url-test
   proxies:
-  - '🇩🇪 Germany #01 Hy2'
-  - '🇩🇪 Germany #02 Hy2'
+  - '🇩🇪 Germany #01 VLESS'
+  - '🇩🇪 Germany #02 VLESS'
+  - '🇩🇪 Germany #03 VLESS'
+  - '🇩🇪 Germany #04 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇳🇱 Netherlands
   type: url-test
   proxies:
   - '🇳🇱 Netherlands #01 Hy2'
-  - '🇳🇱 Netherlands #02 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇹🇼 Taiwan
@@ -626,16 +1988,25 @@ proxy-groups:
   - '🇹🇼 Taiwan #02 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
+- name: 🇨🇦 Canada
+  type: url-test
+  proxies:
+  - '🇨🇦 Canada #01 VLESS'
+  - '🇨🇦 Canada #02 VLESS'
+  - '🇨🇦 Canada #03 VLESS'
+  - '🇨🇦 Canada #04 VLESS'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+- name: 🇦🇺 Australia
+  type: url-test
+  proxies:
+  - '🇦🇺 Australia #01 VLESS'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
 - name: 🇷🇺 Russia
   type: url-test
   proxies:
-  - '🇷🇺 Russia #01 Hy2'
-  url: http://www.gstatic.com/generate_204
-  interval: 300
-- name: 🇸🇪 Sweden
-  type: url-test
-  proxies:
-  - '🇸🇪 Sweden #01 Hy2'
+  - '🇷🇺 Russia #01 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇹🇷 Turkey
@@ -644,54 +2015,130 @@ proxy-groups:
   - '🇹🇷 Turkey #01 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
+- name: 🇪🇪 Estonia
+  type: url-test
+  proxies:
+  - '🇪🇪 Estonia #01 VLESS'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
 - name: 🇱🇻 Latvia
   type: url-test
   proxies:
   - '🇱🇻 Latvia #01 Hy2'
-  - '🇱🇻 Latvia #02 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇮🇳 India
   type: url-test
   proxies:
-  - '🇮🇳 India #01 Hy2'
+  - '🇮🇳 India #01 VLESS'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+- name: 🇵🇱 Poland
+  type: url-test
+  proxies:
+  - '🇵🇱 Poland #01 VLESS'
+  - '🇵🇱 Poland #02 VLESS'
+  - '🇵🇱 Poland #03 VLESS'
+  - '🇵🇱 Poland #04 VLESS'
+  - '🇵🇱 Poland #05 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇷🇴 Romania
   type: url-test
   proxies:
-  - '🇷🇴 Romania #01 Hy2'
-  - '🇷🇴 Romania #02 Hy2'
-  - '🇷🇴 Romania #03 Hy2'
+  - '🇷🇴 Romania #01 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
-- name: 🇦🇹 Austria
+- name: 🇨🇱 Chile
   type: url-test
   proxies:
-  - '🇦🇹 Austria #01 Hy2'
+  - '🇨🇱 Chile #01 Hy2'
+  - '🇨🇱 Chile #02 Hy2'
+  - '🇨🇱 Chile #03 Hy2'
+  - '🇨🇱 Chile #04 Hy2'
+  - '🇨🇱 Chile #05 Hy2'
+  - '🇨🇱 Chile #06 Hy2'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+- name: 🇨🇭 Switzerland
+  type: url-test
+  proxies:
+  - '🇨🇭 Switzerland #01 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇫🇮 Finland
   type: url-test
   proxies:
-  - '🇫🇮 Finland #01 Hy2'
-  - '🇫🇮 Finland #02 Hy2'
-  - '🇫🇮 Finland #03 Hy2'
-  - '🇫🇮 Finland #04 Hy2'
-  - '🇫🇮 Finland #05 Hy2'
+  - '🇫🇮 Finland #01 VLESS'
+  - '🇫🇮 Finland #02 VLESS'
+  - '🇫🇮 Finland #03 VLESS'
+  - '🇫🇮 Finland #04 VLESS'
+  - '🇫🇮 Finland #05 VLESS'
+  - '🇫🇮 Finland #06 VLESS'
+  - '🇫🇮 Finland #07 VLESS'
+  - '🇫🇮 Finland #08 VLESS'
+  - '🇫🇮 Finland #09 VLESS'
+  - '🇫🇮 Finland #10 VLESS'
+  - '🇫🇮 Finland #11 VLESS'
+  - '🇫🇮 Finland #12 VLESS'
+  - '🇫🇮 Finland #13 VLESS'
+  - '🇫🇮 Finland #14 VLESS'
+  - '🇫🇮 Finland #15 VLESS'
+  - '🇫🇮 Finland #16 VLESS'
+  - '🇫🇮 Finland #17 VLESS'
+  - '🇫🇮 Finland #18 VLESS'
+  - '🇫🇮 Finland #19 VLESS'
+  - '🇫🇮 Finland #20 VLESS'
+  - '🇫🇮 Finland #21 VLESS'
+  - '🇫🇮 Finland #22 VLESS'
+  - '🇫🇮 Finland #23 VLESS'
+  - '🇫🇮 Finland #24 VLESS'
+  - '🇫🇮 Finland #25 VLESS'
+  - '🇫🇮 Finland #26 VLESS'
+  - '🇫🇮 Finland #27 VLESS'
+  - '🇫🇮 Finland #28 VLESS'
+  - '🇫🇮 Finland #29 VLESS'
+  - '🇫🇮 Finland #30 VLESS'
+  - '🇫🇮 Finland #31 VLESS'
+  - '🇫🇮 Finland #32 VLESS'
+  - '🇫🇮 Finland #33 VLESS'
+  - '🇫🇮 Finland #34 VLESS'
+  - '🇫🇮 Finland #35 VLESS'
+  - '🇫🇮 Finland #36 VLESS'
+  - '🇫🇮 Finland #37 VLESS'
+  - '🇫🇮 Finland #38 VLESS'
+  - '🇫🇮 Finland #39 VLESS'
+  - '🇫🇮 Finland #40 VLESS'
+  - '🇫🇮 Finland #41 VLESS'
+  - '🇫🇮 Finland #42 VLESS'
+  - '🇫🇮 Finland #43 VLESS'
+  - '🇫🇮 Finland #44 VLESS'
+  - '🇫🇮 Finland #45 VLESS'
+  - '🇫🇮 Finland #46 VLESS'
+  - '🇫🇮 Finland #47 VLESS'
+  - '🇫🇮 Finland #48 VLESS'
+  - '🇫🇮 Finland #49 VLESS'
+  - '🇫🇮 Finland #50 VLESS'
+  - '🇫🇮 Finland #51 VLESS'
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+- name: 🇵🇭 Philippines
+  type: url-test
+  proxies:
+  - '🇵🇭 Philippines #01 VLESS'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🌍 Other
   type: url-test
   proxies:
   - '🌍 Other #01 Hy2'
-  - '🌍 Other #02 Hy2'
-  - '🌍 Other #03 Hy2'
-  - '🌍 Other #04 Hy2'
-  - '🌍 Other #05 Hy2'
+  - '🌍 Other #02 VLESS'
+  - '🌍 Other #03 VLESS'
+  - '🌍 Other #04 VLESS'
+  - '🌍 Other #05 VLESS'
   - '🌍 Other #06 Hy2'
-  - '🌍 Other #07 Hy2'
-  - '🌍 Other #08 Hy2'
+  - '🌍 Other #07 VLESS'
+  - '🌍 Other #08 VLESS'
   - '🌍 Other #09 Hy2'
   - '🌍 Other #10 Hy2'
   - '🌍 Other #11 Hy2'
@@ -703,10 +2150,47 @@ proxy-groups:
   - '🌍 Other #17 Hy2'
   - '🌍 Other #18 Hy2'
   - '🌍 Other #19 Hy2'
-  - '🌍 Other #20 Hy2'
+  - '🌍 Other #20 VLESS'
   - '🌍 Other #21 Hy2'
   - '🌍 Other #22 Hy2'
   - '🌍 Other #23 Hy2'
+  - '🌍 Other #24 Hy2'
+  - '🌍 Other #25 Hy2'
+  - '🌍 Other #26 Hy2'
+  - '🌍 Other #27 Hy2'
+  - '🌍 Other #28 Hy2'
+  - '🌍 Other #29 Hy2'
+  - '🌍 Other #30 Hy2'
+  - '🌍 Other #31 Hy2'
+  - '🌍 Other #32 Hy2'
+  - '🌍 Other #33 Hy2'
+  - '🌍 Other #34 Hy2'
+  - '🌍 Other #35 Hy2'
+  - '🌍 Other #36 Hy2'
+  - '🌍 Other #37 Hy2'
+  - '🌍 Other #38 Hy2'
+  - '🌍 Other #39 Hy2'
+  - '🌍 Other #40 Hy2'
+  - '🌍 Other #41 Hy2'
+  - '🌍 Other #42 Hy2'
+  - '🌍 Other #43 Hy2'
+  - '🌍 Other #44 Hy2'
+  - '🌍 Other #45 Hy2'
+  - '🌍 Other #46 Hy2'
+  - '🌍 Other #47 Hy2'
+  - '🌍 Other #48 Hy2'
+  - '🌍 Other #49 VLESS'
+  - '🌍 Other #50 Hy2'
+  - '🌍 Other #51 Hy2'
+  - '🌍 Other #52 Hy2'
+  - '🌍 Other #53 VLESS'
+  - '🌍 Other #54 Hy2'
+  - '🌍 Other #55 Hy2'
+  - '🌍 Other #56 Hy2'
+  - '🌍 Other #57 Hy2'
+  - '🌍 Other #58 Hy2'
+  - '🌍 Other #59 VLESS'
+  - '🌍 Other #60 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 
