@@ -1,6 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
-# ║  Auto-generated: 2026-10-10T11:30:03Z                                  ║
+# ║  Auto-generated: 2026-10-10T16:29:42Z                                  ║
 # ║  Nodes:   50 | Countries: 14 | Tested: 100% Functional Latency Verified        ║
 # ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Surge  ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -244,13 +244,6 @@ proxies:
   password: QCgqi_I4EkV8UR-OgQ_tG4EnVTEVvIyR2GgRBzrIn2s
   udp: true
   sni: hy2-new.aspidnet.xyz
-- name: '🇦🇹 Austria #01 Hy2'
-  type: hysteria2
-  server: fastly.vexogf.ir
-  port: 5443
-  password: TPey1Zqj9th9y2JKyiuqVPRTvfjQC-nB
-  udp: true
-  sni: tun-a-1.bexait.ir
 - name: '🇨🇱 Chile #02 Hy2'
   type: hysteria2
   server: 43.156.36.253
@@ -281,6 +274,14 @@ proxies:
   password: ca78f919e6
   udp: true
   sni: srv-3fc7c9.21freedom.net
+- name: '🇨🇭 Switzerland #01 Hy2'
+  type: hysteria2
+  server: 208.69.78.217
+  port: 33130
+  password: capadm96216165
+  udp: true
+  sni: vpn.local
+  skip-cert-verify: true
 - name: '🇫🇮 Finland #02 Hy2'
   type: hysteria2
   server: 144.31.49.138
@@ -295,6 +296,20 @@ proxies:
   password: cd74c0a406664a5bc0bac098220a2468
   udp: true
   sni: de1.sferavpn.pro
+- name: '🇭🇰 Hong Kong #01 Hy2'
+  type: hysteria2
+  server: 152.32.254.68
+  port: 5010
+  password: eBTe6Ax2pUts8oMEWoYVDfnSlHfkLffQ
+  udp: true
+  sni: nas.aizhzo.com
+- name: '🇭🇰 Hong Kong #02 Hy2'
+  type: hysteria2
+  server: nas.aizhzo.com
+  port: 5010
+  password: eBTe6Ax2pUts8oMEWoYVDfnSlHfkLffQ
+  udp: true
+  sni: nas.aizhzo.com
 - name: '🌍 Other #12 Hy2'
   type: hysteria2
   server: giftcard.gateway-stream.com
@@ -352,7 +367,7 @@ proxies:
   udp: true
   sni: https://t.me/oneclickvpnkeys
   skip-cert-verify: true
-- name: '🇭🇰 Hong Kong #01 Hy2'
+- name: '🇭🇰 Hong Kong #03 Hy2'
   type: hysteria2
   server: 202.146.222.29
   port: 443
@@ -396,6 +411,14 @@ proxies:
   password: dongtaiwang.com
   udp: true
   sni: hy2.561891.xyz
+- name: '🇺🇸 United States #05 Hy2'
+  type: hysteria2
+  server: 129.159.156.109
+  port: 50160
+  password: f25f19f29ce3fb53a35bf1b35b452a43
+  udp: true
+  sni: www.bing.com
+  skip-cert-verify: true
 - name: '🇷🇴 Romania #04 Hy2'
   type: hysteria2
   server: 77.74.123.109
@@ -410,14 +433,14 @@ proxies:
   password: s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z
   udp: true
   sni: grape-test-italy.dynuddns.net
-- name: '🇺🇸 United States #05 Hy2'
+- name: '🇺🇸 United States #06 Hy2'
   type: hysteria2
   server: rb1211-4.vatilon.cc
   port: 10004
   password: aec8e5e3-bb81-4b22-8802-0b88c54997b3
   udp: true
   skip-cert-verify: true
-- name: '🇺🇸 United States #06 Hy2'
+- name: '🇺🇸 United States #07 Hy2'
   type: hysteria2
   server: cn42.vatilon.cc
   port: 10004
@@ -425,46 +448,25 @@ proxies:
   udp: true
   skip-cert-verify: true
 - name: '🌍 Other #13 Hy2'
-  password: 184cdec28da5a09450803c8debcd2cc9
-  port: 50160
-  server: 138.3.208.26
-  skip-cert-verify: true
-  sni: www.bing.com
-  type: hysteria2
-- name: '🌍 Other #14 Hy2'
-  password: my_super_password_123
-  port: 443
-  server: 158.101.148.79
-  skip-cert-verify: true
-  sni: 158.101.148.79
-  type: hysteria2
-- name: '🌍 Other #15 Hy2'
   password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
   server: 45.32.10.7
   skip-cert-verify: true
   sni: vp3.yysyy.online
   type: hysteria2
-- name: '🌍 Other #16 Hy2'
-  password: 96ab5cd282733fd4c312a61f972f330a
-  port: 443
-  server: vp3.yysyy.online
+- name: '🌍 Other #14 Hy2'
+  password: my_super_password_123
+  port: 5443
+  server: 138.2.21.246
   skip-cert-verify: true
-  sni: ''
+  sni: 138.2.21.246
   type: hysteria2
-- name: '🌍 Other #17 Hy2'
+- name: '🌍 Other #15 Hy2'
   password: 3d7634af8cb2c6cb4bac1c0efad8b43d
   port: 50160
   server: 152.67.200.82
   skip-cert-verify: true
   sni: ''
-  type: hysteria2
-- name: '🌍 Other #18 Hy2'
-  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
-  port: 443
-  server: 202.146.222.174
-  skip-cert-verify: true
-  sni: https%3a%2f%2ft.me%2fwangcai2
   type: hysteria2
 
 proxy-groups:
@@ -486,7 +488,7 @@ proxy-groups:
   - 🇮🇳 India
   - 🇷🇴 Romania
   - 🇨🇱 Chile
-  - 🇦🇹 Austria
+  - 🇨🇭 Switzerland
   - 🇫🇮 Finland
   - 🌍 Other
   - DIRECT
@@ -512,13 +514,15 @@ proxy-groups:
   - '🌍 Other #08 Hy2'
   - '🇷🇴 Romania #03 Hy2'
   - '🌍 Other #09 Hy2'
-  - '🇦🇹 Austria #01 Hy2'
   - '🇨🇱 Chile #02 Hy2'
   - '🇳🇱 Netherlands #01 Hy2'
   - '🇮🇳 India #02 Hy2'
   - '🌍 Other #10 Hy2'
+  - '🇨🇭 Switzerland #01 Hy2'
   - '🇫🇮 Finland #02 Hy2'
   - '🌍 Other #11 Hy2'
+  - '🇭🇰 Hong Kong #01 Hy2'
+  - '🇭🇰 Hong Kong #02 Hy2'
   - '🌍 Other #12 Hy2'
   - '🇫🇮 Finland #03 Hy2'
   - '🇱🇻 Latvia #01 Hy2'
@@ -527,22 +531,20 @@ proxy-groups:
   - '🇸🇪 Sweden #01 Hy2'
   - '🇫🇮 Finland #05 Hy2'
   - '🇹🇼 Taiwan #01 Hy2'
-  - '🇭🇰 Hong Kong #01 Hy2'
+  - '🇭🇰 Hong Kong #03 Hy2'
   - '🇹🇼 Taiwan #02 Hy2'
   - '🇱🇻 Latvia #02 Hy2'
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #05 Hy2'
   - '🇷🇴 Romania #04 Hy2'
   - '🇷🇴 Romania #05 Hy2'
-  - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
   - '🌍 Other #13 Hy2'
   - '🌍 Other #14 Hy2'
   - '🌍 Other #15 Hy2'
-  - '🌍 Other #16 Hy2'
-  - '🌍 Other #17 Hy2'
-  - '🌍 Other #18 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
@@ -571,6 +573,7 @@ proxy-groups:
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -578,14 +581,17 @@ proxy-groups:
   type: url-test
   proxies:
   - '🇺🇸 United States #01 Hy2'
-  - '🇹🇼 Taiwan #01 Hy2'
   - '🇭🇰 Hong Kong #01 Hy2'
+  - '🇭🇰 Hong Kong #02 Hy2'
+  - '🇹🇼 Taiwan #01 Hy2'
+  - '🇭🇰 Hong Kong #03 Hy2'
   - '🇹🇼 Taiwan #02 Hy2'
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -598,12 +604,15 @@ proxy-groups:
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
+  - '🇺🇸 United States #07 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇭🇰 Hong Kong
   type: url-test
   proxies:
   - '🇭🇰 Hong Kong #01 Hy2'
+  - '🇭🇰 Hong Kong #02 Hy2'
+  - '🇭🇰 Hong Kong #03 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇩🇪 Germany
@@ -670,10 +679,10 @@ proxy-groups:
   - '🇨🇱 Chile #02 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
-- name: 🇦🇹 Austria
+- name: 🇨🇭 Switzerland
   type: url-test
   proxies:
-  - '🇦🇹 Austria #01 Hy2'
+  - '🇨🇭 Switzerland #01 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇫🇮 Finland
@@ -704,9 +713,6 @@ proxy-groups:
   - '🌍 Other #13 Hy2'
   - '🌍 Other #14 Hy2'
   - '🌍 Other #15 Hy2'
-  - '🌍 Other #16 Hy2'
-  - '🌍 Other #17 Hy2'
-  - '🌍 Other #18 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 
