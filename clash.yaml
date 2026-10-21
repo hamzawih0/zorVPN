@@ -1,6 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
-# ║  Auto-generated: 2026-10-20T20:57:47Z                                  ║
+# ║  Auto-generated: 2026-10-21T02:17:57Z                                  ║
 # ║  Nodes:   50 | Countries: 13 | Tested: 100% Functional Latency Verified        ║
 # ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Surge  ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -206,10 +206,56 @@ proxies:
 - name: '🌍 Other #05 Hy2'
   type: hysteria2
   server: 179.61.138.145
+  port: 54759
+  password: Telegram-Vpnjey
+  udp: true
+  skip-cert-verify: true
+- name: '🌍 Other #06 Hy2'
+  type: hysteria2
+  server: 31.76.27.23
+  port: 37009
+  password: Telegram-vpnjey
+  udp: true
+  sni: de.vpnjey.store
+  skip-cert-verify: true
+- name: '🌍 Other #07 Hy2'
+  type: hysteria2
+  server: 77.110.96.201
+  port: 36264
+  password: Telegram-vpnjey
+  udp: true
+  sni: se.vpnjey2.dpdns.org
+  skip-cert-verify: true
+- name: '🇮🇳 India #01 Hy2'
+  type: hysteria2
+  server: 179.61.138.145
   port: 36264
   password: Telegram
   udp: true
   sni: de2.jey.cc.cd
+- name: '🌍 Other #08 Hy2'
+  type: hysteria2
+  server: 31.76.27.23
+  port: 37009
+  password: Telegram
+  udp: true
+  sni: de.vpnjey.store
+  skip-cert-verify: true
+- name: '🌍 Other #09 Hy2'
+  type: hysteria2
+  server: 77.110.96.201
+  port: 36264
+  password: Telegram
+  udp: true
+  sni: se.vpnjey2.dpdns.org
+  skip-cert-verify: true
+- name: '🌍 Other #10 Hy2'
+  type: hysteria2
+  server: 179.61.138.145
+  port: 54759
+  password: Telegram@vpnjey
+  udp: true
+  skip-cert-verify: true
 - name: '🇳🇱 Netherlands #01 Hy2'
   type: hysteria2
   server: 206.71.158.37
@@ -218,14 +264,14 @@ proxies:
   udp: true
   sni: YAPC-1.afshin.ir
   skip-cert-verify: true
-- name: '🇮🇳 India #01 Hy2'
+- name: '🇮🇳 India #02 Hy2'
   type: hysteria2
   server: 5.175.249.174
   port: 35000
   password: b4bd0613-ff7c-4f2f-954d-185915e6ddad
   udp: true
   sni: api.kermanshahi.org
-- name: '🌍 Other #06 Hy2'
+- name: '🌍 Other #11 Hy2'
   type: hysteria2
   server: 155.94.134.183
   port: 11592
@@ -247,7 +293,7 @@ proxies:
   password: eBTe6Ax2pUts8oMEWoYVDfnSlHfkLffQ
   udp: true
   sni: nas.aizhzo.com
-- name: '🌍 Other #07 Hy2'
+- name: '🌍 Other #12 Hy2'
   type: hysteria2
   server: giftcard.gateway-stream.com
   port: 52076
@@ -348,124 +394,82 @@ proxies:
   password: dongtaiwang.com
   udp: true
   sni: hy2.561891.xyz
-- name: '🌍 Other #08 Hy2'
+- name: '🌍 Other #13 Hy2'
   password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
   server: vp3.yysyy.online
   skip-cert-verify: true
   sni: vp3.yysyy.online
   type: hysteria2
-- name: '🌍 Other #09 Hy2'
-  password: 184cdec28da5a09450803c8debcd2cc9
-  port: 50160
-  server: 138.3.208.26
-  skip-cert-verify: true
-  sni: ''
-  type: hysteria2
-- name: '🌍 Other #10 Hy2'
-  password: maintell
-  port: 2053
-  server: 152.70.237.123
-  skip-cert-verify: true
-  sni: bing.com
-  type: hysteria2
-- name: '🌍 Other #11 Hy2'
-  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
-  port: 443
-  server: 202.146.222.174
-  skip-cert-verify: true
-  sni: https%3a%2f%2ft.me%2fwangcai2
-  type: hysteria2
-- name: '🌍 Other #12 Hy2'
-  password: 3d7634af8cb2c6cb4bac1c0efad8b43d
-  port: 50160
-  server: 152.67.200.82
-  skip-cert-verify: true
-  sni: vk.com
-  type: hysteria2
-- name: '🌍 Other #13 Hy2'
-  password: 96ab5cd282733fd4c312a61f972f330a
-  port: 443
-  server: 45.32.10.7
-  skip-cert-verify: true
-  sni: vp3.yysyy.online
-  type: hysteria2
 - name: '🌍 Other #14 Hy2'
-  password: 1671a252e2a97dc2bda4e515475931da
-  port: 50160
-  server: 132.226.226.189
-  skip-cert-verify: true
-  sni: 'off'
-  type: hysteria2
-- name: '🌍 Other #15 Hy2'
   password: u63SxILNwtrQZ7Y1ZrFaZfsA
   port: 8443
   server: 8.211.175.236
   skip-cert-verify: true
   sni: ''
   type: hysteria2
-- name: '🌍 Other #16 Hy2'
-  password: 099830134df5ac3a04a4b21d39b8c395
+- name: '🌍 Other #15 Hy2'
+  password: 184cdec28da5a09450803c8debcd2cc9
   port: 50160
-  server: 163.192.14.135
+  server: 138.3.208.26
   skip-cert-verify: true
-  sni: www.bing.com
+  sni: ''
+  type: hysteria2
+- name: '🌍 Other #16 Hy2'
+  password: 96ab5cd282733fd4c312a61f972f330a
+  port: 443
+  server: 45.32.10.7
+  skip-cert-verify: true
+  sni: vp3.yysyy.online
   type: hysteria2
 - name: '🌍 Other #17 Hy2'
-  password: 4291c983-c520-46ac-82cc-48f14bef573f
-  port: 35013
-  server: 129.213.91.185
+  password: 3d7634af8cb2c6cb4bac1c0efad8b43d
+  port: 50160
+  server: 152.67.200.82
   skip-cert-verify: true
-  sni: 129.213.91.185
+  sni: speedtest.tinkoff.ru
   type: hysteria2
 - name: '🌍 Other #18 Hy2'
-  password: pbgLTkd5276SN1sZ
-  port: 8443
-  server: 144.24.46.175
+  password: H7mP2xY9kJ4nQ8wR5tF6vB3z
+  port: 443
+  server: 160.187.100.109
   skip-cert-verify: true
-  sni: 'off'
+  sni: 127.0.0.1
   type: hysteria2
 - name: '🌍 Other #19 Hy2'
-  password: bce6c821-200d-421f-bf3d-7159e5246ea0
-  port: 33333
-  server: 155.248.209.237
-  skip-cert-verify: false
-  sni: hy2.123266.xyz
+  password: maintell
+  port: 2053
+  server: 152.70.237.123
+  skip-cert-verify: true
+  sni: bing.com
   type: hysteria2
 - name: '🌍 Other #20 Hy2'
   password: H7mP2xY9kJ4nQ8wR5tF6vB3z
   port: 443
-  server: 51.44.167.227
+  server: 202.146.222.174
   skip-cert-verify: true
-  sni: vpn-fr-001.fastervpn.world
+  sni: https%3a%2f%2ft.me%2fwangcai2%f0%9f%87%a8%f0%9f%87%b3
   type: hysteria2
 - name: '🌍 Other #21 Hy2'
-  password: dd50a499-7e43-4589-8490-f3b9c2451473
-  port: 443
-  server: nl-hy-test.tcp-reset-club.net
-  skip-cert-verify: false
-  sni: nl-hy-test.tcp-reset-club.net
-  type: hysteria2
-- name: '🌍 Other #22 Hy2'
-  password: 529f1911-04d5-4427-94b9-c851fd459a27
-  port: 443
-  server: 109.235.49.234
-  skip-cert-verify: false
-  sni: tcp-reset-club.net
-  type: hysteria2
-- name: '🌍 Other #23 Hy2'
-  password: user317_windows:c70565e9-a99f-40ef-b96c-469a3949eed2
-  port: 18642
-  server: s3.huhiuh.space
+  password: 1671a252e2a97dc2bda4e515475931da
+  port: 50160
+  server: 132.226.226.189
   skip-cert-verify: true
   sni: www.bing.com
   type: hysteria2
-- name: '🌍 Other #24 Hy2'
-  password: gf1:gfhysteria2024
-  port: 443
-  server: 66.94.121.46
+- name: '🌍 Other #22 Hy2'
+  password: b0917015b656b3dd2286b5633af0c5c1
+  port: 50160
+  server: 31.57.248.176
   skip-cert-verify: true
   sni: ''
+  type: hysteria2
+- name: '🌍 Other #23 Hy2'
+  password: bce6c821-200d-421f-bf3d-7159e5246ea0
+  port: 33333
+  server: 155.248.209.237
+  skip-cert-verify: true
+  sni: hy2.123266.xyz
   type: hysteria2
 
 proxy-groups:
@@ -507,12 +511,18 @@ proxy-groups:
   - '🇷🇴 Romania #02 Hy2'
   - '🌍 Other #04 Hy2'
   - '🌍 Other #05 Hy2'
-  - '🇳🇱 Netherlands #01 Hy2'
-  - '🇮🇳 India #01 Hy2'
   - '🌍 Other #06 Hy2'
+  - '🌍 Other #07 Hy2'
+  - '🇮🇳 India #01 Hy2'
+  - '🌍 Other #08 Hy2'
+  - '🌍 Other #09 Hy2'
+  - '🌍 Other #10 Hy2'
+  - '🇳🇱 Netherlands #01 Hy2'
+  - '🇮🇳 India #02 Hy2'
+  - '🌍 Other #11 Hy2'
   - '🇨🇭 Switzerland #01 Hy2'
   - '🇫🇮 Finland #03 Hy2'
-  - '🌍 Other #07 Hy2'
+  - '🌍 Other #12 Hy2'
   - '🇫🇮 Finland #04 Hy2'
   - '🇱🇻 Latvia #01 Hy2'
   - '🇳🇱 Netherlands #02 Hy2'
@@ -526,11 +536,6 @@ proxy-groups:
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
-  - '🌍 Other #08 Hy2'
-  - '🌍 Other #09 Hy2'
-  - '🌍 Other #10 Hy2'
-  - '🌍 Other #11 Hy2'
-  - '🌍 Other #12 Hy2'
   - '🌍 Other #13 Hy2'
   - '🌍 Other #14 Hy2'
   - '🌍 Other #15 Hy2'
@@ -542,7 +547,6 @@ proxy-groups:
   - '🌍 Other #21 Hy2'
   - '🌍 Other #22 Hy2'
   - '🌍 Other #23 Hy2'
-  - '🌍 Other #24 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
@@ -646,6 +650,7 @@ proxy-groups:
   type: url-test
   proxies:
   - '🇮🇳 India #01 Hy2'
+  - '🇮🇳 India #02 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇷🇴 Romania
@@ -698,7 +703,6 @@ proxy-groups:
   - '🌍 Other #21 Hy2'
   - '🌍 Other #22 Hy2'
   - '🌍 Other #23 Hy2'
-  - '🌍 Other #24 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 
