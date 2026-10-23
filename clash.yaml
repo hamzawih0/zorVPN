@@ -1,6 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
-# ║  Auto-generated: 2026-10-23T16:01:55Z                                  ║
+# ║  Auto-generated: 2026-10-23T20:44:14Z                                  ║
 # ║  Nodes:   50 | Countries: 15 | Tested: 100% Functional Latency Verified        ║
 # ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Surge  ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -419,20 +419,12 @@ proxies:
   sni: hy2.561891.xyz
 - name: '🇺🇸 United States #04 Hy2'
   type: hysteria2
-  server: starlink-ft.251313.xyz
-  port: 443
-  password: https%3A%2F%2Fxship.2fa.cat
-  udp: true
-  sni: www.cloudflare.com
-  skip-cert-verify: true
-- name: '🇺🇸 United States #05 Hy2'
-  type: hysteria2
   server: clash2.deep-links.com
   port: 443
   password: 4c858cccff331e64c711a199a6cb256a
   udp: true
   sni: clash2.deep-links.com
-- name: '🇺🇸 United States #06 Hy2'
+- name: '🇺🇸 United States #05 Hy2'
   type: hysteria2
   server: 198.46.146.118
   port: 36720
@@ -440,7 +432,7 @@ proxies:
   udp: true
   sni: bing.com
   skip-cert-verify: true
-- name: '🇺🇸 United States #07 Hy2'
+- name: '🇺🇸 United States #06 Hy2'
   type: hysteria2
   server: 163.192.14.135
   port: 50160
@@ -453,12 +445,12 @@ proxies:
   port: 8443
   server: 8.211.175.236
   skip-cert-verify: true
-  sni: bing.com
+  sni: ''
   type: hysteria2
 - name: '🌍 Other #14 Hy2'
   password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
-  server: vp3.yysyy.online
+  server: 45.32.10.7
   skip-cert-verify: true
   sni: vp3.yysyy.online
   type: hysteria2
@@ -466,15 +458,22 @@ proxies:
   password: f5f0babe-aea2-4f07-a1fc-3c9820253f49
   port: 9443
   server: jp1.frnhk.xyz
-  skip-cert-verify: true
+  skip-cert-verify: false
   sni: jp1.frnhk.xyz
   type: hysteria2
 - name: '🌍 Other #16 Hy2'
   password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
-  server: 45.32.10.7
-  skip-cert-verify: false
-  sni: vp3.yysyy.online
+  server: vp3.yysyy.online
+  skip-cert-verify: true
+  sni: ''
+  type: hysteria2
+- name: '🌍 Other #17 Hy2'
+  password: 184cdec28da5a09450803c8debcd2cc9
+  port: 50160
+  server: 138.3.208.26
+  skip-cert-verify: true
+  sni: 138.3.208.26
   type: hysteria2
 
 proxy-groups:
@@ -549,11 +548,11 @@ proxy-groups:
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
-  - '🇺🇸 United States #07 Hy2'
   - '🌍 Other #13 Hy2'
   - '🌍 Other #14 Hy2'
   - '🌍 Other #15 Hy2'
   - '🌍 Other #16 Hy2'
+  - '🌍 Other #17 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
@@ -583,7 +582,6 @@ proxy-groups:
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
-  - '🇺🇸 United States #07 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -599,7 +597,6 @@ proxy-groups:
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
-  - '🇺🇸 United States #07 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -612,7 +609,6 @@ proxy-groups:
   - '🇺🇸 United States #04 Hy2'
   - '🇺🇸 United States #05 Hy2'
   - '🇺🇸 United States #06 Hy2'
-  - '🇺🇸 United States #07 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇭🇰 Hong Kong
@@ -725,6 +721,7 @@ proxy-groups:
   - '🌍 Other #14 Hy2'
   - '🌍 Other #15 Hy2'
   - '🌍 Other #16 Hy2'
+  - '🌍 Other #17 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 
