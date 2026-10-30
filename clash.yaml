@@ -1,6 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
-# ║  Auto-generated: 2026-10-30T03:16:01Z                                  ║
+# ║  Auto-generated: 2026-10-30T11:47:13Z                                  ║
 # ║  Nodes:   50 | Countries: 13 | Tested: 100% Functional Latency Verified        ║
 # ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Surge  ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -358,33 +358,41 @@ proxies:
   password: dongtaiwang.com
   udp: true
   sni: hy2.561891.xyz
+- name: '🇺🇸 United States #05 Hy2'
+  type: hysteria2
+  server: starlink-ft.251313.xyz
+  port: 443
+  password: https%3A%2F%2Fxship.2fa.cat
+  udp: true
+  sni: www.cloudflare.com
+  skip-cert-verify: true
 - name: '🌍 Other #13 Hy2'
   password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
   server: vp3.yysyy.online
   skip-cert-verify: true
-  sni: vp3.yysyy.online
+  sni: ''
   type: hysteria2
 - name: '🌍 Other #14 Hy2'
-  password: 184cdec28da5a09450803c8debcd2cc9
-  port: 50160
-  server: 138.3.208.26
-  skip-cert-verify: true
-  sni: '1'
-  type: hysteria2
-- name: '🌍 Other #15 Hy2'
-  password: STYyftThFn
-  port: 12765
-  server: freedom.chenlan.top
-  skip-cert-verify: false
-  sni: freedom.chenlan.top
-  type: hysteria2
-- name: '🌍 Other #16 Hy2'
   password: u63SxILNwtrQZ7Y1ZrFaZfsA
   port: 8443
   server: 8.211.175.236
   skip-cert-verify: true
   sni: bing.com
+  type: hysteria2
+- name: '🌍 Other #15 Hy2'
+  password: 184cdec28da5a09450803c8debcd2cc9
+  port: 50160
+  server: 138.3.208.26
+  skip-cert-verify: true
+  sni: ''
+  type: hysteria2
+- name: '🌍 Other #16 Hy2'
+  password: STYyftThFn
+  port: 12765
+  server: freedom.chenlan.top
+  skip-cert-verify: false
+  sni: ''
   type: hysteria2
 - name: '🌍 Other #17 Hy2'
   password: H7mP2xY9kJ4nQ8wR5tF6vB3z
@@ -398,72 +406,65 @@ proxies:
   port: 443
   server: 202.146.222.174
   skip-cert-verify: true
-  sni: https%3a%2f%2ft.me%2foneclickvpnkeys
+  sni: 202.146.222.174
   type: hysteria2
 - name: '🌍 Other #19 Hy2'
-  password: maintell
-  port: 2053
-  server: 152.70.237.123
-  skip-cert-verify: true
-  sni: ''
-  type: hysteria2
-- name: '🌍 Other #20 Hy2'
-  password: 3d7634af8cb2c6cb4bac1c0efad8b43d
-  port: 50160
-  server: 152.67.200.82
-  skip-cert-verify: true
-  sni: google.com
-  type: hysteria2
-- name: '🌍 Other #21 Hy2'
-  password: f87376e17da040ed04c9665ce8972930
-  port: 50160
-  server: 138.2.73.238
-  skip-cert-verify: true
-  sni: 138.2.73.238
-  type: hysteria2
-- name: '🌍 Other #22 Hy2'
-  password: 96ab5cd282733fd4c312a61f972f330a
-  port: 443
-  server: 45.32.10.7
-  skip-cert-verify: true
-  sni: vp3.yysyy.online
-  type: hysteria2
-- name: '🌍 Other #23 Hy2'
   password: 1671a252e2a97dc2bda4e515475931da
   port: 50160
   server: 132.226.226.189
   skip-cert-verify: true
-  sni: www.bing.com
+  sni: ''
   type: hysteria2
-- name: '🌍 Other #24 Hy2'
-  password: miaoge110
-  port: 51511
-  server: 5.45.100.100
-  skip-cert-verify: true
-  sni: 5.45.100.100
-  type: hysteria2
-- name: '🌍 Other #25 Hy2'
-  password: usqmqUKJFIlCmvkCNSY64L3k
+- name: '🌍 Other #20 Hy2'
+  password: 96ab5cd282733fd4c312a61f972f330a
   port: 443
-  server: 8.209.247.109
-  skip-cert-verify: true
-  sni: bing.com
+  server: 45.32.10.7
+  skip-cert-verify: false
+  sni: vp3.yysyy.online
   type: hysteria2
-- name: '🌍 Other #26 Hy2'
+- name: '🌍 Other #21 Hy2'
   password: 099830134df5ac3a04a4b21d39b8c395
   port: 50160
   server: 163.192.14.135
   skip-cert-verify: true
-  sni: google.com
+  sni: 'off'
   type: hysteria2
-- name: '🌍 Other #27 Hy2'
-  password: ee78c844-83b6-4508-b1f9-b3f00c8e0556
+- name: '🌍 Other #22 Hy2'
+  password: bce6c821-200d-421f-bf3d-7159e5246ea0
+  port: 33333
+  server: 155.248.209.237
+  skip-cert-verify: true
+  sni: 155.248.209.2
+  type: hysteria2
+- name: '🌍 Other #23 Hy2'
+  password: 7c9c7f52-5a8c-43e0-b6d1-c8552289f230
   port: 443
   server: us.mi11o4ka.com
-  skip-cert-verify: false
+  skip-cert-verify: true
   sni: us.mi11o4ka.com
   type: hysteria2
-- name: '🌍 Other #28 Hy2'
+- name: '🌍 Other #24 Hy2'
+  password: 3d7634af8cb2c6cb4bac1c0efad8b43d
+  port: 50160
+  server: 152.67.200.82
+  skip-cert-verify: false
+  sni: 152-67-200-82.liao.kdns.fr
+  type: hysteria2
+- name: '🌍 Other #25 Hy2'
+  password: maintell
+  port: 2053
+  server: 152.70.237.123
+  skip-cert-verify: true
+  sni: bing.com
+  type: hysteria2
+- name: '🌍 Other #26 Hy2'
+  password: github.com/Alvin9999-newpac/fanqiang
+  port: 60111
+  server: 62.210.7.139
+  skip-cert-verify: true
+  sni: …
+  type: hysteria2
+- name: '🌍 Other #27 Hy2'
   password: H7mP2xY9kJ4nQ8wR5tF6vB3z
   port: 443
   server: 160.187.100.109
@@ -530,6 +531,7 @@ proxy-groups:
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #05 Hy2'
   - '🌍 Other #13 Hy2'
   - '🌍 Other #14 Hy2'
   - '🌍 Other #15 Hy2'
@@ -545,7 +547,6 @@ proxy-groups:
   - '🌍 Other #25 Hy2'
   - '🌍 Other #26 Hy2'
   - '🌍 Other #27 Hy2'
-  - '🌍 Other #28 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
@@ -572,6 +573,7 @@ proxy-groups:
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #05 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -585,6 +587,7 @@ proxy-groups:
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #05 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -595,6 +598,7 @@ proxy-groups:
   - '🇺🇸 United States #02 Hy2'
   - '🇺🇸 United States #03 Hy2'
   - '🇺🇸 United States #04 Hy2'
+  - '🇺🇸 United States #05 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🇭🇰 Hong Kong
@@ -700,7 +704,6 @@ proxy-groups:
   - '🌍 Other #25 Hy2'
   - '🌍 Other #26 Hy2'
   - '🌍 Other #27 Hy2'
-  - '🌍 Other #28 Hy2'
   url: http://www.gstatic.com/generate_204
   interval: 300
 
