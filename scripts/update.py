@@ -506,14 +506,22 @@ def fetch_url(url: str, timeout: int = 15) -> bytes:
         except Exception:
             pass
 
-    # Fallback direct
+    # Fallback direct, with mirror fallback for raw.githubusercontent.com if censored
     try:
         direct_opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         req = urllib.request.Request(url, headers=headers)
         with direct_opener.open(req, timeout=timeout) as resp:
             return resp.read()
-    except Exception as e:
-        raise e
+    except Exception as direct_err:
+        if 'raw.githubusercontent.com' in url:
+            for mirror in [f"https://ghproxy.net/{url}", f"https://raw.github.moeyy.xyz/{url.split('raw.githubusercontent.com/', 1)[1]}"]:
+                try:
+                    req_mirror = urllib.request.Request(mirror, headers=headers)
+                    with direct_opener.open(req_mirror, timeout=timeout) as resp:
+                        return resp.read()
+                except Exception:
+                    pass
+        raise direct_err
 
 
 AD_KEYWORDS = [
@@ -1182,14 +1190,44 @@ def build_zorvpn():
 
     mihomo_bin = find_mihomo_bin()
     if mihomo_bin:
-        # Prioritize Hysteria2, VLESS, Trojan (top GFW evasion protocols)
+        # Prioritize universal HTTPS TCP (VLESS Reality 443, Trojan 443) over UDP/Hy2
         def sort_priority(p):
             t = str(p.get('type', '')).lower()
-            if t == 'hysteria2': return 0
-            if t == 'vless': return 1
-            if t == 'trojan': return 2
-            if t == 'vmess': return 3
-            return 4
+            port = int(p.get('port', 0))
+            is_std_https = port in (443, 8443, 2053, 2083, 2087, 2096)
+            has_reality = bool('reality-opts' in p and p.get('reality-opts', {}).get('public-key'))
+
+            # Rank 0: VLESS Reality on HTTPS 443 (Universal bypass, works everywhere)
+            if t == 'vless' and has_reality and is_std_https:
+                return 0
+            # Rank 1: VLESS WS/TLS on HTTPS 443 (Cloudflare CDN Anycast)
+            if t == 'vless' and is_std_https:
+                return 1
+            # Rank 2: Trojan on HTTPS 443
+            if t == 'trojan' and is_std_https:
+                return 2
+            # Rank 3: VLESS Reality on other ports
+            if t == 'vless' and has_reality:
+                return 3
+            # Rank 4: Other VLESS
+            if t == 'vless':
+                return 4
+            # Rank 5: Other Trojan
+            if t == 'trojan':
+                return 5
+            # Rank 6: VMess on 443
+            if t == 'vmess' and is_std_https:
+                return 6
+            # Rank 7: Other VMess
+            if t == 'vmess':
+                return 7
+            # Rank 8: Shadowsocks
+            if t == 'ss':
+                return 8
+            # Rank 9: Hysteria 2 (UDP-only, blocked on many consumer/office networks)
+            if t == 'hysteria2':
+                return 9
+            return 10
 
         all_candidates.sort(key=sort_priority)
         candidates_to_test = all_candidates[:1200]
@@ -1289,7 +1327,7 @@ def build_zorvpn():
         'name': '⚡ Fastest',
         'type': 'url-test',
         'proxies': all_proxy_names[:],
-        'url': 'http://www.gstatic.com/generate_204',
+        'url': 'http://cp.cloudflare.com/generate_204',
         'interval': 300,
         'tolerance': 50,
     })
@@ -1300,7 +1338,7 @@ def build_zorvpn():
         'name': '🛡️ Fallback',
         'type': 'fallback',
         'proxies': fallback_candidates,
-        'url': 'http://www.gstatic.com/generate_204',
+        'url': 'http://cp.cloudflare.com/generate_204',
         'interval': 300,
     })
 
@@ -1309,7 +1347,7 @@ def build_zorvpn():
         'name': '🤖 AI Services',
         'type': 'url-test',
         'proxies': ai_members,
-        'url': 'http://www.gstatic.com/generate_204',
+        'url': 'http://cp.cloudflare.com/generate_204',
         'interval': 300,
         'tolerance': 100,
     })
@@ -1319,7 +1357,7 @@ def build_zorvpn():
         'name': '🎬 Streaming',
         'type': 'url-test',
         'proxies': stream_members,
-        'url': 'http://www.gstatic.com/generate_204',
+        'url': 'http://cp.cloudflare.com/generate_204',
         'interval': 300,
         'tolerance': 100,
     })
@@ -1330,7 +1368,7 @@ def build_zorvpn():
             'name': pool_name,
             'type': 'url-test',
             'proxies': members,
-            'url': 'http://www.gstatic.com/generate_204',
+            'url': 'http://cp.cloudflare.com/generate_204',
             'interval': 300,
         })
 
@@ -1351,7 +1389,6 @@ ipv6: false
 
 unified-delay: true
 tcp-concurrent: true
-global-client-fingerprint: chrome
 find-process-mode: strict
 
 profile:
@@ -1564,7 +1601,7 @@ rules:
   - DOMAIN-SUFFIX,sina.com.cn,DIRECT
   - DOMAIN-SUFFIX,douyin.com,DIRECT
   - DOMAIN-SUFFIX,bytedance.com,DIRECT
-  - GEOIP,CN,DIRECT
+  - GEOIP,CN,DIRECT,no-resolve
 
   # ── Final Catch-All ───────────────────────────────────────────────────────
   - MATCH,🎯 zorVPN
