@@ -1,0 +1,951 @@
+{
+  "version": 1,
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "🎯 zorVPN"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "geosite": "category-ads-all",
+        "server": "dns-block",
+        "disable_cache": true
+      },
+      {
+        "geosite": "cn",
+        "server": "dns-direct"
+      },
+      {
+        "geoip": "cn",
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-remote",
+    "strategy": "prefer_ipv4"
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 2080
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "🎯 zorVPN",
+      "outbounds": [
+        "⚡ Fastest",
+        "🛡️ Fallback",
+        "🇩🇪 Germany #01 Hy2",
+        "🇺🇸 United States #01 Hy2",
+        "🇷🇺 Russia #01 Hy2",
+        "🇫🇮 Finland #01 Hy2",
+        "🌍 Other #01 Hy2",
+        "🇩🇪 Germany #02 Hy2",
+        "🇳🇱 The Netherlands #01 Hy2",
+        "🇩🇪 Germany #03 Hy2",
+        "🇩🇪 Germany #04 Hy2",
+        "🇩🇪 Germany #05 Hy2",
+        "🇸🇪 Sweden #01 Hy2",
+        "🇩🇪 Germany #06 Hy2",
+        "🇩🇪 Germany #07 Hy2",
+        "🇩🇪 Germany #08 Hy2",
+        "🇳🇱 Netherlands #01 Hy2",
+        "🇩🇪 Germany #09 Hy2",
+        "🌍 Other #02 Hy2",
+        "🌍 Other #03 Hy2",
+        "🌍 Other #04 Hy2",
+        "🇳🇱 The Netherlands #02 Hy2",
+        "🇱🇻 Latvia #01 Hy2",
+        "🇳🇱 Netherlands #02 Hy2",
+        "🌍 Other #05 Hy2",
+        "🇩🇪 Germany #10 Hy2",
+        "🇸🇪 Sweden #02 Hy2",
+        "🇹🇼 Taiwan #01 Hy2",
+        "🇭🇰 Hong Kong #01 Hy2",
+        "🌍 Other #06 Hy2",
+        "🇷🇺 Russia #02 Hy2",
+        "🌍 Other #07 Hy2",
+        "🇺🇸 United States #02 Hy2",
+        "🌍 Other #08 Hy2",
+        "🌍 Other #09 Hy2",
+        "🇯🇵 Japan #01 Hy2",
+        "🇯🇵 Japan #02 Hy2",
+        "🌍 Other #10 Hy2",
+        "🇭🇰 Hong Kong #02 Hy2",
+        "🇭🇰 Hong Kong #03 Hy2",
+        "🇰🇷 South Korea #01 Hy2",
+        "🇯🇵 Japan #03 Hy2",
+        "🇺🇸 United States #03 Hy2",
+        "🇺🇸 United States #04 Hy2",
+        "🌍 Other #11 Hy2",
+        "🇰🇷 South Korea #02 Hy2",
+        "🇰🇷 South Korea #03 Hy2",
+        "🇫🇷 France #01 Hy2",
+        "🇹🇼 Taiwan #02 Hy2",
+        "🇭🇰 Hong Kong #04 Hy2",
+        "🇺🇸 United States #05 Hy2",
+        "🇺🇸 United States #06 Hy2",
+        "direct"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "⚡ Fastest",
+      "outbounds": [
+        "🇩🇪 Germany #01 Hy2",
+        "🇺🇸 United States #01 Hy2",
+        "🇷🇺 Russia #01 Hy2",
+        "🇫🇮 Finland #01 Hy2",
+        "🌍 Other #01 Hy2",
+        "🇩🇪 Germany #02 Hy2",
+        "🇳🇱 The Netherlands #01 Hy2",
+        "🇩🇪 Germany #03 Hy2",
+        "🇩🇪 Germany #04 Hy2",
+        "🇩🇪 Germany #05 Hy2",
+        "🇸🇪 Sweden #01 Hy2",
+        "🇩🇪 Germany #06 Hy2",
+        "🇩🇪 Germany #07 Hy2",
+        "🇩🇪 Germany #08 Hy2",
+        "🇳🇱 Netherlands #01 Hy2",
+        "🇩🇪 Germany #09 Hy2",
+        "🌍 Other #02 Hy2",
+        "🌍 Other #03 Hy2",
+        "🌍 Other #04 Hy2",
+        "🇳🇱 The Netherlands #02 Hy2",
+        "🇱🇻 Latvia #01 Hy2",
+        "🇳🇱 Netherlands #02 Hy2",
+        "🌍 Other #05 Hy2",
+        "🇩🇪 Germany #10 Hy2",
+        "🇸🇪 Sweden #02 Hy2",
+        "🇹🇼 Taiwan #01 Hy2",
+        "🇭🇰 Hong Kong #01 Hy2",
+        "🌍 Other #06 Hy2",
+        "🇷🇺 Russia #02 Hy2",
+        "🌍 Other #07 Hy2",
+        "🇺🇸 United States #02 Hy2",
+        "🌍 Other #08 Hy2",
+        "🌍 Other #09 Hy2",
+        "🇯🇵 Japan #01 Hy2",
+        "🇯🇵 Japan #02 Hy2",
+        "🌍 Other #10 Hy2",
+        "🇭🇰 Hong Kong #02 Hy2",
+        "🇭🇰 Hong Kong #03 Hy2",
+        "🇰🇷 South Korea #01 Hy2",
+        "🇯🇵 Japan #03 Hy2",
+        "🇺🇸 United States #03 Hy2",
+        "🇺🇸 United States #04 Hy2",
+        "🌍 Other #11 Hy2",
+        "🇰🇷 South Korea #02 Hy2",
+        "🇰🇷 South Korea #03 Hy2",
+        "🇫🇷 France #01 Hy2",
+        "🇹🇼 Taiwan #02 Hy2",
+        "🇭🇰 Hong Kong #04 Hy2",
+        "🇺🇸 United States #05 Hy2",
+        "🇺🇸 United States #06 Hy2"
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "300s",
+      "tolerance": 50
+    },
+    {
+      "type": "urltest",
+      "tag": "🛡️ Fallback",
+      "outbounds": [
+        "🇩🇪 Germany #01 Hy2",
+        "🇺🇸 United States #01 Hy2",
+        "🇷🇺 Russia #01 Hy2",
+        "🇫🇮 Finland #01 Hy2",
+        "🌍 Other #01 Hy2",
+        "🇩🇪 Germany #02 Hy2",
+        "🇳🇱 The Netherlands #01 Hy2",
+        "🇩🇪 Germany #03 Hy2",
+        "🇩🇪 Germany #04 Hy2",
+        "🇩🇪 Germany #05 Hy2",
+        "🇸🇪 Sweden #01 Hy2",
+        "🇩🇪 Germany #06 Hy2",
+        "🇩🇪 Germany #07 Hy2",
+        "🇩🇪 Germany #08 Hy2",
+        "🇳🇱 Netherlands #01 Hy2",
+        "🇩🇪 Germany #09 Hy2",
+        "🌍 Other #02 Hy2",
+        "🌍 Other #03 Hy2",
+        "🌍 Other #04 Hy2",
+        "🇳🇱 The Netherlands #02 Hy2",
+        "🇱🇻 Latvia #01 Hy2",
+        "🇳🇱 Netherlands #02 Hy2",
+        "🌍 Other #05 Hy2",
+        "🇩🇪 Germany #10 Hy2",
+        "🇸🇪 Sweden #02 Hy2"
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "300s",
+      "tolerance": 100
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #01 Hy2",
+      "server": "181.214.99.162",
+      "server_port": 35000,
+      "password": "b4bd0613-ff7c-4f2f-954d-185915e6ddad",
+      "tls": {
+        "enabled": true,
+        "server_name": "api.kermanshahi.org",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "@JavidnamanIran-Javid-SHAH-KingRezaPahlavi"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇺🇸 United States #01 Hy2",
+      "server": "54.213.89.22",
+      "server_port": 443,
+      "password": "qQe1z5kU8kN6SlKnDt9Ru3Qp",
+      "tls": {
+        "enabled": true,
+        "server_name": "vk.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇷🇺 Russia #01 Hy2",
+      "server": "91.142.73.159",
+      "server_port": 36758,
+      "password": "5bcodmhjtyfyyrqh",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdn77.dmtr.ru",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "dzcb7hv6i2kx2zze"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇫🇮 Finland #01 Hy2",
+      "server": "31.76.80.69",
+      "server_port": 443,
+      "password": "6aab8efdf13945829ae3699c342be406",
+      "tls": {
+        "enabled": true,
+        "server_name": "fiproxy1.lockdwn.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "uw9b2qq5rx"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #01 Hy2",
+      "server": "giftcard.gateway-stream.com",
+      "server_port": 52087,
+      "password": "8f0gvz5eul6omhq4",
+      "tls": {
+        "enabled": true,
+        "server_name": "giftcard.gateway-stream.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "fuw2k1ddrouwxr3u"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #02 Hy2",
+      "server": "179.61.132.96",
+      "server_port": 8443,
+      "password": "KevinZakarian",
+      "tls": {
+        "enabled": true,
+        "server_name": "179.61.132.96",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "KevinZakarian"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇳🇱 The Netherlands #01 Hy2",
+      "server": "147.45.149.88",
+      "server_port": 8443,
+      "password": "NL2026hy",
+      "tls": {
+        "enabled": true,
+        "server_name": "nl.nobelchat.ru",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "SalamanderNL2026"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #03 Hy2",
+      "server": "179.61.138.145",
+      "server_port": 54759,
+      "password": "Telegram-Vpnjey",
+      "tls": {
+        "enabled": true,
+        "server_name": "179.61.138.145",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #04 Hy2",
+      "server": "179.61.138.145",
+      "server_port": 36264,
+      "password": "Telegram-vpnjey",
+      "tls": {
+        "enabled": true,
+        "server_name": "de2.jey.cc.cd",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #05 Hy2",
+      "server": "31.76.27.23",
+      "server_port": 37009,
+      "password": "Telegram-vpnjey",
+      "tls": {
+        "enabled": true,
+        "server_name": "de.vpnjey.store",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇸🇪 Sweden #01 Hy2",
+      "server": "77.110.96.201",
+      "server_port": 36264,
+      "password": "Telegram-vpnjey",
+      "tls": {
+        "enabled": true,
+        "server_name": "se.vpnjey2.dpdns.org",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #06 Hy2",
+      "server": "179.61.138.145",
+      "server_port": 36264,
+      "password": "Telegram",
+      "tls": {
+        "enabled": true,
+        "server_name": "de2.jey.cc.cd",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #07 Hy2",
+      "server": "179.61.138.145",
+      "server_port": 54759,
+      "password": "Telegram@vpnjey",
+      "tls": {
+        "enabled": true,
+        "server_name": "179.61.138.145",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #08 Hy2",
+      "server": "179.61.138.145",
+      "server_port": 36264,
+      "password": "VPNJEY",
+      "tls": {
+        "enabled": true,
+        "server_name": "de2.jey.cc.cd",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇳🇱 Netherlands #01 Hy2",
+      "server": "206.71.158.37",
+      "server_port": 35000,
+      "password": "Yet-Another-Public-Config-1",
+      "tls": {
+        "enabled": true,
+        "server_name": "YAPC-1.afshin.ir",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Yet-Another-Public-Config-1"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #09 Hy2",
+      "server": "5.175.249.174",
+      "server_port": 35000,
+      "password": "b4bd0613-ff7c-4f2f-954d-185915e6ddad",
+      "tls": {
+        "enabled": true,
+        "server_name": "api.kermanshahi.org",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "@JavidnamanIran-Javid-SHAH-KingRezaPahlavi"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #02 Hy2",
+      "server": "nas.aizhzo.com",
+      "server_port": 5010,
+      "password": "eBTe6Ax2pUts8oMEWoYVDfnSlHfkLffQ",
+      "tls": {
+        "enabled": true,
+        "server_name": "nas.aizhzo.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "7M4RXPFcQyQEGbkxBPfXo4bilMhCW2U9"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #03 Hy2",
+      "server": "r5ycmuko.zibayeman.com",
+      "server_port": 54280,
+      "password": "f04i31zq8sy80v9b",
+      "tls": {
+        "enabled": true,
+        "server_name": "r5ycmuko.zibayeman.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "hfwq51con9efdxx6"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #04 Hy2",
+      "server": "giftcard.gateway-stream.com",
+      "server_port": 52076,
+      "password": "fmaznn1lrzys7ddy",
+      "tls": {
+        "enabled": true,
+        "server_name": "giftcard.gateway-stream.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "fuw2k1ddrouwxr3u"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇳🇱 The Netherlands #02 Hy2",
+      "server": "130.49.161.70",
+      "server_port": 443,
+      "password": "p7Q76LzlnS4hIzr1W3staBOnUe_WwSkR",
+      "tls": {
+        "enabled": true,
+        "server_name": "hy2.aspidnet.xyz",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "rG07s3COMIEvdnQipRyWzx_H_2xygNC3"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇱🇻 Latvia #01 Hy2",
+      "server": "pro2.riziro.ir",
+      "server_port": 44100,
+      "password": "rjj39jg8iphgd06h",
+      "tls": {
+        "enabled": true,
+        "server_name": "pro2.riziro.ir",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "2gg0tx9d2etug8n9"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇳🇱 Netherlands #02 Hy2",
+      "server": "giftcard.gateway-stream.com",
+      "server_port": 52050,
+      "password": "s6gt5e4mof43sfg8",
+      "tls": {
+        "enabled": true,
+        "server_name": "giftcard.gateway-stream.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "fuw2k1ddrouwxr3u"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #05 Hy2",
+      "server": "bwdf2fnt.xn--e1aatfr8bwa.online",
+      "server_port": 30000,
+      "password": "tnnls",
+      "tls": {
+        "enabled": true,
+        "server_name": "bwdf2fnt.xn--e1aatfr8bwa.online",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "b6d1f3888ab1d90dd11aac1dce427b81"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇩🇪 Germany #10 Hy2",
+      "server": "179.61.138.145",
+      "server_port": 36264,
+      "password": "vpnjey",
+      "tls": {
+        "enabled": true,
+        "server_name": "de2.jey.cc.cd",
+        "insecure": true
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "Telegram@vpnjey"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇸🇪 Sweden #02 Hy2",
+      "server": "giftcard.gateway-stream.com",
+      "server_port": 52062,
+      "password": "vz86jgszv4zszchv",
+      "tls": {
+        "enabled": true,
+        "server_name": "giftcard.gateway-stream.com",
+        "insecure": false
+      },
+      "obfs": {
+        "type": "salamander",
+        "password": "fuw2k1ddrouwxr3u"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇹🇼 Taiwan #01 Hy2",
+      "server": "103.115.109.49",
+      "server_port": 443,
+      "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
+      "tls": {
+        "enabled": true,
+        "server_name": "https://t.me/oneclickvpnkeys",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇭🇰 Hong Kong #01 Hy2",
+      "server": "202.146.222.29",
+      "server_port": 443,
+      "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
+      "tls": {
+        "enabled": true,
+        "server_name": "202.146.222.29",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #06 Hy2",
+      "server": "vpn-tw-002.fastervpn.world",
+      "server_port": 443,
+      "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
+      "tls": {
+        "enabled": true,
+        "server_name": "127.0.0.1",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇷🇺 Russia #02 Hy2",
+      "server": "hy2-latvia2.unlimited-access.ru",
+      "server_port": 443,
+      "password": "GSPOBvG-ZwYcBFMr0ekFGO_Zga3wK6v_",
+      "tls": {
+        "enabled": true,
+        "server_name": "hy2-latvia2.unlimited-access.ru",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #07 Hy2",
+      "server": "hy2.123266.xyz",
+      "server_port": 33333,
+      "password": "bce6c821-200d-421f-bf3d-7159e5246ea0",
+      "tls": {
+        "enabled": true,
+        "server_name": "hy2.123266.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇺🇸 United States #02 Hy2",
+      "server": "142.249.37.90",
+      "server_port": 44356,
+      "password": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "server_name": "hy2.561891.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #08 Hy2",
+      "server": "hy2.561891.xyz",
+      "server_port": 44356,
+      "password": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "server_name": "hy2.561891.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #09 Hy2",
+      "server": "vp3.yysyy.online",
+      "server_port": 443,
+      "password": "96ab5cd282733fd4c312a61f972f330a",
+      "tls": {
+        "enabled": true,
+        "server_name": "",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇯🇵 Japan #01 Hy2",
+      "server": "8.211.175.236",
+      "server_port": 8443,
+      "password": "u63SxILNwtrQZ7Y1ZrFaZfsA",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇯🇵 Japan #02 Hy2",
+      "server": "138.3.208.26",
+      "server_port": 50160,
+      "password": "184cdec28da5a09450803c8debcd2cc9",
+      "tls": {
+        "enabled": true,
+        "server_name": "",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #10 Hy2",
+      "server": "freedom.chenlan.top",
+      "server_port": 12765,
+      "password": "STYyftThFn",
+      "tls": {
+        "enabled": true,
+        "server_name": "",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇭🇰 Hong Kong #02 Hy2",
+      "server": "202.146.222.89",
+      "server_port": 443,
+      "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
+      "tls": {
+        "enabled": true,
+        "server_name": "202.146.222.89",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇭🇰 Hong Kong #03 Hy2",
+      "server": "202.146.222.174",
+      "server_port": 443,
+      "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
+      "tls": {
+        "enabled": true,
+        "server_name": "202.146.222.174",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇰🇷 South Korea #01 Hy2",
+      "server": "132.226.226.189",
+      "server_port": 50160,
+      "password": "1671a252e2a97dc2bda4e515475931da",
+      "tls": {
+        "enabled": true,
+        "server_name": "",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇯🇵 Japan #03 Hy2",
+      "server": "45.32.10.7",
+      "server_port": 443,
+      "password": "96ab5cd282733fd4c312a61f972f330a",
+      "tls": {
+        "enabled": true,
+        "server_name": "vp3.yysyy.online",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇺🇸 United States #03 Hy2",
+      "server": "163.192.14.135",
+      "server_port": 50160,
+      "password": "099830134df5ac3a04a4b21d39b8c395",
+      "tls": {
+        "enabled": true,
+        "server_name": "off",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇺🇸 United States #04 Hy2",
+      "server": "155.248.209.237",
+      "server_port": 33333,
+      "password": "bce6c821-200d-421f-bf3d-7159e5246ea0",
+      "tls": {
+        "enabled": true,
+        "server_name": "155.248.209.2",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌍 Other #11 Hy2",
+      "server": "us.mi11o4ka.com",
+      "server_port": 443,
+      "password": "7c9c7f52-5a8c-43e0-b6d1-c8552289f230",
+      "tls": {
+        "enabled": true,
+        "server_name": "us.mi11o4ka.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇰🇷 South Korea #02 Hy2",
+      "server": "152.67.200.82",
+      "server_port": 50160,
+      "password": "3d7634af8cb2c6cb4bac1c0efad8b43d",
+      "tls": {
+        "enabled": true,
+        "server_name": "152-67-200-82.liao.kdns.fr",
+        "insecure": false
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇰🇷 South Korea #03 Hy2",
+      "server": "152.70.237.123",
+      "server_port": 2053,
+      "password": "maintell",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇫🇷 France #01 Hy2",
+      "server": "62.210.7.139",
+      "server_port": 60111,
+      "password": "github.com/Alvin9999-newpac/fanqiang",
+      "tls": {
+        "enabled": true,
+        "server_name": "…",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇹🇼 Taiwan #02 Hy2",
+      "server": "160.187.100.109",
+      "server_port": 443,
+      "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
+      "tls": {
+        "enabled": true,
+        "server_name": "160.187.100.109",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇭🇰 Hong Kong #04 Hy2",
+      "server": "31.57.248.176",
+      "server_port": 50160,
+      "password": "b0917015b656b3dd2286b5633af0c5c1",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇺🇸 United States #05 Hy2",
+      "server": "129.213.91.185",
+      "server_port": 35013,
+      "password": "4291c983-c520-46ac-82cc-48f14bef573f",
+      "tls": {
+        "enabled": true,
+        "server_name": "",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇺🇸 United States #06 Hy2",
+      "server": "198.46.146.118",
+      "server_port": 36720,
+      "password": "4fUg3KH31LpMhko6o0Ka9Q",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "geosite": "category-ads-all",
+        "outbound": "block"
+      },
+      {
+        "domain_suffix": [
+          "openai.com",
+          "chatgpt.com",
+          "anthropic.com",
+          "claude.ai",
+          "gemini.google.com",
+          "perplexity.ai",
+          "grok.com",
+          "x.ai"
+        ],
+        "outbound": "🎯 zorVPN"
+      },
+      {
+        "geosite": "cn",
+        "outbound": "direct"
+      },
+      {
+        "geoip": "cn",
+        "outbound": "direct"
+      },
+      {
+        "geoip": "private",
+        "outbound": "direct"
+      }
+    ],
+    "final": "🎯 zorVPN",
+    "auto_detect_interface": true
+  }
+}

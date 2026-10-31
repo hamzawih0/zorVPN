@@ -2,7 +2,13 @@
 zorVPN — Premium Subscription Generator & Active Health Filter
 Fetches candidates from verified GitHub sources, runs real-time protocol
 and HTTP 204 latency tests using Mihomo (Clash.Meta) core, rejects dead/blocked
-nodes, groups verified green nodes by speed/AI/streaming/country, and writes clash.yaml.
+nodes, groups verified green nodes by speed/AI/streaming/country, and writes:
+- ZorVPN.yaml & clash.yaml (Clash / Mihomo / FlClash / Stash)
+- ZorVPN-singbox.json (Sing-box native configuration profile)
+- ZorVPN-lite.txt (iOS Top 30 Base64)
+- ZorVPN.txt (iOS Top 60 Base64)
+- ZorVPN-all.txt (Complete Base64 pool)
+- ZorVPN-nodes.txt (Plaintext URI stream)
 """
 
 import sys
@@ -13,6 +19,7 @@ import time
 import json
 import base64
 import shutil
+import socket
 import hashlib
 import tempfile
 import subprocess
@@ -23,9 +30,18 @@ from datetime import datetime, timezone
 from collections import defaultdict
 import yaml
 
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    if hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
+
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_ZORVPN = os.path.join(ROOT_DIR, "ZorVPN.yaml")
 OUTPUT_CLASH = os.path.join(ROOT_DIR, "clash.yaml")
+OUTPUT_SINGBOX = os.path.join(ROOT_DIR, "ZorVPN-singbox.json")
 OUTPUT_B64_TXT = os.path.join(ROOT_DIR, "ZorVPN.txt")
 OUTPUT_B64_LITE = os.path.join(ROOT_DIR, "ZorVPN-lite.txt")
 OUTPUT_B64_ALL = os.path.join(ROOT_DIR, "ZorVPN-all.txt")
@@ -42,12 +58,18 @@ def proxy_to_uri(p: dict) -> str:
         auth = p.get('password', p.get('auth', ''))
         sni = p.get('sni', p.get('server', ''))
         insecure = 1 if p.get('skip-cert-verify') else 0
-        return f'hysteria2://{auth}@{server}:{port}?sni={sni}&insecure={insecure}#{urllib.parse.quote(name)}'
+        params = [f'sni={sni}', f'insecure={insecure}']
+        if p.get('obfs'):
+            params.append(f'obfs={p.get("obfs")}')
+            if p.get('obfs-password'):
+                params.append(f'obfs-password={p.get("obfs-password")}')
+        return f'hysteria2://{auth}@{server}:{port}?' + '&'.join(params) + f'#{urllib.parse.quote(name)}'
+
     elif ptype == 'vless':
         uuid = p.get('uuid', '')
         flow = p.get('flow', '')
         sni = p.get('servername', p.get('sni', ''))
-        network = p.get('network', 'tcp')
+        network = str(p.get('network', 'tcp')).lower()
         pbk = p.get('reality-opts', {}).get('public-key', '') if p.get('reality-opts') else ''
         sid = p.get('reality-opts', {}).get('short-id', '') if p.get('reality-opts') else ''
         fp = p.get('client-fingerprint', '')
@@ -59,11 +81,33 @@ def proxy_to_uri(p: dict) -> str:
         if pbk: params.append(f'pbk={pbk}')
         if sid: params.append(f'sid={sid}')
         if network: params.append(f'type={network}')
+        if network == 'ws':
+            ws_opts = p.get('ws-opts', {})
+            path = ws_opts.get('path', '/')
+            host = ws_opts.get('headers', {}).get('Host', '') or ws_opts.get('headers', {}).get('host', '')
+            if path: params.append(f'path={urllib.parse.quote(path)}')
+            if host: params.append(f'host={urllib.parse.quote(host)}')
+        elif network == 'grpc':
+            grpc_opts = p.get('grpc-opts', {})
+            service = grpc_opts.get('grpc-service-name', '')
+            if service: params.append(f'serviceName={urllib.parse.quote(service)}')
         return f'vless://{uuid}@{server}:{port}?' + '&'.join(params) + f'#{urllib.parse.quote(name)}'
+
     elif ptype == 'trojan':
         pw = p.get('password', '')
         sni = p.get('sni', '')
-        return f'trojan://{pw}@{server}:{port}?security=tls&sni={sni}#{urllib.parse.quote(name)}'
+        network = str(p.get('network', 'tcp')).lower()
+        params = ['security=tls']
+        if sni: params.append(f'sni={sni}')
+        if network: params.append(f'type={network}')
+        if network == 'ws':
+            ws_opts = p.get('ws-opts', {})
+            path = ws_opts.get('path', '/')
+            host = ws_opts.get('headers', {}).get('Host', '') or ws_opts.get('headers', {}).get('host', '')
+            if path: params.append(f'path={urllib.parse.quote(path)}')
+            if host: params.append(f'host={urllib.parse.quote(host)}')
+        return f'trojan://{pw}@{server}:{port}?' + '&'.join(params) + f'#{urllib.parse.quote(name)}'
+
     elif ptype == 'vmess':
         v_dict = {
             'v': '2', 'ps': name, 'add': server, 'port': port,
@@ -77,19 +121,18 @@ def proxy_to_uri(p: dict) -> str:
         }
         v_str = base64.b64encode(json.dumps(v_dict).encode('utf-8')).decode('utf-8')
         return f'vmess://{v_str}'
+
     elif ptype == 'ss':
         cipher = p.get('cipher', '')
         pw = p.get('password', '')
         user_info = base64.b64encode(f'{cipher}:{pw}'.encode('utf-8')).decode('utf-8')
         return f'ss://{user_info}@{server}:{port}#{urllib.parse.quote(name)}'
+
     return ""
 
-# Verified upstream subscription sources
+
+# High-cadence verified upstream subscription sources
 SOURCES = [
-    {
-        "name": "v2nodes.com (Global Node Feed)",
-        "url": "https://www.v2nodes.com/subscriptions/country/all/?key=EA14A8FD6DCEA0A",
-    },
     {
         "name": "MatinGhanbari/v2ray-configs (15m Refresh)",
         "url": "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/all_sub.txt",
@@ -99,8 +142,12 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/barry-far/V2ray-Config/main/All_Configs_Sub.txt",
     },
     {
-        "name": "Nexus Nodes (ninjastrikers/nexus-nodes 4h Speed-Sorted)",
+        "name": "Nexus Nodes (ninjastrikers 4h Speed-Sorted)",
         "url": "https://raw.githubusercontent.com/ninjastrikers/nexus-nodes/main/configs/all.txt",
+    },
+    {
+        "name": "Au1rxx/free-vpn-subscriptions (VLESS & Hy2 Pre-verified)",
+        "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/clash.yaml",
     },
     {
         "name": "lyqnihao/proxy (12h Meta-Aggregator Clash-Meta)",
@@ -115,20 +162,12 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml",
     },
     {
-        "name": "free-nodes/v2rayfree (Daily Verified Aggregation)",
-        "url": "https://raw.githubusercontent.com/free-nodes/v2rayfree/main/sub",
-    },
-    {
         "name": "Pawdroid/Free-servers (Curated Global)",
         "url": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
     },
     {
         "name": "awesome-vpn/awesome-vpn (Midnight Refresh)",
         "url": "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml",
-    },
-    {
-        "name": "Au1rxx/free-vpn-subscriptions (VLESS & Hy2 Pre-verified)",
-        "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/clash.yaml",
     },
     {
         "name": "sunmiao4458/free-proxy-airport (Low Latency Verified)",
@@ -139,11 +178,11 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/sinspired/airport/main/subs/clashfree.yaml",
     },
     {
-        "name": "peasoft/NoMoreWalls",
+        "name": "peasoft/NoMoreWalls (Meta Aggregator)",
         "url": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml",
     },
     {
-        "name": "ermaozi/get_subscribe",
+        "name": "ermaozi/get_subscribe (Clash Collection)",
         "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml",
     },
     {
@@ -218,21 +257,35 @@ EMOJI_FLAG_MAP = {
     '🇮🇷': 'IR',
 }
 
-def detect_country(name: str, server: str = "") -> str:
+def detect_country_by_text(name: str, server: str = "") -> str:
+    """Accurately identify country code from text using word boundaries, avoiding substring bugs."""
     if not name:
         name = ""
+
+    # 1. Emoji flag match
     for emoji, code in EMOJI_FLAG_MAP.items():
         if emoji in name:
             return code
+
     name_lower = name.lower()
+
+    # 2. Strict keyword match with word boundaries
     for kw, val in sorted(COUNTRY_MAP.items(), key=lambda x: len(x[0]), reverse=True):
         kw_lower = kw.lower()
         if any(ord(c) > 127 for c in kw):
             if kw in name:
                 return val[1]
         else:
-            if re.search(r'(?:\b|_|-)' + re.escape(kw_lower) + r'(?:\b|_|-|\d)', name_lower) or kw_lower in name_lower:
-                return val[1]
+            # For ASCII codes, require distinct word/token delimiters
+            if len(kw) <= 3:
+                pattern = r'(?:^|[\s_\[\(\-|/])' + re.escape(kw_lower) + r'(?:$|[\s_\]\)\-|/\d])'
+                if re.search(pattern, name_lower):
+                    return val[1]
+            else:
+                if re.search(r'\b' + re.escape(kw_lower) + r'\b', name_lower):
+                    return val[1]
+
+    # 3. Check TLD in server domain
     if server:
         srv_lower = server.lower()
         parts = srv_lower.split('.')
@@ -240,7 +293,79 @@ def detect_country(name: str, server: str = "") -> str:
             tld = parts[-1].upper()
             if tld in EMOJI_FLAG_MAP.values():
                 return tld
+
     return 'XX'
+
+
+def resolve_countries_batch(working_proxies: list) -> dict:
+    """
+    Perform high-speed batch IP geolocation for nodes lacking clear country names.
+    Returns mapping from (server) -> (flag_emoji, country_code, country_name).
+    """
+    geo_map = {}
+    servers_to_lookup = set()
+
+    for p in working_proxies:
+        srv = str(p.get('server', '')).strip().lower()
+        name = str(p.get('name', ''))
+        # If text detection was uncertain ('XX' or 'Other'), add to lookup queue
+        if srv and srv not in ('127.0.0.1', 'localhost', '0.0.0.0'):
+            code = detect_country_by_text(name, srv)
+            if code == 'XX':
+                servers_to_lookup.add(srv)
+
+    if not servers_to_lookup:
+        return geo_map
+
+    socket.setdefaulttimeout(2.5)
+    lookup_list = list(servers_to_lookup)[:150]
+    print(f"  🌍 Resolving genuine GeoIP locations for {len(lookup_list)} servers via batch lookup...", flush=True)
+
+    # Parallel DNS resolution for domain names
+    ip_to_servers = defaultdict(list)
+    def resolve_server(srv):
+        if re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', srv):
+            return (srv, srv)
+        try:
+            ip = socket.gethostbyname(srv)
+            return (srv, ip)
+        except Exception:
+            return (srv, None)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=30) as ex:
+        dns_results = list(ex.map(resolve_server, lookup_list))
+
+    for srv, ip in dns_results:
+        if ip:
+            ip_to_servers[ip].append(srv)
+
+    unique_ips = list(ip_to_servers.keys())
+
+    # Query ip-api batch in chunks of 100
+    for i in range(0, len(unique_ips), 100):
+        batch = unique_ips[i:i+100]
+        try:
+            req_data = json.dumps([{"query": ip} for ip in batch]).encode('utf-8')
+            req = urllib.request.Request(
+                "http://ip-api.com/batch?fields=query,status,country,countryCode",
+                data=req_data,
+                headers={"Content-Type": "application/json"}
+            )
+            opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+            with opener.open(req, timeout=5) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+                for item in data:
+                    if item.get('status') == 'success':
+                        cc = item.get('countryCode', '').upper()
+                        cname = item.get('country', '')
+                        flag = [k for k, v in EMOJI_FLAG_MAP.items() if v == cc]
+                        flag_emoji = flag[0] if flag else '🌐'
+                        for srv in ip_to_servers.get(item.get('query'), []):
+                            geo_map[srv] = (flag_emoji, cc, cname)
+        except Exception as e:
+            print(f"    ⚠️ GeoIP batch notice: {e}", flush=True)
+
+    return geo_map
 
 
 def proxy_fingerprint(proxy: dict) -> str:
@@ -249,6 +374,35 @@ def proxy_fingerprint(proxy: dict) -> str:
     ptype = str(proxy.get('type', '')).strip().lower()
     cred = str(proxy.get('uuid', proxy.get('password', ''))).strip()
     return hashlib.sha256(f"{server}:{port}:{ptype}:{cred}".encode('utf-8')).hexdigest()
+
+
+def is_valid_proxy(p: dict) -> bool:
+    """Validate proxy fields to prevent Mihomo startup crashes."""
+    if not isinstance(p, dict):
+        return False
+    server = str(p.get('server', '')).strip().lower()
+    if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
+        return False
+    try:
+        port = int(p.get('port', 0))
+        if port <= 0 or port > 65535:
+            return False
+    except (ValueError, TypeError):
+        return False
+
+    ptype = str(p.get('type', '')).strip().lower()
+    if ptype not in ('vless', 'hysteria2', 'trojan', 'vmess', 'ss'):
+        return False
+
+    # Check required credentials
+    if ptype in ('vless', 'vmess') and not p.get('uuid'):
+        return False
+    if ptype in ('hysteria2', 'trojan') and not p.get('password') and not p.get('auth'):
+        return False
+    if ptype == 'ss' and (not p.get('password') or not p.get('cipher')):
+        return False
+
+    return True
 
 
 def find_mihomo_bin() -> str:
@@ -280,12 +434,6 @@ def fetch_url(url: str, timeout: int = 15) -> bytes:
         proxies['http'] = os.environ.get('http_proxy')
     if os.environ.get('https_proxy'):
         proxies['https'] = os.environ.get('https_proxy')
-    if not proxies and os.name == 'nt':
-        proxies = {'http': 'http://127.0.0.1:7897', 'https': 'http://127.0.0.1:7897'}
-
-    ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
 
     # Try with proxy
     if proxies:
@@ -323,7 +471,7 @@ def parse_vmess(uri: str) -> dict | None:
         server = str(data.get('add', '')).strip()
         port = int(data.get('port', 0))
         uuid = str(data.get('id', '')).strip()
-        if not server or not port or not uuid:
+        if not server or not (1 <= port <= 65535) or not uuid:
             return None
         name = str(data.get('ps', f"vmess-{server}-{port}")).strip()
         net = str(data.get('net', 'tcp')).lower()
@@ -364,7 +512,7 @@ def parse_vless(uri: str) -> dict | None:
         uuid = parsed.username
         server = parsed.hostname
         port = parsed.port
-        if not uuid or not server or not port:
+        if not uuid or not server or not port or not (1 <= int(port) <= 65535):
             return None
         qs = urllib.parse.parse_qs(parsed.query)
         name = urllib.parse.unquote(parsed.fragment) if parsed.fragment else f"vless-{server}-{port}"
@@ -420,7 +568,7 @@ def parse_trojan(uri: str) -> dict | None:
         password = parsed.username
         server = parsed.hostname
         port = parsed.port
-        if not password or not server or not port:
+        if not password or not server or not port or not (1 <= int(port) <= 65535):
             return None
         qs = urllib.parse.parse_qs(parsed.query)
         name = urllib.parse.unquote(parsed.fragment) if parsed.fragment else f"trojan-{server}-{port}"
@@ -480,6 +628,8 @@ def parse_ss(uri: str) -> dict | None:
                 return None
             cipher, password, server, port = m.group(1), m.group(2), m.group(3), int(m.group(4))
 
+        if not (1 <= port <= 65535):
+            return None
         if not name:
             name = f"ss-{server}-{port}"
         return {
@@ -501,12 +651,14 @@ def parse_hy2(uri: str) -> dict | None:
         auth = parsed.username or ''
         server = parsed.hostname
         port = parsed.port
-        if not server or not port:
+        if not server or not port or not (1 <= int(port) <= 65535):
             return None
         qs = urllib.parse.parse_qs(parsed.query)
         name = urllib.parse.unquote(parsed.fragment) if parsed.fragment else f"hy2-{server}-{port}"
         sni = qs.get('sni', [''])[0]
         insecure = qs.get('insecure', ['0'])[0] in ('1', 'true')
+        obfs = qs.get('obfs', [''])[0]
+        obfs_pw = qs.get('obfs-password', [''])[0]
 
         proxy = {
             'name': name,
@@ -518,6 +670,9 @@ def parse_hy2(uri: str) -> dict | None:
         }
         if sni: proxy['sni'] = sni
         if insecure: proxy['skip-cert-verify'] = True
+        if obfs:
+            proxy['obfs'] = obfs
+            if obfs_pw: proxy['obfs-password'] = obfs_pw
         return proxy
     except Exception:
         return None
@@ -553,16 +708,11 @@ def parse_subscription_content(content_bytes: bytes) -> list:
             data = yaml.safe_load(yaml_text)
             if isinstance(data, dict) and 'proxies' in data and isinstance(data['proxies'], list):
                 for p in data['proxies']:
-                    if isinstance(p, dict) and 'server' in p and 'port' in p:
-                        server = str(p.get('server', '')).strip().lower()
-                        if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
-                            continue
+                    if is_valid_proxy(p):
                         name = str(p.get('name', '')).strip()
                         if any(kw in name for kw in AD_KEYWORDS):
                             continue
-                        ptype = str(p.get('type', '')).lower()
-                        if ptype in ('vless', 'hysteria2', 'hysteria', 'trojan', 'vmess', 'ss', 'socks5'):
-                            results.append(p)
+                        results.append(p)
                 if results:
                     return results
         except Exception:
@@ -584,10 +734,7 @@ def parse_subscription_content(content_bytes: bytes) -> list:
         if not line or line.startswith('#'):
             continue
         p = parse_uri(line)
-        if p:
-            server = str(p.get('server', '')).strip().lower()
-            if not server or server in ('127.0.0.1', '0.0.0.0', 'localhost'):
-                continue
+        if p and is_valid_proxy(p):
             name = str(p.get('name', '')).strip()
             if any(kw in name for kw in AD_KEYWORDS):
                 continue
@@ -596,15 +743,10 @@ def parse_subscription_content(content_bytes: bytes) -> list:
     return results
 
 
-def parse_clash_yaml(content_bytes: bytes) -> list:
-    """Backwards-compatible alias for parse_subscription_content."""
-    return parse_subscription_content(content_bytes)
-
-
 def test_proxies_with_mihomo(candidates: list, mihomo_bin: str, max_workers: int = 35) -> list:
     print(f"\n  🔍 Starting Active Health Filter ({len(candidates)} candidates)...")
-    print(f"  ⚡ Engine: {mihomo_bin}")
-    print(f"  🧪 Probe Target: http://www.gstatic.com/generate_204 (Timeout: 2500ms, Workers: {max_workers})")
+    print(f"  ⚡ Engine: {mihomo_bin}", flush=True)
+    print(f"  🧪 Probe Target: http://cp.cloudflare.com/generate_204 (Timeout: 2500ms, Workers: {max_workers})", flush=True)
 
     temp_proxies = []
     for i, p in enumerate(candidates):
@@ -638,7 +780,7 @@ def test_proxies_with_mihomo(candidates: list, mihomo_bin: str, max_workers: int
     def check_node(item):
         orig_proxy, test_proxy = item
         node_name = test_proxy['name']
-        url = f"http://127.0.0.1:{ctrl_port}/proxies/{urllib.parse.quote(node_name)}/delay?timeout=2500&url=http://www.gstatic.com/generate_204"
+        url = f"http://127.0.0.1:{ctrl_port}/proxies/{urllib.parse.quote(node_name)}/delay?timeout=2500&url=http://cp.cloudflare.com/generate_204"
         req = urllib.request.Request(url, headers={'Authorization': f'Bearer {secret}'})
         try:
             opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
@@ -686,6 +828,248 @@ def test_proxies_with_mihomo(candidates: list, mihomo_bin: str, max_workers: int
     return alive_results
 
 
+def proxy_to_singbox_outbound(p: dict) -> dict | None:
+    """Convert proxy dict to native Sing-box outbound configuration."""
+    ptype = str(p.get('type', '')).lower()
+    name = str(p.get('name', ''))
+    server = str(p.get('server', ''))
+    try:
+        port = int(p.get('port', 0))
+    except (ValueError, TypeError):
+        return None
+
+    if not server or not (1 <= port <= 65535):
+        return None
+
+    if ptype == 'hysteria2':
+        out = {
+            "type": "hysteria2",
+            "tag": name,
+            "server": server,
+            "server_port": port,
+            "password": str(p.get('password', p.get('auth', ''))),
+            "tls": {
+                "enabled": True,
+                "server_name": p.get('sni', server),
+                "insecure": bool(p.get('skip-cert-verify', False))
+            }
+        }
+        if p.get('obfs'):
+            out['obfs'] = {
+                'type': p.get('obfs'),
+                'password': p.get('obfs-password', '')
+            }
+        return out
+
+    elif ptype == 'vless':
+        out = {
+            "type": "vless",
+            "tag": name,
+            "server": server,
+            "server_port": port,
+            "uuid": str(p.get('uuid', '')),
+        }
+        if p.get('flow'):
+            out['flow'] = p.get('flow')
+        reality_opts = p.get('reality-opts', {})
+        if reality_opts and reality_opts.get('public-key'):
+            out['tls'] = {
+                "enabled": True,
+                "server_name": p.get('servername', p.get('sni', server)),
+                "utls": {
+                    "enabled": True,
+                    "fingerprint": p.get('client-fingerprint', 'chrome')
+                },
+                "reality": {
+                    "enabled": True,
+                    "public_key": reality_opts.get('public-key', ''),
+                    "short_id": reality_opts.get('short-id', '')
+                }
+            }
+        elif p.get('tls'):
+            out['tls'] = {
+                "enabled": True,
+                "server_name": p.get('servername', p.get('sni', server)),
+                "insecure": bool(p.get('skip-cert-verify', False))
+            }
+            if p.get('client-fingerprint'):
+                out['tls']['utls'] = {
+                    "enabled": True,
+                    "fingerprint": p.get('client-fingerprint')
+                }
+        net = str(p.get('network', 'tcp')).lower()
+        if net == 'ws':
+            ws_opts = p.get('ws-opts', {})
+            out['transport'] = {
+                "type": "ws",
+                "path": ws_opts.get('path', '/'),
+                "headers": ws_opts.get('headers', {})
+            }
+        elif net == 'grpc':
+            grpc_opts = p.get('grpc-opts', {})
+            out['transport'] = {
+                "type": "grpc",
+                "service_name": grpc_opts.get('grpc-service-name', '')
+            }
+        return out
+
+    elif ptype == 'trojan':
+        out = {
+            "type": "trojan",
+            "tag": name,
+            "server": server,
+            "server_port": port,
+            "password": str(p.get('password', '')),
+            "tls": {
+                "enabled": True,
+                "server_name": p.get('sni', server),
+                "insecure": bool(p.get('skip-cert-verify', False))
+            }
+        }
+        net = str(p.get('network', 'tcp')).lower()
+        if net == 'ws':
+            ws_opts = p.get('ws-opts', {})
+            out['transport'] = {
+                "type": "ws",
+                "path": ws_opts.get('path', '/'),
+                "headers": ws_opts.get('headers', {})
+            }
+        return out
+
+    elif ptype == 'vmess':
+        out = {
+            "type": "vmess",
+            "tag": name,
+            "server": server,
+            "server_port": port,
+            "uuid": str(p.get('uuid', '')),
+            "security": str(p.get('cipher', 'auto')),
+            "alter_id": int(p.get('alterId', 0))
+        }
+        if p.get('tls'):
+            out['tls'] = {
+                "enabled": True,
+                "server_name": p.get('servername', p.get('sni', server)),
+                "insecure": bool(p.get('skip-cert-verify', False))
+            }
+        net = str(p.get('network', 'tcp')).lower()
+        if net == 'ws':
+            ws_opts = p.get('ws-opts', {})
+            out['transport'] = {
+                "type": "ws",
+                "path": ws_opts.get('path', '/'),
+                "headers": ws_opts.get('headers', {})
+            }
+        return out
+
+    elif ptype == 'ss':
+        return {
+            "type": "shadowsocks",
+            "tag": name,
+            "server": server,
+            "server_port": port,
+            "method": str(p.get('cipher', '')),
+            "password": str(p.get('password', ''))
+        }
+
+    return None
+
+
+def generate_singbox_profile(proxies: list) -> str:
+    """Generate modern, production-grade Sing-box configuration profile."""
+    outbounds = []
+    proxy_tags = []
+
+    for p in proxies:
+        out = proxy_to_singbox_outbound(p)
+        if out:
+            outbounds.append(out)
+            proxy_tags.append(out['tag'])
+
+    if not proxy_tags:
+        proxy_tags = ["direct"]
+
+    special_outbounds = [
+        {
+            "type": "selector",
+            "tag": "🎯 zorVPN",
+            "outbounds": ["⚡ Fastest", "🛡️ Fallback"] + proxy_tags + ["direct"]
+        },
+        {
+            "type": "urltest",
+            "tag": "⚡ Fastest",
+            "outbounds": proxy_tags,
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "300s",
+            "tolerance": 50
+        },
+        {
+            "type": "urltest",
+            "tag": "🛡️ Fallback",
+            "outbounds": proxy_tags[:min(25, len(proxy_tags))],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "300s",
+            "tolerance": 100
+        }
+    ]
+
+    terminals = [
+        {"type": "direct", "tag": "direct"},
+        {"type": "block", "tag": "block"},
+        {"type": "dns", "tag": "dns-out"}
+    ]
+
+    sb = {
+        "version": 1,
+        "log": {
+            "level": "warn",
+            "timestamp": True
+        },
+        "dns": {
+            "servers": [
+                {"tag": "dns-remote", "address": "https://1.1.1.1/dns-query", "detour": "🎯 zorVPN"},
+                {"tag": "dns-direct", "address": "https://223.5.5.5/dns-query", "detour": "direct"},
+                {"tag": "dns-block", "address": "rcode://success"}
+            ],
+            "rules": [
+                {"geosite": "category-ads-all", "server": "dns-block", "disable_cache": True},
+                {"geosite": "cn", "server": "dns-direct"},
+                {"geoip": "cn", "server": "dns-direct"}
+            ],
+            "final": "dns-remote",
+            "strategy": "prefer_ipv4"
+        },
+        "inbounds": [
+            {
+                "type": "mixed",
+                "tag": "mixed-in",
+                "listen": "127.0.0.1",
+                "listen_port": 2080
+            }
+        ],
+        "outbounds": special_outbounds + outbounds + terminals,
+        "route": {
+            "rules": [
+                {"protocol": "dns", "outbound": "dns-out"},
+                {"geosite": "category-ads-all", "outbound": "block"},
+                {
+                    "domain_suffix": [
+                        "openai.com", "chatgpt.com", "anthropic.com", "claude.ai",
+                        "gemini.google.com", "perplexity.ai", "grok.com", "x.ai"
+                    ],
+                    "outbound": "🎯 zorVPN"
+                },
+                {"geosite": "cn", "outbound": "direct"},
+                {"geoip": "cn", "outbound": "direct"},
+                {"geoip": "private", "outbound": "direct"}
+            ],
+            "final": "🎯 zorVPN",
+            "auto_detect_interface": True
+        }
+    }
+    return json.dumps(sb, indent=2, ensure_ascii=False)
+
+
 def build_zorvpn():
     print("═" * 70)
     print("  🚀 zorVPN Subscription Updater — Aggregating & Health-Filtering")
@@ -694,13 +1078,24 @@ def build_zorvpn():
     all_candidates = []
     seen_fingerprints = set()
 
-    for src in SOURCES:
+    def fetch_source(src):
         name = src['name']
         url = src['url']
-        print(f"  ➜ Fetching {name} ...", end="", flush=True)
         try:
-            data = fetch_url(url, timeout=18)
+            data = fetch_url(url, timeout=12)
             proxies = parse_subscription_content(data)
+            return (name, proxies, None)
+        except Exception as e:
+            return (name, [], e)
+
+    print(f"  ➜ Harvesting candidate nodes from {len(SOURCES)} upstream feeds in parallel...")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+        results = list(executor.map(fetch_source, SOURCES))
+
+    for name, proxies, err in results:
+        if err:
+            print(f"    ✗ {name:<50}: Failed ({err})")
+        else:
             added = 0
             for p in proxies:
                 fp = proxy_fingerprint(p)
@@ -708,13 +1103,11 @@ def build_zorvpn():
                     seen_fingerprints.add(fp)
                     all_candidates.append(dict(p))
                     added += 1
-            print(f"  ✓ {len(proxies)} nodes ({added} unique)")
-        except Exception as e:
-            print(f"  ✗ Failed: {e}")
+            print(f"    ✓ {name:<50}: {len(proxies)} nodes ({added} unique)")
 
     print(f"\n  Total unique candidate nodes harvested: {len(all_candidates)}")
     if not all_candidates:
-        print("  ❌ No proxies collected! Aborting update to protect existing clash.yaml.")
+        print("  ❌ No proxies collected! Aborting update to protect existing subscription.")
         return False
 
     mihomo_bin = find_mihomo_bin()
@@ -740,16 +1133,24 @@ def build_zorvpn():
         print("  ⚠️ Warning: Mihomo binary not found. Skipping live delay test.")
         working_proxies = all_candidates[:200]
 
+    # Resolve genuine GeoIP locations for working proxies
+    geo_lookup = resolve_countries_batch(working_proxies)
+
     # Group by country and rename
     renamed_proxies = []
     country_counters = defaultdict(int)
 
     for p in working_proxies:
         original_name = str(p.get('name', ''))
-        server = str(p.get('server', ''))
-        code = detect_country(original_name, server)
+        server = str(p.get('server', '')).strip().lower()
 
-        if code in EMOJI_FLAG_MAP.values():
+        # Check text detection first
+        code = detect_country_by_text(original_name, server)
+
+        # If text detection was unsure, check batch GeoIP
+        if code == 'XX' and server in geo_lookup:
+            flag, code, cname = geo_lookup[server]
+        elif code in EMOJI_FLAG_MAP.values():
             flag = [k for k, v in EMOJI_FLAG_MAP.items() if v == code][0]
             cname = [v[2] for k, v in COUNTRY_MAP.items() if v[1] == code][0]
         else:
@@ -869,7 +1270,7 @@ def build_zorvpn():
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
 # ║  Auto-generated: {now_str:<32}                      ║
 # ║  Nodes: {len(renamed_proxies):>4} | Countries: {len(region_pools):>2} | Tested: 100% Functional Latency Verified        ║
-# ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Surge  ║
+# ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Sing-box║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
 mixed-port: 7890
@@ -1001,6 +1402,8 @@ rules:
   # ── AI Services → Dedicated Pool ──────────────────────────────────────────
   - DOMAIN-SUFFIX,openai.com,🤖 AI Services
   - DOMAIN-SUFFIX,chatgpt.com,🤖 AI Services
+  - DOMAIN-SUFFIX,oaistatic.com,🤖 AI Services
+  - DOMAIN-SUFFIX,oaiusercontent.com,🤖 AI Services
   - DOMAIN-SUFFIX,ai.com,🤖 AI Services
   - DOMAIN-SUFFIX,claude.ai,🤖 AI Services
   - DOMAIN-SUFFIX,anthropic.com,🤖 AI Services
@@ -1104,9 +1507,14 @@ rules:
         with open(out_path, 'w', encoding='utf-8') as f:
             f.write(full_output)
 
+    # Write Sing-box Native Profile (ZorVPN-singbox.json)
+    singbox_json = generate_singbox_profile(renamed_proxies)
+    with open(OUTPUT_SINGBOX, 'w', encoding='utf-8') as f:
+        f.write(singbox_json)
+
     # Convert proxies to standard URIs for Shadowrocket / V2Ray / Sing-box
     uris = []
-    for p in working_proxies:
+    for p in renamed_proxies:
         uri = proxy_to_uri(p)
         if uri:
             uris.append(uri)
@@ -1135,6 +1543,7 @@ rules:
     print(f"  🎉 SUCCESS! zorVPN subscriptions written successfully:")
     print(f"    - {OUTPUT_ZORVPN} (Clash/Mihomo/FlClash/Stash)")
     print(f"    - {OUTPUT_CLASH} (Legacy alias)")
+    print(f"    - {OUTPUT_SINGBOX} (Sing-box native format)")
     print(f"    - {OUTPUT_B64_LITE} (iOS Shadowrocket Lite: Top 30 nodes)")
     print(f"    - {OUTPUT_B64_TXT} (iOS Shadowrocket Standard: Top 60 nodes)")
     print(f"    - {OUTPUT_B64_ALL} (Full Base64 Pool: {len(uris)} nodes)")

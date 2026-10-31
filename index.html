@@ -470,6 +470,7 @@ button {
 
 .platform-icon-wrap.ios { background: rgba(10, 132, 255, 0.12); color: #0A84FF; }
 .platform-icon-wrap.android { background: rgba(48, 209, 88, 0.12); color: #30D158; }
+.platform-icon-wrap.singbox { background: rgba(191, 90, 242, 0.12); color: #BF5AF2; }
 .platform-icon-wrap.mac { background: rgba(94, 92, 230, 0.12); color: #5E5CE6; }
 .platform-icon-wrap.win { background: rgba(10, 132, 255, 0.12); color: #0A84FF; }
 .platform-icon-wrap.router { background: rgba(255, 159, 10, 0.12); color: #FF9F0A; }
@@ -511,10 +512,173 @@ button {
   border-color: rgba(48, 209, 88, 0.25);
 }
 
+.platform-pill.purple {
+  background: rgba(191, 90, 242, 0.12);
+  color: #BF5AF2;
+  border-color: rgba(191, 90, 242, 0.25);
+}
+
 .platform-pill.orange {
   background: rgba(255, 159, 10, 0.12);
   color: var(--orange);
   border-color: rgba(255, 159, 10, 0.25);
+}
+
+/* Live Node Explorer */
+.explorer-card {
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  border-radius: 20px;
+  padding: 18px;
+  margin-top: 24px;
+}
+
+.explorer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.explorer-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.explorer-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.explorer-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid rgba(10, 132, 255, 0.25);
+}
+
+.explorer-search-box {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.explorer-search-input {
+  width: 100%;
+  background: #111116;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 10px 14px 10px 38px;
+  font-size: 13px;
+  color: #FFFFFF;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+}
+
+.explorer-search-input:focus {
+  border-color: var(--blue);
+}
+
+.explorer-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.node-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+
+.node-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #181820;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 9px 12px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.node-row:hover {
+  background: #20202C;
+  border-color: var(--stroke-strong);
+}
+
+.node-info-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.node-flag {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.node-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.node-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.node-subtext {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+}
+
+.btn-copy-node {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-copy-node:hover {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border-color: rgba(10, 132, 255, 0.35);
+}
+
+.btn-copy-node svg {
+  width: 13px;
+  height: 13px;
 }
 
 .platform-sub {
@@ -1291,7 +1455,31 @@ button {
         </div>
       </div>
 
-      <!-- 5. Merlin / Router / Linux -->
+      <!-- 5. Sing-box Universal -->
+      <div class="platform-card" onclick="openPlatformSheet('singbox')">
+        <div class="platform-left">
+          <div class="platform-icon-wrap singbox">
+            <!-- Box / Cube SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <div class="platform-meta">
+            <div class="platform-name-row">
+              <span class="platform-name">Sing-box</span>
+              <span class="platform-pill purple">Universal</span>
+            </div>
+            <span class="platform-sub">iOS • Android • macOS • Linux Native</span>
+          </div>
+        </div>
+        <div class="platform-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- 6. Merlin / Router / Linux -->
       <div class="platform-card" onclick="openPlatformSheet('merlin')">
         <div class="platform-left">
           <div class="platform-icon-wrap router">
@@ -1314,6 +1502,31 @@ button {
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Live Node Explorer & Quick Single-Node Copy -->
+  <section class="explorer-card">
+    <div class="explorer-header">
+      <div class="explorer-title-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="color: var(--blue);">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span class="explorer-title">Live Server Pool Explorer</span>
+      </div>
+      <span class="explorer-badge" id="explorerCountBadge">Verified Green</span>
+    </div>
+    <div class="explorer-search-box">
+      <svg class="explorer-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="nodeSearchInput" class="explorer-search-input" placeholder="Filter by country, protocol, or name (e.g. US, Hy2, Germany)..." oninput="filterNodesList(this.value)" />
+    </div>
+    <div id="nodeListContainer" class="node-list-container">
+      <div style="text-align: center; color: var(--text-dim); padding: 20px; font-size: 13px;">Loading verified server pool...</div>
     </div>
   </section>
 
@@ -1543,6 +1756,7 @@ const ICONS = {
   mac: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M2 20h20M12 16v4"></path></svg>`,
   windows: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.48L10.33 4.5v6.52H3V5.48zm0 13.04L10.33 19.5v-6.52H3v5.54zM11.67 4.31L21 3v8.02h-9.33V4.31zm9.33 8.67V21l-9.33-1.31v-6.67H21z"/></svg>`,
   router: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="20" height="8" rx="2"></rect><path d="M6 18h.01M10 18h.01M14 6a8 8 0 0 1 6.5 3.3M17 10a4 4 0 0 1 3.5 1.7M7 14V8"></path></svg>`,
+  box: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`,
   zap: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
   globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
 };
@@ -1606,6 +1820,23 @@ const PLATFORMS = {
     appDownloadBtnText: "Download .exe",
     isDirectDownload: true,
     appLogo: APP_LOGOS.clashverge
+  },
+  singbox: {
+    title: "Sing-box Setup",
+    subtitle: "Universal JSON Profile • iOS / Android / macOS / Linux",
+    svg: ICONS.box,
+    stableFile: "ZorVPN-singbox.json",
+    fullFile: "ZorVPN-all.txt",
+    stableDesc: "Native JSON • Auto-route & DNS Rules",
+    fullDesc: "Complete Base64 Stream Archive",
+    importProtocol: "singbox",
+    appTitle: "Sing-box",
+    appTag: "Universal",
+    appSub: "Next-Gen Open-Source Client",
+    appDownloadUrl: "https://github.com/SagerNet/sing-box/releases",
+    appDownloadBtnText: "Releases Page ↗",
+    isDirectDownload: false,
+    appLogo: APP_LOGOS.singbox
   },
   merlin: {
     title: "Merlin / Router / Linux",
@@ -1778,6 +2009,9 @@ function updateSheetUrls() {
   } else if (protocol === 'clashmeta' || protocol === 'clash') {
     importBtn.href = `clash://install-config?url=${encodeURIComponent(url)}&name=zorVPN`;
     document.getElementById('btnImportLabel').textContent = (currentPlatform === 'android') ? '1-Click Add to Clash Meta' : '1-Click Add to Clash';
+  } else if (protocol === 'singbox') {
+    importBtn.href = `sing-box://import-remote-profile?url=${encodeURIComponent(url)}#zorVPN`;
+    document.getElementById('btnImportLabel').textContent = '1-Click Add to Sing-box';
   } else {
     importBtn.href = url;
     document.getElementById('btnImportLabel').textContent = 'Open Raw Subscription';
@@ -1998,11 +2232,127 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+// ============================================================
+// LIVE SERVER POOL EXPLORER LOGIC
+// ============================================================
+let allParsedNodes = [];
+
+async function loadLiveNodePool() {
+  const container = document.getElementById('nodeListContainer');
+  const countBadge = document.getElementById('explorerCountBadge');
+  try {
+    const res = await fetch('ZorVPN-nodes.txt', { cache: 'no-cache' });
+    if (!res.ok) return;
+    const text = await res.text();
+    const lines = text.split('\n').filter(l => l.trim().length > 0);
+
+    allParsedNodes = [];
+    lines.forEach((line, idx) => {
+      const uri = line.trim();
+      let flag = '🌐';
+      let name = `Node #${idx + 1}`;
+      let proto = 'PROXY';
+
+      if (uri.startsWith('hysteria2://') || uri.startsWith('hy2://')) proto = 'Hy2';
+      else if (uri.startsWith('vless://')) proto = 'VLESS';
+      else if (uri.startsWith('vmess://')) proto = 'VMess';
+      else if (uri.startsWith('trojan://')) proto = 'Trojan';
+      else if (uri.startsWith('ss://')) proto = 'SS';
+
+      if (uri.includes('#')) {
+        try {
+          const rawTag = decodeURIComponent(uri.split('#')[1]);
+          const flagMatch = rawTag.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]|🌍|🌐/);
+          if (flagMatch) flag = flagMatch[0];
+          name = rawTag.replace(flag, '').trim();
+        } catch(e){}
+      }
+
+      allParsedNodes.push({ uri, flag, name, proto, idx: idx + 1 });
+    });
+
+    if (countBadge) {
+      countBadge.textContent = `${allParsedNodes.length} Verified`;
+    }
+
+    renderNodeList(allParsedNodes);
+  } catch(e) {
+    if (container) {
+      container.innerHTML = '<div style="text-align: center; color: var(--text-dim); padding: 16px;">Server pool stream offline</div>';
+    }
+  }
+}
+
+function renderNodeList(nodes) {
+  const container = document.getElementById('nodeListContainer');
+  if (!container) return;
+
+  if (nodes.length === 0) {
+    container.innerHTML = '<div style="text-align: center; color: var(--text-dim); padding: 24px; font-size: 13px;">No matching nodes found</div>';
+    return;
+  }
+
+  const slice = nodes.slice(0, 100);
+  container.innerHTML = slice.map(n => `
+    <div class="node-row">
+      <div class="node-info-left">
+        <span class="node-flag">${n.flag}</span>
+        <div class="node-details">
+          <div class="node-name">${escapeHtml(n.name)}</div>
+          <div class="node-subtext"><span style="color: var(--teal); font-weight: 600;">${n.proto}</span> • #${n.idx}</div>
+        </div>
+      </div>
+      <button class="btn-copy-node" onclick="copySingleNode('${escapeHtml(n.uri)}')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span>Copy URI</span>
+      </button>
+    </div>
+  `).join('');
+}
+
+function filterNodesList(query) {
+  const q = (query || '').toLowerCase().trim();
+  if (!q) {
+    renderNodeList(allParsedNodes);
+    return;
+  }
+  const filtered = allParsedNodes.filter(n => 
+    n.name.toLowerCase().includes(q) || 
+    n.proto.toLowerCase().includes(q) || 
+    n.flag.includes(q)
+  );
+  renderNodeList(filtered);
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+async function copySingleNode(uri) {
+  try {
+    await navigator.clipboard.writeText(uri);
+  } catch (e) {
+    const ta = document.createElement('textarea');
+    ta.value = uri;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  recordCopyAction();
+  showToast('Node URI Copied to Clipboard!');
+}
+
 // Initialize on load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadRealOperationalStats);
-} else {
+function initApp() {
   loadRealOperationalStats();
+  loadLiveNodePool();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
 }
 </script>
 

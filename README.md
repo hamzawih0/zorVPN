@@ -62,10 +62,11 @@ flowchart TD
 
     subgraph Emission ["4. Artifact Generation & Classification"]
         E1["ZorVPN.yaml (Full Clash/Mihomo Profile)"]
-        E2["ZorVPN-lite.txt (iOS Top 30 Base64)"]
-        E3["ZorVPN.txt (iOS Top 60 Base64)"]
-        E4["ZorVPN-all.txt (Complete Base64 Archive)"]
-        E5["ZorVPN-nodes.txt (Plaintext URI Stream)"]
+        E2["ZorVPN-singbox.json (Sing-box Native Profile)"]
+        E3["ZorVPN-lite.txt (iOS Top 30 Base64)"]
+        E4["ZorVPN.txt (iOS Top 60 Base64)"]
+        E5["ZorVPN-all.txt (Complete Base64 Archive)"]
+        E6["ZorVPN-nodes.txt (Plaintext URI Stream)"]
     end
 
     subgraph Edge ["5. Global Edge Distribution"]
@@ -86,6 +87,17 @@ flowchart TD
 
 Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Mainland China, users without an active proxy should utilize the **Cloudflare Edge**, **jsDelivr**, or **GHProxy** accelerated mirrors below.
 
+### 📦 Sing-box Native Endpoints (iOS, Android, macOS, Linux)
+> **Recommended**: Sing-box format contains native routing rules, DNS hijack rules, and direct outbounds for the fastest protocol switching.
+
+| Mirror Provider | Subscription URL | Notes |
+| :--- | :--- | :--- |
+| ☁️ **Cloudflare Edge** *(Primary)* | `https://zorvpn.xxaweii.workers.dev/singbox` | Auto UA routing & edge caching |
+| ⚡ **jsDelivr Global CDN** | `https://cdn.jsdelivr.net/gh/hamzawih0/zorVPN/ZorVPN-singbox.json` | Worldwide edge acceleration |
+| 🚀 **GHProxy Mirror** | `https://ghproxy.net/https://raw.githubusercontent.com/hamzawih0/zorVPN/main/ZorVPN-singbox.json` | Direct China optimization |
+
+---
+
 ### 📱 iOS Clients (Shadowrocket, Loon, Quantumult X)
 > **Recommended**: Shadowrocket renders all nodes in a flat list. Standard large YAML files cause memory spikes and UI lag. These curated Base64 endpoints load in **0.05 seconds**.
 
@@ -97,7 +109,7 @@ Because `raw.githubusercontent.com` is blocked by the Great Firewall (GFW) in Ma
 
 ---
 
-### 💻 Clash & Mihomo Clients (Clash Verge Rev, Clash Meta, FlClash, Stash, Sing-box)
+### 💻 Clash & Mihomo Clients (Clash Verge Rev, Clash Meta, FlClash, Stash)
 
 | Mirror Provider | Subscription URL | Notes |
 | :--- | :--- | :--- |

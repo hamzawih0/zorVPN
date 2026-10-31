@@ -51,7 +51,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add ZorVPN.yaml clash.yaml ZorVPN.txt ZorVPN-lite.txt ZorVPN-all.txt ZorVPN-nodes.txt
+          git add ZorVPN.yaml clash.yaml ZorVPN-singbox.json ZorVPN.txt ZorVPN-lite.txt ZorVPN-all.txt ZorVPN-nodes.txt
           if git diff --staged --quiet; then
             echo "No changes detected in subscription files"
           else
@@ -62,7 +62,7 @@ jobs:
 
       - name: Purge jsDelivr Global CDN Cache (Instant Global Refresh)
         run: |
-          for file in ZorVPN.yaml clash.yaml ZorVPN.txt ZorVPN-lite.txt ZorVPN-all.txt ZorVPN-nodes.txt index.html; do
+          for file in ZorVPN.yaml clash.yaml ZorVPN-singbox.json ZorVPN.txt ZorVPN-lite.txt ZorVPN-all.txt ZorVPN-nodes.txt index.html; do
             echo "Purging jsDelivr cache for $file..."
             curl -s "https://purge.jsdelivr.net/gh/hamzawih0/zorVPN@main/$file" || true
           done

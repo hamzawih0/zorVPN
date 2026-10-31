@@ -4,15 +4,18 @@
  * Features:
  * - Unblocks raw.githubusercontent.com in Mainland China via Cloudflare Global Edge
  * - Serves the interactive Liquid Glass Web Hub (index.html) to browsers at the root URL
- * - Multi-Tier Support:
+ * - Multi-Format Support:
+ *   - Sing-box Native Configuration -> /singbox, /sb, or /ZorVPN-singbox.json
  *   - iOS Shadowrocket Lite (Top 30 nodes, instant load) -> /lite or /ZorVPN-lite.txt
  *   - iOS Shadowrocket Standard (Top 60 curated nodes) -> /ZorVPN.txt or /ios
  *   - Clash / FlClash / Stash (Inline rules, 100% verified) -> /ZorVPN.yaml or /clash
  *   - Full Pool Base64 -> /all or /ZorVPN-all.txt
  *   - Raw Plaintext URIs -> /nodes or /ZorVPN-nodes.txt
  * - Auto-detects client User-Agent:
+ *   - Sing-box -> serves Sing-box JSON automatically
  *   - Shadowrocket -> serves Base64 automatically
- *   - Clash / FlClash / Stash -> serves Clash YAML automatically
+ *   - Clash / FlClash / Stash / Mihomo -> serves Clash YAML automatically
+ *   - v2rayNG / Xray -> serves Base64 automatically
  * - Edge Caching (300 seconds) to prevent GitHub rate-limiting
  * - Injects standard subscription headers:
  *   - profile-update-interval: 6 (auto-update every 6 hours)
@@ -27,10 +30,12 @@ export default {
     const url = new URL(request.url);
     const userAgent = (request.headers.get("User-Agent") || "").toLowerCase();
     const pathname = url.pathname.toLowerCase();
+    const targetParam = (url.searchParams.get("target") || "").toLowerCase();
 
+    const isSingbox = userAgent.includes("sing-box") || userAgent.includes("singbox") || targetParam === "singbox";
     const isShadowrocket = userAgent.includes("shadowrocket");
-    const isClash = userAgent.includes("clash") || userAgent.includes("stash") || userAgent.includes("meta") || userAgent.includes("flclash") || userAgent.includes("mihomo");
-    const isV2ray = userAgent.includes("v2rayng") || userAgent.includes("v2ray") || userAgent.includes("xray") || userAgent.includes("sing-box");
+    const isClash = userAgent.includes("clash") || userAgent.includes("stash") || userAgent.includes("meta") || userAgent.includes("flclash") || userAgent.includes("mihomo") || targetParam === "clash";
+    const isV2ray = userAgent.includes("v2rayng") || userAgent.includes("v2ray") || userAgent.includes("xray") || targetParam === "v2ray";
 
     // Direct App Binary Streaming Route (No redirect, edge streamed)
     if (pathname.startsWith("/download/")) {
@@ -74,6 +79,14 @@ export default {
       }
     }
 
+    // Health check endpoint
+    if (pathname === "/health" || pathname === "/ping") {
+      return new Response(JSON.stringify({ status: "ok", timestamp: new Date().toISOString() }), {
+        status: 200,
+        headers: { "content-type": "application/json", "access-control-allow-origin": "*" }
+      });
+    }
+
     // Optional JSON API route
     if (pathname === "/api" || pathname === "/json" || url.searchParams.get("format") === "json") {
       return new Response(
@@ -82,16 +95,18 @@ export default {
           service: "zorVPN Cloudflare Edge Subscription Proxy",
           domain: url.origin,
           subscriptions: {
-            v2rayng_android_lite: `${url.origin}/lite`,
+            singbox_native_json: `${url.origin}/singbox`,
             clash_meta_yaml: `${url.origin}/clash`,
+            v2rayng_android_lite: `${url.origin}/lite`,
             ios_shadowrocket_lite: `${url.origin}/lite`,
             ios_shadowrocket_standard: `${url.origin}/ios`,
             all_nodes_base64: `${url.origin}/all`,
             raw_uri_nodes: `${url.origin}/nodes`
           },
           quick_guide: {
+            singbox: `Add Remote Profile: ${url.origin}/singbox`,
             v2rayng_android: `1-Click Intent: v2rayng://install-sub?url=${encodeURIComponent(url.origin + '/lite')}&name=zorVPN`,
-            clash_meta_android: `Add URL Subscription using ${url.origin}/clash (or jsDelivr CDN backup)`,
+            clash_meta: `Add URL Subscription using ${url.origin}/clash`,
             ios_shadowrocket: `Add as Type: Subscribe using ${url.origin}/lite (Top 30)`
           },
           updated_at: new Date().toISOString()
@@ -118,7 +133,6 @@ export default {
       return new Response(
         JSON.stringify({
           status: "online",
-          live_servers: 268,
           visits,
           copies,
           updated_at: new Date().toISOString()
@@ -156,7 +170,10 @@ export default {
     let targetFilename = "index.html";
     let contentType = "text/html; charset=utf-8";
 
-    if (pathname.includes("yaml") || pathname.includes("yml") || pathname.includes("clash") || pathname.includes("meta") || isClash) {
+    if (pathname.includes("singbox") || pathname.includes("sing-box") || pathname === "/sb" || isSingbox) {
+      targetFilename = "ZorVPN-singbox.json";
+      contentType = "application/json; charset=utf-8";
+    } else if (pathname.includes("yaml") || pathname.includes("yml") || pathname.includes("clash") || pathname.includes("meta") || isClash) {
       targetFilename = "ZorVPN.yaml";
       contentType = "text/yaml; charset=utf-8";
     } else if (pathname.includes("lite") || pathname.includes("v2ray") || isV2ray) {
@@ -203,6 +220,7 @@ export default {
 
       const headers = new Headers();
       headers.set("content-type", contentType);
+      headers.set("x-content-type-options", "nosniff");
       if (targetFilename !== "index.html") {
         headers.set("content-disposition", `inline; filename="${targetFilename}"`);
         headers.set("profile-update-interval", "6");
