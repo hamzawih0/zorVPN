@@ -142,12 +142,36 @@ SOURCES = [
         "url": "https://raw.githubusercontent.com/barry-far/V2ray-Config/main/All_Configs_Sub.txt",
     },
     {
+        "name": "Delta-Kronecker/V2ray-Config (VLESS Clash Meta)",
+        "url": "https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/protocols/vless_clash.yaml",
+    },
+    {
+        "name": "Delta-Kronecker/V2ray-Config (Realtime New Pool)",
+        "url": "https://raw.githubusercontent.com/Delta-Kronecker/V2ray-Config/main/config/new.txt",
+    },
+    {
+        "name": "Au1rxx/free-vpn-subscriptions (Verified Meta Pool)",
+        "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/all-verified/clash-0006.yaml",
+    },
+    {
         "name": "Nexus Nodes (ninjastrikers 4h Speed-Sorted)",
         "url": "https://raw.githubusercontent.com/ninjastrikers/nexus-nodes/main/configs/all.txt",
     },
     {
         "name": "Au1rxx/free-vpn-subscriptions (VLESS & Hy2 Pre-verified)",
         "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/clash.yaml",
+    },
+    {
+        "name": "Mosifree/-FREE2CONFIG (Reality Live Pool)",
+        "url": "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/Reality",
+    },
+    {
+        "name": "igareck/vpn-configs-for-russia (Bypass Mobile VLESS & Trojan)",
+        "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt",
+    },
+    {
+        "name": "ShatakVPN/ConfigForge-V2Ray (Multi-protocol Hysteria2 & VLESS)",
+        "url": "https://raw.githubusercontent.com/ShatakVPN/ConfigForge-V2Ray/main/configs/ir/all.txt",
     },
     {
         "name": "lyqnihao/proxy (12h Meta-Aggregator Clash-Meta)",
@@ -376,8 +400,17 @@ def proxy_fingerprint(proxy: dict) -> str:
     return hashlib.sha256(f"{server}:{port}:{ptype}:{cred}".encode('utf-8')).hexdigest()
 
 
+VALID_SS_CIPHERS = {
+    'aes-128-gcm', 'aes-192-gcm', 'aes-256-gcm',
+    'chacha20-ietf-poly1305', 'xchacha20-ietf-poly1305',
+    '2022-blake3-aes-128-gcm', '2022-blake3-aes-256-gcm', '2022-blake3-chacha20-poly1305',
+    'aes-128-cfb', 'aes-192-cfb', 'aes-256-cfb',
+    'aes-128-ctr', 'aes-192-ctr', 'aes-256-ctr',
+    'rc4-md5', 'chacha20-ietf'
+}
+
 def is_valid_proxy(p: dict) -> bool:
-    """Validate proxy fields to prevent Mihomo startup crashes."""
+    """Validate and sanitize proxy fields to prevent Mihomo startup crashes."""
     if not isinstance(p, dict):
         return False
     server = str(p.get('server', '')).strip().lower()
@@ -394,13 +427,41 @@ def is_valid_proxy(p: dict) -> bool:
     if ptype not in ('vless', 'hysteria2', 'trojan', 'vmess', 'ss'):
         return False
 
-    # Check required credentials
-    if ptype in ('vless', 'vmess') and not p.get('uuid'):
-        return False
-    if ptype in ('hysteria2', 'trojan') and not p.get('password') and not p.get('auth'):
-        return False
-    if ptype == 'ss' and (not p.get('password') or not p.get('cipher')):
-        return False
+    # Normalize & check required credentials
+    if ptype == 'vless':
+        if not p.get('uuid'):
+            return False
+        if 'reality-opts' in p:
+            ropts = p.get('reality-opts')
+            if not isinstance(ropts, dict) or not ropts.get('public-key'):
+                return False
+
+    elif ptype == 'vmess':
+        if not p.get('uuid'):
+            return False
+        scy = str(p.get('cipher', '')).strip().lower()
+        if not scy or scy == 'none':
+            p['cipher'] = 'auto'
+
+    elif ptype == 'hysteria2':
+        if not p.get('password') and p.get('auth'):
+            p['password'] = p.get('auth')
+        if not p.get('password'):
+            return False
+
+    elif ptype == 'trojan':
+        if not p.get('password'):
+            return False
+
+    elif ptype == 'ss':
+        if not p.get('password') or not p.get('cipher'):
+            return False
+        c = str(p.get('cipher', '')).strip().lower()
+        if c == 'chacha20-poly1305':
+            c = 'chacha20-ietf-poly1305'
+            p['cipher'] = c
+        if c not in VALID_SS_CIPHERS:
+            return False
 
     return True
 
@@ -771,8 +832,17 @@ def test_proxies_with_mihomo(candidates: list, mihomo_bin: str, max_workers: int
     with open(cfg_path, 'w', encoding='utf-8') as f:
         yaml.dump(test_cfg, f, allow_unicode=True)
 
-    proc = subprocess.Popen([mihomo_bin, '-d', temp_dir, '-f', cfg_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    proc = subprocess.Popen([mihomo_bin, '-d', temp_dir, '-f', cfg_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     time.sleep(3)
+    if proc.poll() is not None:
+        out, err = proc.communicate()
+        print(f"  ❌ Mihomo startup failed (exit code {proc.returncode}):")
+        if out:
+            print(f"     STDOUT: {out.decode('utf-8', errors='ignore').strip()[:400]}")
+        if err:
+            print(f"     STDERR: {err.decode('utf-8', errors='ignore').strip()[:400]}")
+        shutil.rmtree(temp_dir, ignore_errors=True)
+        return []
 
     alive_results = []
     t_start = time.time()

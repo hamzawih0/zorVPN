@@ -169,17 +169,21 @@ zorVPN continuously aggregates and validates configurations from prominent open-
 
 | Provider / Repository | Frequency | Primary Protocols |
 | :--- | :---: | :--- |
-| **[v2nodes.com](https://www.v2nodes.com/)** | Continuous API | VLESS, VMess, Shadowsocks |
+| **[Delta-Kronecker/V2ray-Config](https://github.com/Delta-Kronecker/V2ray-Config)** | Hourly | VLESS Reality, Trojan, Clash-Meta |
+| **[Au1rxx/free-vpn-subscriptions](https://github.com/Au1rxx/free-vpn-subscriptions)** | Scheduled | VLESS Reality, Trojan, Hysteria2 |
 | **[MatinGhanbari/v2ray-configs](https://github.com/MatinGhanbari/v2ray-configs)** | Every 15 min | VLESS, VMess, Trojan, SS, Hysteria2 |
 | **[barry-far/V2ray-Config](https://github.com/barry-far/V2ray-Config)** | Every 15 min | Multi-protocol subscription feeds |
+| **[Mosifree/-FREE2CONFIG](https://github.com/Mosifree/-FREE2CONFIG)** | Daily | VLESS Reality verified bypass |
+| **[igareck/vpn-configs-for-russia](https://github.com/igareck/vpn-configs-for-russia)** | Hourly | VLESS Reality & Trojan mobile pool |
+| **[ShatakVPN/ConfigForge-V2Ray](https://github.com/ShatakVPN/ConfigForge-V2Ray)** | Continuous | Hysteria2, VLESS, Shadowsocks |
 | **[Nexus Nodes (ninjastrikers)](https://github.com/ninjastrikers/nexus-nodes)** | Every 4 hours | Latency-tested & region-sorted |
 | **[lyqnihao/proxy](https://github.com/lyqnihao/proxy)** | Every 12 hours | Meta-aggregation (Clash-Meta & V2Nodes) |
 | **[jichangx/free-nodes](https://github.com/jichangx/free-nodes)** | Daily (00:00) | Curated stable server pool |
-| **[free-nodes/v2rayfree](https://github.com/free-nodes/v2rayfree)** | Daily | Shadowsocks, Trojan, VLESS |
 | **[Pawdroid/Free-servers](https://github.com/Pawdroid/Free-servers)** | Daily | Public Shadowsocks & V2Ray nodes |
 | **[awesome-vpn/awesome-vpn](https://github.com/awesome-vpn/awesome-vpn)** | Midnight UTC | Base64 & Clash YAML feeds |
-| **[Au1rxx/free-vpn-subscriptions](https://github.com/Au1rxx/free-vpn-subscriptions)** | Scheduled | VLESS Reality & Hysteria2 |
 | **[sunmiao4458/free-proxy-airport](https://github.com/sunmiao4458/free-proxy-airport)** | Every 30 min | Low-latency verified nodes |
+| **[sinspired/airport](https://github.com/sinspired/airport)** | Daily | Daily speed-tested clashfree pool |
+| **[peasoft/NoMoreWalls](https://github.com/peasoft/NoMoreWalls)** | Daily | Meta-Aggregated proxy matrix |
 
 ---
 
