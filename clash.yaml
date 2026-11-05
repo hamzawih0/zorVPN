@@ -1,6 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                  zorVPN — 100% Verified Green Subscription                 ║
-# ║  Auto-generated: 2026-11-05T03:58:49Z                                  ║
+# ║  Auto-generated: 2026-11-05T13:38:47Z                                  ║
 # ║  Nodes:   50 | Countries: 12 | Tested: 100% Functional Latency Verified        ║
 # ║  Compatible: Clash Verge Rev, ClashX, Stash, Shadowrocket, FlClash, Sing-box║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -106,71 +106,19 @@ dns:
       - "+.googleapis.com"
 
 proxies:
-- name: '🇺🇸 United States #01 VLESS'
+- name: '🇷🇺 Russia #01 VLESS'
   type: vless
-  server: 169.40.42.224
+  server: bg1.fox-lisa.ru
   port: 443
-  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  uuid: ccb8ff48-3934-4250-b4ec-bb76b95d154f
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
-    short-id: c39cc7310a
-  servername: yahoo.com
-  client-fingerprint: ios
-- name: '🇵🇱 Poland #01 VLESS'
-  type: vless
-  server: 222.167.245.16
-  port: 443
-  uuid: 7d43670b-6b08-45b9-8a24-8f3971abc132
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: j4Uc6ljg9by_VKYywo5h2N-eh3kpUbFL5Bsp8-AX4Qk
-  servername: poland.biznes.lol
-  client-fingerprint: chrome
-- name: '🌐 Moldova #01 VLESS'
-  type: vless
-  server: 89.35.14.31
-  port: 443
-  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
-  udp: true
-  network: grpc
-  tls: true
-  reality-opts:
-    public-key: JXFsWHYjhAcR-7yz9tuCTMdcfuiyC9a-C9ewA55Z63o
-    short-id: d36a38659ce106cb
-  servername: md2.univesalsrv.com
-  client-fingerprint: chrome
-- name: '🌐 Moldova #02 VLESS'
-  type: vless
-  server: md2.univesalsrv.com
-  port: 443
-  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
-  udp: true
-  network: grpc
-  tls: true
-  reality-opts:
-    public-key: JXFsWHYjhAcR-7yz9tuCTMdcfuiyC9a-C9ewA55Z63o
-    short-id: d36a38659ce106cb
-  servername: md2.univesalsrv.com
-  client-fingerprint: firefox
-- name: '🌐 Serbia #01 VLESS'
-  type: vless
-  server: 150.40.126.22
-  port: 443
-  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
-  udp: true
-  network: grpc
-  tls: true
-  reality-opts:
-    public-key: sXsJ4ET-50TYqlhKZf03nPQr2JIy1F0D4m6lOsI0cAs
-    short-id: 861ac7d66953e55f
-  servername: rs4.univesalsrv.com
+    public-key: NaCZ-sS4poEbFwKmD7ePAVyc5OhHxsD9nkAStjXkoWs
+    short-id: 027af64166562b09
+  servername: bg1.fox-lisa.ru
   client-fingerprint: firefox
 - name: '🇳🇱 The Netherlands #01 VLESS'
   type: vless
@@ -185,9 +133,129 @@ proxies:
     short-id: b4e3b0b55b8dc75b
   servername: cloudflare.com
   client-fingerprint: firefox
+- name: '🇳🇱 The Netherlands #02 VLESS'
+  type: vless
+  server: 156.252.229.136
+  port: 8443
+  uuid: 3e21e3d3-6d26-4155-b851-764dd8e8c6b5
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: 7jPluypHwPilf_Mq7JOY96SwKkbK35WuIlN1HwGQ_0A
+    short-id: 974f7f8f
+  servername: play.googleapis.com
+  client-fingerprint: chrome
+- name: '🇷🇺 Russia #02 VLESS'
+  type: vless
+  server: ruen2.xnetguard.stream
+  port: 443
+  uuid: c88e0389-8333-476d-b565-495020e473e5
+  udp: true
+  network: raw
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: a7pE0PrtV-p1g975c57xFrQ8MBI4G_Ozd7eWiq4L6lU
+    short-id: b379b5e4d6afa90f
+  servername: ruen2.xnetguard.stream
+  client-fingerprint: firefox
+- name: '🇳🇱 The Netherlands #03 VLESS'
+  type: vless
+  server: 84.32.177.63
+  port: 443
+  uuid: 2232d904-8e6a-4202-8240-6efd8aec02e9
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: xNzdfy4hPv-IgM_MSn64FNQdb-UPu78pmM-GBE1HhSo
+    short-id: ef5d4ad5
+  servername: app.betust.net
+  client-fingerprint: firefox
+- name: '🇩🇪 Germany #01 VLESS'
+  type: vless
+  server: 91.107.144.211
+  port: 443
+  uuid: e95a9e0a-7633-4d87-aec9-f887ee87fb36
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: TIkdjXzDQ5RmrSB4r8QoStVHhQTNHX2fwm8izRQ07C0
+    short-id: b913c53c
+  servername: storage.googleapis.com
+  client-fingerprint: chrome
+- name: '🇳🇱 The Netherlands #04 VLESS'
+  type: vless
+  server: 2.27.118.10
+  port: 443
+  uuid: d9fe2431-8351-41eb-b956-75d96dec5d4a
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: goey7Sc4Xm6Nvdukb_DuoUnrkPSV0p4hPWbAmk2_AHc
+    short-id: ecf1d9f7caa6ba67
+  servername: ph-nl-s3784.cybercat.network
+  client-fingerprint: firefox
+- name: '🇵🇱 Poland #01 VLESS'
+  type: vless
+  server: 201.10.90.113
+  port: 443
+  uuid: 610ac982-04eb-34c0-80b1-5dd3c2ca131e
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 6z3VlbF2v0C3FTWQQemYDxX-MIzwaz_k8_B-xyc0Xyg
+  servername: undef-aut-0.undef.network
+  client-fingerprint: firefox
+- name: '🇺🇸 United States #01 VLESS'
+  type: vless
+  server: 5.181.171.2
+  port: 443
+  uuid: 8e6acce9-8b56-7190-d491-7d84f8189e26
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: YNGotlyAx3ELUmi4lxOUjiEDmibqf1pPUTE9o3YYT2Y
+  servername: speed.cloudflare.com
+  client-fingerprint: chrome
+- name: '🇷🇺 Russia #03 VLESS'
+  type: vless
+  server: join.betust.net
+  port: 443
+  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: GQul8Ak0VO_z4FW_m_R-xsQbwd2e1rWZO-XfMmKmpQE
+    short-id: 351224a7
+  servername: join.betust.net
+  client-fingerprint: firefox
+- name: '🇵🇱 Poland #02 VLESS'
+  type: vless
+  server: 54.37.136.194
+  port: 2053
+  uuid: e8a432c8-5d84-49a5-b822-67ed761a58f9
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: Vemd9Jjk5xKO8qSC3g8VVagwcb4J1BcTvp86CswQC0A
+    short-id: 50ba05992b05c1c3
+  servername: www.cloudflare.com
 - name: '🇺🇸 United States #02 VLESS'
   type: vless
-  server: 169.40.42.231
+  server: 169.40.42.104
   port: 443
   uuid: d65cc14c-f53f-4fe2-b262-97856601319c
   udp: true
@@ -198,113 +266,144 @@ proxies:
     public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
     short-id: c39cc7310a
   servername: yahoo.com
-- name: '🇩🇪 Germany #01 VLESS'
+  client-fingerprint: random
+- name: '🇺🇸 United States #03 VLESS'
   type: vless
-  server: 144.31.125.60
+  server: 169.40.42.223
   port: 443
-  uuid: 9015f0bc-2053-4ca1-9b9b-a018b97b32d2
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: SVgtyuD9khylgHuB0treGekxVSHPOS-wPZTNHUf6zj8
-    short-id: 85c86a9863
-  servername: www.intel.com
-- name: '🇳🇱 The Netherlands #02 VLESS'
-  type: vless
-  server: 156.252.229.50
-  port: 8443
-  uuid: 3e21e3d3-6d26-4155-b851-764dd8e8c6b5
-  udp: true
-  network: tcp
-  tls: true
-  reality-opts:
-    public-key: 7jPluypHwPilf_Mq7JOY96SwKkbK35WuIlN1HwGQ_0A
-    short-id: 974f7f8f
-  servername: play.googleapis.com
-- name: '🇷🇺 Russia #01 VLESS'
-  type: vless
-  server: g01tig3hasus3.dnetsolutions.ru
-  port: 443
-  uuid: e08d9bc5-6832-4dd4-bd44-d9bbe61e5817
-  udp: true
-  network: grpc
-  tls: true
-  reality-opts:
-    public-key: 4qE0kXmxDvNzsns2jdwd74AN35RptcTD4eKo5REa9w8
-    short-id: '04'
-  servername: max.ru
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
   client-fingerprint: chrome
-- name: '🇮🇷 Iran #01 VLESS'
+- name: '🇺🇸 United States #04 VLESS'
   type: vless
-  server: 6.bmi.ir.asopardaz.ir
-  port: 8443
-  uuid: 875942c6-1d42-4681-b49b-521a2bf10e8c
+  server: 169.40.42.163
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: JtA0d5K6Jnmg35oWP9SDOsc1ceuqaxOsNg33fiPHJQs
-    short-id: e915
-  servername: timeline.www.cloudflare.com
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
   client-fingerprint: chrome
-- name: '🇳🇱 The Netherlands #03 VLESS'
+- name: '🇵🇱 Poland #03 VLESS'
+  type: vless
+  server: 185.32.6.26
+  port: 443
+  uuid: e0216964-ffa1-4d39-82c4-0e40879a470d
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: XYkuP_Keu-yL7EQ8xZc4RTmcVAfp06Z1onV2ZNrlsHM
+    short-id: c31f187b
+  servername: stable.nullo.pro
+  client-fingerprint: firefox
+- name: '🇬🇧 United Kingdom #01 VLESS'
+  type: vless
+  server: 51.38.70.192
+  port: 443
+  uuid: 9343f183-7a16-4bdd-9c65-b0c21feca40b
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: YRKpNLfduSsOl3l-CCUkhZDEjvcKytnuELqnWjLZI1M
+    short-id: 98fa0b00d09419f7
+  servername: play.google.com
+  client-fingerprint: random
+- name: '🇷🇺 Russia #04 VLESS'
+  type: vless
+  server: dlx-2.viralforge.ru
+  port: 443
+  uuid: 047466dd-05aa-4331-abf7-322c5aaecf97
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: HLKQ0JvyaZ16JNdl0pbEPkiVRYJDiZNzGz9prDMiw2s
+    short-id: a1b2c3d4b5
+  servername: dlx-2.viralforge.ru
+  client-fingerprint: firefox
+- name: '🇸🇬 Singapore #01 VLESS'
+  type: vless
+  server: 172.237.88.103
+  port: 443
+  uuid: efd11a89-7506-44ce-95b6-6654859f155b
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: EeLAX-BAjzSdRes-zpUFzVOYsBedmP8lUOHhXXJFXyI
+    short-id: 5a42dbd7e26a0415
+  servername: zoom.us
+  client-fingerprint: chrome
+- name: '🇯🇵 Japan #01 VLESS'
+  type: vless
+  server: 47.74.3.200
+  port: 443
+  uuid: 7fb42fab-ea8a-4f0f-af9e-55df8ae6cb1d
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: kb1uhDsBcfsCD6acCuFcVERW29dscNGIjKPd67NArVk
+    short-id: ab3b914f0c9d9de5
+  servername: www.logitech.com
+  client-fingerprint: chrome
+- name: '🇳🇱 The Netherlands #05 VLESS'
   type: vless
   server: server.slavkiti.monster
   port: 443
-  uuid: 68cf8d29-5aa0-44b3-88a9-f1a576b6e84c
+  uuid: 4d017db2-7655-4276-9557-e2ec25b04ee7
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
     public-key: J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk
-    short-id: 73a9e631a09b
-  servername: www.microsoft.com
+    short-id: ee1716767f9b
+  servername: www.tradingview.com
   client-fingerprint: chrome
-- name: '🇷🇺 Russia #02 VLESS'
+- name: '🌐 Moldova #01 VLESS'
   type: vless
-  server: 104.171.133.209
+  server: 89.35.14.33
   port: 443
-  uuid: ebd1c0d6-7ff4-4b9f-8692-237517a27a64
+  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
+  udp: true
+  network: grpc
+  tls: true
+  reality-opts:
+    public-key: TZVMqglhHzteJ6t34mtku75LKzXNq0CB6glKYMAH6zg
+    short-id: 8e07337954f9823f
+  servername: md4.univesalsrv.com
+  client-fingerprint: chrome
+- name: '🇫🇷 France #01 VLESS'
+  type: vless
+  server: edge.bookmai.com
+  port: 443
+  uuid: b9bfa54d-bc44-4592-a6d6-89a9665d286f
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: mza5Hn1aolSz65qu-UwvBP3oesxMe25r11o4nxvikF0
-    short-id: 64c1fe36c7846400
-  servername: anyfile2file.com
-- name: '🇷🇺 Russia #03 VLESS'
-  type: vless
-  server: tgfree.rush-server.com
-  port: 443
-  uuid: ebd1c0d6-7ff4-4b9f-8692-237517a27a64
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: mza5Hn1aolSz65qu-UwvBP3oesxMe25r11o4nxvikF0
-    short-id: 64c1fe36c7846400
-  servername: anyfile2file.com
-  client-fingerprint: ios
-- name: '🇫🇮 Finland #01 VLESS'
-  type: vless
-  server: 107.181.151.128
-  port: 443
-  uuid: 88742d38-3f5c-4b9c-b256-7df5db8257ec
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: zfsjt2A8ur0qHWIuCG7F9W4wZN3VTuL6fkTljC-9R0s
-    short-id: 8f79726c5002
-  servername: www.mozilla.org
-  client-fingerprint: firefox
+    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
+  servername: mother-earth.fyi
+  client-fingerprint: chrome
 - name: '🇩🇪 Germany #02 VLESS'
   type: vless
   server: 205.237.110.254
@@ -319,153 +418,32 @@ proxies:
     short-id: cd2d53510b4df2a8
   servername: zsit.eu-cdn294.com
   client-fingerprint: chrome
-- name: '🇺🇸 United States #03 VLESS'
-  type: vless
-  server: 169.40.42.163
-  port: 443
-  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
-    short-id: c39cc7310a
-  servername: yahoo.com
-  client-fingerprint: chrome
-- name: '🇵🇱 Poland #02 VLESS'
-  type: vless
-  server: 201.10.90.113
-  port: 443
-  uuid: 610ac982-04eb-34c0-80b1-5dd3c2ca131e
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: 6z3VlbF2v0C3FTWQQemYDxX-MIzwaz_k8_B-xyc0Xyg
-  servername: undef-aut-0.undef.network
-  client-fingerprint: firefox
-- name: '🇳🇱 The Netherlands #04 VLESS'
-  type: vless
-  server: 193.124.17.190
-  port: 443
-  uuid: fad0b9a6-187d-4fcc-96fc-498bc5b3135a
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk
-    short-id: 8325360e8bd2
-  servername: www.foxsports.com
-  client-fingerprint: firefox
-- name: '🇳🇴 Norway #01 VLESS'
-  type: vless
-  server: 185.90.61.65
-  port: 443
-  uuid: ccb8ff48-3934-4250-b4ec-bb76b95d154f
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: NaCZ-sS4poEbFwKmD7ePAVyc5OhHxsD9nkAStjXkoWs
-    short-id: 027af64166562b09
-  servername: no1.fox-lisa.ru
-  client-fingerprint: firefox
 - name: '🇩🇪 Germany #03 VLESS'
   type: vless
-  server: 31.77.188.214
+  server: 91.99.168.213
   port: 443
-  uuid: ecf12398-8689-4c8d-91e2-8f1aeb8bd556
-  udp: true
-  network: xhttp
-  tls: true
-  reality-opts:
-    public-key: T1DzX4CYLd98VHpbbGrVHGnWsXlWVud1AcGM6mqhulc
-    short-id: d6afc6488f1d1758
-  servername: www.cisco.com
-  client-fingerprint: chrome
-- name: '🇷🇺 Russia #04 VLESS'
-  type: vless
-  server: ruen2.xnetguard.stream
-  port: 443
-  uuid: c88e0389-8333-476d-b565-495020e473e5
-  udp: true
-  network: raw
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: a7pE0PrtV-p1g975c57xFrQ8MBI4G_Ozd7eWiq4L6lU
-    short-id: b379b5e4d6afa90f
-  servername: ruen2.xnetguard.stream
-  client-fingerprint: firefox
-- name: '🇮🇷 Iran #02 VLESS'
-  type: vless
-  server: col.serverah.ir
-  port: 443
-  uuid: d18e433f-0f40-4f71-8055-aea4a0a42af4
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: 5l4RnloO79fW8U0ROmCmWsjNb9WECNxVDqZeTt9HDEc
-    short-id: f64da10a
-  servername: de.col.serverah.ir
-  client-fingerprint: chrome
-- name: '🇪🇸 Spain #01 VLESS'
-  type: vless
-  server: 152.114.194.147
-  port: 443
-  uuid: ccb8ff48-3934-4250-b4ec-bb76b95d154f
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: NaCZ-sS4poEbFwKmD7ePAVyc5OhHxsD9nkAStjXkoWs
-    short-id: 027af64166562b09
-  servername: es1.fox-lisa.ru
-  client-fingerprint: firefox
-- name: '🇵🇱 Poland #03 VLESS'
-  type: vless
-  server: 54.37.136.194
-  port: 2053
-  uuid: e8a432c8-5d84-49a5-b822-67ed761a58f9
-  udp: true
-  network: tcp
-  tls: true
-  reality-opts:
-    public-key: Vemd9Jjk5xKO8qSC3g8VVagwcb4J1BcTvp86CswQC0A
-    short-id: 50ba05992b05c1c3
-  servername: www.cloudflare.com
-- name: '🌐 Serbia #02 VLESS'
-  type: vless
-  server: 150.40.126.24
-  port: 443
-  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
+  uuid: 14eba471-4623-4ed1-b937-f5b2206749bf
   udp: true
   network: grpc
   tls: true
   reality-opts:
-    public-key: X8mPYnsoTd8QCnvFZKSy7VvpSn_nrt_NWJkCUJhFCyE
-    short-id: 4872856d5489c37d
-  servername: rs5.univesalsrv.com
-  client-fingerprint: firefox
-- name: '🇳🇱 The Netherlands #05 VLESS'
+    public-key: UrGT7bAn2UND3kx81QHACf_6qReN8V6_o70kZerONk4
+    short-id: 1c547814
+  servername: miro.com
+  client-fingerprint: chrome
+- name: '🇳🇱 The Netherlands #06 VLESS'
   type: vless
-  server: 156.252.229.136
-  port: 8443
-  uuid: 3e21e3d3-6d26-4155-b851-764dd8e8c6b5
+  server: 185.112.59.210
+  port: 443
+  uuid: ee18d188-14cc-417e-beb1-70e4add6d023
   udp: true
   network: tcp
+  flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: 7jPluypHwPilf_Mq7JOY96SwKkbK35WuIlN1HwGQ_0A
-    short-id: 974f7f8f
-  servername: play.googleapis.com
+    public-key: MTYXgxLIK9PzmQGAjuCmhI1FikCNlvU66NKgQ5g14Bc
+    short-id: 0b135481ea1283fc
+  servername: nl2.nztvpn.com
   client-fingerprint: chrome
 - name: '🇪🇪 Estonia #01 VLESS'
   type: vless
@@ -481,7 +459,139 @@ proxies:
     short-id: 1a2b3c4d
   servername: files.porsche.com
   client-fingerprint: firefox
-- name: '🇺🇸 United States #04 VLESS'
+- name: '🇷🇺 Russia #05 VLESS'
+  type: vless
+  server: tgfree.rush-server.com
+  port: 443
+  uuid: ebd1c0d6-7ff4-4b9f-8692-237517a27a64
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: mza5Hn1aolSz65qu-UwvBP3oesxMe25r11o4nxvikF0
+    short-id: 64c1fe36c7846400
+  servername: anyfile2file.com
+  client-fingerprint: ios
+- name: '🌐 Moldova #02 VLESS'
+  type: vless
+  server: md2.univesalsrv.com
+  port: 443
+  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
+  udp: true
+  network: grpc
+  tls: true
+  reality-opts:
+    public-key: JXFsWHYjhAcR-7yz9tuCTMdcfuiyC9a-C9ewA55Z63o
+    short-id: d36a38659ce106cb
+  servername: md2.univesalsrv.com
+  client-fingerprint: firefox
+- name: '🇵🇱 Poland #04 VLESS'
+  type: vless
+  server: tg.riotvpn.eu
+  port: 443
+  uuid: a18f7c2d-9e45-4b8a-af3c-1d5e7f9c8b2a
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: 8h8t5eBWL9oERK7xWHQLFJE5j6sZdgNDQAs3EGnNbho
+    short-id: 2f49bccf11150ef2
+  servername: ads.x5.ru
+  client-fingerprint: chrome
+- name: '🇩🇪 Germany #04 VLESS'
+  type: vless
+  server: 144.31.125.60
+  port: 443
+  uuid: 9015f0bc-2053-4ca1-9b9b-a018b97b32d2
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: SVgtyuD9khylgHuB0treGekxVSHPOS-wPZTNHUf6zj8
+    short-id: 85c86a9863
+  servername: www.intel.com
+- name: '🇺🇸 United States #05 VLESS'
+  type: vless
+  server: 5.181.171.2
+  port: 443
+  uuid: a87bf8a2-17a4-3054-b51e-876b5f1d0f24
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: YNGotlyAx3ELUmi4lxOUjiEDmibqf1pPUTE9o3YYT2Y
+  servername: speed.cloudflare.com
+- name: '🇺🇸 United States #06 VLESS'
+  type: vless
+  server: 169.40.42.231
+  port: 443
+  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
+    short-id: c39cc7310a
+  servername: yahoo.com
+- name: '🌐 Serbia #01 VLESS'
+  type: vless
+  server: 150.40.126.22
+  port: 443
+  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
+  udp: true
+  network: grpc
+  tls: true
+  reality-opts:
+    public-key: sXsJ4ET-50TYqlhKZf03nPQr2JIy1F0D4m6lOsI0cAs
+    short-id: 861ac7d66953e55f
+  servername: rs4.univesalsrv.com
+  client-fingerprint: firefox
+- name: '🌐 Greece #01 VLESS'
+  type: vless
+  server: 217.12.194.226
+  port: 443
+  uuid: b8cff836-8a21-4b72-a77d-231c8678c711
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: oOp4xgD1R9MGm17qYp4XIHiq1dAfTaknr39UvhOv8Gc
+    short-id: ab55ed2e71e8f58e
+  servername: www.cloudflare.com
+  client-fingerprint: firefox
+- name: '🇺🇸 United States #07 VLESS'
+  type: vless
+  server: 198.251.78.29
+  port: 2053
+  uuid: c423cc1b-f88e-421c-9a16-c480d84da20f
+  udp: true
+  network: tcp
+  tls: true
+  reality-opts:
+    public-key: Uk5b-Wh_uxeCc7R8NS9iWE40xc0h9wWC04rSB9yhgAw
+    short-id: b5d625695ec82c7e
+  servername: www.cloudflare.com
+  client-fingerprint: chrome
+- name: '🇮🇷 Iran #01 VLESS'
+  type: vless
+  server: col.serverah.ir
+  port: 443
+  uuid: d18e433f-0f40-4f71-8055-aea4a0a42af4
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 5l4RnloO79fW8U0ROmCmWsjNb9WECNxVDqZeTt9HDEc
+    short-id: f64da10a
+  servername: de.col.serverah.ir
+  client-fingerprint: chrome
+- name: '🇺🇸 United States #08 VLESS'
   type: vless
   server: 169.40.42.15
   port: 443
@@ -495,45 +605,73 @@ proxies:
     short-id: c39cc7310a
   servername: yahoo.com
   client-fingerprint: chrome
-- name: '🇵🇱 Poland #04 VLESS'
+- name: '🇳🇱 Netherlands #01 VLESS'
   type: vless
-  server: 5.104.74.27
-  port: 8443
-  uuid: a941243b-4b25-465f-ba2c-1dc4e1d16217
+  server: 79.141.164.81
+  port: 443
+  uuid: 754aa943-ab43-41ec-9791-c0e77d9fbfef
   udp: true
-  network: tcp
-  flow: xtls-rprx-vision
+  network: grpc
   tls: true
   reality-opts:
-    public-key: 48j01Jsa4o8zfmCGEFoVjn-YeALM80-DSG_-nAZUBDM
-    short-id: dbef98744832b751
-  servername: uk-room07.filesnap.tech
+    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
+    short-id: 27350908de933e09
+  servername: nla.kosmosapp.net
   client-fingerprint: firefox
-- name: '🇺🇸 United States #05 VLESS'
+- name: '🇳🇱 The Netherlands #07 VLESS'
   type: vless
-  server: 5.181.171.2
+  server: vvsvvs.soreanapanel.com
   port: 443
-  uuid: 8e6acce9-8b56-7190-d491-7d84f8189e26
+  uuid: 913dc759-8639-4890-9bfc-a9acdc5090cf
   udp: true
   network: tcp
-  flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: YNGotlyAx3ELUmi4lxOUjiEDmibqf1pPUTE9o3YYT2Y
-  servername: speed.cloudflare.com
+    public-key: YWhH3_lunQFxpqA29GF-Hq1K78hdSsy0h3E5dVbxImA
+    short-id: 371f6e
+  servername: graphs.4cdn.de
   client-fingerprint: chrome
-- name: '🇵🇱 Poland #05 VLESS'
+- name: '🇳🇱 The Netherlands #08 VLESS'
   type: vless
-  server: 191.217.245.227
+  server: 195.189.98.123
   port: 443
-  uuid: 2614a96d-e39f-4cca-a9c7-467a178c2c0a
+  uuid: fb37d713-0ed3-4146-b085-a5c879a9aafa
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: OFmJtVi6OB9E6KIc5QV5YmoouimRFc-Se9hICjtV8hQ
-  servername: pl.lenvex.cc
+    public-key: 7dxSNJKvSZNySuiKjuv6wwddd3hYJeJy6X55OcwOPDk
+    short-id: 16fbc56c
+  servername: api14.betust.net
+  client-fingerprint: firefox
+- name: '🌐 Bulgaria #01 VLESS'
+  type: vless
+  server: 185.246.131.55
+  port: 443
+  uuid: ccb8ff48-3934-4250-b4ec-bb76b95d154f
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: NaCZ-sS4poEbFwKmD7ePAVyc5OhHxsD9nkAStjXkoWs
+    short-id: 027af64166562b09
+  servername: bg1.fox-lisa.ru
+  client-fingerprint: firefox
+- name: '🇷🇺 Russia #06 VLESS'
+  type: vless
+  server: es1.fox-lisa.ru
+  port: 443
+  uuid: ccb8ff48-3934-4250-b4ec-bb76b95d154f
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: NaCZ-sS4poEbFwKmD7ePAVyc5OhHxsD9nkAStjXkoWs
+    short-id: 027af64166562b09
+  servername: es1.fox-lisa.ru
   client-fingerprint: firefox
 - name: '🇸🇪 Sweden #01 VLESS'
   type: vless
@@ -549,235 +687,98 @@ proxies:
     short-id: 5212dad2aa9723d7
   servername: de1.waspnest.space
   client-fingerprint: firefox
-- name: '🇩🇪 Germany #04 VLESS'
+- name: '🇩🇪 Germany #05 VLESS'
   type: vless
-  server: 91.107.247.174
-  port: 443
-  uuid: a01eabc2-bfdd-457c-a02a-73993237a3c4
-  udp: true
-  network: tcp
-  tls: true
-  reality-opts:
-    public-key: MjBRMMMBFIu4jSHSdDzdK4VPczAVkC1GHhHvugU3myI
-    short-id: c76b1008265b1a
-  servername: gspe121-rh-ssl.ls.apple.com
-  client-fingerprint: chrome
-- name: '🇺🇸 United States #06 VLESS'
-  type: vless
-  server: 169.40.42.104
-  port: 443
-  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
-    short-id: c39cc7310a
-  servername: yahoo.com
-  client-fingerprint: chrome
-- name: '🇺🇸 United States #07 VLESS'
-  type: vless
-  server: 198.251.78.29
-  port: 2053
-  uuid: c423cc1b-f88e-421c-9a16-c480d84da20f
-  udp: true
-  network: tcp
-  tls: true
-  reality-opts:
-    public-key: Uk5b-Wh_uxeCc7R8NS9iWE40xc0h9wWC04rSB9yhgAw
-    short-id: b5d625695ec82c7e
-  servername: www.cloudflare.com
-  client-fingerprint: chrome
-- name: '🇷🇺 Russia #05 VLESS'
-  type: vless
-  server: 80.249.131.7
-  port: 443
-  uuid: d4e4c02a-d969-47a6-ba0f-3d433fdac206
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: J_jQq9-SWQZjiMhuPaFV7V2MaJ4pkKgVRaz7x6tmvy8
-    short-id: 16895459a2c7768d
-  servername: wa.sfasti.ru
-  client-fingerprint: firefox
-- name: '🇷🇺 Russia #06 VLESS'
-  type: vless
-  server: 193.160.140.159
+  server: 195.248.242.224
   port: 8443
-  uuid: d4353076-3ec7-47dc-88b0-f21eb59fbfb8
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  servername: apple.com
-  client-fingerprint: chrome
-- name: '🇸🇪 Sweden #02 VLESS'
-  type: vless
-  server: 201.58.177.35
-  port: 443
-  uuid: 5adb25b6-b41a-46ac-a481-71651deb60c5
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: DA1kJXSsIsN8H-kZ51jEYHafTx50X-2RGG8KNZuCISg
-    short-id: da4d87fa
-  servername: xb1.huinaduok.fans
-  client-fingerprint: firefox
-- name: '🇳🇱 The Netherlands #06 VLESS'
-  type: vless
-  server: 132.243.119.223
-  port: 443
-  uuid: 326c45d1-966c-4080-874f-ac73883c5e4a
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: KjXapnfwZtRbZIKBDsP-5YOL1nsiHLds8Hw-JfzczDo
-    short-id: 5e50b6c8fe883545
-  servername: www.techadvisor.com
-  client-fingerprint: firefox
-- name: '🌐 Serbia #03 VLESS'
-  type: vless
-  server: 150.40.126.28
-  port: 443
-  uuid: 4360f941-b541-43d4-8507-2de3763e0cfd
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: 8ZYjmjb0b2QJKCGMrcdhQNV28jZZPCKgIQbIdqChQ0w
-    short-id: 00a61d55a07de885
-  servername: rs.convert-flow.net
-  client-fingerprint: qq
-- name: '🇮🇷 Iran #03 VLESS'
-  type: vless
-  server: new-t11.vurneq.ir
-  port: 443
-  uuid: ae8976cc-f26d-45a6-8602-7a5de5808e32
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: XzPy2vjzBXPB5eC1cHEn37MRCCq47zYE-apfA1XUbhY
-    short-id: 51852ca8c115946e
-  servername: delivery.mp.microsoft.com
-  client-fingerprint: edge
-- name: '🌍 Other #01 VLESS'
-  type: vless
-  server: magazine.sentry-warrunner.xyz
-  port: 443
-  uuid: 14eba471-4623-4ed1-b937-f5b2206749bf
+  uuid: 5cae5881-ba03-4e16-94af-27ba427a5a6b
   udp: true
   network: grpc
   tls: true
   reality-opts:
-    public-key: UrGT7bAn2UND3kx81QHACf_6qReN8V6_o70kZerONk4
-    short-id: 1c547814
-  servername: miro.com
+    public-key: kwM-vPOAkPfwf8gPN5SGvOz8n88rW6J-e_JkG-wOrFk
+    short-id: f4bdc2
+  servername: www.speedtest.net
   client-fingerprint: chrome
-- name: '🇪🇸 Spain #02 VLESS'
+- name: '🇩🇪 Germany #06 VLESS'
   type: vless
-  server: 83.97.79.93
-  port: 8443
-  uuid: e0216964-ffa1-4d39-82c4-0e40879a470d
+  server: 31.77.188.214
+  port: 443
+  uuid: ecf12398-8689-4c8d-91e2-8f1aeb8bd556
   udp: true
-  network: tcp
-  flow: xtls-rprx-vision
+  network: xhttp
   tls: true
   reality-opts:
-    public-key: e8vusEkL9FTC7oxFCp8biOWMFH-e-1IN21V6YNynGDg
-    short-id: 6350d1647a4880
-  servername: ger.nullo.pro
-  client-fingerprint: firefox
-- name: '🌐 Serbia #04 VLESS'
+    public-key: T1DzX4CYLd98VHpbbGrVHGnWsXlWVud1AcGM6mqhulc
+    short-id: d6afc6488f1d1758
+  servername: www.cisco.com
+  client-fingerprint: chrome
+- name: '🌐 Moldova #03 VLESS'
   type: vless
-  server: rs1.univesalsrv.com
+  server: 89.35.14.30
   port: 443
   uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
   udp: true
   network: grpc
   tls: true
   reality-opts:
-    public-key: upIzyaSbVz2ZK6KfGtXmPl_-sCwn8XLDyFDH5CsL9iY
-    short-id: ed0cd5cc2e26e6e7
-  servername: rs1.univesalsrv.com
-  client-fingerprint: firefox
-- name: '🇳🇱 Netherlands #01 VLESS'
+    public-key: xWejOQUn2koOUorUPSrHMLM-lyHlZ441KzxKc9bLmkY
+    short-id: 221ba6174224ca5b
+  servername: md1.univesalsrv.com
+  client-fingerprint: chrome
+- name: '🇩🇪 Germany #07 VLESS'
   type: vless
-  server: 79.141.164.83
+  server: 31.76.64.248
   port: 443
-  uuid: 0760406c-3f19-47b1-b332-f59270adf431
+  uuid: 0a322246-8c1a-47cd-9865-cccebbb2e5c1
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: 9OV_GN4lgwY_4llPfYCGev-PPXLMj-hfYnveKF4tjws
+    short-id: f8
+  servername: blog.api.www.cloudflare.com
+  client-fingerprint: chrome
+- name: '🇮🇷 Iran #02 VLESS'
+  type: vless
+  server: n1.fllow.ir
+  port: 443
+  uuid: e4d98cb3-ad20-4f27-bdf6-ab99af212bdc
   udp: true
   network: grpc
   tls: true
   reality-opts:
-    public-key: pR39Vv5qhk8r6akOicoy6mMs4-ppSWUez8MyAXG7wwQ
-    short-id: 27350908de933e09
-  servername: nlb.kosmosapp.net
-- name: '🇵🇱 Poland #06 VLESS'
-  type: vless
-  server: 191.217.211.161
-  port: 443
-  uuid: 0806e6e2-e01d-482c-b530-be3b57d486d4
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: 5H_MmyfvF4SkwS84wTbLmtcZDecXJIJtZ3uisiKQpSM
-    short-id: 0c774b50
-  servername: pl1.song69.fun
-  client-fingerprint: firefox
-- name: '🇫🇷 France #01 VLESS'
-  type: vless
-  server: 161.97.66.16
-  port: 443
-  uuid: 086bf957-9cd0-4e55-8280-bbef10435b41
-  udp: true
-  network: tcp
-  tls: true
-  reality-opts:
-    public-key: R-w7BpNgtryZRBMyRoHx81OnjzAwrKhVtV1EUKLFJzc
-    short-id: 086bf957
-  servername: www.cloudflare.com
-  client-fingerprint: firefox
-- name: '🇺🇸 United States #08 VLESS'
-  type: vless
-  server: 169.40.42.212
-  port: 443
-  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-  udp: true
-  network: tcp
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
-    short-id: c39cc7310a
-  servername: yahoo.com
+    public-key: 2_l_AeThgEkkPEN4_jQm83_oGgx_e9nsvYc2VHXk93w
+    short-id: 226f09e4
+  servername: akam.bing.com
   client-fingerprint: chrome
-- name: '🇷🇺 Russia #07 VLESS'
+- name: '🇵🇱 Poland #05 VLESS'
   type: vless
-  server: es1.fox-lisa.ru
+  server: 222.167.245.16
   port: 443
-  uuid: ccb8ff48-3934-4250-b4ec-bb76b95d154f
+  uuid: 7d43670b-6b08-45b9-8a24-8f3971abc132
   udp: true
   network: tcp
   flow: xtls-rprx-vision
   tls: true
   reality-opts:
-    public-key: NaCZ-sS4poEbFwKmD7ePAVyc5OhHxsD9nkAStjXkoWs
-    short-id: 027af64166562b09
-  servername: es1.fox-lisa.ru
+    public-key: j4Uc6ljg9by_VKYywo5h2N-eh3kpUbFL5Bsp8-AX4Qk
+  servername: poland.biznes.lol
+  client-fingerprint: chrome
+- name: '🇫🇮 Finland #01 VLESS'
+  type: vless
+  server: 107.181.151.128
+  port: 443
+  uuid: 88742d38-3f5c-4b9c-b256-7df5db8257ec
+  udp: true
+  network: tcp
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: zfsjt2A8ur0qHWIuCG7F9W4wZN3VTuL6fkTljC-9R0s
+    short-id: 8f79726c5002
+  servername: www.mozilla.org
   client-fingerprint: firefox
 
 proxy-groups:
@@ -789,71 +790,71 @@ proxy-groups:
   - 🤖 AI Services
   - 🎬 Streaming
   - 🇺🇸 United States
+  - 🇯🇵 Japan
+  - 🇸🇬 Singapore
   - 🇩🇪 Germany
+  - 🇬🇧 United Kingdom
   - 🇫🇷 France
   - 🇳🇱 Netherlands
   - 🇷🇺 Russia
   - 🇸🇪 Sweden
-  - 🇪🇸 Spain
   - 🇪🇪 Estonia
   - 🇵🇱 Poland
   - 🇫🇮 Finland
-  - 🇳🇴 Norway
-  - 🌍 Other
   - DIRECT
 - name: ⚡ Fastest
   type: url-test
   proxies:
-  - '🇺🇸 United States #01 VLESS'
-  - '🇵🇱 Poland #01 VLESS'
-  - '🌐 Moldova #01 VLESS'
-  - '🌐 Moldova #02 VLESS'
-  - '🌐 Serbia #01 VLESS'
-  - '🇳🇱 The Netherlands #01 VLESS'
-  - '🇺🇸 United States #02 VLESS'
-  - '🇩🇪 Germany #01 VLESS'
-  - '🇳🇱 The Netherlands #02 VLESS'
   - '🇷🇺 Russia #01 VLESS'
-  - '🇮🇷 Iran #01 VLESS'
-  - '🇳🇱 The Netherlands #03 VLESS'
+  - '🇳🇱 The Netherlands #01 VLESS'
+  - '🇳🇱 The Netherlands #02 VLESS'
   - '🇷🇺 Russia #02 VLESS'
-  - '🇷🇺 Russia #03 VLESS'
-  - '🇫🇮 Finland #01 VLESS'
-  - '🇩🇪 Germany #02 VLESS'
-  - '🇺🇸 United States #03 VLESS'
-  - '🇵🇱 Poland #02 VLESS'
+  - '🇳🇱 The Netherlands #03 VLESS'
+  - '🇩🇪 Germany #01 VLESS'
   - '🇳🇱 The Netherlands #04 VLESS'
-  - '🇳🇴 Norway #01 VLESS'
-  - '🇩🇪 Germany #03 VLESS'
-  - '🇷🇺 Russia #04 VLESS'
-  - '🇮🇷 Iran #02 VLESS'
-  - '🇪🇸 Spain #01 VLESS'
-  - '🇵🇱 Poland #03 VLESS'
-  - '🌐 Serbia #02 VLESS'
-  - '🇳🇱 The Netherlands #05 VLESS'
-  - '🇪🇪 Estonia #01 VLESS'
+  - '🇵🇱 Poland #01 VLESS'
+  - '🇺🇸 United States #01 VLESS'
+  - '🇷🇺 Russia #03 VLESS'
+  - '🇵🇱 Poland #02 VLESS'
+  - '🇺🇸 United States #02 VLESS'
+  - '🇺🇸 United States #03 VLESS'
   - '🇺🇸 United States #04 VLESS'
-  - '🇵🇱 Poland #04 VLESS'
-  - '🇺🇸 United States #05 VLESS'
-  - '🇵🇱 Poland #05 VLESS'
-  - '🇸🇪 Sweden #01 VLESS'
-  - '🇩🇪 Germany #04 VLESS'
-  - '🇺🇸 United States #06 VLESS'
-  - '🇺🇸 United States #07 VLESS'
-  - '🇷🇺 Russia #05 VLESS'
-  - '🇷🇺 Russia #06 VLESS'
-  - '🇸🇪 Sweden #02 VLESS'
-  - '🇳🇱 The Netherlands #06 VLESS'
-  - '🌐 Serbia #03 VLESS'
-  - '🇮🇷 Iran #03 VLESS'
-  - '🌍 Other #01 VLESS'
-  - '🇪🇸 Spain #02 VLESS'
-  - '🌐 Serbia #04 VLESS'
-  - '🇳🇱 Netherlands #01 VLESS'
-  - '🇵🇱 Poland #06 VLESS'
+  - '🇵🇱 Poland #03 VLESS'
+  - '🇬🇧 United Kingdom #01 VLESS'
+  - '🇷🇺 Russia #04 VLESS'
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇯🇵 Japan #01 VLESS'
+  - '🇳🇱 The Netherlands #05 VLESS'
+  - '🌐 Moldova #01 VLESS'
   - '🇫🇷 France #01 VLESS'
+  - '🇩🇪 Germany #02 VLESS'
+  - '🇩🇪 Germany #03 VLESS'
+  - '🇳🇱 The Netherlands #06 VLESS'
+  - '🇪🇪 Estonia #01 VLESS'
+  - '🇷🇺 Russia #05 VLESS'
+  - '🌐 Moldova #02 VLESS'
+  - '🇵🇱 Poland #04 VLESS'
+  - '🇩🇪 Germany #04 VLESS'
+  - '🇺🇸 United States #05 VLESS'
+  - '🇺🇸 United States #06 VLESS'
+  - '🌐 Serbia #01 VLESS'
+  - '🌐 Greece #01 VLESS'
+  - '🇺🇸 United States #07 VLESS'
+  - '🇮🇷 Iran #01 VLESS'
   - '🇺🇸 United States #08 VLESS'
-  - '🇷🇺 Russia #07 VLESS'
+  - '🇳🇱 Netherlands #01 VLESS'
+  - '🇳🇱 The Netherlands #07 VLESS'
+  - '🇳🇱 The Netherlands #08 VLESS'
+  - '🌐 Bulgaria #01 VLESS'
+  - '🇷🇺 Russia #06 VLESS'
+  - '🇸🇪 Sweden #01 VLESS'
+  - '🇩🇪 Germany #05 VLESS'
+  - '🇩🇪 Germany #06 VLESS'
+  - '🌐 Moldova #03 VLESS'
+  - '🇩🇪 Germany #07 VLESS'
+  - '🇮🇷 Iran #02 VLESS'
+  - '🇵🇱 Poland #05 VLESS'
+  - '🇫🇮 Finland #01 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
   tolerance: 50
@@ -862,30 +863,36 @@ proxy-groups:
   proxies:
   - ⚡ Fastest
   - 🇺🇸 United States
+  - 🇯🇵 Japan
+  - 🇸🇬 Singapore
   - 🇩🇪 Germany
+  - 🇬🇧 United Kingdom
   - 🇫🇷 France
   - 🇳🇱 Netherlands
   - 🇷🇺 Russia
-  - 🇸🇪 Sweden
-  - 🇪🇸 Spain
-  - 🇪🇪 Estonia
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 - name: 🤖 AI Services
   type: url-test
   proxies:
+  - '🇩🇪 Germany #01 VLESS'
   - '🇺🇸 United States #01 VLESS'
   - '🇺🇸 United States #02 VLESS'
-  - '🇩🇪 Germany #01 VLESS'
-  - '🇩🇪 Germany #02 VLESS'
   - '🇺🇸 United States #03 VLESS'
-  - '🇩🇪 Germany #03 VLESS'
   - '🇺🇸 United States #04 VLESS'
-  - '🇺🇸 United States #05 VLESS'
+  - '🇬🇧 United Kingdom #01 VLESS'
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇯🇵 Japan #01 VLESS'
+  - '🇩🇪 Germany #02 VLESS'
+  - '🇩🇪 Germany #03 VLESS'
   - '🇩🇪 Germany #04 VLESS'
+  - '🇺🇸 United States #05 VLESS'
   - '🇺🇸 United States #06 VLESS'
   - '🇺🇸 United States #07 VLESS'
   - '🇺🇸 United States #08 VLESS'
+  - '🇩🇪 Germany #05 VLESS'
+  - '🇩🇪 Germany #06 VLESS'
+  - '🇩🇪 Germany #07 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
   tolerance: 100
@@ -896,6 +903,9 @@ proxy-groups:
   - '🇺🇸 United States #02 VLESS'
   - '🇺🇸 United States #03 VLESS'
   - '🇺🇸 United States #04 VLESS'
+  - '🇬🇧 United Kingdom #01 VLESS'
+  - '🇸🇬 Singapore #01 VLESS'
+  - '🇯🇵 Japan #01 VLESS'
   - '🇺🇸 United States #05 VLESS'
   - '🇺🇸 United States #06 VLESS'
   - '🇺🇸 United States #07 VLESS'
@@ -916,6 +926,18 @@ proxy-groups:
   - '🇺🇸 United States #08 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
+- name: 🇯🇵 Japan
+  type: url-test
+  proxies:
+  - '🇯🇵 Japan #01 VLESS'
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+- name: 🇸🇬 Singapore
+  type: url-test
+  proxies:
+  - '🇸🇬 Singapore #01 VLESS'
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
 - name: 🇩🇪 Germany
   type: url-test
   proxies:
@@ -923,6 +945,15 @@ proxy-groups:
   - '🇩🇪 Germany #02 VLESS'
   - '🇩🇪 Germany #03 VLESS'
   - '🇩🇪 Germany #04 VLESS'
+  - '🇩🇪 Germany #05 VLESS'
+  - '🇩🇪 Germany #06 VLESS'
+  - '🇩🇪 Germany #07 VLESS'
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+- name: 🇬🇧 United Kingdom
+  type: url-test
+  proxies:
+  - '🇬🇧 United Kingdom #01 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 - name: 🇫🇷 France
@@ -941,6 +972,8 @@ proxy-groups:
   - '🇳🇱 The Netherlands #05 VLESS'
   - '🇳🇱 The Netherlands #06 VLESS'
   - '🇳🇱 Netherlands #01 VLESS'
+  - '🇳🇱 The Netherlands #07 VLESS'
+  - '🇳🇱 The Netherlands #08 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 - name: 🇷🇺 Russia
@@ -952,21 +985,12 @@ proxy-groups:
   - '🇷🇺 Russia #04 VLESS'
   - '🇷🇺 Russia #05 VLESS'
   - '🇷🇺 Russia #06 VLESS'
-  - '🇷🇺 Russia #07 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 - name: 🇸🇪 Sweden
   type: url-test
   proxies:
   - '🇸🇪 Sweden #01 VLESS'
-  - '🇸🇪 Sweden #02 VLESS'
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-- name: 🇪🇸 Spain
-  type: url-test
-  proxies:
-  - '🇪🇸 Spain #01 VLESS'
-  - '🇪🇸 Spain #02 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 - name: 🇪🇪 Estonia
@@ -983,25 +1007,12 @@ proxy-groups:
   - '🇵🇱 Poland #03 VLESS'
   - '🇵🇱 Poland #04 VLESS'
   - '🇵🇱 Poland #05 VLESS'
-  - '🇵🇱 Poland #06 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 - name: 🇫🇮 Finland
   type: url-test
   proxies:
   - '🇫🇮 Finland #01 VLESS'
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-- name: 🇳🇴 Norway
-  type: url-test
-  proxies:
-  - '🇳🇴 Norway #01 VLESS'
-  url: http://cp.cloudflare.com/generate_204
-  interval: 300
-- name: 🌍 Other
-  type: url-test
-  proxies:
-  - '🌍 Other #01 VLESS'
   url: http://cp.cloudflare.com/generate_204
   interval: 300
 
